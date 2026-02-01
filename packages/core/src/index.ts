@@ -9,3 +9,6 @@ export * from "./utils";
 
 // 类型导出
 export * from "./types";
+
+// 主题导出
+export * from "./theme";

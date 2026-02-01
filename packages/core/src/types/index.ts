@@ -14,3 +14,6 @@ export type Variant = "primary" | "secondary" | "ghost" | "danger";
  * 颜色类型
  */
 export type Color = "blue" | "green" | "red" | "gray" | "purple";
+
+// 主题类型
+export type * from "./theme";
