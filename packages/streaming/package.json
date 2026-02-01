@@ -1,0 +1,40 @@
+{
+  "name": "@proton-ui/streaming",
+  "version": "0.0.1",
+  "description": "高性能流式渲染引擎",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --project tsconfig.build.json --emitDeclarationOnly --outDir dist",
+    "dev": "tsup --watch",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@proton-ui/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@proton-ui/eslint-config": "workspace:*",
+    "@proton-ui/typescript-config": "workspace:*",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "eslint": "^8.57.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
