@@ -1,3 +1,5 @@
+import { useRef, useEffect, useState } from "react";
+
 import { cn } from "../../utils/cn";
 import { Message } from "../Message";
 
@@ -6,7 +8,7 @@ import type { ChatContainerProps } from "./types";
 /**
  * ChatContainer 组件
  *
- * 用于显示对话消息列表，支持加载状态显示。
+ * 用于显示对话消息列表，支持加载状态显示和自动滚动。
  *
  * @example
  * ```tsx
@@ -25,8 +27,50 @@ export function ChatContainer({
   className,
   messageClassName,
 }: ChatContainerProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [autoScroll, setAutoScroll] = useState(true);
+  const lastMessageCountRef = useRef(messages.length);
+
+  // 滚动到底部
+  const scrollToBottom = () => {
+    if (containerRef.current && autoScroll) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // 检测用户是否手动滚动
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+    const isAtBottom = Math.abs(scrollHeight - scrollTop - clientHeight) < 10;
+
+    // 如果用户滚动到底部，启用自动滚动；否则禁用
+    setAutoScroll(isAtBottom);
+  };
+
+  // 当消息变化时自动滚动
+  useEffect(() => {
+    // 只有在新增消息时才滚动
+    if (messages.length > lastMessageCountRef.current) {
+      scrollToBottom();
+    }
+    lastMessageCountRef.current = messages.length;
+  }, [messages, autoScroll]);
+
+  // 当 loading 状态变化时滚动
+  useEffect(() => {
+    if (loading) {
+      scrollToBottom();
+    }
+  }, [loading, autoScroll]);
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         "flex flex-col gap-2 p-4 overflow-y-auto",
         "bg-white dark:bg-gray-900",
@@ -35,6 +79,7 @@ export function ChatContainer({
       role="log"
       aria-label="对话消息列表"
       aria-live="polite"
+      onScroll={handleScroll}
     >
       {/* 消息列表 */}
       {messages.map((message) => (
