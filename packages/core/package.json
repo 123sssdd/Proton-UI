@@ -16,11 +16,14 @@
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsup",
+    "build:prod": "NODE_ENV=production tsup",
     "dev": "tsup --watch",
     "lint": "eslint src --ext .ts,.tsx",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "react",
