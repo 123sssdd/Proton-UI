@@ -3,3 +3,4 @@ export * from "./Button";
 export * from "./Input";
 export * from "./Card";
 export * from "./Message";
+export * from "./ChatContainer";
