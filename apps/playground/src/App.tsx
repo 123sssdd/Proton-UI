@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChatContainer, MessageInput, type ChatMessage } from "@proton-ui/core";
 import { StreamingText } from "@proton-ui/streaming";
+import VirtualizedDemo from "./VirtualizedDemo";
 
 /**
  * 模拟 AI 流式响应
@@ -43,6 +44,21 @@ function simulateAIResponse(
 }
 
 export default function App() {
+  const [view, setView] = useState<"normal" | "virtualized">("normal");
+
+  if (view === "virtualized") {
+    return (
+      <div className="relative">
+        <button
+          onClick={() => setView("normal")}
+          className="absolute top-4 right-4 z-10 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          切换到标准模式
+        </button>
+        <VirtualizedDemo />
+      </div>
+    );
+  }
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "1",
@@ -119,13 +135,21 @@ export default function App() {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       {/* 头部 */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Proton UI Playground
-        </h1>
-        <p className="text-sm text-gray-600 mt-1">
-          AI 对话组件演示 - 支持流式渲染和 Markdown
-        </p>
+      <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Proton UI Playground
+          </h1>
+          <p className="text-sm text-gray-600 mt-1">
+            AI 对话组件演示 - 支持流式渲染和 Markdown
+          </p>
+        </div>
+        <button
+          onClick={() => setView("virtualized")}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          切换到虚拟滚动模式
+        </button>
       </header>
 
       {/* 对话容器 */}
