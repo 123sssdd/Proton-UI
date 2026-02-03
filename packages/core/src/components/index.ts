@@ -5,3 +5,5 @@ export * from "./Card";
 export * from "./Message";
 export * from "./ChatContainer";
 export * from "./MessageInput";
+export * from "./ParticleEffect";
+export * from "./PixelatedImage";

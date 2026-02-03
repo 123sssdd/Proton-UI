@@ -15,6 +15,8 @@ export interface MessageProps {
   renderContent?: (content: string) => React.ReactNode;
   /** 流式渲染完成回调 */
   onStreamComplete?: () => void;
+  /** 消息气泡最大宽度（百分比，如 70 表示 70%） */
+  maxWidth?: number;
   /** 自定义类名 */
   className?: string;
 }

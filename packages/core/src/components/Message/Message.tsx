@@ -44,12 +44,16 @@ export function Message({
   streaming = false,
   renderContent,
   onStreamComplete: _onStreamComplete,
+  maxWidth = 70,
   className,
 }: MessageProps) {
   // 根据角色确定样式
   const isUser = role === "user";
   const isAssistant = role === "assistant";
   const isSystem = role === "system";
+
+  // 判断是否显示加载点（内容为空且正在流式渲染）
+  const showLoadingDot = streaming && content.length === 0;
 
   // 容器样式：用户消息右对齐，AI 消息左对齐
   const containerClasses = cn(
@@ -61,11 +65,19 @@ export function Message({
 
   // 消息气泡样式
   const bubbleClasses = cn(
-    "max-w-[70%] rounded-lg px-4 py-3 break-words",
+    "rounded-lg px-4 py-3 break-words",
     isUser && "bg-blue-600 text-white",
     isAssistant && "bg-gray-100 text-gray-900",
-    isSystem && "bg-yellow-50 text-yellow-900 text-sm text-center"
+    isSystem && "bg-yellow-50 text-yellow-900 text-sm text-center",
+    // 如果显示加载点，使用固定的最小尺寸
+    showLoadingDot &&
+      "min-w-[60px] min-h-[40px] flex items-center justify-center"
   );
+
+  // 动态设置最大宽度
+  const bubbleStyle = {
+    maxWidth: `${maxWidth}%`,
+  };
 
   // 头像样式
   const avatarClasses = cn(
@@ -115,8 +127,18 @@ export function Message({
       {/* 消息内容区域 */}
       <div className="flex flex-col gap-1 min-w-0">
         {/* 消息气泡 */}
-        <div className={bubbleClasses}>
-          {streaming ? (
+        <div className={bubbleClasses} style={bubbleStyle}>
+          {showLoadingDot ? (
+            // 显示加载点（脉冲效果）
+            <div
+              className="w-3 h-3 bg-gray-400 rounded-full animate-pulse"
+              role="status"
+              aria-label="正在输入"
+              style={{
+                animation: "pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              }}
+            />
+          ) : streaming ? (
             <div data-streaming="true" aria-live="polite" aria-atomic="false">
               {renderContent ? renderContent(content) : content}
             </div>

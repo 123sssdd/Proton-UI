@@ -1,0 +1,76 @@
+/**
+ * 阴影令牌 - 像素风UI设计系统
+ * 像素风格的硬边阴影效果
+ */
+
+:root {
+  /* ========== 像素阴影（硬边）========== */
+  --shadow-pixel-sm: 2px 2px 0px rgba(0, 0, 0, 0.1);
+  --shadow-pixel-md: 4px 4px 0px rgba(0, 0, 0, 0.15);
+  --shadow-pixel-lg: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  --shadow-pixel-xl: 8px 8px 0px rgba(0, 0, 0, 0.25);
+
+  /* ========== 强调色阴影 ========== */
+  --shadow-accent-sm: 2px 2px 0px var(--color-accent);
+  --shadow-accent-md: 4px 4px 0px var(--color-accent);
+
+  /* ========== 多层阴影 ========== */
+  --shadow-layered:
+    2px 2px 0px var(--color-accent), 4px 4px 0px rgba(0, 0, 0, 0.2);
+
+  /* ========== 内阴影 ========== */
+  --shadow-inset: inset 2px 2px 0px rgba(0, 0, 0, 0.1);
+
+  /* ========== 焦点阴影 ========== */
+  --shadow-focus: 0 0 0 4px rgba(123, 160, 91, 0.2); /* accent + 20% */
+}
+
+[data-theme="dark"] {
+  --shadow-pixel-sm: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  --shadow-pixel-md: 4px 4px 0px rgba(0, 0, 0, 0.4);
+  --shadow-pixel-lg: 6px 6px 0px rgba(0, 0, 0, 0.5);
+  --shadow-pixel-xl: 8px 8px 0px rgba(0, 0, 0, 0.6);
+
+  --shadow-focus: 0 0 0 4px rgba(78, 205, 196, 0.2); /* dark accent + 20% */
+}
+
+/* ========== 阴影工具类 ========== */
+.shadow-pixel-sm {
+  box-shadow: var(--shadow-pixel-sm);
+}
+
+.shadow-pixel-md {
+  box-shadow: var(--shadow-pixel-md);
+}
+
+.shadow-pixel-lg {
+  box-shadow: var(--shadow-pixel-lg);
+}
+
+.shadow-pixel-xl {
+  box-shadow: var(--shadow-pixel-xl);
+}
+
+.shadow-accent-sm {
+  box-shadow: var(--shadow-accent-sm);
+}
+
+.shadow-accent-md {
+  box-shadow: var(--shadow-accent-md);
+}
+
+.shadow-layered {
+  box-shadow: var(--shadow-layered);
+}
+
+.shadow-inset {
+  box-shadow: var(--shadow-inset);
+}
+
+.shadow-focus {
+  box-shadow: var(--shadow-focus);
+}
+
+.shadow-none {
+  box-shadow: none;
+}

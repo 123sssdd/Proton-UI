@@ -1,0 +1,33 @@
+/**
+ * 亮色主题 - 像素风UI设计系统
+ * 米白纸感 + 抹茶绿强调色
+ */
+
+[data-theme="light"],
+:root {
+  /* 主色调 */
+  --color-bg-primary: #f5f1e8;
+  --color-bg-secondary: #e8e4db;
+  --color-text-primary: #2c2c2c;
+  --color-text-secondary: #5a5a5a;
+  --color-accent: #7ba05b;
+  --color-highlight: #d4af37;
+
+  /* 语义色 */
+  --color-success: #6b9b6e;
+  --color-warning: #d4af37;
+  --color-error: #c85a54;
+  --color-info: #5b8ba0;
+
+  /* 边框颜色 */
+  --border-color-default: rgba(90, 90, 90, 0.4);
+  --border-color-light: rgba(90, 90, 90, 0.2);
+  --border-color-dark: rgba(90, 90, 90, 0.6);
+
+  /* 阴影 */
+  --shadow-pixel-sm: 2px 2px 0px rgba(0, 0, 0, 0.1);
+  --shadow-pixel-md: 4px 4px 0px rgba(0, 0, 0, 0.15);
+  --shadow-pixel-lg: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  --shadow-pixel-xl: 8px 8px 0px rgba(0, 0, 0, 0.25);
+  --shadow-focus: 0 0 0 4px rgba(123, 160, 91, 0.2);
+}

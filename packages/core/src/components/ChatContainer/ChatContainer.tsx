@@ -17,13 +17,20 @@ import type { ChatContainerProps } from "./types";
  *   { id: '2', role: 'assistant', content: '你好！有什么可以帮助你的吗？', timestamp: new Date() }
  * ];
  *
- * <ChatContainer messages={messages} />
+ * <ChatContainer
+ *   messages={messages}
+ *   loading={true}
+ *   loadingIndicator="dots"
+ * />
  * ```
  */
 export function ChatContainer({
   messages,
   loading = false,
   loadingText = "正在输入...",
+  loadingIndicator = "dots",
+  renderLoadingIndicator,
+  messageMaxWidth = 70,
   className,
   messageClassName,
 }: ChatContainerProps) {
@@ -56,10 +63,24 @@ export function ChatContainer({
   useEffect(() => {
     // 只有在新增消息时才滚动
     if (messages.length > lastMessageCountRef.current) {
-      scrollToBottom();
+      // 使用 setTimeout 确保 DOM 更新后再滚动
+      setTimeout(() => {
+        scrollToBottom();
+      }, 0);
     }
     lastMessageCountRef.current = messages.length;
   }, [messages, scrollToBottom]);
+
+  // 当消息内容变化时也滚动（用于流式渲染）
+  useEffect(() => {
+    if (autoScroll && messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage?.streaming) {
+        // 流式渲染时持续滚动
+        scrollToBottom();
+      }
+    }
+  }, [messages, autoScroll, scrollToBottom]);
 
   // 当 loading 状态变化时滚动
   useEffect(() => {
@@ -67,6 +88,113 @@ export function ChatContainer({
       scrollToBottom();
     }
   }, [loading, scrollToBottom]);
+
+  // 渲染加载指示器
+  const renderIndicator = () => {
+    if (renderLoadingIndicator) {
+      return renderLoadingIndicator();
+    }
+
+    switch (loadingIndicator) {
+      case "dots":
+        return (
+          <div className="flex gap-1">
+            <span
+              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+              style={{ animationDelay: "0ms" }}
+            />
+            <span
+              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+              style={{ animationDelay: "150ms" }}
+            />
+            <span
+              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+              style={{ animationDelay: "300ms" }}
+            />
+          </div>
+        );
+
+      case "pulse":
+        return (
+          <div className="flex gap-1">
+            <span className="w-3 h-3 bg-gray-400 rounded-full animate-pulse" />
+          </div>
+        );
+
+      case "spinner":
+        return (
+          <svg
+            className="w-5 h-5 animate-spin text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            />
+          </svg>
+        );
+
+      case "bars":
+        return (
+          <div className="flex gap-1 items-end h-5">
+            <span
+              className="w-1 bg-gray-400 rounded-full animate-pulse"
+              style={{
+                height: "60%",
+                animationDelay: "0ms",
+                animationDuration: "0.6s",
+              }}
+            />
+            <span
+              className="w-1 bg-gray-400 rounded-full animate-pulse"
+              style={{
+                height: "100%",
+                animationDelay: "150ms",
+                animationDuration: "0.6s",
+              }}
+            />
+            <span
+              className="w-1 bg-gray-400 rounded-full animate-pulse"
+              style={{
+                height: "80%",
+                animationDelay: "300ms",
+                animationDuration: "0.6s",
+              }}
+            />
+          </div>
+        );
+
+      case "wave":
+        return (
+          <div className="flex gap-0.5 items-center h-5">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <span
+                key={i}
+                className="w-0.5 h-3 bg-gray-400 rounded-full"
+                style={{
+                  animation: "wave 1.2s ease-in-out infinite",
+                  animationDelay: `${i * 0.1}s`,
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <div
@@ -92,6 +220,7 @@ export function ChatContainer({
           streaming={message.streaming}
           renderContent={message.renderContent}
           onStreamComplete={message.onStreamComplete}
+          maxWidth={messageMaxWidth}
           className={messageClassName}
         />
       ))}
@@ -103,23 +232,22 @@ export function ChatContainer({
           role="status"
           aria-label={loadingText}
         >
-          <div className="flex gap-1">
-            <span
-              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-              style={{ animationDelay: "0ms" }}
-            />
-            <span
-              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-              style={{ animationDelay: "150ms" }}
-            />
-            <span
-              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-              style={{ animationDelay: "300ms" }}
-            />
-          </div>
+          {renderIndicator()}
           <span>{loadingText}</span>
         </div>
       )}
+
+      {/* 添加 wave 动画的 CSS */}
+      <style>{`
+        @keyframes wave {
+          0%, 100% {
+            transform: scaleY(0.5);
+          }
+          50% {
+            transform: scaleY(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,0 +1,86 @@
+/**
+ * 颜色令牌 - 像素风UI设计系统
+ * 基于限制色盘原则，支持亮色和暗色主题
+ */
+
+:root {
+  /* ========== 亮色主题 ========== */
+
+  /* 主色调 */
+  --color-bg-primary: #f5f1e8; /* 米白纸感 */
+  --color-bg-secondary: #e8e4db; /* 浅砂色 */
+  --color-text-primary: #2c2c2c; /* 墨黑 */
+  --color-text-secondary: #5a5a5a; /* 灰黑 */
+  --color-accent: #7ba05b; /* 抹茶绿 */
+  --color-highlight: #d4af37; /* 金色 */
+
+  /* 语义色 */
+  --color-success: #6b9b6e; /* 成功绿 */
+  --color-warning: #d4af37; /* 警告金 */
+  --color-error: #c85a54; /* 错误红 */
+  --color-info: #5b8ba0; /* 信息蓝 */
+
+  /* 状态透明度 */
+  --opacity-hover: 0.1; /* 10% */
+  --opacity-active: 0.2; /* 20% */
+  --opacity-disabled: 0.6; /* 60% */
+  --opacity-focus: 0.4; /* 40% */
+}
+
+/* ========== 暗色主题 ========== */
+[data-theme="dark"] {
+  /* 主色调 */
+  --color-bg-primary: #1a1d2e; /* 深色夜景 */
+  --color-bg-secondary: #252836; /* 深灰蓝 */
+  --color-text-primary: #e8e4db; /* 浅米色 */
+  --color-text-secondary: #a8a4a0; /* 灰米色 */
+  --color-accent: #4ecdc4; /* 霓虹青 */
+  --color-highlight: #ff6b9d; /* 樱粉 */
+
+  /* 语义色（暗色变体） */
+  --color-success: #7fd99f; /* 成功绿 */
+  --color-warning: #ffb86c; /* 警告橙 */
+  --color-error: #ff6b6b; /* 错误红 */
+  --color-info: #6bbaff; /* 信息蓝 */
+}
+
+/* ========== 辅助颜色工具类 ========== */
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-highlight {
+  color: var(--color-highlight);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-info {
+  color: var(--color-info);
+}

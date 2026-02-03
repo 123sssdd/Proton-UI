@@ -1,0 +1,109 @@
+/**
+ * 字体导入 - 像素风UI设计系统
+ * 引入 Press Start 2P 像素字体
+ */
+
+/* 从 Google Fonts 导入 Press Start 2P */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/*
+ * 备选方案：如果需要本地字体，可以使用 @font-face
+ *
+ * @font-face {
+ *   font-family: 'Press Start 2P';
+ *   src: url('/fonts/PressStart2P-Regular.ttf') format('truetype');
+ *   font-weight: 400;
+ *   font-style: normal;
+ *   font-display: swap;
+ * }
+ */
+
+/**
+ * 字体渲染优化
+ * 确保像素字体在整数像素边界上渲染
+ */
+.font-pixel,
+[class*="font-pixel"] {
+  font-family: var(--font-pixel);
+
+  /* 禁用字体平滑 */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+
+  /* 禁用字体合成 */
+  font-synthesis: none;
+
+  /* 优化渲染速度 */
+  text-rendering: optimizeSpeed;
+
+  /* 防止字体缩放 */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/**
+ * 等宽字体渲染优化
+ */
+.font-mono,
+[class*="font-mono"],
+code,
+pre {
+  font-family: var(--font-mono);
+
+  /* 禁用字体平滑 */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+
+  /* 优化渲染 */
+  text-rendering: optimizeSpeed;
+}
+
+/**
+ * 字号可读性警告
+ * 小于 14px 的字体可能影响可读性
+ */
+@media (max-width: 640px) {
+  /* 移动端最小字号建议 */
+  .text-xs {
+    /* 12px 在移动端可能过小，建议使用 14px */
+    font-size: max(var(--font-size-xs), 14px);
+  }
+}
+
+/**
+ * 像素字体特殊处理
+ * Press Start 2P 在小尺寸下需要特别注意
+ */
+.font-pixel.text-xs,
+.font-pixel.text-sm {
+  /* 小尺寸像素字体建议增加字间距 */
+  letter-spacing: 0.05em;
+}
+
+/**
+ * 代码块字体优化
+ */
+pre code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+
+  /* 保持像素完美 */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * 内联代码字体优化
+ */
+code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 2px 4px;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  border: var(--border-thin) solid var(--border-color-light);
+}
