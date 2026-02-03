@@ -1,0 +1,221 @@
+/* 🎮 像素风格自定义样式 - 优化版 */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("/fonts.css");
+@import url("/hero-config.css");
+
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   颜色变量
+   ======================================== */
+
+:root {
+  --pixel-primary: #58a6ff;
+  --pixel-secondary: #79c0ff;
+  --pixel-tertiary: #a5d6ff;
+  --pixel-glow: #1f6feb;
+  --pixel-shadow: rgba(88, 166, 255, 0.3);
+  --pixel-shadow-strong: rgba(88, 166, 255, 0.6);
+
+  --rp-c-brand: #58a6ff;
+  --rp-c-brand-dark: #1f6feb;
+  --rp-c-brand-light: #79c0ff;
+}
+
+/* ========================================
+   基础样式 - 23px Ark Pixel 字体
+   ======================================== */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Ark Pixel", "Press Start 2P", monospace;
+  font-size: 23px;
+  font-weight: normal;
+}
+
+body {
+  overflow-y: auto !important;
+}
+
+/* ========================================
+   Hero 区域 - 艺术体效果
+   ======================================== */
+
+/* Hero 标题 - 超大艺术体 */
+.rspress-home-hero-title {
+  font-size: 4.5rem !important;
+  font-weight: 900 !important;
+  line-height: 1.2 !important;
+  background: linear-gradient(135deg, #58a6ff 0%, #79c0ff 50%, #a5d6ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 25px rgba(88, 166, 255, 0.6));
+  letter-spacing: 3px;
+}
+
+/* Hero 副标题 */
+.rspress-home-hero-text {
+  font-size: 1.8rem !important;
+  font-weight: bold !important;
+  color: var(--pixel-primary);
+  margin: 24px 0 !important;
+}
+
+/* Hero 描述文字 */
+.rspress-home-hero-tagline {
+  font-size: 1.2rem !important;
+  font-weight: normal !important;
+  line-height: 1.8 !important;
+  opacity: 0.95;
+}
+
+/* ========================================
+   导航栏自动隐藏
+   ======================================== */
+
+.rspress-nav {
+  transition: transform 0.3s ease !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+}
+
+.rspress-nav.nav-hidden {
+  transform: translateY(-100%) !important;
+}
+
+/* ========================================
+   Features 卡片样式 - 精美像素风
+   ======================================== */
+
+.rspress-home-feature {
+  border: 3px solid var(--pixel-primary) !important;
+  border-radius: 8px !important;
+  box-shadow: 6px 6px 0px var(--pixel-shadow) !important;
+  transition: all 0.3s ease !important;
+  background: rgba(88, 166, 255, 0.05) !important;
+}
+
+.rspress-home-feature:hover {
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 9px 9px 0px var(--pixel-shadow-strong) !important;
+  border-color: var(--pixel-secondary) !important;
+  background: rgba(88, 166, 255, 0.1) !important;
+}
+
+.rspress-home-feature-title {
+  color: var(--pixel-primary) !important;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  margin-bottom: 14px !important;
+}
+
+.rspress-home-feature-details {
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  opacity: 0.92;
+}
+
+/* ========================================
+   按钮样式 - 像素风格
+   ======================================== */
+
+.rspress-button {
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  background: linear-gradient(
+    135deg,
+    var(--pixel-primary),
+    var(--pixel-secondary)
+  ) !important;
+  border: 2px solid var(--pixel-glow) !important;
+  font-weight: bold !important;
+  box-shadow: 3px 3px 0px var(--pixel-shadow) !important;
+}
+
+.rspress-button:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 5px 5px 0px var(--pixel-shadow-strong) !important;
+}
+
+/* ========================================
+   滚动条样式
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(88, 166, 255, 0.1);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-primary);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-secondary);
+  background-clip: padding-box;
+}
+
+/* 技术栈标签样式 - 已移至 JavaScript 动态创建 */
+
+/* 隐藏 MDX 中可能残留的文本节点 */
+.rspress-doc > p:first-of-type {
+  display: none !important;
+}
+
+.rspress-doc > div:first-of-type > p {
+  display: none !important;
+}
+
+/* ========================================
+   Playground 代码块样式优化
+   ======================================== */
+
+/* 代码块容器 */
+.rspress-directive-code {
+  position: relative;
+}
+
+/* 折叠按钮移到代码块外面 */
+.rspress-code-collapse-button {
+  position: absolute !important;
+  top: -40px !important;
+  right: 0 !important;
+  z-index: 10 !important;
+}
+
+/* 代码编辑器默认折叠 */
+.rspress-playground-editor.collapsed {
+  display: none !important;
+}
+
+/* 展开/折叠按钮样式 */
+button[class*="toggle"] {
+  background: var(--pixel-primary) !important;
+  color: white !important;
+  border: 2px solid var(--pixel-glow) !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+button[class*="toggle"]:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 3px 3px 0px var(--pixel-shadow) !important;
+}

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 import { cn } from "../../utils/cn";
 import { Message } from "../Message";
@@ -32,14 +32,14 @@ export function ChatContainer({
   const lastMessageCountRef = useRef(messages.length);
 
   // 滚动到底部
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     if (containerRef.current && autoScroll) {
       containerRef.current.scrollTo({
         top: containerRef.current.scrollHeight,
         behavior: "smooth",
       });
     }
-  };
+  }, [autoScroll]);
 
   // 检测用户是否手动滚动
   const handleScroll = () => {
@@ -59,14 +59,14 @@ export function ChatContainer({
       scrollToBottom();
     }
     lastMessageCountRef.current = messages.length;
-  }, [messages, autoScroll]);
+  }, [messages, scrollToBottom]);
 
   // 当 loading 状态变化时滚动
   useEffect(() => {
     if (loading) {
       scrollToBottom();
     }
-  }, [loading, autoScroll]);
+  }, [loading, scrollToBottom]);
 
   return (
     <div

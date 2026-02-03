@@ -1,0 +1,90 @@
+# API 文档
+
+Proton UI 的完整 API 参考文档。
+
+## 核心包
+
+### @proton-ui/core
+
+核心组件库，包含所有基础 UI 组件和对话组件。
+
+- [Button 按钮](/components/button)
+- [Input 输入框](/components/input)
+- [Card 卡片](/components/card)
+- [Message 消息](/components/message)
+- [ChatContainer 对话容器](/components/chat-container)
+
+### @proton-ui/streaming
+
+流式渲染引擎，提供高性能的文本流式渲染能力。
+
+- [StreamingText 流式文本](/components/streaming-text)
+
+## 类型定义
+
+所有组件都提供完整的 TypeScript 类型定义。
+
+```typescript
+import type {
+  ButtonProps,
+  InputProps,
+  CardProps,
+  MessageData,
+  ChatContainerProps,
+} from "@proton-ui/core";
+
+import type { StreamingTextProps } from "@proton-ui/streaming";
+```
+
+## 工具函数
+
+### cn
+
+用于合并 Tailwind CSS 类名的工具函数。
+
+```typescript
+import { cn } from "@proton-ui/core";
+
+const className = cn("base-class", condition && "conditional-class");
+```
+
+## Hooks
+
+### useStreamingText
+
+流式文本渲染的核心 Hook。
+
+```typescript
+import { useStreamingText } from "@proton-ui/streaming";
+
+const { displayedText, isComplete } = useStreamingText({
+  content: "要渲染的文本",
+  speed: 30,
+  enableVirtualCompletion: true,
+});
+```
+
+## 主题系统
+
+Proton UI 基于 Tailwind CSS 构建，支持完全的主题定制。
+
+### 颜色系统
+
+```javascript
+// tailwind.config.js
+export default {
+  theme: {
+    extend: {
+      colors: {
+        // 自定义主题色
+      },
+    },
+  },
+};
+```
+
+## 更多信息
+
+- 查看 [组件文档](/components/button) 了解详细用法
+- 阅读 [快速开始](/guide/getting-started) 开始使用
+- 学习 [架构设计](/guide/architecture) 了解技术细节

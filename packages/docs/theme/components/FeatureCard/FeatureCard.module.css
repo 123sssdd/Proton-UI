@@ -1,0 +1,117 @@
+.featureCard {
+  border: 3px solid var(--pixel-primary, #58a6ff);
+  border-radius: 12px;
+  padding: 28px 32px;
+  background: rgba(88, 166, 255, 0.05);
+  box-shadow: 6px 6px 0px rgba(88, 166, 255, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.featureCard:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px rgba(88, 166, 255, 0.6);
+  border-color: #79c0ff;
+  background: rgba(88, 166, 255, 0.1);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.6));
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--pixel-primary, #58a6ff);
+  margin-bottom: 12px;
+  font-family: "Ark Pixel", monospace;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  opacity: 0.92;
+  flex-grow: 1;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 14px;
+  background: rgba(88, 166, 255, 0.08);
+  border-radius: 8px;
+  border: 2px solid rgba(88, 166, 255, 0.2);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metricLabel {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.metricValue {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--pixel-secondary, #79c0ff);
+  font-family: "Ark Pixel", monospace;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.highlight {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.highlight::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--pixel-primary, #58a6ff);
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .featureCard {
+    padding: 20px 24px;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}

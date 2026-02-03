@@ -1,0 +1,1 @@
+export { LogoCat } from "./LogoCat";

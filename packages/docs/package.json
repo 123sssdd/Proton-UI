@@ -1,0 +1,27 @@
+{
+  "name": "@proton-ui/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview"
+  },
+  "dependencies": {
+    "@proton-ui/core": "workspace:*",
+    "@proton-ui/streaming": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@rspress/core": "^1.47.1",
+    "@rspress/plugin-playground": "^1.47.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "rspress": "^1.47.1",
+    "tailwindcss": "^3.4.17"
+  }
+}

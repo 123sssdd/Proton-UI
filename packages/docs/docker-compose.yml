@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  proton-ui-docs:
+    build:
+      context: ../..
+      dockerfile: packages/docs/Dockerfile
+    container_name: proton-ui-docs
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - proton-network
+    labels:
+      - "com.proton-ui.description=Proton UI Documentation Site"
+      - "com.proton-ui.version=1.0.0"
+
+networks:
+  proton-network:
+    driver: bridge

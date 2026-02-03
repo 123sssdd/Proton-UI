@@ -1,0 +1,255 @@
+# Button 按钮
+
+按钮用于触发操作或事件，支持多种变体、尺寸和状态。
+
+## 基础用法
+
+最简单的按钮用法，提供四种变体：`primary`、`secondary`、`ghost` 和 `danger`。
+
+```tsx
+import { Button } from "@proton-ui/core";
+
+export default () => (
+  <div className="flex gap-4">
+    <Button variant="primary">主要按钮</Button>
+    <Button variant="secondary">次要按钮</Button>
+    <Button variant="ghost">幽灵按钮</Button>
+    <Button variant="danger">危险按钮</Button>
+  </div>
+);
+```
+
+## 按钮尺寸
+
+提供三种尺寸：`sm`（小）、`md`（中）、`lg`（大）。
+
+```tsx
+import { Button } from "@proton-ui/core";
+
+export default () => (
+  <div className="flex items-center gap-4">
+    <Button size="sm">小按钮</Button>
+    <Button size="md">中按钮</Button>
+    <Button size="lg">大按钮</Button>
+  </div>
+);
+```
+
+## 加载状态
+
+通过 `loading` 属性显示加载状态，加载时按钮会自动禁用。
+
+```tsx
+import { Button } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+
+  return (
+    <div className="flex gap-4">
+      <Button loading={loading} onClick={handleClick}>
+        {loading ? "加载中..." : "点击加载"}
+      </Button>
+      <Button variant="secondary" loading>
+        加载中
+      </Button>
+    </div>
+  );
+};
+```
+
+## 禁用状态
+
+通过 `disabled` 属性禁用按钮。
+
+```tsx
+import { Button } from "@proton-ui/core";
+
+export default () => (
+  <div className="flex gap-4">
+    <Button disabled>主要按钮</Button>
+    <Button variant="secondary" disabled>
+      次要按钮
+    </Button>
+    <Button variant="ghost" disabled>
+      幽灵按钮
+    </Button>
+  </div>
+);
+```
+
+## 带图标
+
+通过 `icon` 属性添加图标。
+
+```tsx
+import { Button } from "@proton-ui/core";
+
+const PlusIcon = () => (
+  <svg
+    className="h-4 w-4"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 4v16m8-8H4"
+    />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg
+    className="h-4 w-4"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+    />
+  </svg>
+);
+
+export default () => (
+  <div className="flex gap-4">
+    <Button icon={<PlusIcon />}>新建</Button>
+    <Button variant="secondary" icon={<DownloadIcon />}>
+      下载
+    </Button>
+  </div>
+);
+```
+
+## 全宽按钮
+
+通过 `fullWidth` 属性使按钮占满容器宽度。
+
+```tsx
+import { Button } from "@proton-ui/core";
+
+export default () => (
+  <div className="space-y-4">
+    <Button fullWidth>全宽主要按钮</Button>
+    <Button variant="secondary" fullWidth>
+      全宽次要按钮
+    </Button>
+  </div>
+);
+```
+
+## 使用场景
+
+### 表单提交
+
+```tsx
+import { Button } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setTimeout(() => setSubmitting(false), 2000);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <input
+        type="text"
+        placeholder="输入内容"
+        className="w-full rounded-md border border-gray-300 px-3 py-2"
+      />
+      <div className="flex gap-4">
+        <Button type="submit" loading={submitting}>
+          提交
+        </Button>
+        <Button variant="secondary" type="button">
+          取消
+        </Button>
+      </div>
+    </form>
+  );
+};
+```
+
+### 操作确认
+
+```tsx
+import { Button } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  return (
+    <div className="space-y-4">
+      {!showConfirm ? (
+        <Button variant="danger" onClick={() => setShowConfirm(true)}>
+          删除
+        </Button>
+      ) : (
+        <div className="flex gap-4">
+          <Button
+            variant="danger"
+            onClick={() => {
+              alert("已删除");
+              setShowConfirm(false);
+            }}
+          >
+            确认删除
+          </Button>
+          <Button variant="secondary" onClick={() => setShowConfirm(false)}>
+            取消
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+## API
+
+### Button Props
+
+| 属性      | 说明             | 类型                                              | 默认值      |
+| --------- | ---------------- | ------------------------------------------------- | ----------- |
+| variant   | 按钮变体         | `'primary' \| 'secondary' \| 'ghost' \| 'danger'` | `'primary'` |
+| size      | 按钮尺寸         | `'sm' \| 'md' \| 'lg'`                            | `'md'`      |
+| loading   | 加载状态         | `boolean`                                         | `false`     |
+| disabled  | 禁用状态         | `boolean`                                         | `false`     |
+| icon      | 图标元素         | `ReactNode`                                       | -           |
+| fullWidth | 是否占满容器宽度 | `boolean`                                         | `false`     |
+| className | 自定义类名       | `string`                                          | -           |
+| children  | 按钮内容         | `ReactNode`                                       | -           |
+
+继承所有原生 `button` 元素的属性，如 `onClick`、`type` 等。
+
+## 无障碍性
+
+- 支持键盘导航（Tab、Enter、Space）
+- 加载状态下自动添加 `aria-busy` 属性
+- 禁用状态下自动添加 `aria-disabled` 属性
+- 加载图标包含 `role="status"` 和 `aria-label` 属性
+
+## 设计原则
+
+1. **清晰的视觉层级**：通过不同的变体区分按钮的重要性
+2. **一致的交互反馈**：hover、focus、active 状态提供清晰的视觉反馈
+3. **可访问性优先**：遵循 WCAG 2.1 标准，确保所有用户都能使用
+4. **灵活的定制**：支持通过 className 进行样式定制

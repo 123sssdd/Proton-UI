@@ -1,0 +1,340 @@
+# 快速开始
+
+欢迎使用 Aether UI！本指南将帮助你快速上手。
+
+## 安装
+
+### 使用 npm
+
+```bash
+npm install @proton-ui/core @proton-ui/streaming
+```
+
+### 使用 pnpm
+
+```bash
+pnpm add @proton-ui/core @proton-ui/streaming
+```
+
+### 使用 yarn
+
+```bash
+yarn add @proton-ui/core @proton-ui/streaming
+```
+
+## 配置 Tailwind CSS
+
+Aether UI 基于 Tailwind CSS 构建，你需要在项目中配置 Tailwind CSS。
+
+### 1. 安装 Tailwind CSS
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### 2. 配置 tailwind.config.js
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    // 添加 Aether UI 组件路径
+    "./node_modules/@proton-ui/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### 3. 添加 Tailwind 指令
+
+在你的 CSS 文件中添加 Tailwind 指令：
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## 基础使用
+
+### 导入组件
+
+```tsx pure
+import { Button, Input, Card } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+```
+
+### 使用基础组件
+
+```tsx collapsed
+import { Button, Input, Card } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="p-8 space-y-4">
+      <Card>
+        <Card.Header title="欢迎使用 Aether UI" />
+        <Card.Body>
+          <Input label="用户名" placeholder="请输入用户名" />
+        </Card.Body>
+        <Card.Footer>
+          <Button>提交</Button>
+        </Card.Footer>
+      </Card>
+    </div>
+  );
+};
+```
+
+### 使用对话组件
+
+```tsx collapsed
+import { ChatContainer, Message } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [messages, setMessages] = useState([
+    {
+      id: "1",
+      role: "assistant" as const,
+      content: "你好！有什么可以帮助你的吗？",
+      timestamp: new Date(),
+    },
+  ]);
+
+  return (
+    <div className="h-screen flex flex-col">
+      <div className="flex-1 overflow-hidden">
+        <ChatContainer messages={messages} />
+      </div>
+    </div>
+  );
+};
+```
+
+### 使用流式渲染
+
+```tsx collapsed
+import { Message } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText = "这是一段流式渲染的文本...";
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <Message
+      role="assistant"
+      content={content}
+      streaming
+      renderContent={(text) => <StreamingText content={text} />}
+      timestamp={new Date()}
+    />
+  );
+};
+```
+
+## 完整示例
+
+这是一个完整的 AI 对话应用示例：
+
+```tsx
+import { ChatContainer, MessageInput } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState } from "react";
+
+function ChatApp() {
+  const [messages, setMessages] = useState([
+    {
+      id: "1",
+      role: "assistant" as const,
+      content: "你好！我是 AI 助手，有什么可以帮助你的吗？",
+      timestamp: new Date(),
+    },
+  ]);
+  const [loading, setLoading] = useState(false);
+  const [streamingContent, setStreamingContent] = useState("");
+
+  const handleSend = async (content: string) => {
+    // 添加用户消息
+    const userMessage = {
+      id: Date.now().toString(),
+      role: "user" as const,
+      content,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+
+    // 模拟 AI 流式响应
+    setLoading(true);
+    const aiResponse = "这是 AI 的回复内容...";
+
+    // 创建流式消息
+    const aiMessageId = (Date.now() + 1).toString();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: aiMessageId,
+        role: "assistant" as const,
+        content: "",
+        streaming: true,
+        renderContent: (text: string) => (
+          <StreamingText content={text} enableVirtualCompletion />
+        ),
+        timestamp: new Date(),
+      },
+    ]);
+
+    // 模拟流式输出
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < aiResponse.length) {
+        const newContent = aiResponse.slice(0, index + 1);
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === aiMessageId ? { ...msg, content: newContent } : msg
+          )
+        );
+        index++;
+      } else {
+        clearInterval(timer);
+        setLoading(false);
+        // 完成后移除 streaming 标记
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === aiMessageId
+              ? { ...msg, streaming: false, renderContent: undefined }
+              : msg
+          )
+        );
+      }
+    }, 30);
+  };
+
+  return (
+    <div className="h-screen flex flex-col bg-gray-50">
+      {/* 头部 */}
+      <div className="bg-white border-b px-6 py-4">
+        <h1 className="text-xl font-semibold">AI 对话助手</h1>
+      </div>
+
+      {/* 对话区域 */}
+      <div className="flex-1 overflow-hidden">
+        <ChatContainer messages={messages} loading={loading} />
+      </div>
+
+      {/* 输入区域 */}
+      <div className="bg-white border-t">
+        <MessageInput onSend={handleSend} disabled={loading} />
+      </div>
+    </div>
+  );
+}
+
+export default ChatApp;
+```
+
+## TypeScript 支持
+
+Aether UI 完全使用 TypeScript 编写，提供完整的类型定义：
+
+```tsx pure
+import type { ButtonProps, InputProps, MessageData } from "@proton-ui/core";
+import type { StreamingTextProps } from "@proton-ui/streaming";
+
+// 使用类型定义
+const buttonProps: ButtonProps = {
+  variant: "primary",
+  size: "md",
+  loading: false,
+};
+
+const messages: MessageData[] = [
+  {
+    id: "1",
+    role: "user",
+    content: "Hello",
+    timestamp: new Date(),
+  },
+];
+```
+
+## 主题定制
+
+Aether UI 使用 Tailwind CSS，你可以通过 Tailwind 配置文件定制主题：
+
+```javascript pure
+// tailwind.config.js
+export default {
+  theme: {
+    extend: {
+      colors: {
+        // 自定义主色调
+        blue: {
+          600: "#your-color",
+          700: "#your-color",
+        },
+      },
+    },
+  },
+};
+```
+
+## 下一步
+
+- 查看 [组件文档](/components/button) 了解所有可用组件
+- 阅读 [架构设计](/guide/architecture) 了解项目架构
+- 学习 [流式渲染原理](/guide/streaming) 深入理解核心技术
+
+## 常见问题
+
+### 样式不生效？
+
+确保你已经正确配置了 Tailwind CSS，并在 `tailwind.config.js` 中添加了 Aether UI 的组件路径。
+
+### 如何自定义组件样式？
+
+所有组件都支持 `className` 属性，你可以通过传入自定义类名来覆盖默认样式：
+
+```tsx pure
+<Button className="bg-green-600 hover:bg-green-700">自定义按钮</Button>
+```
+
+### 如何处理 SSR？
+
+Aether UI 支持服务端渲染（SSR），但流式渲染功能依赖浏览器 API（requestAnimationFrame），需要在客户端使用。
+
+### 浏览器兼容性？
+
+Aether UI 支持所有现代浏览器：
+
+- Chrome >= 90
+- Firefox >= 88
+- Safari >= 14
+- Edge >= 90
+
+## 获取帮助
+
+- [GitHub Issues](https://github.com/yourusername/aether-ui/issues)
+- [讨论区](https://github.com/yourusername/aether-ui/discussions)

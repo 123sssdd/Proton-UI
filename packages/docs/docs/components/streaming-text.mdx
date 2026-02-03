@@ -1,0 +1,327 @@
+# StreamingText 流式文本
+
+用于显示流式渲染的文本内容，支持批处理、帧率控制和虚拟补全算法。
+
+## 基础用法
+
+最简单的流式文本显示。
+
+```tsx
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText =
+    "这是一段流式渲染的文本，会逐字显示出来，提供流畅的用户体验。";
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="p-4 border rounded-lg">
+      <StreamingText content={content} />
+    </div>
+  );
+};
+```
+
+## 批处理渲染
+
+通过 `batchSize` 控制每次渲染的字符数量，减少渲染次数。
+
+```tsx
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText =
+    "批处理渲染可以减少渲染次数，提升性能。每次渲染多个字符，而不是逐字渲染。";
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="space-y-4">
+      <div className="p-4 border rounded-lg">
+        <p className="text-sm text-gray-600 mb-2">默认批处理 (batchSize=5)</p>
+        <StreamingText content={content} />
+      </div>
+      <div className="p-4 border rounded-lg">
+        <p className="text-sm text-gray-600 mb-2">大批处理 (batchSize=20)</p>
+        <StreamingText content={content} batchSize={20} />
+      </div>
+    </div>
+  );
+};
+```
+
+## 帧率控制
+
+通过 `maxFPS` 控制最大渲染帧率，避免过度渲染。
+
+```tsx
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText =
+    "帧率控制可以限制渲染频率，在保证流畅度的同时降低 CPU 占用。";
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 20);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="space-y-4">
+      <div className="p-4 border rounded-lg">
+        <p className="text-sm text-gray-600 mb-2">60 FPS（默认）</p>
+        <StreamingText content={content} maxFPS={60} />
+      </div>
+      <div className="p-4 border rounded-lg">
+        <p className="text-sm text-gray-600 mb-2">30 FPS</p>
+        <StreamingText content={content} maxFPS={30} />
+      </div>
+    </div>
+  );
+};
+```
+
+## 虚拟补全算法
+
+启用虚拟补全算法，自动补全不完整的 Markdown 标签。
+
+```tsx
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText = "这是一段包含 **粗体** 和 `代码` 的文本。";
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 100);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="space-y-4">
+      <div className="p-4 border rounded-lg">
+        <p className="text-sm text-gray-600 mb-2">不启用虚拟补全</p>
+        <StreamingText content={content} />
+      </div>
+      <div className="p-4 border rounded-lg">
+        <p className="text-sm text-gray-600 mb-2">启用虚拟补全</p>
+        <StreamingText content={content} enableVirtualCompletion />
+      </div>
+    </div>
+  );
+};
+```
+
+## 完成回调
+
+通过 `onComplete` 回调在流式渲染完成时执行操作。
+
+```tsx
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const [completed, setCompleted] = useState(false);
+  const fullText = "流式渲染完成后会触发回调函数。";
+
+  useEffect(() => {
+    setCompleted(false);
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="space-y-4">
+      <div className="p-4 border rounded-lg">
+        <StreamingText
+          content={content}
+          onComplete={() => setCompleted(true)}
+        />
+      </div>
+      {completed && <p className="text-sm text-green-600">✓ 渲染完成！</p>}
+    </div>
+  );
+};
+```
+
+## 配合 Message 组件
+
+在对话场景中使用流式文本。
+
+```tsx
+import { Message } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText = `这是一段 AI 生成的回复，使用流式渲染逐字显示。
+
+支持 **Markdown** 格式，包括：
+- 列表项
+- \`代码\`
+- **粗体**和*斜体*`;
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setContent(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <Message
+      role="assistant"
+      content={content}
+      streaming
+      renderContent={(text) => (
+        <StreamingText content={text} enableVirtualCompletion />
+      )}
+      timestamp={new Date()}
+    />
+  );
+};
+```
+
+## API
+
+### StreamingText Props
+
+| 属性                    | 说明                           | 类型         | 默认值  |
+| ----------------------- | ------------------------------ | ------------ | ------- |
+| content                 | 源内容                         | `string`     | -       |
+| batchSize               | 批处理大小（每次渲染的字符数） | `number`     | `5`     |
+| maxFPS                  | 最大帧率                       | `number`     | `60`    |
+| enableVirtualCompletion | 是否启用虚拟补全算法           | `boolean`    | `false` |
+| onComplete              | 渲染完成回调                   | `() => void` | -       |
+| className               | 自定义类名                     | `string`     | -       |
+
+## 虚拟补全算法
+
+虚拟补全算法用于处理流式渲染过程中不完整的 Markdown 标签，避免渲染错误：
+
+### 工作原理
+
+1. **检测不完整标签**：检查末尾是否有半截的 Markdown 标签（如单个反引号）
+2. **移除不完整标签**：临时移除这些不完整的标签
+3. **统计标签数量**：统计各类标签（代码块、行内代码、粗体、斜体）的数量
+4. **补全闭合标签**：如果标签数量为奇数，自动追加闭合标签
+
+### 支持的标签
+
+- 代码块：` ``` `
+- 行内代码：`` ` ``
+- 粗体：`**`
+- 斜体：`*`
+
+### 示例
+
+````
+输入: "这是一段 **粗体"
+输出: "这是一段 **粗体**"
+
+输入: "代码 `const x = "
+输出: "代码 `const x =`"
+
+输入: "```javascript\nfunction"
+输出: "```javascript\nfunction\n```"
+````
+
+## 性能优化
+
+StreamingText 采用多种优化策略：
+
+1. **批处理渲染**：减少渲染次数，降低 CPU 占用
+2. **RAF 节流**：使用 requestAnimationFrame 调度渲染，避免阻塞主线程
+3. **帧率限制**：控制最大渲染频率，平衡流畅度和性能
+4. **增量更新**：只渲染新增的内容，避免重复渲染
+
+## 使用建议
+
+1. **选择合适的 batchSize**：
+   - 快速流式场景（如打字效果）：5-10
+   - 中速流式场景（如 AI 对话）：10-20
+   - 慢速流式场景（如长文本）：20-50
+
+2. **选择合适的 maxFPS**：
+   - 流畅优先：60 FPS
+   - 性能优先：30 FPS
+   - 低端设备：15-20 FPS
+
+3. **虚拟补全算法**：
+   - Markdown 内容：建议启用
+   - 纯文本内容：无需启用
+
+## 设计原则
+
+1. **流畅的视觉体验**：通过批处理和帧率控制提供流畅的渲染效果
+2. **高效的性能**：最小化渲染次数和 CPU 占用
+3. **智能的补全**：自动处理不完整的 Markdown 标签
+4. **灵活的配置**：支持多种参数配置，适应不同场景

@@ -1,0 +1,91 @@
+.techStackSection {
+  padding: 60px 60px 80px;
+  background: linear-gradient(
+    180deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(88, 166, 255, 0.02) 100%
+  );
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--pixel-primary, #58a6ff);
+  font-family: "Ark Pixel", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.6));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.techItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 20px;
+  background: rgba(88, 166, 255, 0.05);
+  border: 2px solid rgba(88, 166, 255, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.techItem:hover {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: var(--pixel-primary, #58a6ff);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+}
+
+.techName {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--pixel-primary, #58a6ff);
+  font-family: "Ark Pixel", monospace;
+}
+
+.techCategory {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .techStackSection {
+    padding: 40px 20px 60px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .techItem {
+    padding: 12px 16px;
+  }
+
+  .techName {
+    font-size: 0.9rem;
+  }
+}

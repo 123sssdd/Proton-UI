@@ -1,0 +1,18 @@
+/* 🎮 本地字体配置 - Ark Pixel Font 16px */
+
+@font-face {
+  font-family: "Ark Pixel";
+  src: url("/fonts/ark-pixel-16px-zh_cn.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 加粗字体 */
+@font-face {
+  font-family: "Ark Pixel";
+  src: url("/fonts/ark-pixel-16px-zh_cn.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,37 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" fill="transparent"/>
+  <!-- Cat body -->
+  <rect x="16" y="24" width="32" height="32" fill="#58a6ff"/>
+  <rect x="14" y="24" width="2" height="32" fill="#1f6feb"/>
+  <rect x="48" y="24" width="2" height="32" fill="#1f6feb"/>
+  <rect x="16" y="22" width="32" height="2" fill="#1f6feb"/>
+  <rect x="16" y="56" width="32" height="2" fill="#1f6feb"/>
+
+  <!-- Ears -->
+  <rect x="20" y="16" width="8" height="8" fill="#58a6ff"/>
+  <rect x="36" y="16" width="8" height="8" fill="#58a6ff"/>
+  <rect x="18" y="16" width="2" height="8" fill="#1f6feb"/>
+  <rect x="28" y="16" width="2" height="2" fill="#1f6feb"/>
+  <rect x="34" y="16" width="2" height="2" fill="#1f6feb"/>
+  <rect x="44" y="16" width="2" height="8" fill="#1f6feb"/>
+  <rect x="20" y="14" width="8" height="2" fill="#1f6feb"/>
+  <rect x="36" y="14" width="8" height="2" fill="#1f6feb"/>
+
+  <!-- Eyes -->
+  <rect x="24" y="32" width="4" height="4" fill="#1f6feb"/>
+  <rect x="36" y="32" width="4" height="4" fill="#1f6feb"/>
+
+  <!-- Nose -->
+  <rect x="30" y="40" width="4" height="2" fill="#1f6feb"/>
+
+  <!-- Mouth -->
+  <rect x="28" y="44" width="2" height="2" fill="#1f6feb"/>
+  <rect x="34" y="44" width="2" height="2" fill="#1f6feb"/>
+  <rect x="30" y="46" width="4" height="2" fill="#1f6feb"/>
+
+  <!-- Tail -->
+  <rect x="48" y="40" width="8" height="4" fill="#58a6ff"/>
+  <rect x="48" y="38" width="8" height="2" fill="#1f6feb"/>
+  <rect x="48" y="44" width="8" height="2" fill="#1f6feb"/>
+  <rect x="56" y="40" width="2" height="4" fill="#1f6feb"/>
+</svg>

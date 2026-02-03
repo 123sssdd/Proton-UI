@@ -1,0 +1,60 @@
+/* 🎮 Logo 动画 - 小猫呼吸效果 */
+
+/* Logo 容器 */
+.rspress-nav-logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+/* Logo 图片 - 放大并添加动画 */
+.rspress-nav-logo img {
+  width: 52px !important;
+  height: 52px !important;
+  animation: logo-breathe 2s ease-in-out infinite;
+  image-rendering: pixelated !important;
+  filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.8));
+}
+
+@keyframes logo-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.8));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 18px rgba(88, 166, 255, 1));
+  }
+}
+
+.rspress-nav-logo:hover img {
+  animation: logo-wave 0.6s ease-in-out;
+  filter: drop-shadow(0 0 20px rgba(52, 211, 153, 1));
+}
+
+@keyframes logo-wave {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-15deg) scale(1.15);
+  }
+  75% {
+    transform: rotate(15deg) scale(1.15);
+  }
+}
+
+/* Logo 文字 - Proton UI（显示在 logo 右边） */
+.rspress-nav-logo-text {
+  font-family: "Ark Pixel", monospace !important;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  background: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  letter-spacing: 1.5px !important;
+  display: inline-block !important;
+}

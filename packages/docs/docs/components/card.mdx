@@ -1,0 +1,428 @@
+# Card 卡片
+
+卡片是一个容器组件，用于展示相关的内容和操作。采用组合式 API 设计，提供 Header、Body 和 Footer 子组件。
+
+## 基础用法
+
+最简单的卡片用法。
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+export default () => (
+  <Card>
+    <Card.Header title="卡片标题" />
+    <Card.Body>
+      <p>这是卡片的内容区域，可以放置任何内容。</p>
+    </Card.Body>
+  </Card>
+);
+```
+
+## 带副标题
+
+通过 `subtitle` 属性添加副标题。
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+export default () => (
+  <Card>
+    <Card.Header title="用户信息" subtitle="查看和编辑用户的基本信息" />
+    <Card.Body>
+      <div className="space-y-2">
+        <p>
+          <strong>姓名:</strong> 张三
+        </p>
+        <p>
+          <strong>邮箱:</strong> zhangsan@example.com
+        </p>
+        <p>
+          <strong>角色:</strong> 管理员
+        </p>
+      </div>
+    </Card.Body>
+  </Card>
+);
+```
+
+## 带操作按钮
+
+通过 `action` 属性在头部添加操作按钮。
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+const MoreIcon = () => (
+  <svg
+    className="h-5 w-5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+    />
+  </svg>
+);
+
+export default () => (
+  <Card>
+    <Card.Header
+      title="项目设置"
+      subtitle="配置项目的基本信息"
+      action={
+        <button className="rounded-md p-1 hover:bg-gray-100">
+          <MoreIcon />
+        </button>
+      }
+    />
+    <Card.Body>
+      <p>项目配置内容...</p>
+    </Card.Body>
+  </Card>
+);
+```
+
+## 带底部操作
+
+使用 `Card.Footer` 添加底部操作区域。
+
+```tsx
+import { Card, Button } from "@proton-ui/core";
+
+export default () => (
+  <Card>
+    <Card.Header title="确认操作" subtitle="此操作不可撤销，请谨慎操作" />
+    <Card.Body>
+      <p>您确定要删除这个项目吗？删除后所有数据将无法恢复。</p>
+    </Card.Body>
+    <Card.Footer>
+      <Button variant="secondary">取消</Button>
+      <Button variant="danger">确认删除</Button>
+    </Card.Footer>
+  </Card>
+);
+```
+
+## 内边距配置
+
+通过 `padding` 属性配置卡片的内边距，支持 `none`、`sm`、`md`、`lg`。
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+export default () => (
+  <div className="space-y-4">
+    <Card padding="sm">
+      <Card.Header title="小内边距" />
+      <Card.Body>padding="sm"</Card.Body>
+    </Card>
+
+    <Card padding="md">
+      <Card.Header title="中等内边距（默认）" />
+      <Card.Body>padding="md"</Card.Body>
+    </Card>
+
+    <Card padding="lg">
+      <Card.Header title="大内边距" />
+      <Card.Body>padding="lg"</Card.Body>
+    </Card>
+
+    <Card padding="none">
+      <div className="p-4">
+        <h3 className="text-lg font-semibold">无内边距</h3>
+        <p className="mt-2">padding="none"，需要手动添加内边距</p>
+      </div>
+    </Card>
+  </div>
+);
+```
+
+## 阴影配置
+
+通过 `shadow` 属性配置卡片的阴影，支持 `none`、`sm`、`md`、`lg`。
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+export default () => (
+  <div className="space-y-4">
+    <Card shadow="none">
+      <Card.Header title="无阴影" />
+      <Card.Body>shadow="none"</Card.Body>
+    </Card>
+
+    <Card shadow="sm">
+      <Card.Header title="小阴影" />
+      <Card.Body>shadow="sm"</Card.Body>
+    </Card>
+
+    <Card shadow="md">
+      <Card.Header title="中等阴影（默认）" />
+      <Card.Body>shadow="md"</Card.Body>
+    </Card>
+
+    <Card shadow="lg">
+      <Card.Header title="大阴影" />
+      <Card.Body>shadow="lg"</Card.Body>
+    </Card>
+  </div>
+);
+```
+
+## 灵活组合
+
+Card 的子组件可以灵活组合使用。
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+export default () => (
+  <div className="space-y-4">
+    {/* 只有 Body */}
+    <Card>
+      <Card.Body>
+        <p>只有内容区域的卡片</p>
+      </Card.Body>
+    </Card>
+
+    {/* Header + Body */}
+    <Card>
+      <Card.Header title="标题 + 内容" />
+      <Card.Body>
+        <p>有标题和内容的卡片</p>
+      </Card.Body>
+    </Card>
+
+    {/* Header + Footer */}
+    <Card>
+      <Card.Header title="标题 + 底部" />
+      <Card.Footer>
+        <button className="rounded-md bg-blue-600 px-4 py-2 text-white">
+          操作
+        </button>
+      </Card.Footer>
+    </Card>
+
+    {/* 完整结构 */}
+    <Card>
+      <Card.Header title="完整卡片" subtitle="包含所有部分" />
+      <Card.Body>
+        <p>内容区域</p>
+      </Card.Body>
+      <Card.Footer>
+        <button className="rounded-md bg-gray-200 px-4 py-2">取消</button>
+        <button className="rounded-md bg-blue-600 px-4 py-2 text-white">
+          确定
+        </button>
+      </Card.Footer>
+    </Card>
+  </div>
+);
+```
+
+## 使用场景
+
+### 用户资料卡片
+
+```tsx
+import { Card, Button } from "@proton-ui/core";
+
+export default () => (
+  <Card>
+    <Card.Header
+      title="个人资料"
+      action={
+        <Button variant="ghost" size="sm">
+          编辑
+        </Button>
+      }
+    />
+    <Card.Body>
+      <div className="flex items-start gap-4">
+        <div className="h-16 w-16 rounded-full bg-blue-500 flex items-center justify-center text-white text-2xl font-bold">
+          张
+        </div>
+        <div className="flex-1 space-y-2">
+          <h4 className="font-semibold">张三</h4>
+          <p className="text-sm text-gray-600">zhangsan@example.com</p>
+          <p className="text-sm text-gray-600">前端开发工程师</p>
+        </div>
+      </div>
+    </Card.Body>
+  </Card>
+);
+```
+
+### 统计卡片
+
+```tsx
+import { Card } from "@proton-ui/core";
+
+const TrendUpIcon = () => (
+  <svg
+    className="h-5 w-5 text-green-500"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+    />
+  </svg>
+);
+
+export default () => (
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <Card>
+      <Card.Body>
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-600">总用户数</p>
+            <p className="mt-1 text-2xl font-bold">12,345</p>
+          </div>
+          <TrendUpIcon />
+        </div>
+        <p className="mt-2 text-sm text-green-600">+12.5% 较上月</p>
+      </Card.Body>
+    </Card>
+
+    <Card>
+      <Card.Body>
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-600">活跃用户</p>
+            <p className="mt-1 text-2xl font-bold">8,234</p>
+          </div>
+          <TrendUpIcon />
+        </div>
+        <p className="mt-2 text-sm text-green-600">+8.2% 较上月</p>
+      </Card.Body>
+    </Card>
+
+    <Card>
+      <Card.Body>
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-gray-600">新增用户</p>
+            <p className="mt-1 text-2xl font-bold">1,234</p>
+          </div>
+          <TrendUpIcon />
+        </div>
+        <p className="mt-2 text-sm text-green-600">+15.3% 较上月</p>
+      </Card.Body>
+    </Card>
+  </div>
+);
+```
+
+### 表单卡片
+
+```tsx
+import { Card, Input, Button } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("表单已提交！");
+  };
+
+  return (
+    <Card>
+      <Card.Header title="联系我们" subtitle="有任何问题请随时联系" />
+      <Card.Body>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            label="姓名"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="请输入姓名"
+          />
+          <Input
+            label="邮箱"
+            type="email"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            placeholder="请输入邮箱"
+          />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              留言
+            </label>
+            <textarea
+              className="w-full rounded-md border border-gray-300 px-3 py-2"
+              rows={4}
+              value={formData.message}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
+              placeholder="请输入留言"
+            />
+          </div>
+        </form>
+      </Card.Body>
+      <Card.Footer>
+        <Button variant="secondary">取消</Button>
+        <Button onClick={handleSubmit}>提交</Button>
+      </Card.Footer>
+    </Card>
+  );
+};
+```
+
+## API
+
+### Card Props
+
+| 属性      | 说明       | 类型                             | 默认值 |
+| --------- | ---------- | -------------------------------- | ------ |
+| padding   | 内边距大小 | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` |
+| shadow    | 阴影大小   | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` |
+| className | 自定义类名 | `string`                         | -      |
+| children  | 卡片内容   | `ReactNode`                      | -      |
+
+### Card.Header Props
+
+| 属性      | 说明       | 类型        | 默认值 |
+| --------- | ---------- | ----------- | ------ |
+| title     | 标题       | `string`    | -      |
+| subtitle  | 副标题     | `string`    | -      |
+| action    | 操作区域   | `ReactNode` | -      |
+| className | 自定义类名 | `string`    | -      |
+
+### Card.Body Props
+
+| 属性      | 说明       | 类型        | 默认值 |
+| --------- | ---------- | ----------- | ------ |
+| children  | 内容       | `ReactNode` | -      |
+| className | 自定义类名 | `string`    | -      |
+
+### Card.Footer Props
+
+| 属性      | 说明       | 类型        | 默认值 |
+| --------- | ---------- | ----------- | ------ |
+| children  | 底部内容   | `ReactNode` | -      |
+| className | 自定义类名 | `string`    | -      |
+
+## 设计原则
+
+1. **组合式设计**：通过子组件的灵活组合满足不同场景需求
+2. **清晰的层次结构**：Header、Body、Footer 提供清晰的内容层次
+3. **可配置的样式**：支持内边距和阴影的灵活配置
+4. **语义化标记**：使用合适的 HTML 标签提升可访问性

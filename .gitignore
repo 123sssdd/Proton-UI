@@ -58,4 +58,8 @@ playwright/.cache
 # docs
 项目介绍.md
 .kiro/*
-docs
+doc
+packages/docs/doc_build
+packages/docs/node_modules
+packages/docs/.rspress
+

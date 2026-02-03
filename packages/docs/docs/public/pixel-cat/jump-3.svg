@@ -1,0 +1,43 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" fill="transparent"/>
+  <!-- Cat body (landing) -->
+  <rect x="16" y="26" width="32" height="28" fill="#FF6B9D"/>
+  <rect x="14" y="26" width="2" height="28" fill="#2D3748"/>
+  <rect x="48" y="26" width="2" height="28" fill="#2D3748"/>
+  <rect x="16" y="24" width="32" height="2" fill="#2D3748"/>
+  <rect x="16" y="54" width="32" height="2" fill="#2D3748"/>
+
+  <!-- Ears -->
+  <rect x="20" y="18" width="8" height="8" fill="#FF6B9D"/>
+  <rect x="36" y="18" width="8" height="8" fill="#FF6B9D"/>
+  <rect x="18" y="18" width="2" height="8" fill="#2D3748"/>
+  <rect x="28" y="18" width="2" height="2" fill="#2D3748"/>
+  <rect x="34" y="18" width="2" height="2" fill="#2D3748"/>
+  <rect x="44" y="18" width="2" height="8" fill="#2D3748"/>
+  <rect x="20" y="16" width="8" height="2" fill="#2D3748"/>
+  <rect x="36" y="16" width="8" height="2" fill="#2D3748"/>
+
+  <!-- Eyes (happy) -->
+  <rect x="24" y="34" width="4" height="2" fill="#2D3748"/>
+  <rect x="36" y="34" width="4" height="2" fill="#2D3748"/>
+
+  <!-- Nose -->
+  <rect x="30" y="40" width="4" height="2" fill="#2D3748"/>
+
+  <!-- Mouth (smiling) -->
+  <rect x="26" y="44" width="2" height="2" fill="#2D3748"/>
+  <rect x="36" y="44" width="2" height="2" fill="#2D3748"/>
+  <rect x="28" y="46" width="8" height="2" fill="#2D3748"/>
+
+  <!-- Tail (relaxed) -->
+  <rect x="48" y="40" width="8" height="4" fill="#FF6B9D"/>
+  <rect x="48" y="38" width="8" height="2" fill="#2D3748"/>
+  <rect x="48" y="44" width="8" height="2" fill="#2D3748"/>
+  <rect x="56" y="40" width="2" height="4" fill="#2D3748"/>
+
+  <!-- Landing dust -->
+  <rect x="10" y="56" width="2" height="2" fill="#CBD5E0"/>
+  <rect x="14" y="56" width="2" height="2" fill="#CBD5E0"/>
+  <rect x="48" y="56" width="2" height="2" fill="#CBD5E0"/>
+  <rect x="52" y="56" width="2" height="2" fill="#CBD5E0"/>
+</svg>
