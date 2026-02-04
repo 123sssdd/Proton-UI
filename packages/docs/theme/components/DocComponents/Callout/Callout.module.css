@@ -1,0 +1,86 @@
+/* Callout 组件样式 */
+
+.callout {
+  @apply mb-6 rounded-lg border-l-4 p-4;
+}
+
+.header {
+  @apply flex items-center gap-2 mb-2;
+}
+
+.icon {
+  @apply text-lg;
+}
+
+.title {
+  @apply font-semibold;
+}
+
+.content {
+  @apply text-sm;
+}
+
+/* Info 类型 - 蓝色 */
+.info {
+  @apply bg-blue-50 dark:bg-blue-900/20 border-blue-500;
+}
+
+.info .title {
+  @apply text-blue-900 dark:text-blue-300;
+}
+
+.info .content {
+  @apply text-blue-800 dark:text-blue-200;
+}
+
+/* Warning 类型 - 黄色 */
+.warning {
+  @apply bg-yellow-50 dark:bg-yellow-900/20 border-yellow-500;
+}
+
+.warning .title {
+  @apply text-yellow-900 dark:text-yellow-300;
+}
+
+.warning .content {
+  @apply text-yellow-800 dark:text-yellow-200;
+}
+
+/* Error 类型 - 红色 */
+.error {
+  @apply bg-red-50 dark:bg-red-900/20 border-red-500;
+}
+
+.error .title {
+  @apply text-red-900 dark:text-red-300;
+}
+
+.error .content {
+  @apply text-red-800 dark:text-red-200;
+}
+
+/* Success 类型 - 绿色 */
+.success {
+  @apply bg-green-50 dark:bg-green-900/20 border-green-500;
+}
+
+.success .title {
+  @apply text-green-900 dark:text-green-300;
+}
+
+.success .content {
+  @apply text-green-800 dark:text-green-200;
+}
+
+/* Tip 类型 - 紫色 */
+.tip {
+  @apply bg-purple-50 dark:bg-purple-900/20 border-purple-500;
+}
+
+.tip .title {
+  @apply text-purple-900 dark:text-purple-300;
+}
+
+.tip .content {
+  @apply text-purple-800 dark:text-purple-200;
+}

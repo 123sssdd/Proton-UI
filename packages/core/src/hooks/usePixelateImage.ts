@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 import { pixelateImage, PixelateOptions } from "../utils/pixelateImage";
 
@@ -9,6 +9,8 @@ export interface UsePixelateImageOptions extends PixelateOptions {
   onError?: (error: Error) => void;
   /** 完成回调 */
   onComplete?: (result: string) => void;
+  /** 防抖延迟（毫秒，默认 300） */
+  debounceDelay?: number;
 }
 
 export interface UsePixelateImageReturn {
@@ -59,32 +61,67 @@ export function usePixelateImage(
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const { auto = false, onError, onComplete, ...pixelateOptions } = options;
+  const {
+    auto = false,
+    onError,
+    onComplete,
+    debounceDelay = 300,
+    ...pixelateOptions
+  } = options;
+
+  // 使用 ref 存储最新的 options，避免 pixelate 函数频繁重新创建
+  const optionsRef = useRef(pixelateOptions);
+  const callbacksRef = useRef({ onError, onComplete });
+
+  // 更新 refs
+  useEffect(() => {
+    optionsRef.current = pixelateOptions;
+    callbacksRef.current = { onError, onComplete };
+  }, [pixelateOptions, onError, onComplete]);
+
+  // 防抖定时器
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const pixelate = useCallback(
     async (imageSource: string | File | HTMLImageElement) => {
+      // 清除之前的防抖定时器
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+
       setIsProcessing(true);
       setError(null);
 
-      try {
-        const result = await pixelateImage(imageSource, pixelateOptions);
-        setPixelatedImage(result);
-        onComplete?.(result);
-      } catch (err) {
-        const error = err instanceof Error ? err : new Error("像素化处理失败");
-        setError(error);
-        onError?.(error);
-      } finally {
-        setIsProcessing(false);
-      }
+      // 使用防抖延迟
+      return new Promise<void>((resolve) => {
+        debounceTimerRef.current = setTimeout(async () => {
+          try {
+            const result = await pixelateImage(imageSource, optionsRef.current);
+            setPixelatedImage(result);
+            callbacksRef.current.onComplete?.(result);
+            resolve();
+          } catch (err) {
+            const error =
+              err instanceof Error ? err : new Error("像素化处理失败");
+            setError(error);
+            callbacksRef.current.onError?.(error);
+            resolve();
+          } finally {
+            setIsProcessing(false);
+          }
+        }, debounceDelay);
+      });
     },
-    [pixelateOptions, onComplete, onError]
+    [debounceDelay]
   );
 
   const reset = useCallback(() => {
     setPixelatedImage(null);
     setError(null);
     setIsProcessing(false);
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
   }, []);
 
   // 自动处理
@@ -93,6 +130,15 @@ export function usePixelateImage(
       pixelate(source);
     }
   }, [auto, source, pixelate]);
+
+  // 清理防抖定时器
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   return {
     pixelatedImage,

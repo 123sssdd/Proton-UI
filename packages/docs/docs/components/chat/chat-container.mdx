@@ -1,0 +1,889 @@
+# ChatContainer 对话容器
+
+用于显示对话消息列表，支持自动滚动、加载状态显示和流式消息渲染。
+
+## 基础用法
+
+最简单的对话容器使用方式。
+
+<DemoBox
+  title="基础对话容器"
+  description="展示基本的消息列表"
+  code={`import { ChatContainer } from "@proton-ui/core";
+
+const messages = [
+{
+id: "1",
+role: "user",
+content: "你好，AI！",
+timestamp: new Date()
+},
+{
+id: "2",
+role: "assistant",
+content: "你好！有什么可以帮助你的吗？",
+timestamp: new Date()
+},
+{
+id: "3",
+role: "user",
+content: "请介绍一下你自己",
+timestamp: new Date()
+},
+{
+id: "4",
+role: "assistant",
+content: "我是一个 AI 助手，可以回答问题、提供建议和帮助解决问题。",
+timestamp: new Date()
+}
+];
+
+export default () => {
+  return (
+    <div className="h-96 border rounded-lg overflow-hidden">
+      <ChatContainer messages={messages} />
+    </div>
+  );
+};`}
+>
+  <BasicChatDemo />
+</DemoBox>
+
+## 加载状态
+
+ChatContainer 支持多种加载指示器样式。
+
+<DocTabs defaultTab="dots">
+  <DocTabPanel id="dots" label="跳动的点">
+    <DemoBox
+      code={`import { ChatContainer } from "@proton-ui/core";
+
+export default () => {
+  const messages = [
+    { id: "1", role: "user", content: "你好", timestamp: new Date() }
+  ];
+
+return (
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+        messages={messages}
+        loading={true}
+        loadingIndicator="dots"
+        loadingText="AI 正在思考..."
+      />
+</div>
+);
+};`} >
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+messages={[
+{ id: "1", role: "user", content: "你好", timestamp: new Date() }
+]}
+loading={true}
+loadingIndicator="dots"
+loadingText="AI 正在思考..."
+/>
+</div>
+</DemoBox>
+
+  </DocTabPanel>
+
+  <DocTabPanel id="pulse" label="脉冲">
+    <DemoBox
+      code={`import { ChatContainer } from "@proton-ui/core";
+
+export default () => {
+  const messages = [
+    { id: "1", role: "user", content: "你好", timestamp: new Date() }
+  ];
+
+return (
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+        messages={messages}
+        loading={true}
+        loadingIndicator="pulse"
+        loadingText="正在输入..."
+      />
+</div>
+);
+};`} >
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+messages={[
+{ id: "1", role: "user", content: "你好", timestamp: new Date() }
+]}
+loading={true}
+loadingIndicator="pulse"
+loadingText="正在输入..."
+/>
+</div>
+</DemoBox>
+
+  </DocTabPanel>
+
+  <DocTabPanel id="spinner" label="旋转">
+    <DemoBox
+      code={`import { ChatContainer } from "@proton-ui/core";
+
+export default () => {
+  const messages = [
+    { id: "1", role: "user", content: "你好", timestamp: new Date() }
+  ];
+
+return (
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+        messages={messages}
+        loading={true}
+        loadingIndicator="spinner"
+        loadingText="加载中..."
+      />
+</div>
+);
+};`} >
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+messages={[
+{ id: "1", role: "user", content: "你好", timestamp: new Date() }
+]}
+loading={true}
+loadingIndicator="spinner"
+loadingText="加载中..."
+/>
+</div>
+</DemoBox>
+
+  </DocTabPanel>
+
+  <DocTabPanel id="bars" label="跳动的条">
+    <DemoBox
+      code={`import { ChatContainer } from "@proton-ui/core";
+
+export default () => {
+  const messages = [
+    { id: "1", role: "user", content: "你好", timestamp: new Date() }
+  ];
+
+return (
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+        messages={messages}
+        loading={true}
+        loadingIndicator="bars"
+        loadingText="处理中..."
+      />
+</div>
+);
+};`} >
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+messages={[
+{ id: "1", role: "user", content: "你好", timestamp: new Date() }
+]}
+loading={true}
+loadingIndicator="bars"
+loadingText="处理中..."
+/>
+</div>
+</DemoBox>
+
+  </DocTabPanel>
+
+  <DocTabPanel id="wave" label="波浪">
+    <DemoBox
+      code={`import { ChatContainer } from "@proton-ui/core";
+
+export default () => {
+  const messages = [
+    { id: "1", role: "user", content: "你好", timestamp: new Date() }
+  ];
+
+return (
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+        messages={messages}
+        loading={true}
+        loadingIndicator="wave"
+        loadingText="生成中..."
+      />
+</div>
+);
+};`} >
+<div className="h-64 border rounded-lg overflow-hidden">
+<ChatContainer
+messages={[
+{ id: "1", role: "user", content: "你好", timestamp: new Date() }
+]}
+loading={true}
+loadingIndicator="wave"
+loadingText="生成中..."
+/>
+</div>
+</DemoBox>
+
+  </DocTabPanel>
+</DocTabs>
+
+## 流式消息
+
+配合 StreamingText 组件实现流式消息效果。
+
+<DemoBox
+  title="流式消息演示"
+  description="模拟真实的 AI 对话流式渲染"
+  code={`import { ChatContainer } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [messages, setMessages] = useState([
+    { id: "1", role: "user", content: "请介绍一下流式渲染", timestamp: new Date() }
+  ]);
+  const [streamingContent, setStreamingContent] = useState("");
+
+  const fullText = \`流式渲染是一种逐步显示内容的技术，特别适合 AI 对话场景。
+
+主要优势：
+
+- **即时反馈**：用户无需等待完整响应
+- **流畅体验**：内容逐字显示，更自然
+- **性能优化**：增量渲染，降低内存占用
+
+实现方式：
+
+1. 使用 SSE 或 WebSocket 接收数据流
+2. 配合 StreamingText 组件渲染
+3. 自动处理 Markdown 标签补全\`;
+
+useEffect(() => {
+let index = 0;
+const timer = setInterval(() => {
+if (index < fullText.length) {
+setStreamingContent(fullText.slice(0, index + 1));
+index++;
+} else {
+clearInterval(timer);
+}
+}, 30);
+
+    return () => clearInterval(timer);
+
+}, []);
+
+useEffect(() => {
+if (streamingContent) {
+setMessages([
+messages[0],
+{
+id: "2",
+role: "assistant",
+content: streamingContent,
+streaming: true,
+renderContent: (text) => (
+<StreamingText content={text} enableVirtualCompletion />
+),
+timestamp: new Date()
+}
+]);
+}
+}, [streamingContent]);
+
+return (
+<div className="h-96 border rounded-lg overflow-hidden">
+<ChatContainer messages={messages} />
+</div>
+);
+};`}
+
+>
+
+  <StreamingChatDemo />
+</DemoBox>
+
+<Callout type="tip" title="流式渲染最佳实践">
+  使用流式渲染时，建议： 1. 启用 `enableVirtualCompletion` 自动补全 Markdown
+  标签 2. 设置合适的 `batchSize` 和 `maxFPS` 平衡流畅度和性能 3. 在消息完成后将
+  `streaming` 设为 `false`
+</Callout>
+
+## 大量消息列表
+
+ChatContainer 内置自动滚动功能，可以处理大量消息。
+
+<DemoBox
+  title="大量消息演示"
+  description="展示 50 条消息的滚动效果"
+  code={`import { ChatContainer } from "@proton-ui/core";
+
+// 生成大量测试消息
+const generateMessages = (count) => {
+const messages = [];
+for (let i = 0; i < count; i++) {
+messages.push({
+id: \`\${i}\`,
+role: i % 2 === 0 ? "user" : "assistant",
+content: \`这是第 \${i + 1} 条消息\`,
+timestamp: new Date(Date.now() - (count - i) \* 60000)
+});
+}
+return messages;
+};
+
+export default () => {
+  const messages = generateMessages(50);
+
+return (
+<div className="h-96 border rounded-lg overflow-hidden">
+<ChatContainer messages={messages} />
+</div>
+);
+};`}
+
+>
+
+  <LargeMessageListDemo />
+</DemoBox>
+
+<Callout type="info" title="自动滚动">
+  ChatContainer
+  会自动滚动到最新消息。当用户手动向上滚动查看历史消息时，自动滚动会暂停；滚动回底部后会重新启用。
+</Callout>
+
+## 自定义消息宽度
+
+通过 `messageMaxWidth` 属性控制所有消息的最大宽度。
+
+<DemoBox
+  title="自定义消息宽度"
+  code={`import { ChatContainer } from "@proton-ui/core";
+
+const messages = [
+{ id: "1", role: "user", content: "这是较窄的消息", timestamp: new Date() },
+{ id: "2", role: "assistant", content: "回复也是较窄的", timestamp: new Date() }
+];
+
+export default () => {
+  return (
+    <div className="space-y-4">
+      <div className="h-48 border rounded-lg overflow-hidden">
+        <p className="text-sm text-gray-600 p-2">默认宽度（70%）</p>
+        <ChatContainer messages={messages} />
+      </div>
+      <div className="h-48 border rounded-lg overflow-hidden">
+        <p className="text-sm text-gray-600 p-2">较窄宽度（50%）</p>
+        <ChatContainer messages={messages} messageMaxWidth={50} />
+      </div>
+    </div>
+  );
+};`}
+>
+  <div className="space-y-4">
+    <div className="h-48 border rounded-lg overflow-hidden">
+      <p className="text-sm text-gray-600 p-2">默认宽度（70%）</p>
+      <ChatContainer
+        messages={[
+          { id: "1", role: "user", content: "这是较窄的消息", timestamp: new Date() },
+          { id: "2", role: "assistant", content: "回复也是较窄的", timestamp: new Date() }
+        ]}
+      />
+    </div>
+    <div className="h-48 border rounded-lg overflow-hidden">
+      <p className="text-sm text-gray-600 p-2">较窄宽度（50%）</p>
+      <ChatContainer
+        messages={[
+          { id: "1", role: "user", content: "这是较窄的消息", timestamp: new Date() },
+          { id: "2", role: "assistant", content: "回复也是较窄的", timestamp: new Date() }
+        ]}
+        messageMaxWidth={50}
+      />
+    </div>
+  </div>
+</DemoBox>
+
+## API
+
+### ChatContainer Props
+
+<PropsTable
+  data={[
+    {
+      name: "messages",
+      type: "ChatMessage[]",
+      required: true,
+      description: "消息列表，每条消息必须包含唯一的 id",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否显示加载状态",
+    },
+    {
+      name: "loadingText",
+      type: "string",
+      required: false,
+      defaultValue: '"正在输入..."',
+      description: "加载提示文本",
+    },
+    {
+      name: "loadingIndicator",
+      type: '"dots" | "pulse" | "spinner" | "bars" | "wave" | "custom"',
+      required: false,
+      defaultValue: '"dots"',
+      description: "加载指示器类型",
+    },
+    {
+      name: "renderLoadingIndicator",
+      type: "() => React.ReactNode",
+      required: false,
+      description: "自定义加载指示器渲染函数",
+    },
+    {
+      name: "messageMaxWidth",
+      type: "number",
+      required: false,
+      defaultValue: "70",
+      description: "消息气泡最大宽度（百分比）",
+    },
+    {
+      name: "className",
+      type: "string",
+      required: false,
+      description: "自定义容器类名",
+    },
+    {
+      name: "messageClassName",
+      type: "string",
+      required: false,
+      description: "自定义消息项类名",
+    },
+  ]}
+/>
+
+### ChatMessage 类型
+
+<PropsTable
+  data={[
+    {
+      name: "id",
+      type: "string",
+      required: true,
+      description: "消息唯一标识",
+    },
+    {
+      name: "role",
+      type: '"user" | "assistant" | "system"',
+      required: true,
+      description: "消息角色",
+    },
+    {
+      name: "content",
+      type: "string",
+      required: true,
+      description: "消息内容",
+    },
+    {
+      name: "timestamp",
+      type: "Date",
+      required: false,
+      description: "消息时间戳",
+    },
+    {
+      name: "avatar",
+      type: "string",
+      required: false,
+      description: "头像 URL",
+    },
+    {
+      name: "streaming",
+      type: "boolean",
+      required: false,
+      description: "是否为流式渲染",
+    },
+    {
+      name: "renderContent",
+      type: "(content: string) => React.ReactNode",
+      required: false,
+      description: "自定义内容渲染函数",
+    },
+    {
+      name: "onStreamComplete",
+      type: "() => void",
+      required: false,
+      description: "流式渲染完成回调",
+    },
+  ]}
+/>
+
+## SSE 集成示例
+
+使用 Server-Sent Events (SSE) 实现真实的流式对话。
+
+```tsx
+import { ChatContainer } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState } from "react";
+
+export default function ChatApp() {
+  const [messages, setMessages] = useState([]);
+  const [streamingContent, setStreamingContent] = useState("");
+  const [isStreaming, setIsStreaming] = useState(false);
+
+  const sendMessage = async (content) => {
+    // 添加用户消息
+    const userMessage = {
+      id: Date.now().toString(),
+      role: "user",
+      content,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+
+    // 开始流式接收 AI 回复
+    setIsStreaming(true);
+    setStreamingContent("");
+
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: content }),
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let accumulatedContent = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
+      accumulatedContent += chunk;
+      setStreamingContent(accumulatedContent);
+    }
+
+    // 流式完成，添加完整消息
+    setIsStreaming(false);
+    const aiMessage = {
+      id: (Date.now() + 1).toString(),
+      role: "assistant",
+      content: accumulatedContent,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, aiMessage]);
+    setStreamingContent("");
+  };
+
+  // 构建消息列表
+  const displayMessages = isStreaming
+    ? [
+        ...messages,
+        {
+          id: "streaming",
+          role: "assistant",
+          content: streamingContent,
+          streaming: true,
+          renderContent: (text) => (
+            <StreamingText content={text} enableVirtualCompletion />
+          ),
+          timestamp: new Date(),
+        },
+      ]
+    : messages;
+
+  return (
+    <div className="h-screen flex flex-col">
+      <div className="flex-1 overflow-hidden">
+        <ChatContainer messages={displayMessages} />
+      </div>
+      {/* 输入框组件 */}
+    </div>
+  );
+}
+```
+
+## WebSocket 集成示例
+
+使用 WebSocket 实现双向实时通信。
+
+```tsx
+import { ChatContainer } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect, useRef } from "react";
+
+export default function ChatApp() {
+  const [messages, setMessages] = useState([]);
+  const [streamingContent, setStreamingContent] = useState("");
+  const wsRef = useRef(null);
+
+  useEffect(() => {
+    // 建立 WebSocket 连接
+    wsRef.current = new WebSocket("ws://localhost:3000/chat");
+
+    wsRef.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === "chunk") {
+        // 接收流式数据块
+        setStreamingContent((prev) => prev + data.content);
+      } else if (data.type === "complete") {
+        // 流式完成
+        const aiMessage = {
+          id: data.id,
+          role: "assistant",
+          content: data.content,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+        setStreamingContent("");
+      }
+    };
+
+    return () => {
+      wsRef.current?.close();
+    };
+  }, []);
+
+  const sendMessage = (content) => {
+    const userMessage = {
+      id: Date.now().toString(),
+      role: "user",
+      content,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+
+    // 发送消息到服务器
+    wsRef.current.send(
+      JSON.stringify({
+        type: "message",
+        content,
+      })
+    );
+  };
+
+  // 构建消息列表
+  const displayMessages = streamingContent
+    ? [
+        ...messages,
+        {
+          id: "streaming",
+          role: "assistant",
+          content: streamingContent,
+          streaming: true,
+          renderContent: (text) => (
+            <StreamingText content={text} enableVirtualCompletion />
+          ),
+          timestamp: new Date(),
+        },
+      ]
+    : messages;
+
+  return (
+    <div className="h-screen flex flex-col">
+      <div className="flex-1 overflow-hidden">
+        <ChatContainer messages={displayMessages} />
+      </div>
+      {/* 输入框组件 */}
+    </div>
+  );
+}
+```
+
+## 性能考虑
+
+### 消息数量
+
+ChatContainer 使用标准的 DOM 滚动，适合中等数量的消息（< 1000 条）。对于更大的消息列表，建议：
+
+1. **分页加载**：只加载最近的消息，向上滚动时加载更多
+2. **虚拟滚动**：使用 `react-virtuoso` 等虚拟滚动库
+3. **消息归档**：将旧消息移到归档区域
+
+<Callout type="warning" title="性能建议">
+  当消息数量超过 500 条时，建议实现分页加载或虚拟滚动，避免 DOM
+  节点过多影响性能。
+</Callout>
+
+### 流式渲染优化
+
+流式渲染时的性能优化建议：
+
+```tsx
+// 1. 使用合适的批处理大小
+<StreamingText
+  content={text}
+  batchSize={10}  // 每次渲染 10 个字符
+  maxFPS={30}     // 限制为 30 FPS
+/>
+
+// 2. 启用虚拟补全，减少重新渲染
+<StreamingText
+  content={text}
+  enableVirtualCompletion
+/>
+
+// 3. 使用 React.memo 优化历史消息
+const MemoizedMessage = React.memo(Message);
+```
+
+### 自动滚动优化
+
+ChatContainer 的自动滚动已经过优化：
+
+- 使用 `requestAnimationFrame` 调度滚动
+- 检测用户手动滚动，智能暂停/恢复自动滚动
+- 使用 `smooth` 滚动行为提升体验
+
+## 无障碍访问
+
+ChatContainer 遵循无障碍访问最佳实践：
+
+### ARIA 属性
+
+- 使用 `role="log"` 标记消息列表
+- 使用 `aria-label` 描述容器用途
+- 使用 `aria-live="polite"` 实时播报新消息
+- 加载状态使用 `role="status"`
+
+### 键盘导航
+
+- 消息列表可以使用键盘滚动
+- 支持 Page Up/Down 快速滚动
+- 支持 Home/End 跳转到顶部/底部
+
+<Callout type="info" title="屏幕阅读器">
+  ChatContainer
+  对屏幕阅读器友好，新消息会自动播报。流式渲染时会实时播报新增的内容。
+</Callout>
+
+## 最佳实践
+
+### 1. 消息 ID
+
+确保每条消息都有唯一的 ID：
+
+```tsx
+const messages = [
+  {
+    id: crypto.randomUUID(), // 使用 UUID
+    role: "user",
+    content: "消息内容",
+  },
+];
+```
+
+### 2. 时间戳
+
+为消息添加时间戳，方便用户查看：
+
+```tsx
+const message = {
+  id: "1",
+  role: "user",
+  content: "消息内容",
+  timestamp: new Date(), // 添加时间戳
+};
+```
+
+### 3. 错误处理
+
+处理流式渲染中的错误：
+
+```tsx
+try {
+  // 流式接收数据
+} catch (error) {
+  setMessages((prev) => [
+    ...prev,
+    {
+      id: Date.now().toString(),
+      role: "system",
+      content: "抱歉，发生了错误，请重试。",
+    },
+  ]);
+}
+```
+
+### 4. 加载状态
+
+在等待 AI 回复时显示加载状态：
+
+```tsx
+<ChatContainer
+  messages={messages}
+  loading={isWaitingForResponse}
+  loadingText="AI 正在思考..."
+/>
+```
+
+## 设计令牌
+
+ChatContainer 使用以下 CSS 变量：
+
+- 背景色：`bg-white` / `dark:bg-gray-900`
+- 内边距：`p-4`
+- 消息间距：`gap-2`
+- 滚动条样式：浏览器默认
+
+## 相关组件
+
+- [Message](/components/chat/message) - 消息组件
+- [StreamingText](/components/streaming-text) - 流式文本组件
+- [MessageInput](/components/chat/message-input) - 消息输入框
+
+## 常见问题
+
+### 如何实现消息的编辑和删除？
+
+在父组件中管理消息状态：
+
+```tsx
+const [messages, setMessages] = useState([]);
+
+const handleDelete = (id) => {
+  setMessages(messages.filter((msg) => msg.id !== id));
+};
+
+const handleEdit = (id, newContent) => {
+  setMessages(
+    messages.map((msg) =>
+      msg.id === id ? { ...msg, content: newContent } : msg
+    )
+  );
+};
+```
+
+### 如何实现消息的分页加载？
+
+监听滚动事件，在滚动到顶部时加载更多：
+
+```tsx
+const handleScroll = (e) => {
+  if (e.target.scrollTop === 0 && hasMore) {
+    loadMoreMessages();
+  }
+};
+
+<div onScroll={handleScroll}>
+  <ChatContainer messages={messages} />
+</div>;
+```
+
+### 如何自定义加载指示器？
+
+使用 `renderLoadingIndicator` 属性：
+
+```tsx
+<ChatContainer
+  messages={messages}
+  loading={true}
+  renderLoadingIndicator={() => (
+    <div className="custom-loader">
+      <YourCustomLoader />
+    </div>
+  )}
+/>
+```

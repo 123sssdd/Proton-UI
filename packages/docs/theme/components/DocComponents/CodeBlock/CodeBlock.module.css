@@ -1,0 +1,50 @@
+/* CodeBlock 组件样式 */
+
+.codeBlock {
+  @apply relative mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700;
+}
+
+.filename {
+  @apply px-4 py-2 bg-gray-100 dark:bg-gray-800 text-sm font-mono text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700;
+}
+
+.codeWrapper {
+  @apply relative;
+}
+
+.pre {
+  @apply m-0 p-4 overflow-x-auto bg-gray-50 dark:bg-gray-900;
+}
+
+.pre code {
+  @apply text-sm font-mono;
+}
+
+.copyButton {
+  @apply absolute top-2 right-2 px-3 py-1 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors;
+}
+
+.copyButton:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* 行号和高亮样式 */
+.codeLine {
+  @apply flex;
+}
+
+.lineNumber {
+  @apply inline-block w-12 text-right pr-4 text-gray-400 dark:text-gray-600 select-none;
+}
+
+.lineContent {
+  @apply flex-1;
+}
+
+.highlightedLine {
+  @apply bg-yellow-100 dark:bg-yellow-900/30 -mx-4 px-4;
+}
+
+.highlightedLine .lineNumber {
+  @apply text-yellow-600 dark:text-yellow-400;
+}

@@ -65,11 +65,13 @@ export function useParticles(
   const [particles, setParticles] = useState<Particle[]>([]);
   const animationFrameRef = useRef<number | null>(null);
 
-  // 初始化粒子系统
+  // 初始化粒子系统（只在组件挂载时初始化一次）
   useEffect(() => {
+    console.log("[useParticles] 初始化粒子系统", options);
     systemRef.current = new ParticleSystem(options);
 
     return () => {
+      console.log("[useParticles] 销毁粒子系统");
       if (systemRef.current) {
         systemRef.current.destroy();
       }
@@ -77,21 +79,36 @@ export function useParticles(
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [options]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // 空依赖数组，只在挂载时初始化一次
 
   // 渲染粒子到 Canvas
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.log("[useParticles] Canvas 未找到");
+      return;
+    }
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      console.log("[useParticles] 无法获取 Canvas 2D 上下文");
+      return;
+    }
+
+    console.log("[useParticles] 开始渲染循环");
 
     // 设置 Canvas 尺寸
     const resizeCanvas = () => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width;
       canvas.height = rect.height;
+      console.log(
+        "[useParticles] Canvas 尺寸:",
+        canvas.width,
+        "x",
+        canvas.height
+      );
     };
 
     resizeCanvas();
@@ -137,6 +154,7 @@ export function useParticles(
     animationFrameRef.current = requestAnimationFrame(render);
 
     return () => {
+      console.log("[useParticles] 停止渲染循环");
       window.removeEventListener("resize", resizeCanvas);
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -152,11 +170,21 @@ export function useParticles(
         y?: number;
       }
     ) => {
-      if (!systemRef.current || !canvasRef.current) return;
+      if (!systemRef.current || !canvasRef.current) {
+        console.log("[useParticles] emit 失败: 系统或 Canvas 未初始化");
+        return;
+      }
 
       const canvas = canvasRef.current;
       const x = options.x ?? canvas.width / 2;
       const y = options.y ?? canvas.height / 2;
+
+      console.log("[useParticles] 发射粒子:", {
+        x,
+        y,
+        type: options.type,
+        count: options.count,
+      });
 
       systemRef.current.emit({
         ...options,

@@ -1,5 +1,5 @@
 import { defineConfig } from "rspress/config";
-import { pluginPlayground } from "@rspress/plugin-playground";
+// import { pluginPlayground } from "@rspress/plugin-playground";
 import path from "path";
 import { fileURLToPath } from "url";
 // --- ESM 路径兼容处理 ---
@@ -16,6 +16,31 @@ export default defineConfig({
   },
   // 使用自定义主题
   themeDir: path.join(__dirname, "theme"),
+  // 注册全局组件
+  globalComponents: [
+    path.join(__dirname, "theme/components/DocComponents/DemoBox/DemoBox.tsx"),
+    path.join(
+      __dirname,
+      "theme/components/DocComponents/PropsTable/PropsTable.tsx"
+    ),
+    path.join(
+      __dirname,
+      "theme/components/DocComponents/CodeBlock/CodeBlock.tsx"
+    ),
+    path.join(__dirname, "theme/components/DocComponents/Tabs/Tabs.tsx"),
+    path.join(__dirname, "theme/components/DocComponents/Callout/Callout.tsx"),
+    // 演示组件
+    path.join(__dirname, "theme/components/demos/InputValidationDemo.tsx"),
+    path.join(__dirname, "theme/components/demos/StreamingMessageDemo.tsx"),
+    path.join(__dirname, "theme/components/demos/BasicChatDemo.tsx"),
+    path.join(__dirname, "theme/components/demos/StreamingChatDemo.tsx"),
+    path.join(__dirname, "theme/components/demos/LargeMessageListDemo.tsx"),
+    path.join(__dirname, "theme/components/demos/CombinedEffectsDemo.tsx"),
+  ],
+  // MDX 配置
+  markdown: {
+    mdxRs: true, // 启用 Rust 版 MDX 解析器
+  },
   themeConfig: {
     socialLinks: [
       {
@@ -81,15 +106,33 @@ export default defineConfig({
           items: [
             {
               text: "Message 消息",
-              link: "/components/message",
+              link: "/components/chat/message",
             },
             {
               text: "ChatContainer 对话容器",
-              link: "/components/chat-container",
+              link: "/components/chat/chat-container",
             },
             {
               text: "StreamingText 流式文本",
               link: "/components/streaming-text",
+            },
+          ],
+        },
+        {
+          text: "✨ 特效组件",
+          items: [
+            {
+              text: "像素特效",
+              link: "/components/effects/pixel-effects",
+            },
+          ],
+        },
+        {
+          text: "🎨 主题系统",
+          items: [
+            {
+              text: "主题画廊",
+              link: "/components/theme/theme-gallery",
             },
           ],
         },
@@ -98,12 +141,17 @@ export default defineConfig({
     // 启用暗色模式
     darkMode: true,
   },
-  plugins: [
-    pluginPlayground({
-      defaultDirection: "vertical", // 上下布局
-      defaultEditorCollapsed: true, // 代码默认折叠
-    }),
-  ],
+  // plugins: [
+  //   pluginPlayground({
+  //     defaultDirection: "vertical", // 上下布局
+  //     defaultEditorCollapsed: true, // 代码默认折叠
+  //     include: [
+  //       ["@proton-ui/core", "@proton-ui/core"],
+  //       ["react", "react"],
+  //       ["@proton-ui/streaming", "@proton-ui/streaming"],
+  //     ],
+  //   }),
+  // ],
   builderConfig: {
     resolve: {
       alias: {

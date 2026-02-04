@@ -1,403 +1,832 @@
 # Input 输入框
 
-通过键盘输入内容，支持受控和非受控模式，提供标签、错误提示、辅助文本和图标等功能。
+输入框组件用于接收用户输入，提供像素风格的视觉效果和完整的表单支持。
 
 ## 基础用法
 
-最简单的输入框用法。
+使用 `label`、`placeholder` 等属性来定义输入框的样式和行为。
 
-```tsx
-import { Input } from "@proton-ui/core";
-
-export default () => (
-  <div className="space-y-4">
-    <Input placeholder="请输入内容" />
-    <Input placeholder="带标签的输入框" label="用户名" />
-  </div>
-);
-```
-
-## 受控模式
-
-通过 `value` 和 `onChange` 控制输入框的值。
-
-```tsx
-import { Input } from "@proton-ui/core";
-import { useState } from "react";
-
-export default () => {
-  const [value, setValue] = useState("");
-
-  return (
-    <div className="space-y-4">
-      <Input
-        label="受控输入框"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="输入内容"
-      />
-      <p className="text-sm text-gray-600">当前值: {value || "(空)"}</p>
-    </div>
-  );
-};
-```
-
-## 非受控模式
-
-使用 `defaultValue` 设置初始值，通过 ref 获取输入框的值。
-
-```tsx
-import { Input } from "@proton-ui/core";
-import { useRef } from "react";
-
-export default () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleClick = () => {
-    alert(`输入的值: ${inputRef.current?.value || "(空)"}`);
-  };
-
-  return (
-    <div className="space-y-4">
-      <Input
-        ref={inputRef}
-        label="非受控输入框"
-        defaultValue="默认值"
-        placeholder="输入内容"
-      />
-      <button
-        onClick={handleClick}
-        className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-      >
-        获取值
-      </button>
-    </div>
-  );
-};
-```
-
-## 错误状态
-
-通过 `error` 属性显示错误信息。
-
-```tsx
-import { Input } from "@proton-ui/core";
-import { useState } from "react";
-
-export default () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-
-  const validateEmail = (value: string) => {
-    if (!value) {
-      setError("邮箱不能为空");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      setError("请输入有效的邮箱地址");
-    } else {
-      setError("");
+<DemoBox
+  title="基础输入框"
+  description="通过属性面板调整输入框的样式和状态"
+  showCode={true}
+  showProps={true}
+  propsConfig={[
+    {
+      name: "placeholder",
+      type: "string",
+      label: "占位符",
+      defaultValue: "请输入内容...",
+      description: "输入框的占位符文本"
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      label: "禁用",
+      defaultValue: false,
+      description: "是否禁用输入框"
+    },
+    {
+      name: "fullWidth",
+      type: "boolean",
+      label: "全宽",
+      defaultValue: false,
+      description: "是否占满容器宽度"
     }
-  };
+  ]}
+  code={`import { Input } from "@proton-ui/core";
 
-  return (
+<Input placeholder="请输入内容..." />`}
+  language="tsx"
+>
+  <Input placeholder="请输入内容..." />
+</DemoBox>
+
+## 带标签的输入框
+
+使用 `label` 属性为输入框添加标签，使用 `required` 属性标记必填字段。
+
+<DemoBox
+  title="带标签的输入框"
+  description="标签帮助用户理解输入框的用途"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<div className="space-y-4">
+  <Input
+    label="用户名"
+    placeholder="请输入用户名"
+  />
+  <Input
+    label="邮箱"
+    placeholder="请输入邮箱地址"
+    required
+  />
+</div>`}
+  language="tsx"
+>
+  <div className="space-y-4">
+    <Input
+      label="用户名"
+      placeholder="请输入用户名"
+    />
     <Input
       label="邮箱"
-      type="email"
-      value={email}
-      onChange={(e) => {
-        setEmail(e.target.value);
-        validateEmail(e.target.value);
-      }}
-      error={error}
+      placeholder="请输入邮箱地址"
+      required
+    />
+  </div>
+</DemoBox>
+
+## 带图标的输入框
+
+使用 `leftIcon` 和 `rightIcon` 属性为输入框添加图标，增强视觉表达。
+
+<DemoBox
+  title="图标输入框"
+  description="图标可以帮助用户快速识别输入框的用途"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+// 搜索图标
+const SearchIcon = () => (
+
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="2" />
+  <path
+    d="M11 11L14 14"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+  />
+</svg>
+);
+
+// 邮件图标
+const MailIcon = () => (
+
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <rect
+    x="2"
+    y="4"
+    width="12"
+    height="8"
+    rx="1"
+    stroke="currentColor"
+    strokeWidth="2"
+  />
+  <path
+    d="M2 5L8 9L14 5"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+  />
+</svg>
+);
+
+// 关闭图标
+const CloseIcon = () => (
+
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path
+    d="M4 4L12 12M12 4L4 12"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+  />
+</svg>
+);
+
+<div className="space-y-4">
+  <Input
+    leftIcon={<SearchIcon />}
+    placeholder="搜索..."
+  />
+  <Input
+    leftIcon={<MailIcon />}
+    placeholder="请输入邮箱地址"
+  />
+  <Input
+    placeholder="可清除的输入框"
+    rightIcon={<CloseIcon />}
+  />
+</div>`}
+  language="tsx"
+>
+  <div className="space-y-4">
+    <Input
+      leftIcon={
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="2" />
+          <path d="M11 11L14 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      }
+      placeholder="搜索..."
+    />
+    <Input
+      leftIcon={
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+          <path d="M2 5L8 9L14 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      }
+      placeholder="请输入邮箱地址"
+    />
+    <Input
+      placeholder="可清除的输入框"
+      rightIcon={
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      }
+    />
+  </div>
+</DemoBox>
+
+## 输入框状态
+
+Input 组件支持多种状态，提供完整的视觉反馈。
+
+<DemoBox
+  title="状态演示"
+  description="展示输入框的不同状态：正常、聚焦、错误、禁用"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<div className="space-y-4">
+  <Input
+    label="正常状态"
+    placeholder="请输入内容"
+  />
+  <Input
+    label="错误状态"
+    placeholder="请输入内容"
+    error="此字段不能为空"
+  />
+  <Input
+    label="禁用状态"
+    placeholder="此输入框已禁用"
+    disabled
+  />
+  <Input
+    label="带辅助文本"
+    placeholder="请输入内容"
+    helperText="这是一段辅助说明文字"
+  />
+</div>`}
+  language="tsx"
+>
+  <div className="space-y-4">
+    <Input
+      label="正常状态"
+      placeholder="请输入内容"
+    />
+    <Input
+      label="错误状态"
+      placeholder="请输入内容"
+      error="此字段不能为空"
+    />
+    <Input
+      label="禁用状态"
+      placeholder="此输入框已禁用"
+      disabled
+    />
+    <Input
+      label="带辅助文本"
+      placeholder="请输入内容"
+      helperText="这是一段辅助说明文字"
+    />
+  </div>
+</DemoBox>
+
+<Callout type="info" title="状态优先级">
+  当同时设置 `error` 和 `helperText`
+  时，只会显示错误信息。错误状态具有更高的优先级。
+</Callout>
+
+## 表单验证
+
+结合表单验证逻辑，Input 组件可以提供实时的验证反馈。
+
+<DemoBox
+  title="表单验证演示"
+  description="实时验证用户输入，提供即时反馈"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+import { useState } from "react";
+
+function ValidationDemo() {
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [username, setUsername] = useState("");
+
+// 邮箱验证
+const emailError = email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)
+? "请输入有效的邮箱地址"
+: "";
+
+// 密码验证
+const passwordError = password && password.length < 8
+? "密码长度至少为 8 个字符"
+: "";
+
+// 用户名验证
+const usernameError = username && username.length < 3
+? "用户名长度至少为 3 个字符"
+: "";
+
+return (
+<div className="space-y-4">
+<Input
+label="用户名"
+placeholder="请输入用户名"
+value={username}
+onChange={(e) => setUsername(e.target.value)}
+error={usernameError}
+helperText={!usernameError && username ? "用户名可用" : ""}
+required
+/>
+<Input
+label="邮箱"
+type="email"
+placeholder="请输入邮箱地址"
+value={email}
+onChange={(e) => setEmail(e.target.value)}
+error={emailError}
+helperText={!emailError && email ? "邮箱格式正确" : ""}
+required
+/>
+<Input
+label="密码"
+type="password"
+placeholder="请输入密码"
+value={password}
+onChange={(e) => setPassword(e.target.value)}
+error={passwordError}
+helperText={!passwordError && password ? "密码强度良好" : ""}
+required
+/>
+</div>
+);
+}`}
+language="tsx"
+
+>
+
+  <InputValidationDemo />
+</DemoBox>
+
+## 不同输入类型
+
+Input 组件支持所有原生 HTML input 类型。
+
+<DocTabs defaultTab="text">
+  <DocTabPanel id="text" label="文本">
+    <DemoBox
+      description="标准文本输入框"
+      showCode={true}
+      code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="姓名"
+  type="text"
+  placeholder="请输入姓名"
+/>`}
+      language="tsx"
+    >
+      <Input
+        label="姓名"
+        type="text"
+        placeholder="请输入姓名"
+      />
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="email" label="邮箱">
+    <DemoBox
+      description="邮箱输入框，移动端会显示邮箱键盘"
+      showCode={true}
+      code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="邮箱"
+  type="email"
+  placeholder="example@email.com"
+/>`}
+      language="tsx"
+    >
+      <Input
+        label="邮箱"
+        type="email"
+        placeholder="example@email.com"
+      />
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="password" label="密码">
+    <DemoBox
+      description="密码输入框，输入内容会被隐藏"
+      showCode={true}
+      code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="密码"
+  type="password"
+  placeholder="请输入密码"
+/>`}
+      language="tsx"
+    >
+      <Input
+        label="密码"
+        type="password"
+        placeholder="请输入密码"
+      />
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="number" label="数字">
+    <DemoBox
+      description="数字输入框，移动端会显示数字键盘"
+      showCode={true}
+      code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="年龄"
+  type="number"
+  placeholder="请输入年龄"
+  min={0}
+  max={120}
+/>`}
+      language="tsx"
+    >
+      <Input
+        label="年龄"
+        type="number"
+        placeholder="请输入年龄"
+        min={0}
+        max={120}
+      />
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="tel" label="电话">
+    <DemoBox
+      description="电话输入框，移动端会显示电话键盘"
+      showCode={true}
+      code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="电话"
+  type="tel"
+  placeholder="请输入电话号码"
+/>`}
+      language="tsx"
+    >
+      <Input
+        label="电话"
+        type="tel"
+        placeholder="请输入电话号码"
+      />
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="url" label="URL">
+    <DemoBox
+      description="URL 输入框，移动端会显示 URL 键盘"
+      showCode={true}
+      code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="网站"
+  type="url"
+  placeholder="https://example.com"
+/>`}
+      language="tsx"
+    >
+      <Input
+        label="网站"
+        type="url"
+        placeholder="https://example.com"
+      />
+    </DemoBox>
+  </DocTabPanel>
+</DocTabs>
+
+## 全宽输入框
+
+使用 `fullWidth` 属性使输入框占满容器宽度。
+
+<DemoBox
+  title="全宽输入框"
+  description="适用于表单布局或需要占满容器宽度的场景"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<div className="space-y-4">
+  <Input
+    label="全宽输入框"
+    placeholder="占满容器宽度"
+    fullWidth
+  />
+  <Input
+    label="普通输入框"
+    placeholder="默认宽度"
+  />
+</div>`}
+  language="tsx"
+>
+  <div className="space-y-4">
+    <Input
+      label="全宽输入框"
+      placeholder="占满容器宽度"
+      fullWidth
+    />
+    <Input
+      label="普通输入框"
+      placeholder="默认宽度"
+    />
+  </div>
+</DemoBox>
+
+## API
+
+<PropsTable
+  data={[
+    {
+      name: "label",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "输入框标签文本",
+    },
+    {
+      name: "error",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "错误信息，设置后输入框会显示错误状态",
+    },
+    {
+      name: "helperText",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "辅助文本，显示在输入框下方。当有错误信息时不显示",
+    },
+    {
+      name: "leftIcon",
+      type: "React.ReactNode",
+      required: false,
+      defaultValue: "-",
+      description: "左侧图标，显示在输入框内部左侧",
+    },
+    {
+      name: "rightIcon",
+      type: "React.ReactNode",
+      required: false,
+      defaultValue: "-",
+      description: "右侧图标，显示在输入框内部右侧",
+    },
+    {
+      name: "fullWidth",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否占满容器宽度",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否禁用输入框",
+    },
+    {
+      name: "required",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否为必填字段，会在标签后显示红色星号",
+    },
+    {
+      name: "className",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "自定义 CSS 类名",
+    },
+    {
+      name: "type",
+      type: '"text" | "email" | "password" | "number" | "tel" | "url" | ...',
+      required: false,
+      defaultValue: '"text"',
+      description: "输入框类型，支持所有原生 HTML input 类型",
+    },
+    {
+      name: "placeholder",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "占位符文本",
+    },
+    {
+      name: "value",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "输入框的值（受控组件）",
+    },
+    {
+      name: "defaultValue",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "输入框的默认值（非受控组件）",
+    },
+    {
+      name: "onChange",
+      type: "(e: React.ChangeEvent<HTMLInputElement>) => void",
+      required: false,
+      defaultValue: "-",
+      description: "值变化时的回调函数",
+    },
+  ]}
+/>
+
+<Callout type="info" title="继承原生属性">
+Input 组件继承了所有原生 `<input>` 元素的 HTML 属性，如 `maxLength`、`minLength`、`pattern`、`autoComplete` 等。
+</Callout>
+
+## 无障碍访问
+
+Input 组件遵循 WAI-ARIA 规范，提供完整的无障碍访问支持。
+
+### 键盘导航
+
+<Callout type="tip" title="键盘操作">
+  - **Tab**: 聚焦到输入框 - **Shift + Tab**: 移动到上一个可聚焦元素 - **Enter**:
+  提交表单（如果输入框在表单中） - **Esc**: 清除输入（需要自定义实现）
+</Callout>
+
+### ARIA 属性
+
+Input 组件会自动添加适当的 ARIA 属性：
+
+- `aria-invalid`: 当 `error` 属性存在时设置为 `true`，告知屏幕阅读器输入无效
+- `aria-describedby`: 关联错误信息或辅助文本，屏幕阅读器会读取这些信息
+- `aria-required`: 当 `required={true}` 时设置，告知屏幕阅读器这是必填字段
+- `role="alert"`: 错误信息包含此属性，确保错误信息被立即播报
+
+### 标签关联
+
+Input 组件会自动为输入框和标签生成唯一的 ID，并通过 `htmlFor` 和 `id` 属性建立关联。这确保：
+
+- 点击标签时会聚焦到输入框
+- 屏幕阅读器能正确播报标签和输入框的关系
+
+<DemoBox
+  title="标签关联演示"
+  description="点击标签文本，输入框会获得焦点"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<Input
+  label="点击这个标签试试"
+  placeholder="输入框会获得焦点"
+/>`}
+  language="tsx"
+>
+  <Input
+    label="点击这个标签试试"
+    placeholder="输入框会获得焦点"
+  />
+</DemoBox>
+
+### 焦点指示器
+
+所有输入框都有清晰的焦点指示器（focus ring），确保键盘用户能够清楚地看到当前焦点位置。
+
+### 错误提示
+
+错误信息使用 `role="alert"` 和 `aria-live="polite"` 属性，确保屏幕阅读器能够及时播报错误信息。
+
+<Callout type="success" title="无障碍访问最佳实践">
+  - 始终为输入框提供有意义的 `label` 属性 - 使用 `required` 属性标记必填字段 -
+  提供清晰的错误信息，说明如何修正错误 - 使用 `helperText` 提供额外的输入指导 -
+  确保错误信息的颜色对比度符合 WCAG 标准 - 不要仅依赖颜色来表示错误状态
+</Callout>
+
+## 设计令牌
+
+Input 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
+
+- `--color-bg-primary`: 输入框背景色
+- `--color-bg-secondary`: 禁用状态背景色
+- `--color-text-primary`: 文本颜色
+- `--color-text-secondary`: 占位符和辅助文本颜色
+- `--color-accent`: 聚焦状态边框颜色
+- `--color-error`: 错误状态颜色
+
+<Callout type="info" title="主题定制">
+  查看 [主题系统文档](/components/theme/theme-gallery)
+  了解如何自定义输入框的颜色和样式。
+</Callout>
+
+## 最佳实践
+
+### 标签和占位符
+
+- 始终使用 `label` 属性提供标签，不要仅依赖占位符
+- 占位符应该提供输入示例，而不是替代标签
+- 标签应该简洁明了，说明输入框的用途
+
+<DemoBox
+  title="标签和占位符示例"
+  description="正确使用标签和占位符"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<div className="space-y-4">
+  {/* 推荐：标签 + 占位符 */}
+  <Input
+    label="邮箱"
+    placeholder="example@email.com"
+  />
+
+  {/* 不推荐：仅使用占位符 */}
+  <Input
+    placeholder="请输入邮箱"
+  />
+</div>`}
+  language="tsx"
+>
+  <div className="space-y-4">
+    <Input
+      label="邮箱"
       placeholder="example@email.com"
     />
-  );
-};
-```
+    <Input
+      placeholder="请输入邮箱"
+    />
+  </div>
+</DemoBox>
 
-## 辅助文本
+### 错误处理
 
-通过 `helperText` 属性显示辅助文本。
+- 提供清晰、具体的错误信息
+- 说明如何修正错误
+- 在用户输入时实时验证，而不是等到提交表单
 
-```tsx
-import { Input } from "@proton-ui/core";
+<Callout type="warning" title="错误信息编写">
+  - ✅ 好的错误信息："邮箱格式不正确，请输入有效的邮箱地址" - ❌
+  不好的错误信息："输入错误"
+</Callout>
 
-export default () => (
+### 辅助文本
+
+使用 `helperText` 提供额外的输入指导：
+
+<DemoBox
+  title="辅助文本示例"
+  description="使用辅助文本提供输入指导"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<div className="space-y-4">
+  <Input
+    label="密码"
+    type="password"
+    placeholder="请输入密码"
+    helperText="密码长度至少为 8 个字符，包含字母和数字"
+  />
+  <Input
+    label="用户名"
+    placeholder="请输入用户名"
+    helperText="用户名只能包含字母、数字和下划线"
+  />
+</div>`}
+  language="tsx"
+>
   <div className="space-y-4">
     <Input
       label="密码"
       type="password"
-      helperText="密码长度至少 8 位，包含字母和数字"
       placeholder="请输入密码"
+      helperText="密码长度至少为 8 个字符，包含字母和数字"
     />
     <Input
       label="用户名"
-      helperText="用户名只能包含字母、数字和下划线"
       placeholder="请输入用户名"
+      helperText="用户名只能包含字母、数字和下划线"
     />
   </div>
-);
-```
+</DemoBox>
 
-## 带图标
+### 表单布局
 
-通过 `leftIcon` 和 `rightIcon` 属性添加图标。
+在表单中使用 `fullWidth` 属性创建一致的布局：
 
-```tsx
-import { Input } from "@proton-ui/core";
+<DemoBox
+  title="表单布局示例"
+  description="使用全宽输入框创建整洁的表单"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+import { Button } from "@proton-ui/core";
 
-const SearchIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+<form className="space-y-4 max-w-md">
+  <Input
+    label="姓名"
+    placeholder="请输入姓名"
+    fullWidth
+    required
+  />
+  <Input
+    label="邮箱"
+    type="email"
+    placeholder="example@email.com"
+    fullWidth
+    required
+  />
+  <Input
+    label="电话"
+    type="tel"
+    placeholder="请输入电话号码"
+    fullWidth
+  />
+  <Button variant="primary" fullWidth>
+    提交
+  </Button>
+</form>`}
+  language="tsx"
+>
+  <form className="space-y-4 max-w-md">
+    <Input
+      label="姓名"
+      placeholder="请输入姓名"
+      fullWidth
+      required
     />
-  </svg>
-);
-
-const EmailIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-    />
-  </svg>
-);
-
-const CheckIcon = () => (
-  <svg
-    className="h-5 w-5 text-green-500"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M5 13l4 4L19 7"
-    />
-  </svg>
-);
-
-export default () => (
-  <div className="space-y-4">
-    <Input label="搜索" leftIcon={<SearchIcon />} placeholder="搜索内容" />
     <Input
       label="邮箱"
-      leftIcon={<EmailIcon />}
+      type="email"
       placeholder="example@email.com"
+      fullWidth
+      required
     />
     <Input
-      label="用户名"
-      rightIcon={<CheckIcon />}
-      defaultValue="available_username"
-      helperText="用户名可用"
+      label="电话"
+      type="tel"
+      placeholder="请输入电话号码"
+      fullWidth
     />
-  </div>
-);
-```
+    <Button variant="primary" fullWidth>
+      提交
+    </Button>
+  </form>
+</DemoBox>
 
-## 禁用状态
+## 相关组件
 
-通过 `disabled` 属性禁用输入框。
-
-```tsx
-import { Input } from "@proton-ui/core";
-
-export default () => (
-  <div className="space-y-4">
-    <Input label="禁用输入框" disabled placeholder="无法输入" />
-    <Input label="禁用且有值" disabled defaultValue="已禁用的内容" />
-  </div>
-);
-```
-
-## 全宽输入框
-
-通过 `fullWidth` 属性使输入框占满容器宽度。
-
-```tsx
-import { Input } from "@proton-ui/core";
-
-export default () => (
-  <div className="space-y-4">
-    <Input label="全宽输入框" fullWidth placeholder="占满容器宽度" />
-    <Input label="标准宽度" placeholder="默认宽度" />
-  </div>
-);
-```
-
-## 不同输入类型
-
-支持所有原生 HTML input 类型。
-
-```tsx
-import { Input } from "@proton-ui/core";
-
-export default () => (
-  <div className="space-y-4">
-    <Input label="文本" type="text" placeholder="文本输入" />
-    <Input label="密码" type="password" placeholder="密码输入" />
-    <Input label="邮箱" type="email" placeholder="邮箱输入" />
-    <Input label="数字" type="number" placeholder="数字输入" />
-    <Input label="日期" type="date" />
-    <Input label="时间" type="time" />
-  </div>
-);
-```
-
-## 使用场景
-
-### 登录表单
-
-```tsx
-import { Input } from "@proton-ui/core";
-import { useState } from "react";
-
-export default () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-  const [errors, setErrors] = useState({
-    username: "",
-    password: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newErrors = { username: "", password: "" };
-
-    if (!formData.username) {
-      newErrors.username = "请输入用户名";
-    }
-    if (!formData.password) {
-      newErrors.password = "请输入密码";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "密码长度至少 6 位";
-    }
-
-    setErrors(newErrors);
-
-    if (!newErrors.username && !newErrors.password) {
-      alert("登录成功！");
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Input
-        label="用户名"
-        value={formData.username}
-        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-        error={errors.username}
-        placeholder="请输入用户名"
-      />
-      <Input
-        label="密码"
-        type="password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-        error={errors.password}
-        placeholder="请输入密码"
-      />
-      <button
-        type="submit"
-        className="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-      >
-        登录
-      </button>
-    </form>
-  );
-};
-```
-
-### 搜索框
-
-```tsx
-import { Input } from "@proton-ui/core";
-import { useState } from "react";
-
-const SearchIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>
-);
-
-export default () => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  return (
-    <div className="space-y-4">
-      <Input
-        leftIcon={<SearchIcon />}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="搜索..."
-        fullWidth
-      />
-      {searchTerm && (
-        <p className="text-sm text-gray-600">
-          搜索: <strong>{searchTerm}</strong>
-        </p>
-      )}
-    </div>
-  );
-};
-```
-
-## API
-
-### Input Props
-
-| 属性       | 说明             | 类型        | 默认值  |
-| ---------- | ---------------- | ----------- | ------- |
-| label      | 输入框标签       | `string`    | -       |
-| error      | 错误信息         | `string`    | -       |
-| helperText | 辅助文本         | `string`    | -       |
-| leftIcon   | 左侧图标         | `ReactNode` | -       |
-| rightIcon  | 右侧图标         | `ReactNode` | -       |
-| fullWidth  | 是否占满容器宽度 | `boolean`   | `false` |
-| disabled   | 禁用状态         | `boolean`   | `false` |
-| className  | 自定义类名       | `string`    | -       |
-
-继承所有原生 `input` 元素的属性，如 `type`、`placeholder`、`value`、`onChange` 等。
-
-## 无障碍性
-
-- 自动生成唯一的 `id` 关联标签和输入框
-- 错误状态下自动添加 `aria-invalid` 属性
-- 错误信息包含 `role="alert"` 和 `aria-live="polite"` 属性
-- 通过 `aria-describedby` 关联辅助文本和错误信息
-- 支持键盘导航和屏幕阅读器
-
-## 设计原则
-
-1. **清晰的状态反馈**：通过颜色和文本清晰地传达输入框的状态
-2. **友好的错误提示**：错误信息应该具体、可操作
-3. **灵活的图标支持**：支持左右图标，增强视觉识别
-4. **一致的交互体验**：focus 状态提供清晰的视觉反馈
+- [Button 按钮](/components/button) - 表单提交按钮
+- [Card 卡片](/components/card) - 表单容器组件
+- [MessageInput 消息输入框](/components/message-input) - 专门用于聊天界面的输入框

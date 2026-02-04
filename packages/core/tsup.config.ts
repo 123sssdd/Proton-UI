@@ -1,4 +1,24 @@
+import { copyFileSync, mkdirSync, readdirSync, statSync } from "fs";
+import { join } from "path";
+
 import { defineConfig } from "tsup";
+
+// 递归复制目录
+function copyDir(src: string, dest: string) {
+  mkdirSync(dest, { recursive: true });
+  const entries = readdirSync(src, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const srcPath = join(src, entry.name);
+    const destPath = join(dest, entry.name);
+
+    if (entry.isDirectory()) {
+      copyDir(srcPath, destPath);
+    } else {
+      copyFileSync(srcPath, destPath);
+    }
+  }
+}
 
 export default defineConfig({
   // 入口文件
@@ -49,5 +69,15 @@ export default defineConfig({
   // 构建完成后的回调
   onSuccess: async () => {
     console.log("✅ Build completed successfully!");
+    console.log("📦 Copying CSS files...");
+
+    try {
+      // 复制整个 styles 目录到 dist
+      copyDir("src/styles", "dist/styles");
+      console.log("✅ CSS files copied successfully!");
+    } catch (error) {
+      console.error("❌ Failed to copy CSS files:", error);
+      throw error;
+    }
   },
 });

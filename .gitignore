@@ -55,10 +55,10 @@ test-results
 playwright-report
 playwright/.cache
 
+# Kiro AI assistant files (internal development only)
+.kiro/
+
 # docs
-项目介绍.md
-.kiro/*
-doc
 packages/docs/doc_build
 packages/docs/node_modules
 packages/docs/.rspress

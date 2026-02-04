@@ -55,16 +55,6 @@ export const PixelEffectsShowcase: React.FC = () => {
             装饰元素
           </button>
           <button
-            onClick={() => setSelectedEffect("crt")}
-            className={`px-6 py-3 rounded border-2 transition-all ${
-              selectedEffect === "crt"
-                ? "neon-glow-gold-box text-yellow-400"
-                : "border-gray-600 text-gray-400 hover:border-yellow-400"
-            }`}
-          >
-            CRT 效果
-          </button>
-          <button
             onClick={() => setSelectedEffect("dithering")}
             className={`px-6 py-3 rounded border-2 transition-all ${
               selectedEffect === "dithering"
@@ -83,16 +73,6 @@ export const PixelEffectsShowcase: React.FC = () => {
             }`}
           >
             粒子效果
-          </button>
-          <button
-            onClick={() => setSelectedEffect("pixelate")}
-            className={`px-6 py-3 rounded border-2 transition-all ${
-              selectedEffect === "pixelate"
-                ? "neon-glow-cyan-box text-cyan-400"
-                : "border-gray-600 text-gray-400 hover:border-cyan-400"
-            }`}
-          >
-            图片滤镜
           </button>
         </div>
 
@@ -396,139 +376,6 @@ export const PixelEffectsShowcase: React.FC = () => {
           </div>
         )}
 
-        {/* CRT 效果增强 */}
-        {selectedEffect === "crt" && (
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-white mb-6">CRT 效果增强</h2>
-
-            {/* 曲面程度可调 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                曲面程度可调（5 级）
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="crt-curvature-level-1 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 1</p>
-                  <p className="text-sm text-gray-300">轻微曲面 (2000px)</p>
-                </div>
-                <div className="crt-curvature-level-2 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 2</p>
-                  <p className="text-sm text-gray-300">中等曲面 (1500px)</p>
-                </div>
-                <div className="crt-curvature-level-3 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 3</p>
-                  <p className="text-sm text-gray-300">标准曲面 (1000px)</p>
-                </div>
-                <div className="crt-curvature-level-4 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 4</p>
-                  <p className="text-sm text-gray-300">强烈曲面 (700px)</p>
-                </div>
-                <div className="crt-curvature-level-5 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 5</p>
-                  <p className="text-sm text-gray-300">极强曲面 (500px)</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 扫描线密度可调 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                扫描线密度可调
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="scanline-density-low p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">低密度</p>
-                  <p className="text-sm text-gray-300">6-8px 间距</p>
-                </div>
-                <div className="scanline-density-medium p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">中密度</p>
-                  <p className="text-sm text-gray-300">3-4px 间距</p>
-                </div>
-                <div className="scanline-density-high p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">高密度</p>
-                  <p className="text-sm text-gray-300">1-2px 间距</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 色散强度可调 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                色散强度可调
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="crt-chromatic-level-1 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 1</p>
-                  <p className="text-sm text-gray-300">轻微色散 (1px)</p>
-                </div>
-                <div className="crt-chromatic-level-2 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 2</p>
-                  <p className="text-sm text-gray-300">中等色散 (2px)</p>
-                </div>
-                <div className="crt-chromatic-level-3 p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">Level 3</p>
-                  <p className="text-sm text-gray-300">强烈色散 (3px)</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 开关机动画 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                开关机动画增强
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-4">开机动画</p>
-                  <div className="crt-power-on-enhanced p-4 bg-cyan-500/20 rounded text-cyan-400 text-center">
-                    CRT 开机效果
-                  </div>
-                  <p className="text-sm text-gray-300 mt-2">
-                    模拟显像管从中心线展开
-                  </p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-4">关机动画</p>
-                  <div className="crt-power-off-enhanced p-4 bg-cyan-500/20 rounded text-cyan-400 text-center">
-                    CRT 关机效果
-                  </div>
-                  <p className="text-sm text-gray-300 mt-2">
-                    模拟显像管收缩到中心线
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* CRT 闪烁效果 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                CRT 闪烁效果
-              </h3>
-              <div className="crt-flicker p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                <p className="text-white font-bold mb-2">老旧显示器闪烁</p>
-                <p className="text-sm text-gray-300">
-                  模拟老旧 CRT 显示器的不稳定闪烁效果
-                </p>
-              </div>
-            </div>
-
-            {/* CRT 组合效果 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                CRT 组合效果
-              </h3>
-              <div className="crt-full-effect p-8 rounded-lg bg-gray-800/50">
-                <p className="text-white font-bold text-xl mb-4">
-                  完整 CRT 效果
-                </p>
-                <p className="text-gray-300">
-                  曲面 + 扫描线 + 光晕的组合效果，完整还原 CRT 显示器的视觉特征
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Dithering 效果 */}
         {selectedEffect === "dithering" && (
           <div className="space-y-8">
@@ -693,6 +540,7 @@ export const PixelEffectsShowcase: React.FC = () => {
                   size={{ min: 2, max: 4 }}
                   speed={{ min: 100, max: 200 }}
                   life={{ min: 500, max: 1500 }}
+                  respectMotionPreference={false}
                 />
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <p className="text-white text-lg">点击任意位置</p>
@@ -718,6 +566,7 @@ export const PixelEffectsShowcase: React.FC = () => {
                   size={{ min: 2, max: 3 }}
                   speed={{ min: 30, max: 60 }}
                   life={{ min: 3000, max: 5000 }}
+                  respectMotionPreference={false}
                 />
               </div>
             </div>
@@ -737,6 +586,7 @@ export const PixelEffectsShowcase: React.FC = () => {
                   colors={["#FFB86C", "#D4AF37", "#FFFFFF"]}
                   size={{ min: 2, max: 4 }}
                   life={{ min: 800, max: 1200 }}
+                  respectMotionPreference={false}
                 />
               </div>
             </div>
@@ -757,6 +607,7 @@ export const PixelEffectsShowcase: React.FC = () => {
                   size={{ min: 2, max: 3 }}
                   speed={{ min: 40, max: 80 }}
                   life={{ min: 4000, max: 6000 }}
+                  respectMotionPreference={false}
                 />
               </div>
             </div>
@@ -779,6 +630,7 @@ export const PixelEffectsShowcase: React.FC = () => {
                   speed={{ min: 20, max: 40 }}
                   life={{ min: 5000, max: 8000 }}
                   style={{ zIndex: 1 }}
+                  respectMotionPreference={false}
                 />
                 {/* 点击爆炸效果 */}
                 <ParticleEffect
@@ -790,6 +642,7 @@ export const PixelEffectsShowcase: React.FC = () => {
                   speed={{ min: 80, max: 180 }}
                   life={{ min: 600, max: 1200 }}
                   style={{ zIndex: 2 }}
+                  respectMotionPreference={false}
                 />
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                   <p className="text-white text-lg">点击触发爆炸效果</p>
@@ -806,232 +659,6 @@ export const PixelEffectsShowcase: React.FC = () => {
                 <li>✓ 自动清理死亡粒子</li>
                 <li>✓ 支持 prefers-reduced-motion 设置</li>
                 <li>✓ Canvas 渲染，GPU 加速</li>
-              </ul>
-            </div>
-          </div>
-        )}
-
-        {/* 图片滤镜效果 */}
-        {selectedEffect === "pixelate" && (
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              像素化图片滤镜
-            </h2>
-
-            {/* 说明 */}
-            <div className="glass-morphism p-6 rounded-lg">
-              <p className="text-gray-300">
-                将任意图片转换为像素风格，支持可调像素大小和色彩量化。
-                适用于头像、背景图、装饰图片等场景。
-              </p>
-            </div>
-
-            {/* 预设效果演示 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">预设效果</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* 8-bit 风格 */}
-                <div className="space-y-3">
-                  <h4 className="text-cyan-400 font-bold">8-bit 风格</h4>
-                  <p className="text-gray-400 text-sm">8x8 像素块，16 色</p>
-                  <div className="bg-gray-800 p-4 rounded border border-gray-600">
-                    <div
-                      className="w-full h-48 bg-gradient-to-br from-cyan-500 to-purple-500 rounded"
-                      style={{
-                        imageRendering: "pixelated",
-                        backgroundSize: "8px 8px",
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.1) 8px, rgba(0,0,0,0.1) 16px), repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.1) 8px, rgba(0,0,0,0.1) 16px)",
-                      }}
-                    />
-                  </div>
-                  <code className="text-xs text-gray-400 block">
-                    pixelSize: 8, colorLevels: 16
-                  </code>
-                </div>
-
-                {/* 16-bit 风格 */}
-                <div className="space-y-3">
-                  <h4 className="text-pink-400 font-bold">16-bit 风格</h4>
-                  <p className="text-gray-400 text-sm">4x4 像素块，256 色</p>
-                  <div className="bg-gray-800 p-4 rounded border border-gray-600">
-                    <div
-                      className="w-full h-48 bg-gradient-to-br from-pink-500 to-yellow-500 rounded"
-                      style={{
-                        imageRendering: "pixelated",
-                        backgroundSize: "4px 4px",
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px), repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px)",
-                      }}
-                    />
-                  </div>
-                  <code className="text-xs text-gray-400 block">
-                    pixelSize: 4, colorLevels: 256
-                  </code>
-                </div>
-
-                {/* 现代像素风 */}
-                <div className="space-y-3">
-                  <h4 className="text-purple-400 font-bold">现代像素风</h4>
-                  <p className="text-gray-400 text-sm">8x8 像素块，保持原色</p>
-                  <div className="bg-gray-800 p-4 rounded border border-gray-600">
-                    <div
-                      className="w-full h-48 bg-gradient-to-br from-purple-500 to-blue-500 rounded"
-                      style={{
-                        imageRendering: "pixelated",
-                        backgroundSize: "8px 8px",
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.1) 8px, rgba(0,0,0,0.1) 16px), repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.1) 8px, rgba(0,0,0,0.1) 16px)",
-                      }}
-                    />
-                  </div>
-                  <code className="text-xs text-gray-400 block">
-                    pixelSize: 8, preserveColor: true
-                  </code>
-                </div>
-
-                {/* 粗糙像素 */}
-                <div className="space-y-3">
-                  <h4 className="text-yellow-400 font-bold">粗糙像素</h4>
-                  <p className="text-gray-400 text-sm">16x16 像素块</p>
-                  <div className="bg-gray-800 p-4 rounded border border-gray-600">
-                    <div
-                      className="w-full h-48 bg-gradient-to-br from-yellow-500 to-red-500 rounded"
-                      style={{
-                        imageRendering: "pixelated",
-                        backgroundSize: "16px 16px",
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(0,0,0,0.1) 16px, rgba(0,0,0,0.1) 32px), repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(0,0,0,0.1) 16px, rgba(0,0,0,0.1) 32px)",
-                      }}
-                    />
-                  </div>
-                  <code className="text-xs text-gray-400 block">
-                    pixelSize: 16
-                  </code>
-                </div>
-
-                {/* 精细像素 */}
-                <div className="space-y-3">
-                  <h4 className="text-green-400 font-bold">精细像素</h4>
-                  <p className="text-gray-400 text-sm">4x4 像素块</p>
-                  <div className="bg-gray-800 p-4 rounded border border-gray-600">
-                    <div
-                      className="w-full h-48 bg-gradient-to-br from-green-500 to-teal-500 rounded"
-                      style={{
-                        imageRendering: "pixelated",
-                        backgroundSize: "4px 4px",
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px), repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 8px)",
-                      }}
-                    />
-                  </div>
-                  <code className="text-xs text-gray-400 block">
-                    pixelSize: 4
-                  </code>
-                </div>
-              </div>
-            </div>
-
-            {/* 使用场景 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">使用场景</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* 头像 */}
-                <div className="space-y-3">
-                  <h4 className="text-cyan-400 font-bold">像素化头像</h4>
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 border-2 border-cyan-400"
-                      style={{ imageRendering: "pixelated" }}
-                    />
-                    <div className="text-gray-300">
-                      <p className="font-bold">用户名</p>
-                      <p className="text-sm text-gray-400">像素风格头像</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 背景 */}
-                <div className="space-y-3">
-                  <h4 className="text-pink-400 font-bold">像素化背景</h4>
-                  <div
-                    className="h-32 rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 flex items-center justify-center"
-                    style={{
-                      imageRendering: "pixelated",
-                      backgroundSize: "8px 8px",
-                      backgroundImage:
-                        "repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.1) 8px, rgba(0,0,0,0.1) 16px), repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.1) 8px, rgba(0,0,0,0.1) 16px)",
-                    }}
-                  >
-                    <p className="text-white font-bold text-xl">像素背景</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* API 示例 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                API 使用示例
-              </h3>
-              <div className="space-y-4">
-                {/* 组件用法 */}
-                <div>
-                  <h4 className="text-cyan-400 font-bold mb-2">组件用法</h4>
-                  <pre className="bg-gray-900 p-4 rounded border border-gray-700 overflow-x-auto">
-                    <code className="text-sm text-gray-300">{`import { PixelatedImage } from '@proton-ui/core';
-
-<PixelatedImage
-  src="/avatar.jpg"
-  alt="Avatar"
-  pixelSize={8}
-  preserveColor={true}
-  className="rounded-lg"
-/>`}</code>
-                  </pre>
-                </div>
-
-                {/* Hook 用法 */}
-                <div>
-                  <h4 className="text-pink-400 font-bold mb-2">Hook 用法</h4>
-                  <pre className="bg-gray-900 p-4 rounded border border-gray-700 overflow-x-auto">
-                    <code className="text-sm text-gray-300">{`import { usePixelateImage } from '@proton-ui/core';
-
-const { pixelatedImage, pixelate } = usePixelateImage();
-
-const handleFile = async (file: File) => {
-  await pixelate(file);
-};`}</code>
-                  </pre>
-                </div>
-
-                {/* 工具函数用法 */}
-                <div>
-                  <h4 className="text-purple-400 font-bold mb-2">
-                    工具函数用法
-                  </h4>
-                  <pre className="bg-gray-900 p-4 rounded border border-gray-700 overflow-x-auto">
-                    <code className="text-sm text-gray-300">{`import { pixelateImage, PIXELATE_PRESETS } from '@proton-ui/core';
-
-const result = await pixelateImage('/photo.jpg', {
-  ...PIXELATE_PRESETS.retro8bit,
-  pixelSize: 8,
-});`}</code>
-                  </pre>
-                </div>
-              </div>
-            </div>
-
-            {/* 性能说明 */}
-            <div className="glass-morphism p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">特性说明</h3>
-              <ul className="text-gray-300 space-y-2">
-                <li>✓ 支持可调像素大小（4px, 8px, 16px 等）</li>
-                <li>✓ 支持色彩量化（8-bit, 16-bit 风格）</li>
-                <li>✓ 支持保持原始色彩</li>
-                <li>✓ 支持多种图片源（URL, File, HTMLImageElement）</li>
-                <li>✓ 提供 5 种预设配置</li>
-                <li>✓ Canvas 处理，高性能</li>
               </ul>
             </div>
           </div>

@@ -85,23 +85,8 @@ export const PixelatedImage: React.FC<PixelatedImageProps> = ({
     pixelate(src);
   }, [src, pixelate]);
 
-  // 加载中状态
-  if (isProcessing) {
-    return (
-      <div className={cn("pixelated-image-loading", className)} style={style}>
-        {loadingPlaceholder || (
-          <div className="flex items-center justify-center bg-[var(--color-bg-secondary)] p-8">
-            <div className="text-[var(--color-text-secondary)] text-sm">
-              处理中...
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
   // 错误状态
-  if (error) {
+  if (error && !pixelatedImage) {
     return (
       <div className={cn("pixelated-image-error", className)} style={style}>
         {errorPlaceholder || (
@@ -115,19 +100,44 @@ export const PixelatedImage: React.FC<PixelatedImageProps> = ({
     );
   }
 
-  // 显示像素化后的图片
+  // 显示像素化后的图片（处理中时也显示，避免闪烁）
   if (pixelatedImage) {
     return (
-      <img
-        src={pixelatedImage}
-        alt={alt}
-        className={cn("pixelated-image", "pixel-perfect", className)}
-        style={{
-          imageRendering: "pixelated",
-          ...style,
-        }}
-        {...imgProps}
-      />
+      <div className="relative">
+        <img
+          src={pixelatedImage}
+          alt={alt}
+          className={cn("pixelated-image", "pixel-perfect", className)}
+          style={{
+            imageRendering: "pixelated",
+            ...style,
+          }}
+          {...imgProps}
+        />
+        {/* 处理中时显示半透明遮罩，但保留图片 */}
+        {isProcessing && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-900/30 rounded">
+            <div className="text-white text-xs bg-gray-900/80 px-2 py-1 rounded">
+              更新中...
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // 首次加载中状态
+  if (isProcessing) {
+    return (
+      <div className={cn("pixelated-image-loading", className)} style={style}>
+        {loadingPlaceholder || (
+          <div className="flex items-center justify-center bg-[var(--color-bg-secondary)] p-8">
+            <div className="text-[var(--color-text-secondary)] text-sm">
+              处理中...
+            </div>
+          </div>
+        )}
+      </div>
     );
   }
 

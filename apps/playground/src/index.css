@@ -1,5 +1,5 @@
 /* 导入像素风设计系统样式 */
-@import "../../../packages/core/src/styles/index.css";
+@import "@proton-ui/core/dist/styles/index.css";
 
 @tailwind base;
 @tailwind components;

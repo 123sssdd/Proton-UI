@@ -1,0 +1,570 @@
+# Message 消息
+
+用于显示对话消息，支持不同角色（用户、AI、系统）的样式区分，支持 Markdown 格式渲染和流式文本显示。
+
+## 基础用法
+
+最简单的消息显示。
+
+<DemoBox
+  title="基础消息"
+  description="展示用户和 AI 的基础消息样式"
+  code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="space-y-4 bg-white p-4 rounded-lg">
+      <Message
+        role="user"
+        content="你好，AI！"
+        timestamp={new Date()}
+      />
+      <Message
+        role="assistant"
+        content="你好！有什么可以帮助你的吗？"
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="space-y-4 bg-white p-4 rounded-lg">
+    <Message
+      role="user"
+      content="你好，AI！"
+      timestamp={new Date()}
+    />
+    <Message
+      role="assistant"
+      content="你好！有什么可以帮助你的吗？"
+      timestamp={new Date()}
+    />
+  </div>
+</DemoBox>
+
+## 消息角色
+
+Message 组件支持三种角色：用户（user）、AI 助手（assistant）和系统（system）。
+
+<DocTabs defaultTab="user">
+  <DocTabPanel id="user" label="用户消息">
+    <DemoBox
+      code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="bg-white p-4 rounded-lg">
+      <Message
+        role="user"
+        content="这是一条用户消息"
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+    >
+      <div className="bg-white p-4 rounded-lg">
+        <Message
+          role="user"
+          content="这是一条用户消息"
+          timestamp={new Date()}
+        />
+      </div>
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="assistant" label="AI 消息">
+    <DemoBox
+      code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="bg-white p-4 rounded-lg">
+      <Message
+        role="assistant"
+        content="这是一条 AI 助手消息"
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+    >
+      <div className="bg-white p-4 rounded-lg">
+        <Message
+          role="assistant"
+          content="这是一条 AI 助手消息"
+          timestamp={new Date()}
+        />
+      </div>
+    </DemoBox>
+  </DocTabPanel>
+
+  <DocTabPanel id="system" label="系统消息">
+    <DemoBox
+      code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="bg-white p-4 rounded-lg">
+      <Message
+        role="system"
+        content="这是一条系统消息"
+      />
+    </div>
+  );
+};`}
+    >
+      <div className="bg-white p-4 rounded-lg">
+        <Message
+          role="system"
+          content="这是一条系统消息"
+        />
+      </div>
+    </DemoBox>
+  </DocTabPanel>
+</DocTabs>
+
+## Markdown 支持
+
+Message 组件内置支持 Markdown 格式，包括代码高亮、列表、链接等。
+
+<DemoBox
+  title="Markdown 消息"
+  description="支持丰富的 Markdown 格式"
+  code={`import { Message } from "@proton-ui/core";
+
+const markdownContent = \`这是一段包含 **Markdown** 格式的消息：
+
+- 支持列表
+- 支持 \\\`代码\\\`
+- 支持 **粗体** 和 _斜体_
+
+\\\`\\\`\\\`javascript
+// 支持代码块高亮
+function hello() {
+console.log("Hello, World!");
+}
+\\\`\\\`\\\`
+\`;
+
+export default () => {
+  return (
+    <div className="bg-white p-4 rounded-lg">
+      <Message
+        role="assistant"
+        content={markdownContent}
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="bg-white p-4 rounded-lg">
+    <Message
+      role="assistant"
+      content={`这是一段包含 **Markdown** 格式的消息：
+
+- 支持列表
+- 支持 \`代码\`
+- 支持 **粗体** 和 _斜体_
+
+\`\`\`javascript
+// 支持代码块高亮
+function hello() {
+console.log("Hello, World!");
+}
+\`\`\`
+`}
+timestamp={new Date()}
+/>
+
+  </div>
+</DemoBox>
+
+## 流式文本
+
+配合 StreamingText 组件实现流式渲染效果。
+
+<DemoBox
+  title="流式消息"
+  description="模拟 AI 逐字生成回复的效果"
+  code={`import { Message } from "@proton-ui/core";
+import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  const [content, setContent] = useState("");
+  const fullText = "这是一段流式渲染的 AI 回复，会逐字显示出来，提供更好的用户体验。";
+
+useEffect(() => {
+let index = 0;
+const timer = setInterval(() => {
+if (index < fullText.length) {
+setContent(fullText.slice(0, index + 1));
+index++;
+} else {
+clearInterval(timer);
+}
+}, 50);
+
+    return () => clearInterval(timer);
+
+}, []);
+
+return (
+<div className="bg-white p-4 rounded-lg">
+<Message
+role="assistant"
+content={content}
+streaming
+renderContent={(text) => (
+<StreamingText content={text} enableVirtualCompletion />
+)}
+timestamp={new Date()}
+/>
+</div>
+);
+};`}
+
+>
+
+  <StreamingMessageDemo />
+</DemoBox>
+
+<Callout type="tip" title="流式渲染">
+  使用 `streaming` 属性和 `renderContent` 函数可以实现流式文本效果。建议配合
+  `@proton-ui/streaming` 包中的 `StreamingText` 组件使用。
+</Callout>
+
+## 自定义头像
+
+可以为消息设置自定义头像。
+
+<DemoBox
+  title="自定义头像"
+  code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="space-y-4 bg-white p-4 rounded-lg">
+      <Message
+        role="user"
+        content="我有自定义头像"
+        avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=user1"
+        timestamp={new Date()}
+      />
+      <Message
+        role="assistant"
+        content="我也有自定义头像"
+        avatar="https://api.dicebear.com/7.x/bottts/svg?seed=ai1"
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="space-y-4 bg-white p-4 rounded-lg">
+    <Message
+      role="user"
+      content="我有自定义头像"
+      avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=user1"
+      timestamp={new Date()}
+    />
+    <Message
+      role="assistant"
+      content="我也有自定义头像"
+      avatar="https://api.dicebear.com/7.x/bottts/svg?seed=ai1"
+      timestamp={new Date()}
+    />
+  </div>
+</DemoBox>
+
+## 消息宽度
+
+通过 `maxWidth` 属性控制消息气泡的最大宽度（百分比）。
+
+<DemoBox
+  title="自定义宽度"
+  code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="space-y-4 bg-white p-4 rounded-lg">
+      <Message
+        role="assistant"
+        content="默认宽度（70%）的消息"
+        timestamp={new Date()}
+      />
+      <Message
+        role="assistant"
+        content="较窄宽度（50%）的消息"
+        maxWidth={50}
+        timestamp={new Date()}
+      />
+      <Message
+        role="assistant"
+        content="较宽宽度（90%）的消息"
+        maxWidth={90}
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="space-y-4 bg-white p-4 rounded-lg">
+    <Message
+      role="assistant"
+      content="默认宽度（70%）的消息"
+      timestamp={new Date()}
+    />
+    <Message
+      role="assistant"
+      content="较窄宽度（50%）的消息"
+      maxWidth={50}
+      timestamp={new Date()}
+    />
+    <Message
+      role="assistant"
+      content="较宽宽度（90%）的消息"
+      maxWidth={90}
+      timestamp={new Date()}
+    />
+  </div>
+</DemoBox>
+
+## 加载状态
+
+当消息内容为空且 `streaming` 为 true 时，会显示加载点动画。
+
+<DemoBox
+  title="加载状态"
+  code={`import { Message } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="bg-white p-4 rounded-lg">
+      <Message
+        role="assistant"
+        content=""
+        streaming
+        timestamp={new Date()}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="bg-white p-4 rounded-lg">
+    <Message
+      role="assistant"
+      content=""
+      streaming
+      timestamp={new Date()}
+    />
+  </div>
+</DemoBox>
+
+## API
+
+### Message Props
+
+<PropsTable
+  data={[
+    {
+      name: "role",
+      type: '"user" | "assistant" | "system"',
+      required: true,
+      description: "消息角色，决定消息的样式和布局",
+    },
+    {
+      name: "content",
+      type: "string",
+      required: true,
+      description: "消息内容，支持 Markdown 格式",
+    },
+    {
+      name: "timestamp",
+      type: "Date",
+      required: false,
+      description: "消息时间戳，用于显示发送时间",
+    },
+    {
+      name: "avatar",
+      type: "string",
+      required: false,
+      description: "头像 URL，如果不提供则显示默认头像",
+    },
+    {
+      name: "streaming",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否为流式渲染模式",
+    },
+    {
+      name: "renderContent",
+      type: "(content: string) => React.ReactNode",
+      required: false,
+      description: "自定义内容渲染函数，用于流式渲染",
+    },
+    {
+      name: "onStreamComplete",
+      type: "() => void",
+      required: false,
+      description: "流式渲染完成回调",
+    },
+    {
+      name: "maxWidth",
+      type: "number",
+      required: false,
+      defaultValue: "70",
+      description: "消息气泡最大宽度（百分比，如 70 表示 70%）",
+    },
+    {
+      name: "className",
+      type: "string",
+      required: false,
+      description: "自定义类名",
+    },
+  ]}
+/>
+
+## 无障碍访问
+
+Message 组件遵循无障碍访问最佳实践：
+
+### ARIA 属性
+
+- 使用 `role="article"` 标记消息容器
+- 使用 `aria-label` 描述消息角色
+- 流式渲染时使用 `aria-live="polite"` 和 `aria-atomic="false"`
+- 加载状态使用 `role="status"` 和 `aria-label`
+
+### 语义化 HTML
+
+- 使用语义化的 HTML 结构
+- 时间戳使用 `aria-label` 提供完整的时间信息
+- 头像使用 `aria-hidden="true"` 避免重复播报
+
+### 键盘导航
+
+- 消息内容可以通过键盘选择和复制
+- 链接和按钮支持键盘访问
+
+<Callout type="info" title="屏幕阅读器">
+  Message
+  组件对屏幕阅读器友好，会正确播报消息角色、内容和时间。流式渲染时会实时播报新增的内容。
+</Callout>
+
+## 最佳实践
+
+### 1. 流式渲染
+
+对于 AI 生成的内容，建议使用流式渲染提升用户体验：
+
+```tsx
+<Message
+  role="assistant"
+  content={streamingContent}
+  streaming
+  renderContent={(text) => (
+    <StreamingText content={text} enableVirtualCompletion />
+  )}
+/>
+```
+
+### 2. 时间戳
+
+建议为所有消息添加时间戳，方便用户查看消息发送时间：
+
+```tsx
+<Message role="user" content="消息内容" timestamp={new Date()} />
+```
+
+### 3. 头像
+
+为用户和 AI 设置不同的头像，提升视觉识别度：
+
+```tsx
+<Message
+  role="user"
+  content="用户消息"
+  avatar={userAvatar}
+/>
+<Message
+  role="assistant"
+  content="AI 回复"
+  avatar={aiAvatar}
+/>
+```
+
+### 4. 消息宽度
+
+根据内容长度调整消息宽度，短消息使用较小的宽度：
+
+```tsx
+// 短消息
+<Message content="好的" maxWidth={30} />
+
+// 长消息
+<Message content="这是一段很长的消息..." maxWidth={80} />
+```
+
+## 设计令牌
+
+Message 组件使用以下 CSS 变量，可以通过主题系统自定义：
+
+- 用户消息背景色：`bg-blue-600`
+- AI 消息背景色：`bg-gray-100`
+- 系统消息背景色：`bg-yellow-50`
+- 文本颜色：根据背景自动调整
+- 时间戳颜色：`text-gray-500`
+- 头像尺寸：`w-8 h-8`（32x32px）
+
+## 相关组件
+
+- [ChatContainer](/components/chat/chat-container) - 对话容器，用于显示消息列表
+- [StreamingText](/components/streaming-text) - 流式文本组件
+- [MessageInput](/components/chat/message-input) - 消息输入框
+
+## 常见问题
+
+### 如何实现消息的复制功能？
+
+可以在消息上添加复制按钮：
+
+```tsx
+<Message role="assistant" content={content} className="group relative">
+  <button
+    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100"
+    onClick={() => navigator.clipboard.writeText(content)}
+  >
+    复制
+  </button>
+</Message>
+```
+
+### 如何实现消息的编辑和删除？
+
+Message 组件本身不提供编辑和删除功能，需要在父组件中实现：
+
+```tsx
+const [messages, setMessages] = useState([...]);
+
+const handleDelete = (id) => {
+  setMessages(messages.filter(msg => msg.id !== id));
+};
+
+const handleEdit = (id, newContent) => {
+  setMessages(messages.map(msg =>
+    msg.id === id ? { ...msg, content: newContent } : msg
+  ));
+};
+```
+
+### 如何实现消息的引用回复？
+
+可以在消息内容中添加引用信息：
+
+```tsx
+<Message role="user" content={`> ${quotedMessage}\n\n我的回复内容`} />
+```

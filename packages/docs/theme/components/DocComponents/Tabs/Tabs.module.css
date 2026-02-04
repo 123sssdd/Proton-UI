@@ -1,0 +1,39 @@
+/* Tabs 组件样式 */
+
+.tabs {
+  @apply mb-6;
+}
+
+.tabList {
+  @apply flex border-b border-gray-200 dark:border-gray-700 overflow-x-auto;
+}
+
+.tab {
+  @apply px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-900 dark:hover:text-gray-100 hover:border-gray-300 dark:hover:border-gray-600 transition-colors whitespace-nowrap;
+}
+
+.tab:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+.tabActive {
+  @apply text-blue-600 dark:text-blue-400 border-blue-600 dark:border-blue-400;
+}
+
+.tabPanels {
+  @apply pt-4;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tabPanel {
+  animation: fadeIn 0.2s ease-in;
+}

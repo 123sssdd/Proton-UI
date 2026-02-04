@@ -104,6 +104,7 @@ export class ParticleSystem {
    */
   emit(options: ParticleEmitterOptions): void {
     if (this.shouldReduceMotion()) {
+      console.log("[ParticleSystem] 用户偏好减少动画，跳过粒子发射");
       return; // 如果用户偏好减少动画，则不发射粒子
     }
 
@@ -125,6 +126,13 @@ export class ParticleSystem {
       count,
       this.maxParticles - this.particles.length
     );
+
+    console.log("[ParticleSystem] 发射粒子:", {
+      type,
+      count: actualCount,
+      position: { x, y },
+      currentParticles: this.particles.length,
+    });
 
     for (let i = 0; i < actualCount; i++) {
       const particle = this.getParticleFromPool();
@@ -266,6 +274,7 @@ export class ParticleSystem {
   private start(): void {
     if (this.isRunning) return;
 
+    console.log("[ParticleSystem] 启动更新循环");
     this.isRunning = true;
     this.lastUpdateTime = performance.now();
 

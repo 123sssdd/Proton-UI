@@ -1,0 +1,86 @@
+/* DemoBox 组件样式 */
+
+.demoBox {
+  @apply border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden mb-6;
+}
+
+.fullWidth {
+  @apply w-full;
+}
+
+.title {
+  @apply text-lg font-semibold px-4 pt-4 mb-2 text-gray-900 dark:text-gray-100;
+}
+
+.description {
+  @apply text-sm text-gray-600 dark:text-gray-400 px-4 mb-4;
+}
+
+.preview {
+  @apply p-6 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700;
+}
+
+.preview[data-background="dark"] {
+  @apply bg-gray-900;
+}
+
+.preview[data-background="light"] {
+  @apply bg-white;
+}
+
+.preview[data-background="transparent"] {
+  @apply bg-transparent;
+}
+
+/* 属性面板样式 */
+.propsPanel {
+  @apply px-4 py-4 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700;
+}
+
+.propsPanelTitle {
+  @apply text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300;
+}
+
+.propsControls {
+  @apply space-y-3;
+}
+
+.propControl {
+  @apply flex flex-col gap-1;
+}
+
+.propLabel {
+  @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+}
+
+.propDescription {
+  @apply text-xs text-gray-500 dark:text-gray-400 mt-1;
+}
+
+/* 代码展示区域样式 */
+.codeSection {
+  @apply bg-gray-50 dark:bg-gray-800;
+}
+
+.codeToggle {
+  @apply w-full px-4 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2;
+}
+
+.codeToggleIcon {
+  @apply text-gray-500 dark:text-gray-400 text-xs;
+}
+
+.codeContent {
+  @apply px-4 pb-4;
+}
+
+/* 响应式设计 */
+@media (min-width: 640px) {
+  .propControl {
+    @apply flex-row items-center gap-3;
+  }
+
+  .propLabel {
+    @apply w-32 flex-shrink-0;
+  }
+}

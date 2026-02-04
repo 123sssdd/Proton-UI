@@ -1,0 +1,304 @@
+# DemoBox 组件测试
+
+这个页面用于测试 DemoBox 组件的各种功能。
+
+## 基础用法
+
+最简单的 DemoBox 用法，只包含演示内容：
+
+<DemoBox>
+  <div className="p-4 bg-blue-100 dark:bg-blue-900 rounded">
+    这是一个简单的演示内容
+  </div>
+</DemoBox>
+
+## 带标题和描述
+
+<DemoBox title="带标题的演示" description="这个演示展示了如何添加标题和描述">
+  <div className="p-4 bg-green-100 dark:bg-green-900 rounded">演示内容</div>
+</DemoBox>
+
+## 带代码展示
+
+<DemoBox
+  title="代码展示"
+  description="点击下方按钮可以显示/隐藏代码"
+  showCode={true}
+  code={`import { Button } from "@proton-ui/core";
+
+export default () => (
+  <Button variant="primary">
+    点击我
+  </Button>
+);`}
+  language="tsx"
+>
+  <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+    点击我
+  </button>
+</DemoBox>
+
+## 不同背景样式
+
+### 默认背景
+
+<DemoBox title="默认背景" background="default">
+  <div className="p-4 border border-gray-300 rounded">默认背景内容</div>
+</DemoBox>
+
+### 深色背景
+
+<DemoBox title="深色背景" background="dark">
+  <div className="p-4 border border-gray-600 text-white rounded">
+    深色背景内容
+  </div>
+</DemoBox>
+
+### 浅色背景
+
+<DemoBox title="浅色背景" background="light">
+  <div className="p-4 border border-gray-300 rounded">浅色背景内容</div>
+</DemoBox>
+
+### 透明背景
+
+<DemoBox title="透明背景" background="transparent">
+  <div className="p-4 border border-gray-300 rounded bg-gradient-to-r from-purple-400 to-pink-400 text-white">
+    透明背景内容（可以看到渐变）
+  </div>
+</DemoBox>
+
+## 带属性面板
+
+<DemoBox
+  title="交互式按钮演示"
+  description="使用属性面板调整按钮的样式"
+  showProps={true}
+  showCode={true}
+  propsConfig={[
+    {
+      name: "variant",
+      type: "select",
+      label: "变体",
+      defaultValue: "primary",
+      options: ["primary", "secondary", "ghost", "danger"],
+      description: "按钮的视觉样式"
+    },
+    {
+      name: "size",
+      type: "select",
+      label: "尺寸",
+      defaultValue: "md",
+      options: ["sm", "md", "lg"],
+      description: "按钮的大小"
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      label: "禁用",
+      defaultValue: false,
+      description: "是否禁用按钮"
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      label: "加载中",
+      defaultValue: false,
+      description: "是否显示加载状态"
+    }
+  ]}
+  code={`import { Button } from "@proton-ui/core";
+
+export default () => (
+  <Button
+    variant="primary"
+    size="md"
+    disabled={false}
+    loading={false}
+  >
+    点击我
+  </Button>
+);`}
+>
+  <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed">
+    点击我
+  </button>
+</DemoBox>
+
+## 数字滑块控制
+
+<DemoBox
+  title="像素大小控制"
+  description="使用滑块调整像素大小"
+  showProps={true}
+  propsConfig={[
+    {
+      name: "pixelSize",
+      type: "number",
+      label: "像素大小",
+      defaultValue: 8,
+      min: 2,
+      max: 32,
+      step: 2,
+      description: "控制像素化效果的大小",
+    },
+    {
+      name: "opacity",
+      type: "number",
+      label: "不透明度",
+      defaultValue: 100,
+      min: 0,
+      max: 100,
+      step: 10,
+      description: "控制元素的不透明度",
+    },
+  ]}
+>
+  <div
+    className="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-600 rounded"
+    style={{ opacity: 1 }}
+  ></div>
+</DemoBox>
+
+## 颜色选择器
+
+<DemoBox
+  title="颜色自定义"
+  description="使用颜色选择器改变背景色"
+  showProps={true}
+  propsConfig={[
+    {
+      name: "backgroundColor",
+      type: "color",
+      label: "背景颜色",
+      defaultValue: "#3b82f6",
+      description: "选择背景颜色",
+    },
+    {
+      name: "textColor",
+      type: "color",
+      label: "文字颜色",
+      defaultValue: "#ffffff",
+      description: "选择文字颜色",
+    },
+  ]}
+>
+  <div
+    className="p-6 rounded text-center font-semibold"
+    style={{ backgroundColor: "#3b82f6", color: "#ffffff" }}
+  >
+    自定义颜色的盒子
+  </div>
+</DemoBox>
+
+## 文本输入控制
+
+<DemoBox
+  title="文本自定义"
+  description="输入自定义文本"
+  showProps={true}
+  propsConfig={[
+    {
+      name: "text",
+      type: "string",
+      label: "显示文本",
+      defaultValue: "Hello, World!",
+      description: "输入要显示的文本",
+    },
+    {
+      name: "placeholder",
+      type: "string",
+      label: "占位符",
+      defaultValue: "请输入内容",
+      description: "输入框的占位符文本",
+    },
+  ]}
+>
+  <div className="space-y-4">
+    <div className="text-2xl font-bold text-blue-600">Hello, World!</div>
+    <input
+      type="text"
+      placeholder="请输入内容"
+      className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+    />
+  </div>
+</DemoBox>
+
+## 全宽显示
+
+<DemoBox
+  title="全宽演示"
+  description="fullWidth 属性使容器占满整个宽度"
+  fullWidth={true}
+>
+  <div className="w-full p-8 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-center rounded">
+    这是一个全宽的演示容器
+  </div>
+</DemoBox>
+
+## 组合使用
+
+<DemoBox
+  title="完整功能演示"
+  description="这个演示展示了 DemoBox 的所有功能：标题、描述、属性面板、代码展示和自定义背景"
+  showProps={true}
+  showCode={true}
+  background="transparent"
+  propsConfig={[
+    {
+      name: "rounded",
+      type: "select",
+      label: "圆角",
+      defaultValue: "md",
+      options: ["none", "sm", "md", "lg", "full"],
+      description: "选择圆角大小",
+    },
+    {
+      name: "shadow",
+      type: "boolean",
+      label: "阴影",
+      defaultValue: true,
+      description: "是否显示阴影",
+    },
+    {
+      name: "padding",
+      type: "number",
+      label: "内边距",
+      defaultValue: 4,
+      min: 0,
+      max: 12,
+      step: 1,
+      description: "调整内边距大小",
+    },
+  ]}
+  code={`<div className="p-4 bg-white rounded-md shadow-lg">
+  <h3 className="text-lg font-bold mb-2">卡片标题</h3>
+  <p className="text-gray-600">这是卡片内容</p>
+</div>`}
+>
+  <div className="p-4 bg-white dark:bg-gray-800 rounded-md shadow-lg">
+    <h3 className="text-lg font-bold mb-2">卡片标题</h3>
+    <p className="text-gray-600 dark:text-gray-300">
+      这是卡片内容，展示了如何使用 DemoBox 创建交互式演示。
+    </p>
+  </div>
+</DemoBox>
+
+## 总结
+
+DemoBox 组件提供了以下功能：
+
+1. ✅ **标题和描述**：清晰地说明演示内容
+2. ✅ **代码展示**：可折叠的代码块，支持语法高亮和复制
+3. ✅ **属性面板**：交互式控制组件属性
+4. ✅ **多种控制器类型**：
+   - Boolean（复选框）
+   - String（文本输入）
+   - Number（滑块）
+   - Select（下拉选择）
+   - Color（颜色选择器）
+5. ✅ **背景样式**：default、dark、light、transparent
+6. ✅ **响应式设计**：适配移动端和桌面端
+7. ✅ **样式隔离**：使用 CSS Modules 避免样式冲突
+
+这个组件将成为 Proton UI 文档系统的核心，为所有组件提供统一、专业的演示体验。

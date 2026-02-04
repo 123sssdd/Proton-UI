@@ -1,0 +1,69 @@
+/* PropsTable 组件样式 */
+
+.tableWrapper {
+  @apply overflow-x-auto mb-6;
+}
+
+.table {
+  @apply w-full border-collapse;
+}
+
+.table thead {
+  @apply bg-gray-50 dark:bg-gray-800;
+}
+
+.table th {
+  @apply px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700;
+}
+
+.table td {
+  @apply px-4 py-3 text-sm border-b border-gray-200 dark:border-gray-700;
+}
+
+.propName {
+  @apply font-mono font-semibold text-blue-600 dark:text-blue-400;
+}
+
+.propType code {
+  @apply text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded;
+}
+
+.propRequired {
+  @apply text-center;
+}
+
+.propDefault code {
+  @apply text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded;
+}
+
+.propDescription {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+/* 移动端响应式 */
+@media (max-width: 768px) {
+  .table {
+    @apply block;
+  }
+
+  .table thead {
+    @apply hidden;
+  }
+
+  .table tbody {
+    @apply block;
+  }
+
+  .table tr {
+    @apply block mb-4 border border-gray-200 dark:border-gray-700 rounded-lg p-4;
+  }
+
+  .table td {
+    @apply block border-0 py-1;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    @apply font-semibold mr-2;
+  }
+}

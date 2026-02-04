@@ -95,6 +95,8 @@ export const ParticleEffect: React.FC<ParticleEffectProps> = ({
   style = {},
   onClickEmit = false,
 }) => {
+  console.log("[ParticleEffect] 渲染:", { type, autoTrigger, count });
+
   const { emit, emitAt, canvasRef } = useParticles({
     maxParticles,
     respectMotionPreference,
@@ -104,9 +106,19 @@ export const ParticleEffect: React.FC<ParticleEffectProps> = ({
 
   // 自动触发效果
   useEffect(() => {
-    if (!autoTrigger) return;
+    if (!autoTrigger) {
+      console.log("[ParticleEffect] autoTrigger 为 false，跳过自动触发");
+      return;
+    }
+
+    console.log("[ParticleEffect] 设置自动触发:", {
+      type,
+      count,
+      triggerInterval,
+    });
 
     const triggerEffect = () => {
+      console.log("[ParticleEffect] 触发粒子效果");
       emit({
         count,
         type,
@@ -124,6 +136,7 @@ export const ParticleEffect: React.FC<ParticleEffectProps> = ({
     intervalRef.current = window.setInterval(triggerEffect, triggerInterval);
 
     return () => {
+      console.log("[ParticleEffect] 清理定时器");
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
       }

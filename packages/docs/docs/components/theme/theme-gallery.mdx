@@ -1,0 +1,639 @@
+# 主题画廊
+
+Proton UI 提供了灵活的主题系统，支持亮色/暗色模式切换和自定义主题配置。所有主题都遵循"像素但不糙"的设计理念，在保持像素美学的同时确保高可读性。
+
+## 主题切换
+
+<DemoBox
+  title="亮色/暗色模式切换"
+  description="点击按钮切换主题模式"
+  code={`import { usePixelTheme } from '@proton-ui/core';
+
+function ThemeToggle() {
+const { resolvedTheme, toggleTheme } = usePixelTheme();
+
+return (
+
+<button onClick={toggleTheme}>
+{resolvedTheme === 'dark' ? '🌙 暗色' : '☀️ 亮色'}
+</button>
+);
+}`}
+
+>
+
+  <div className="flex justify-center">
+    <button
+      onClick={() => {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+      }}
+      className="px-6 py-3 rounded-lg font-medium transition-all hover:scale-105"
+      style={{
+        backgroundColor: 'var(--color-primary)',
+        color: 'var(--color-bg-primary)',
+      }}
+    >
+      切换主题
+    </button>
+  </div>
+</DemoBox>
+
+## 主题预览
+
+### 亮色主题
+
+<DemoBox
+  title="亮色主题组件展示"
+  code={`// 亮色主题下的组件样式
+<div data-theme="light">
+  <Button variant="primary">Primary Button</Button>
+  <Input placeholder="输入文本..." />
+  <Card>卡片内容</Card>
+</div>`}
+>
+  <div className="p-8 rounded-lg bg-white">
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">按钮</h3>
+        <div className="flex gap-3">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Primary
+          </button>
+          <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+            Secondary
+          </button>
+          <button className="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
+            Outline
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">输入框</h3>
+        <input
+          type="text"
+          placeholder="输入文本..."
+          className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">卡片</h3>
+        <div className="p-4 bg-gray-50 border-2 border-gray-200 rounded-lg">
+          <h4 className="font-bold text-gray-900 mb-2">卡片标题</h4>
+          <p className="text-gray-700">这是卡片的内容区域</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</DemoBox>
+
+### 暗色主题
+
+<DemoBox
+  title="暗色主题组件展示"
+  code={`// 暗色主题下的组件样式
+<div data-theme="dark">
+  <Button variant="primary">Primary Button</Button>
+  <Input placeholder="输入文本..." />
+  <Card>卡片内容</Card>
+</div>`}
+>
+  <div className="p-8 rounded-lg bg-gray-900">
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-lg font-bold text-white mb-2">按钮</h3>
+        <div className="flex gap-3">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Primary
+          </button>
+          <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+            Secondary
+          </button>
+          <button className="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-900/30">
+            Outline
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-bold text-white mb-2">输入框</h3>
+        <input
+          type="text"
+          placeholder="输入文本..."
+          className="w-full px-4 py-2 bg-gray-800 border-2 border-gray-700 text-white rounded-lg focus:border-blue-600 focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <h3 className="text-lg font-bold text-white mb-2">卡片</h3>
+        <div className="p-4 bg-gray-800 border-2 border-gray-700 rounded-lg">
+          <h4 className="font-bold text-white mb-2">卡片标题</h4>
+          <p className="text-gray-300">这是卡片的内容区域</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</DemoBox>
+
+## 主题自定义
+
+### 使用 ThemeProvider
+
+<DemoBox
+  title="自定义主题配置"
+  code={`import { ThemeProvider } from '@proton-ui/core';
+
+const customTheme = {
+colors: {
+primary: '#4ECDC4',
+secondary: '#FF6B9D',
+accent: '#FFB86C',
+background: '#1A1D2E',
+text: '#FFFFFF',
+},
+};
+
+function App() {
+return (
+
+<ThemeProvider theme={customTheme}>
+<YourApp />
+</ThemeProvider>
+);
+}`}
+
+>
+
+  <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+    <p className="text-sm text-gray-700 dark:text-gray-300">
+      使用 ThemeProvider 包装你的应用，传入自定义主题配置即可。
+    </p>
+  </div>
+</DemoBox>
+
+### 主题令牌
+
+<DemoBox
+  title="CSS 变量令牌"
+  description="所有主题令牌都通过 CSS 变量暴露，可以在任何地方使用"
+  code={`/* 使用主题令牌 */
+.my-component {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+/_ 在 Tailwind 中使用 _/
+
+<div className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
+  内容
+</div>`}
+>
+  <div className="space-y-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--color-primary)' }}>
+        <div className="text-xs font-mono text-white">--color-primary</div>
+      </div>
+      <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--color-secondary)' }}>
+        <div className="text-xs font-mono text-white">--color-secondary</div>
+      </div>
+      <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--color-accent)' }}>
+        <div className="text-xs font-mono text-white">--color-accent</div>
+      </div>
+      <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--color-success)' }}>
+        <div className="text-xs font-mono text-white">--color-success</div>
+      </div>
+    </div>
+  </div>
+</DemoBox>
+
+## 主题令牌文档
+
+### 颜色令牌
+
+<PropsTable
+  data={[
+    {
+      name: "--color-primary",
+      type: "color",
+      required: false,
+      defaultValue: "#3b82f6",
+      description: "主要颜色，用于主要按钮、链接等",
+    },
+    {
+      name: "--color-secondary",
+      type: "color",
+      required: false,
+      defaultValue: "#6b7280",
+      description: "次要颜色，用于次要按钮、辅助元素",
+    },
+    {
+      name: "--color-accent",
+      type: "color",
+      required: false,
+      defaultValue: "#8b5cf6",
+      description: "强调色，用于高亮、特殊状态",
+    },
+    {
+      name: "--color-bg-primary",
+      type: "color",
+      required: false,
+      defaultValue: "#ffffff / #111827",
+      description: "主要背景色（亮色/暗色）",
+    },
+    {
+      name: "--color-bg-secondary",
+      type: "color",
+      required: false,
+      defaultValue: "#f9fafb / #1f2937",
+      description: "次要背景色（亮色/暗色）",
+    },
+    {
+      name: "--color-text-primary",
+      type: "color",
+      required: false,
+      defaultValue: "#111827 / #f9fafb",
+      description: "主要文本颜色（亮色/暗色）",
+    },
+    {
+      name: "--color-text-secondary",
+      type: "color",
+      required: false,
+      defaultValue: "#6b7280 / #9ca3af",
+      description: "次要文本颜色（亮色/暗色）",
+    },
+    {
+      name: "--color-border",
+      type: "color",
+      required: false,
+      defaultValue: "#e5e7eb / #374151",
+      description: "边框颜色（亮色/暗色）",
+    },
+    {
+      name: "--color-success",
+      type: "color",
+      required: false,
+      defaultValue: "#10b981",
+      description: "成功状态颜色",
+    },
+    {
+      name: "--color-warning",
+      type: "color",
+      required: false,
+      defaultValue: "#f59e0b",
+      description: "警告状态颜色",
+    },
+    {
+      name: "--color-error",
+      type: "color",
+      required: false,
+      defaultValue: "#ef4444",
+      description: "错误状态颜色",
+    },
+    {
+      name: "--color-info",
+      type: "color",
+      required: false,
+      defaultValue: "#3b82f6",
+      description: "信息状态颜色",
+    },
+  ]}
+/>
+
+### 间距令牌
+
+<PropsTable
+  data={[
+    {
+      name: "--spacing-unit",
+      type: "number",
+      required: false,
+      defaultValue: "4",
+      description: "基础间距单位（px）",
+    },
+    {
+      name: "--spacing-xs",
+      type: "string",
+      required: false,
+      defaultValue: "0.25rem",
+      description: "超小间距（4px）",
+    },
+    {
+      name: "--spacing-sm",
+      type: "string",
+      required: false,
+      defaultValue: "0.5rem",
+      description: "小间距（8px）",
+    },
+    {
+      name: "--spacing-md",
+      type: "string",
+      required: false,
+      defaultValue: "1rem",
+      description: "中等间距（16px）",
+    },
+    {
+      name: "--spacing-lg",
+      type: "string",
+      required: false,
+      defaultValue: "1.5rem",
+      description: "大间距（24px）",
+    },
+    {
+      name: "--spacing-xl",
+      type: "string",
+      required: false,
+      defaultValue: "2rem",
+      description: "超大间距（32px）",
+    },
+  ]}
+/>
+
+### 圆角令牌
+
+<PropsTable
+  data={[
+    {
+      name: "--radius-sm",
+      type: "string",
+      required: false,
+      defaultValue: "0.25rem",
+      description: "小圆角（4px）",
+    },
+    {
+      name: "--radius-md",
+      type: "string",
+      required: false,
+      defaultValue: "0.375rem",
+      description: "中等圆角（6px）",
+    },
+    {
+      name: "--radius-lg",
+      type: "string",
+      required: false,
+      defaultValue: "0.5rem",
+      description: "大圆角（8px）",
+    },
+    {
+      name: "--radius-full",
+      type: "string",
+      required: false,
+      defaultValue: "9999px",
+      description: "完全圆角",
+    },
+  ]}
+/>
+
+### 阴影令牌
+
+<PropsTable
+  data={[
+    {
+      name: "--shadow-sm",
+      type: "string",
+      required: false,
+      defaultValue: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      description: "小阴影",
+    },
+    {
+      name: "--shadow-md",
+      type: "string",
+      required: false,
+      defaultValue: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+      description: "中等阴影",
+    },
+    {
+      name: "--shadow-lg",
+      type: "string",
+      required: false,
+      defaultValue: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+      description: "大阴影",
+    },
+    {
+      name: "--shadow-xl",
+      type: "string",
+      required: false,
+      defaultValue: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
+      description: "超大阴影",
+    },
+  ]}
+/>
+
+## 创建自定义主题
+
+### 步骤 1: 定义主题配置
+
+```typescript
+import type { ThemeConfig } from "@proton-ui/core";
+
+const myTheme: Partial<ThemeConfig> = {
+  colors: {
+    primary: "#4ECDC4", // 霓虹青
+    secondary: "#FF6B9D", // 樱花粉
+    accent: "#FFB86C", // 橙色
+    background: "#1A1D2E", // 深蓝背景
+    text: "#FFFFFF", // 白色文本
+    border: "#2C3E50", // 深灰边框
+    success: "#7FD99F", // 抹茶绿
+    warning: "#FFB86C", // 橙色
+    error: "#FF6B9D", // 粉色
+    info: "#4ECDC4", // 青色
+  },
+  spacing: {
+    unit: 4,
+  },
+  borderRadius: {
+    sm: "0.25rem",
+    md: "0.5rem",
+    lg: "0.75rem",
+    full: "9999px",
+  },
+};
+```
+
+### 步骤 2: 应用主题
+
+```tsx
+import { ThemeProvider } from "@proton-ui/core";
+import { myTheme } from "./theme";
+
+function App() {
+  return (
+    <ThemeProvider theme={myTheme}>
+      <div className="min-h-screen bg-[var(--color-bg-primary)]">
+        <YourApp />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+### 步骤 3: 使用主题令牌
+
+```tsx
+// 在组件中使用
+function MyComponent() {
+  return (
+    <div
+      style={{
+        backgroundColor: "var(--color-bg-primary)",
+        color: "var(--color-text-primary)",
+        padding: "var(--spacing-md)",
+        borderRadius: "var(--radius-lg)",
+      }}
+    >
+      内容
+    </div>
+  );
+}
+
+// 或使用 Tailwind CSS
+function MyComponent() {
+  return (
+    <div className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] p-[var(--spacing-md)] rounded-[var(--radius-lg)]">
+      内容
+    </div>
+  );
+}
+```
+
+## 主题迁移指南
+
+### 从旧版本迁移
+
+如果你正在从旧版本的 Proton UI 迁移，请按照以下步骤操作：
+
+#### 1. 更新导入
+
+```typescript
+// 旧版本
+import { Theme } from "@proton-ui/core";
+
+// 新版本
+import { ThemeProvider, usePixelTheme } from "@proton-ui/core";
+```
+
+#### 2. 更新主题配置
+
+```typescript
+// 旧版本
+const theme = {
+  primaryColor: "#3b82f6",
+  backgroundColor: "#ffffff",
+};
+
+// 新版本
+const theme = {
+  colors: {
+    primary: "#3b82f6",
+    background: "#ffffff",
+  },
+};
+```
+
+#### 3. 更新 CSS 变量
+
+```css
+/* 旧版本 */
+.my-component {
+  background-color: var(--primary-color);
+}
+
+/* 新版本 */
+.my-component {
+  background-color: var(--color-primary);
+}
+```
+
+### 常见问题
+
+<Callout type="info" title="主题不生效？">
+  确保你的应用被 `ThemeProvider` 包装，并且主题配置正确传递。
+</Callout>
+
+<Callout type="warning" title="CSS 变量未定义？">
+检查是否正确导入了 Proton UI 的样式文件：
+
+```typescript
+import "@proton-ui/core/dist/index.css";
+```
+
+</Callout>
+
+<Callout type="tip" title="动态切换主题">
+使用 `usePixelTheme` Hook 可以轻松实现主题切换：
+
+```typescript
+const { theme, setTheme, toggleTheme } = usePixelTheme();
+```
+
+</Callout>
+
+## 最佳实践
+
+### 1. 使用语义化令牌
+
+```tsx
+// ✅ 推荐：使用语义化令牌
+<div style={{ color: 'var(--color-text-primary)' }}>文本</div>
+
+// ❌ 避免：直接使用颜色值
+<div style={{ color: '#111827' }}>文本</div>
+```
+
+### 2. 保持主题一致性
+
+```tsx
+// ✅ 推荐：所有组件使用相同的主题令牌
+const Button = () => (
+  <button style={{ backgroundColor: "var(--color-primary)" }}>按钮</button>
+);
+
+// ❌ 避免：混用不同的颜色系统
+const Button = () => (
+  <button style={{ backgroundColor: "#3b82f6" }}>按钮</button>
+);
+```
+
+### 3. 支持暗色模式
+
+```tsx
+// ✅ 推荐：使用主题令牌自动适配
+<div className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
+  内容
+</div>
+
+// ❌ 避免：硬编码颜色
+<div className="bg-white text-black">
+  内容
+</div>
+```
+
+### 4. 测试不同主题
+
+```tsx
+// 在开发时测试不同主题
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  return (
+    <div data-theme={theme}>
+      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+        切换主题
+      </button>
+      <YourApp />
+    </div>
+  );
+}
+```
+
+## 相关资源
+
+- [设计令牌指南](/guide/design-tokens)
+- [像素特效](/components/effects/pixel-effects)
+- [组件库概览](/guide/getting-started)
