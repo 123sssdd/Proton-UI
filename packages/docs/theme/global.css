@@ -81,11 +81,19 @@ html:not(.dark) [data-component-name="HomeHero"].max-w-6xl > * {
 /* Scroll down button container */
 .scroll-down-container {
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   left: 0;
   right: 0;
-  height: 0;
-  z-index: 20;
+  height: 60px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.scroll-down-container > * {
+  pointer-events: auto;
 }
 
 /* Pixel cat hero positioning */

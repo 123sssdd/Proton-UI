@@ -56,7 +56,12 @@
 }
 
 .rspress-home-hero .rspress-home-hero-actions a {
-  margin: 0 6px !important;
+  margin: 0 24px !important;
+}
+
+/* 增加底部内边距，为滚动按钮留出空间 */
+.rspress-home-hero {
+  padding-bottom: 80px !important;
 }
 
 /* ========================================
