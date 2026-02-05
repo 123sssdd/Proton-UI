@@ -13,7 +13,7 @@ import type { PresetName } from "./components";
 /**
  * 防抖函数
  */
-function debounce<T extends (...args: unknown[]) => unknown>(
+function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -37,7 +37,7 @@ function debounce<T extends (...args: unknown[]) => unknown>(
 export const PixelEffectsShowcaseEnhanced: React.FC = () => {
   // 状态管理
   const [currentImage, setCurrentImage] = useState<string>(
-    DEFAULT_EXAMPLES[0].url
+    DEFAULT_EXAMPLES?.[0]?.url || ""
   );
   const [pixelSize, setPixelSize] = useState<number>(8);
   const [colorLevels, setColorLevels] = useState<number>(16);

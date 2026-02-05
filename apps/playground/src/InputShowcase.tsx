@@ -11,7 +11,7 @@ export function InputShowcase() {
   // 基础输入框状态
   const [basicValue1, setBasicValue1] = React.useState("");
   const [basicValue2, setBasicValue2] = React.useState("");
-  const [basicValue3, setBasicValue3] = React.useState("user@example.com");
+  // const [basicValue3, setBasicValue3] = React.useState("user@example.com"); // unused
   const [basicValue4, setBasicValue4] = React.useState("");
   const [showError, setShowError] = React.useState(false);
 
