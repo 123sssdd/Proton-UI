@@ -33,6 +33,11 @@ const coreFeatures = [
       "带优先级的并发调度器",
       "IndexedDB 状态机实现断点续传",
     ],
+    highlight: true,
+    badge: {
+      text: "🚧 施工中",
+      color: "red",
+    },
   },
   {
     icon: "⚙️",
@@ -125,25 +130,27 @@ const coreFeatures = [
   },
   {
     icon: "🎮",
-    title: "像素风 UI 设计语言",
+    title: "现代化像素设计系统",
     description:
-      "采用复古像素风格设计语言，通过 CSS 像素化渲染、像素字体、像素动画等技术，打造独特的视觉体验。结合现代 Web 技术实现高性能像素风组件。",
+      "不仅仅是复古！融合赛博朋克与现代交互体验的新一代像素设计语言。通过 CSS 像素化渲染、像素字体与高帧率动画，打造既有怀旧情怀又具未来感的视觉冲击。",
     metrics: [
       { label: "视觉识别度", value: "极高" },
-      { label: "用户体验", value: "独特" },
+      { label: "交互体验", value: "AI Native" },
     ],
     highlights: [
       "CSS image-rendering: pixelated",
-      "Ark Pixel 像素字体",
-      "像素风动画与交互效果",
-      "复古游戏风格设计系统",
+      "Modern + Retro 融合设计",
+      "高帧率像素动画",
+      "复古未来主义 (Retro Futurism)",
     ],
   },
 ];
 
 export const CoreFeatures: React.FC = () => {
   return (
-    <section className={styles.coreFeaturesSection}>
+    <section
+      className={`${styles.coreFeaturesSection} core-features-container`}
+    >
       <div className={styles.container}>
         <h2 className={styles.sectionTitle}>🎯 核心技术亮点</h2>
         <p className={styles.sectionDescription}>

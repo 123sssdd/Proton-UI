@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { ChatContainer, MessageInput, type ChatMessage } from "@proton-ui/core";
+import { useState, useEffect } from "react";
+import {
+  ChatContainer,
+  MessageInput,
+  type ChatMessage,
+  ParticleEffect,
+} from "@proton-ui/core";
 import { StreamingText } from "@proton-ui/streaming";
 import VirtualizedDemo from "./VirtualizedDemo";
 import { ThemeToggle } from "./ThemeToggle";
@@ -53,22 +58,33 @@ function simulateAIResponse(
   return () => clearInterval(interval);
 }
 
+type ViewState =
+  | "normal"
+  | "virtualized"
+  | "fonttest"
+  | "pixeleffects"
+  | "pixeleffectsshowcase"
+  | "pixeleffectsenhanced"
+  | "buttonshowcase"
+  | "inputshowcase"
+  | "cardshowcase"
+  | "messageshowcase"
+  | "chatshowcase"
+  | "themegallery";
+
 export default function App() {
-  // 所有 hooks 必须在组件顶层调用
-  const [view, setView] = useState<
-    | "normal"
-    | "virtualized"
-    | "fonttest"
-    | "pixeleffects"
-    | "pixeleffectsshowcase"
-    | "pixeleffectsenhanced"
-    | "buttonshowcase"
-    | "inputshowcase"
-    | "cardshowcase"
-    | "messageshowcase"
-    | "chatshowcase"
-    | "themegallery"
-  >("normal");
+  const [view, setView] = useState<ViewState>("normal");
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  // Check system preference on mount
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -79,201 +95,6 @@ export default function App() {
     },
   ]);
   const [isStreaming, setIsStreaming] = useState(false);
-
-  // 条件渲染放在 hooks 之后
-  if (view === "buttonshowcase") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <ButtonShowcase />
-      </div>
-    );
-  }
-
-  if (view === "inputshowcase") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <InputShowcase />
-      </div>
-    );
-  }
-
-  if (view === "cardshowcase") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <CardShowcase />
-      </div>
-    );
-  }
-
-  if (view === "messageshowcase") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <MessageShowcase />
-      </div>
-    );
-  }
-
-  if (view === "chatshowcase") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <ChatContainerShowcase />
-      </div>
-    );
-  }
-
-  if (view === "themegallery") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <ThemeGallery />
-      </div>
-    );
-  }
-
-  if (view === "pixeleffectsenhanced") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <PixelEffectsShowcaseEnhanced />
-      </div>
-    );
-  }
-
-  if (view === "pixeleffectsshowcase") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <PixelEffectsShowcase />
-      </div>
-    );
-  }
-
-  if (view === "pixeleffects") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <PixelEffectsShowcase />
-      </div>
-    );
-  }
-
-  if (view === "fonttest") {
-    return (
-      <div className="relative min-h-screen">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-bg-primary)",
-          }}
-        >
-          返回主页
-        </button>
-        <FontTest />
-      </div>
-    );
-  }
-
-  if (view === "virtualized") {
-    return (
-      <div className="relative">
-        <button
-          onClick={() => setView("normal")}
-          className="absolute top-4 right-4 z-10 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          切换到标准模式
-        </button>
-        <VirtualizedDemo />
-      </div>
-    );
-  }
 
   const handleSend = (message: string) => {
     // 添加用户消息
@@ -338,100 +159,272 @@ export default function App() {
     }, 2000); // 2秒思考时间
   };
 
+  const renderContent = () => {
+    switch (view) {
+      case "buttonshowcase":
+        return <ButtonShowcase />;
+      case "inputshowcase":
+        return <InputShowcase />;
+      case "cardshowcase":
+        return <CardShowcase />;
+      case "messageshowcase":
+        return <MessageShowcase />;
+      case "chatshowcase":
+        return <ChatContainerShowcase />;
+      case "themegallery":
+        return <ThemeGallery />;
+      case "pixeleffectsenhanced":
+        return <PixelEffectsShowcaseEnhanced />;
+      case "pixeleffectsshowcase":
+      case "pixeleffects":
+        return <PixelEffectsShowcase />;
+      case "fonttest":
+        return <FontTest />;
+      case "virtualized":
+        return <VirtualizedDemo />;
+      default:
+        return (
+          <div className="flex flex-col h-full bg-pixel-card border-x-4 border-pixel-section max-w-4xl mx-auto shadow-pixel relative">
+            {/* Background particles for ambiance if motion allowed */}
+            {!reduceMotion && (
+              <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20 z-0">
+                <ParticleEffect
+                  type="float"
+                  count={5}
+                  colors={["#0ff0fc", "#ff9ecd"]}
+                  autoTrigger={true}
+                  triggerInterval={2000}
+                  life={{ min: 3000, max: 6000 }}
+                />
+              </div>
+            )}
+            <div className="flex-1 overflow-hidden p-4 relative z-10">
+              <ChatContainer
+                messages={messages}
+                messageMaxWidth={400}
+                className="h-full"
+              />
+            </div>
+            <div className="p-4 border-t-4 border-pixel-section bg-pixel-bg relative z-10">
+              <MessageInput
+                onSend={handleSend}
+                disabled={isStreaming}
+                loading={isStreaming}
+                placeholder="输入消息... (Enter 发送)"
+                maxLength={500}
+              />
+            </div>
+          </div>
+        );
+    }
+  };
+
+  const PixelButton = ({
+    target, // If target is provided, clicking sets view
+    onClick, // Optional custom click handler
+    label,
+    icon,
+    active,
+    variant = "default",
+  }: {
+    target?: ViewState;
+    onClick?: () => void;
+    label: string;
+    icon?: string;
+    active?: boolean;
+    variant?: "default" | "home" | "action";
+  }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleClick = () => {
+      if (onClick) onClick();
+      if (target) setView(target);
+    };
+
+    const baseClasses =
+      "pixel-btn w-full text-left mb-2 flex items-center gap-2 relative overflow-visible";
+    const activeClasses = active ? "bg-pixel-cyan text-pixel-bg" : "";
+    const variantClasses = variant === "home" ? "bg-pixel-pink text-white" : "";
+
+    return (
+      <button
+        onClick={handleClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={`${baseClasses} ${activeClasses} ${variantClasses}`}
+      >
+        {icon && <span>{icon}</span>}
+        {label}
+
+        {/* Sparkle Effect on Hover */}
+        {!reduceMotion && isHovered && (
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+            <ParticleEffect
+              type="sparkle"
+              count={3}
+              colors={["#ffffff", "#ffd700"]}
+              autoTrigger={true}
+              triggerInterval={200}
+              life={{ min: 500, max: 1000 }}
+              size={{ min: 2, max: 4 }}
+            />
+          </div>
+        )}
+      </button>
+    );
+  };
+
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
-      {/* 头部 */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Proton UI Playground
-          </h1>
-          <p className="text-sm text-gray-600 mt-1">
-            AI 对话组件演示 - 支持流式渲染和 Markdown
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <ThemeToggle />
-          <button
-            onClick={() => setView("themegallery")}
-            className="px-4 py-2 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-lg hover:opacity-90 font-bold"
-          >
-            🎨 主题画廊
-          </button>
-          <button
-            onClick={() => setView("buttonshowcase")}
-            className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700"
-          >
-            💎 按钮展示
-          </button>
-          <button
-            onClick={() => setView("inputshowcase")}
-            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700"
-          >
-            💎 输入框展示
-          </button>
-          <button
-            onClick={() => setView("cardshowcase")}
-            className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
-          >
-            💎 卡片展示
-          </button>
-          <button
-            onClick={() => setView("messageshowcase")}
-            className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-          >
-            💬 消息展示
-          </button>
-          <button
-            onClick={() => setView("chatshowcase")}
-            className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700"
-          >
-            💬 聊天容器
-          </button>
-          <button
-            onClick={() => setView("pixeleffectsenhanced")}
-            className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-lg hover:opacity-90 font-bold"
-          >
-            🖼️ 图片滤镜
-          </button>
-          <button
-            onClick={() => setView("pixeleffectsshowcase")}
-            className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
-          >
-            ✨ 像素特效
-          </button>
-          <button
-            onClick={() => setView("fonttest")}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-          >
-            字体测试
-          </button>
-          <button
-            onClick={() => setView("virtualized")}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            虚拟滚动
-          </button>
+    <div className="min-h-screen bg-pixel-bg text-pixel-text font-pixel selection:bg-pixel-cyan selection:text-pixel-bg flex flex-col">
+      {/* Top Navigation Bar */}
+      <header className="bg-pixel-section border-b-4 border-pixel-card py-6 px-8 shadow-pixel z-10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl text-pixel-cyan drop-shadow-md tracking-wider">
+              Proton UI
+            </h1>
+            <p className="text-xs text-pixel-muted mt-2 tracking-widest uppercase">
+              Retro-Futurism AI Interface
+            </p>
+          </div>
+          <div className="flex gap-4 items-center">
+            {view !== "normal" && (
+              <div className="w-auto">
+                <PixelButton
+                  target="normal"
+                  label="首页"
+                  icon="🏠"
+                  variant="home"
+                />
+              </div>
+            )}
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
-      {/* 对话容器 */}
-      <div className="flex-1 overflow-hidden">
-        <ChatContainer
-          messages={messages}
-          messageMaxWidth={400}
-          className="h-full"
-        />
-      </div>
+      <main className="flex-1 flex max-w-7xl mx-auto w-full p-8 gap-8">
+        {/* Sidebar Navigation */}
+        <aside className="w-64 hidden lg:block">
+          <div className="sticky top-8 space-y-8">
+            {/* Settings Panel */}
+            <div className="bg-pixel-section p-4 border-2 border-pixel-muted shadow-pixel-sm">
+              <h3 className="text-pixel-text mb-4 text-sm uppercase tracking-wider border-b-2 border-pixel-muted pb-2">
+                System
+              </h3>
+              <div className="flex items-center justify-between text-xs mb-2">
+                <span>Reduce Motion</span>
+                <button
+                  onClick={() => setReduceMotion(!reduceMotion)}
+                  className={`w-8 h-8 flex items-center justify-center border-2 border-pixel-muted ${reduceMotion ? "bg-pixel-cyan text-pixel-bg" : "bg-pixel-bg"}`}
+                >
+                  {reduceMotion ? "ON" : "OFF"}
+                </button>
+              </div>
+            </div>
 
-      {/* 输入框 */}
-      <MessageInput
-        onSend={handleSend}
-        disabled={isStreaming}
-        loading={isStreaming}
-        placeholder="输入消息... (Enter 发送，Shift+Enter 换行)"
-        maxLength={500}
-      />
+            <div className="bg-pixel-section p-4 border-2 border-pixel-muted shadow-pixel-sm">
+              <h3 className="text-pixel-gold mb-4 text-sm uppercase tracking-wider border-b-2 border-pixel-muted pb-2">
+                Showcase Gallery
+              </h3>
+              <nav>
+                <PixelButton
+                  target="themegallery"
+                  label="主题画廊"
+                  icon="🎨"
+                  active={view === "themegallery"}
+                />
+                <PixelButton
+                  target="pixeleffectsenhanced"
+                  label="图片滤镜"
+                  icon="🖼️"
+                  active={view === "pixeleffectsenhanced"}
+                />
+                <PixelButton
+                  target="pixeleffectsshowcase"
+                  label="像素特效"
+                  icon="✨"
+                  active={view === "pixeleffectsshowcase"}
+                />
+              </nav>
+            </div>
+
+            <div className="bg-pixel-section p-4 border-2 border-pixel-muted shadow-pixel-sm">
+              <h3 className="text-pixel-pink mb-4 text-sm uppercase tracking-wider border-b-2 border-pixel-muted pb-2">
+                Components
+              </h3>
+              <nav>
+                <PixelButton
+                  target="buttonshowcase"
+                  label="Button"
+                  icon="💎"
+                  active={view === "buttonshowcase"}
+                />
+                <PixelButton
+                  target="inputshowcase"
+                  label="Input"
+                  icon="⌨️"
+                  active={view === "inputshowcase"}
+                />
+                <PixelButton
+                  target="cardshowcase"
+                  label="Card"
+                  icon="🎴"
+                  active={view === "cardshowcase"}
+                />
+                <PixelButton
+                  target="messageshowcase"
+                  label="Message"
+                  icon="💬"
+                  active={view === "messageshowcase"}
+                />
+                <PixelButton
+                  target="chatshowcase"
+                  label="Chat Container"
+                  icon="📦"
+                  active={view === "chatshowcase"}
+                />
+              </nav>
+            </div>
+
+            <div className="bg-pixel-section p-4 border-2 border-pixel-muted shadow-pixel-sm">
+              <h3 className="text-pixel-cyan mb-4 text-sm uppercase tracking-wider border-b-2 border-pixel-muted pb-2">
+                Labs
+              </h3>
+              <nav>
+                <PixelButton
+                  target="fonttest"
+                  label="字体测试"
+                  icon="Aa"
+                  active={view === "fonttest"}
+                />
+                <PixelButton
+                  target="virtualized"
+                  label="虚拟滚动"
+                  icon="🚀"
+                  active={view === "virtualized"}
+                />
+              </nav>
+            </div>
+          </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <div className="flex-1 min-w-0">
+          <div className="bg-pixel-section p-1 border-2 border-pixel-card shadow-pixel h-full rounded-sm">
+            <div className="bg-pixel-bg h-full border-2 border-pixel-bg p-4 overflow-auto">
+              {renderContent()}
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Mobile Navigation (simplified) */}
+      <div className="lg:hidden fixed bottom-4 right-4 z-50">
+        <button className="pixel-btn rounded-full w-12 h-12 flex items-center justify-center bg-pixel-cyan text-pixel-bg shadow-pixel">
+          ☰
+        </button>
+      </div>
     </div>
   );
 }

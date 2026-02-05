@@ -1,6 +1,15 @@
-/* 导入像素风设计系统样式 */
-@import "@proton-ui/core/dist/styles/index.css";
+/* 导入核心样式库 */
+@import "@proton-ui/core/styles/pixel-theme.css";
+@import "@proton-ui/core/styles/pixel-utilities.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    background-color: var(--pixel-bg-primary);
+    color: var(--pixel-text-primary);
+    font-family: var(--font-pixel);
+  }
+}

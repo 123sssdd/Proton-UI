@@ -200,3 +200,6 @@ function renderPropControl(
       return null;
   }
 }
+
+// 添加 default export 以支持 Rspress globalComponents
+export default DemoBox;

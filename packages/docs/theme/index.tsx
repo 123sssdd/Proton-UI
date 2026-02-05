@@ -7,6 +7,8 @@ import { CoreFeatures } from "./components/CoreFeatures";
 import { ScrollDownButton } from "./components/ScrollDownButton";
 import { TechStackTags } from "./components/TechStackTags";
 import { useNavbarHide } from "./hooks";
+import "@proton-ui/core/styles/pixel-theme.css";
+import "@proton-ui/core/styles/pixel-utilities.css";
 import "./global.css";
 
 const Layout = () => {

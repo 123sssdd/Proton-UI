@@ -62,4 +62,5 @@ playwright/.cache
 packages/docs/doc_build
 packages/docs/node_modules
 packages/docs/.rspress
+Antigravity
 

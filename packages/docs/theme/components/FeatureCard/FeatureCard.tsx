@@ -8,6 +8,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
   description,
   metrics,
   highlights,
+  badge,
   className = "",
 }) => {
   return (
@@ -35,6 +36,13 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
             </li>
           ))}
         </ul>
+      )}
+      {badge && (
+        <div
+          className={`${styles.badge} ${badge.color === "red" ? styles.badgeRed : ""}`}
+        >
+          {badge.text}
+        </div>
       )}
     </div>
   );

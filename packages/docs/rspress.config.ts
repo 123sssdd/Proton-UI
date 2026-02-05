@@ -16,30 +16,60 @@ export default defineConfig({
   },
   // 使用自定义主题
   themeDir: path.join(__dirname, "theme"),
-  // 注册全局组件
-  globalComponents: [
-    path.join(__dirname, "theme/components/DocComponents/DemoBox/DemoBox.tsx"),
-    path.join(
-      __dirname,
-      "theme/components/DocComponents/PropsTable/PropsTable.tsx"
-    ),
-    path.join(
-      __dirname,
-      "theme/components/DocComponents/CodeBlock/CodeBlock.tsx"
-    ),
-    path.join(__dirname, "theme/components/DocComponents/Tabs/Tabs.tsx"),
-    path.join(__dirname, "theme/components/DocComponents/Callout/Callout.tsx"),
-    // 演示组件
-    path.join(__dirname, "theme/components/demos/InputValidationDemo.tsx"),
-    path.join(__dirname, "theme/components/demos/StreamingMessageDemo.tsx"),
-    path.join(__dirname, "theme/components/demos/BasicChatDemo.tsx"),
-    path.join(__dirname, "theme/components/demos/StreamingChatDemo.tsx"),
-    path.join(__dirname, "theme/components/demos/LargeMessageListDemo.tsx"),
-    path.join(__dirname, "theme/components/demos/CombinedEffectsDemo.tsx"),
-  ],
   // MDX 配置
   markdown: {
-    mdxRs: true, // 启用 Rust 版 MDX 解析器
+    mdxRs: false, // 禁用 Rust 版 MDX 解析器，使用 JS 版本以支持 globalComponents
+    // 注册全局组件 - 必须在 markdown 配置中
+    globalComponents: [
+      path.join(
+        __dirname,
+        "theme/components/DocComponents/DemoBox/DemoBox.tsx"
+      ),
+      path.join(
+        __dirname,
+        "theme/components/DocComponents/PropsTable/PropsTable.tsx"
+      ),
+      path.join(
+        __dirname,
+        "theme/components/DocComponents/CodeBlock/CodeBlock.tsx"
+      ),
+      path.join(__dirname, "theme/components/DocComponents/Tabs/Tabs.tsx"),
+      path.join(
+        __dirname,
+        "theme/components/DocComponents/Callout/Callout.tsx"
+      ),
+      // 演示组件
+      path.join(__dirname, "theme/components/demos/QuickStartHighlights.tsx"),
+      path.join(__dirname, "theme/components/demos/InputValidationDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/StreamingMessageDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/BasicChatDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/StreamingChatDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/LargeMessageListDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/ThemedChatDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/MessageInputDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/StreamingTextDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/FullChatDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/CombinedEffectsDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/ThemeCustomizer.tsx"),
+      path.join(__dirname, "theme/components/demos/ThemeGalleryDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/ParticleEffectDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/PixelatedImageDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/ImageFilterWorkshop.tsx"),
+      // @proton-ui/core 组件 - 每个组件单独包装
+      path.join(__dirname, "theme/components/wrappers/Button.tsx"),
+      path.join(__dirname, "theme/components/wrappers/Input.tsx"),
+      path.join(__dirname, "theme/components/wrappers/Card.tsx"),
+      path.join(__dirname, "theme/components/wrappers/Message.tsx"),
+      path.join(__dirname, "theme/components/wrappers/ChatContainer.tsx"),
+      path.join(__dirname, "theme/components/wrappers/MessageInput.tsx"),
+      path.join(__dirname, "theme/components/wrappers/ParticleEffect.tsx"),
+      path.join(__dirname, "theme/components/wrappers/PixelatedImage.tsx"),
+      // @proton-ui/streaming 组件
+      path.join(__dirname, "theme/components/wrappers/StreamingText.tsx"),
+      // DocTabs 和 DocTabPanel 别名 - 每个组件单独包装
+      path.join(__dirname, "theme/components/wrappers/DocTabs.tsx"),
+      path.join(__dirname, "theme/components/wrappers/DocTabPanel.tsx"),
+    ],
   },
   themeConfig: {
     socialLinks: [
@@ -122,8 +152,12 @@ export default defineConfig({
           text: "✨ 特效组件",
           items: [
             {
-              text: "像素特效",
+              text: "像素特效画廊",
               link: "/components/effects/pixel-effects",
+            },
+            {
+              text: "图片滤镜工坊",
+              link: "/components/effects/image-filter-workshop",
             },
           ],
         },
@@ -133,6 +167,10 @@ export default defineConfig({
             {
               text: "主题画廊",
               link: "/components/theme/theme-gallery",
+            },
+            {
+              text: "主题定制器",
+              link: "/components/theme/theme-customizer",
             },
           ],
         },
@@ -155,8 +193,8 @@ export default defineConfig({
   builderConfig: {
     resolve: {
       alias: {
-        "@proton-ui/core": path.resolve(__dirname, "../core/src"),
-        "@proton-ui/streaming": path.resolve(__dirname, "../streaming/src"),
+        "@proton-ui/core": path.resolve(__dirname, "../core/dist"),
+        "@proton-ui/streaming": path.resolve(__dirname, "../streaming/dist"),
       },
     },
     html: {

@@ -20,9 +20,24 @@ export interface CardProps {
   padding?: "none" | "sm" | "md" | "lg";
 
   /**
-   * 阴影大小
+   * 阴影大
    */
   shadow?: "none" | "sm" | "md" | "lg";
+
+  /**
+   * 像素艺术主题
+   */
+  pixelTheme?:
+    | "retro-futurism"
+    | "neo-tokyo"
+    | "cyber-shrine"
+    | "dreamy-lofi"
+    | "vaporwave";
+
+  /**
+   * 装饰效果
+   */
+  decoration?: "scanline" | "rivets" | "none";
 }
 
 /**

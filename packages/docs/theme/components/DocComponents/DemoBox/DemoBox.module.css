@@ -1,7 +1,33 @@
-/* DemoBox 组件样式 */
+/* DemoBox 组件样式 - 像素风改造 */
 
 .demoBox {
-  @apply border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden mb-6;
+  /* 使用像素边框和阴影 */
+  border: 4px solid var(--pixel-border);
+  box-shadow: var(--pixel-shadow);
+  border-radius: 0; /* 像素风无圆角 */
+  overflow: visible; /* 允许阴影溢出 */
+  margin-bottom: 2.5rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--pixel-bg-secondary);
+  position: relative;
+}
+
+.demoBox::before {
+  /* 顶部装饰条 */
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  height: 4px;
+  background: var(--pixel-border);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.demoBox:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--pixel-shadow-hover);
+  border-color: var(--pixel-accent-cyan);
 }
 
 .fullWidth {
@@ -9,78 +35,221 @@
 }
 
 .title {
-  @apply text-lg font-semibold px-4 pt-4 mb-2 text-gray-900 dark:text-gray-100;
+  @apply text-lg font-bold px-6 pt-6 mb-2;
+  color: var(--pixel-accent-cyan);
+  font-family: "Press Start 2P", monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .description {
-  @apply text-sm text-gray-600 dark:text-gray-400 px-4 mb-4;
+  @apply text-sm px-6 mb-6;
+  color: var(--pixel-text-secondary);
+  font-family: monospace;
+  border-bottom: 2px dashed var(--pixel-border);
+  padding-bottom: 1rem;
 }
 
 .preview {
-  @apply p-6 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700;
+  @apply p-8;
+  background-color: var(--pixel-bg-primary); /* 默认背景 */
+  border-top: 2px solid var(--pixel-border);
+  border-bottom: 2px solid var(--pixel-border);
 }
 
+/* 预览背景变体 */
 .preview[data-background="dark"] {
-  @apply bg-gray-900;
+  background-color: #050510; /* 深空黑 */
 }
 
 .preview[data-background="light"] {
-  @apply bg-white;
+  background-color: #ffffff;
 }
 
 .preview[data-background="transparent"] {
-  @apply bg-transparent;
+  background-color: transparent;
+  background-image:
+    linear-gradient(45deg, #2a2a40 25%, transparent 25%),
+    linear-gradient(-45deg, #2a2a40 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #2a2a40 75%),
+    linear-gradient(-45deg, transparent 75%, #2a2a40 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0px;
 }
 
 /* 属性面板样式 */
 .propsPanel {
-  @apply px-4 py-4 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700;
+  @apply px-6 py-6;
+  background-color: var(--pixel-bg-tertiary);
+  border-bottom: 4px solid var(--pixel-border);
 }
 
 .propsPanelTitle {
-  @apply text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300;
+  @apply text-xs font-bold mb-4 uppercase tracking-widest;
+  color: var(--pixel-accent-gold);
+  font-family: "Press Start 2P", monospace;
+  border-left: 4px solid var(--pixel-accent-gold);
+  padding-left: 8px;
 }
 
 .propsControls {
-  @apply space-y-3;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
 }
 
 .propControl {
-  @apply flex flex-col gap-1;
+  @apply flex flex-col gap-2 p-3 border-2 border-transparent transition-colors;
+  &:hover {
+    border-color: var(--pixel-border);
+  }
 }
 
 .propLabel {
-  @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+  @apply text-xs font-bold uppercase;
+  color: var(--pixel-text-primary);
+  font-family: monospace;
 }
 
 .propDescription {
-  @apply text-xs text-gray-500 dark:text-gray-400 mt-1;
+  @apply text-xs mt-1;
+  color: var(--pixel-text-secondary);
 }
 
 /* 代码展示区域样式 */
 .codeSection {
-  @apply bg-gray-50 dark:bg-gray-800;
+  background-color: #0d1117;
 }
 
 .codeToggle {
-  @apply w-full px-4 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2;
+  @apply w-full px-6 py-3 text-left text-xs font-bold flex items-center gap-2 uppercase;
+  color: var(--pixel-accent-pink);
+  background-color: var(--pixel-bg-secondary);
+  font-family: "Press Start 2P", monospace;
+  transition: all 0.2s;
+  border-top: 2px solid var(--pixel-border);
+}
+
+.codeToggle:hover {
+  background-color: var(--pixel-bg-tertiary);
+  color: #fff;
 }
 
 .codeToggleIcon {
-  @apply text-gray-500 dark:text-gray-400 text-xs;
+  @apply text-xs;
 }
 
 .codeContent {
-  @apply px-4 pb-4;
+  @apply px-0 pb-0 pt-0;
+  border-top: 2px solid var(--pixel-border);
 }
 
-/* 响应式设计 */
-@media (min-width: 640px) {
-  .propControl {
-    @apply flex-row items-center gap-3;
-  }
+/* ========================================
+   Custom Input Styles (Pixel Art)
+   ======================================== */
 
-  .propLabel {
-    @apply w-32 flex-shrink-0;
-  }
+/* Text Input & Select */
+.demoBox input[type="text"],
+.demoBox select {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 2px solid var(--pixel-border);
+  border-radius: 0;
+  padding: 8px 12px;
+  font-family: monospace;
+  font-size: 13px;
+  background-color: var(--pixel-bg-primary);
+  color: var(--pixel-text-primary);
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  transition: all 0.1s;
+}
+
+.demoBox input[type="text"]:focus,
+.demoBox select:focus {
+  border-color: var(--pixel-accent-cyan);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(15, 240, 252, 0.2);
+  background-color: #1a1f35;
+}
+
+/* Range Slider */
+.demoBox input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--pixel-bg-primary);
+  border: 2px solid var(--pixel-border);
+  outline: none;
+}
+
+.demoBox input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--pixel-accent-cyan);
+  border: 2px solid #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.demoBox input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--pixel-accent-pink);
+  transform: scale(1.1);
+}
+
+/* Checkbox */
+.demoBox input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: var(--pixel-bg-primary);
+  border: 2px solid var(--pixel-border);
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.demoBox input[type="checkbox"]:checked {
+  background-color: var(--pixel-accent-cyan);
+  border-color: var(--pixel-text-primary);
+}
+
+.demoBox input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 10px;
+  border: solid var(--pixel-bg-primary);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  image-rendering: pixelated;
+}
+
+/* Color Input */
+.demoBox input[type="color"] {
+  -webkit-appearance: none;
+  border: 2px solid var(--pixel-border);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: none;
+}
+
+.demoBox input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+.demoBox input[type="color"]::-webkit-color-swatch {
+  border: none;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
 }

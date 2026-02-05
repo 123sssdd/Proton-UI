@@ -40,3 +40,6 @@ export function StreamingMessageDemo() {
     </div>
   );
 }
+
+// 添加 default export 以支持 Rspress globalComponents
+export default StreamingMessageDemo;

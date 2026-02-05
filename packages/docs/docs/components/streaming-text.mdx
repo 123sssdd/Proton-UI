@@ -2,6 +2,23 @@
 
 用于显示流式渲染的文本内容，支持批处理、帧率控制和虚拟补全算法。
 
+## 完整演示
+
+体验流式文本的各种功能和参数调整。
+
+<DemoBox
+  title="StreamingText 完整演示"
+  description="包含基础流式效果、虚拟补全、参数调整和性能监控"
+  code={`import { StreamingText } from "@proton-ui/streaming";
+import { useState, useEffect } from "react";
+
+export default () => {
+  return <StreamingTextDemo />;
+};`}
+>
+  <StreamingTextDemo />
+</DemoBox>
+
 ## 基础用法
 
 最简单的流式文本显示。

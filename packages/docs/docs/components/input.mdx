@@ -276,6 +276,7 @@ const usernameError = username && username.length < 3
 : "";
 
 return (
+
 <div className="space-y-4">
 <Input
 label="用户名"
@@ -488,6 +489,80 @@ Input 组件支持所有原生 HTML input 类型。
   </div>
 </DemoBox>
 
+## 像素风主题 (Pixel Themes)
+
+Input 组件同样支持多种像素艺术主题，让表单也充满个性。
+
+<DemoBox
+  title="主题输入框"
+  description="不同主题下的输入框样式"
+  showCode={true}
+  code={`import { Input } from "@proton-ui/core";
+
+<div className="grid grid-cols-1 gap-6 max-w-md">
+  <Input
+    pixelTheme="retro-futurism"
+    label="Retro Input"
+    placeholder="Scanlines active..."
+    decoration="scanline"
+  />
+
+<Input
+  pixelTheme="neo-tokyo"
+  label="Neo Tokyo"
+  placeholder="Glassmorphism..."
+/>
+
+  <Input
+    pixelTheme="cyber-shrine"
+    label="Cyber Shrine"
+    placeholder="Golden border..."
+  />
+</div>`}
+  language="tsx"
+>
+  <div className="grid grid-cols-1 gap-6 max-w-md">
+     <Input
+      pixelTheme="retro-futurism"
+      label="Retro Input"
+      placeholder="Scanlines active..."
+      decoration="scanline"
+    />
+
+    <Input
+      pixelTheme="neo-tokyo"
+      label="Neo Tokyo"
+      placeholder="Glassmorphism..."
+    />
+
+    <Input
+      pixelTheme="cyber-shrine"
+      label="Cyber Shrine"
+      placeholder="Golden border..."
+    />
+
+  </div>
+</DemoBox>
+
+<PropsTable
+  data={[
+    {
+      name: "pixelTheme",
+      type: '"retro-futurism" | "neo-tokyo" | "cyber-shrine" | "dreamy-lofi" | "vaporwave"',
+      required: false,
+      defaultValue: "-",
+      description: "应用预设的像素艺术主题样式",
+    },
+    {
+      name: "decoration",
+      type: '"scanline" | "none"',
+      required: false,
+      defaultValue: "none",
+      description: "应用额外的装饰效果（如扫描线）",
+    },
+  ]}
+/>
+
 ## API
 
 <PropsTable
@@ -693,7 +768,8 @@ Input 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
     placeholder="example@email.com"
   />
 
-  {/* 不推荐：仅使用占位符 */}
+{/* 不推荐：仅使用占位符 */}
+
   <Input
     placeholder="请输入邮箱"
   />

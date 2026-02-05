@@ -1,0 +1,43 @@
+/* Pixel Art Design System Variables */
+/* Migrated from apps/playground/src/index.css */
+
+:root {
+  /* Pixel Art Palette - Japanese Aesthetic */
+
+  /* Backgrounds */
+  --pixel-bg-primary: #0a0a1a; /* Midnight Navy */
+  --pixel-bg-secondary: #161b33; /* Deep Teal/Navy */
+  --pixel-bg-tertiary: #222845; /* Lighter Navy */
+
+  /* Accents */
+  --pixel-accent-cyan: #0ff0fc; /* Neon Cyan */
+  --pixel-accent-pink: #ff9ecd; /* Sakura Pink */
+  --pixel-accent-gold: #ffd700; /* Gold */
+  --pixel-accent-purple: #9d4edd; /* Vaporwave Purple */
+  --pixel-accent-green: #7ba05b; /* Matcha Green */
+  --pixel-text-primary: #e0e0e0; /* Off-white */
+  --pixel-text-secondary: #a0a0c0; /* Muted Blue-Grey */
+  --pixel-text-muted: #606080;
+
+  /* Borders */
+  --pixel-border: #333355;
+
+  /* Effects */
+  --pixel-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
+  --pixel-shadow-sm: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  --pixel-shadow-md: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
+  --pixel-shadow-lg: 6px 6px 0px 0px rgba(0, 0, 0, 0.5);
+  --pixel-shadow-hover: 6px 6px 0px 0px rgba(0, 0, 0, 0.6);
+
+  /* Fonts */
+  --font-pixel: "Press Start 2P", monospace;
+
+  /* Animations */
+  --pixel-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base resets for pixel art */
+html {
+  font-family: var(--font-pixel);
+  image-rendering: pixelated;
+}

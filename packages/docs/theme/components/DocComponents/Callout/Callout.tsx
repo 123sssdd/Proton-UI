@@ -37,3 +37,6 @@ export const Callout: React.FC<CalloutProps> = ({ type, title, children }) => {
     </div>
   );
 };
+
+// 添加 default export 以支持 Rspress globalComponents
+export default Callout;

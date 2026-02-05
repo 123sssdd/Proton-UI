@@ -28,3 +28,6 @@ export function LargeMessageListDemo() {
     </div>
   );
 }
+
+// 添加 default export 以支持 Rspress globalComponents
+export default LargeMessageListDemo;

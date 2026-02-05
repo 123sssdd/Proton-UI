@@ -13,7 +13,9 @@
       "require": "./dist/index.cjs"
     },
     "./styles/*": "./dist/styles/*",
-    "./dist/styles/*": "./dist/styles/*"
+    "./dist/styles/*": "./dist/styles/*",
+    "./styles/pixel-theme.css": "./src/styles/pixel-theme.css",
+    "./styles/pixel-utilities.css": "./src/styles/pixel-utilities.css"
   },
   "files": [
     "dist"

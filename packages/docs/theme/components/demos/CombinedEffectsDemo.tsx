@@ -215,3 +215,6 @@ export function CombinedEffectsDemo() {
     </div>
   );
 }
+
+// 添加 default export 以支持 Rspress globalComponents
+export default CombinedEffectsDemo;

@@ -187,4 +187,5 @@ export const InputValidationDemo: React.FC = () => {
   );
 };
 
+// 添加 default export 以支持 Rspress globalComponents
 export default InputValidationDemo;

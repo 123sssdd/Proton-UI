@@ -19,6 +19,18 @@ Proton UI 提供了丰富的像素风格视觉特效系统，包括霓虹光晕�
 
 </Callout>
 
+## 粒子效果演示
+
+完整的粒子效果控制面板，支持 4 种粒子类型、参数调节和性能监控。
+
+<ParticleEffectDemo />
+
+## 像素化图片演示
+
+交互式像素化图片演示，支持示例图片选择、预设风格和参数调节。
+
+<PixelatedImageDemo />
+
 ## 像素化图片
 
 将任意图片转换为像素风格，支持可调像素大小和色彩量化。
@@ -126,284 +138,17 @@ return (
   </DocTabPanel>
 </DocTabs>
 
-## 粒子效果
-
-高性能的像素风格粒子动画系统，支持多种效果类型。
-
-### 爆炸效果
-
-<DemoBox
-  title="点击爆炸"
-  description="点击区域触发粒子爆炸效果"
-  code={`import { ParticleEffect } from '@proton-ui/core';
-
-<ParticleEffect
-  type="explosion"
-  onClickEmit
-  count={30}
-  colors={['#4ECDC4', '#FF6B9D', '#FFB86C']}
-  size={{ min: 2, max: 4 }}
-  speed={{ min: 100, max: 200 }}
-  life={{ min: 500, max: 1500 }}
-  respectMotionPreference={false}  // 仅用于演示，生产环境建议移除
-/>`}
->
-  <div className="relative h-64 bg-gray-900 rounded-lg overflow-hidden">
-    <ParticleEffect
-      type="explosion"
-      onClickEmit
-      count={30}
-      colors={['#4ECDC4', '#FF6B9D', '#FFB86C', '#7FD99F']}
-      size={{ min: 2, max: 4 }}
-      speed={{ min: 100, max: 200 }}
-      life={{ min: 500, max: 1500 }}
-      respectMotionPreference={false}
-    />
-    <div className="absolute inset-0 flex items-center justify-center text-white text-lg">
-      点击任意位置触发爆炸效果
-    </div>
-  </div>
-</DemoBox>
-
-### 漂浮效果
-
-<DemoBox
-  title="漂浮粒子"
-  description="粒子从底部向上漂浮，模拟气泡或萤火虫效果"
-  code={`<ParticleEffect
-  type="float"
-  autoTrigger
-  triggerInterval={1000}
-  count={5}
-  colors={['#4ECDC4', '#7FD99F', '#FFB86C']}
-  size={{ min: 2, max: 3 }}
-  speed={{ min: 30, max: 60 }}
-  life={{ min: 3000, max: 5000 }}
-/>`}
->
-  <div className="relative h-64 bg-gradient-to-b from-gray-900 to-gray-800 rounded-lg overflow-hidden">
-    <ParticleEffect
-      type="float"
-      autoTrigger
-      triggerInterval={1000}
-      count={5}
-      colors={["#4ECDC4", "#7FD99F", "#FFB86C"]}
-      size={{ min: 2, max: 3 }}
-      speed={{ min: 30, max: 60 }}
-      life={{ min: 3000, max: 5000 }}
-      respectMotionPreference={false}
-    />
-    <div className="absolute inset-0 flex items-center justify-center text-white text-lg">
-      漂浮的粒子
-    </div>
-  </div>
-</DemoBox>
-
-### 闪烁效果
-
-<DemoBox
-  title="星星闪烁"
-  description="粒子在原地闪烁，创造星空效果"
-  code={`<ParticleEffect
-  type="sparkle"
-  autoTrigger
-  triggerInterval={500}
-  count={10}
-  colors={['#FFB86C', '#D4AF37', '#FFFFFF']}
-  size={{ min: 2, max: 4 }}
-  life={{ min: 800, max: 1200 }}
-/>`}
->
-  <div className="relative h-64 bg-gray-950 rounded-lg overflow-hidden">
-    <ParticleEffect
-      type="sparkle"
-      autoTrigger
-      triggerInterval={500}
-      count={10}
-      colors={["#FFB86C", "#D4AF37", "#FFFFFF"]}
-      size={{ min: 2, max: 4 }}
-      life={{ min: 800, max: 1200 }}
-      respectMotionPreference={false}
-    />
-    <div className="absolute inset-0 flex items-center justify-center text-white text-lg">
-      闪烁的星星
-    </div>
-  </div>
-</DemoBox>
-
-### 雪花飘落
-
-<DemoBox
-  title="雪花效果"
-  description="雪花从顶部飘落，带有轻微摆动"
-  code={`<ParticleEffect
-  type="snow"
-  autoTrigger
-  triggerInterval={800}
-  count={8}
-  colors={['#FFFFFF', '#E8E4DB', '#A8A4A0']}
-  size={{ min: 2, max: 3 }}
-  speed={{ min: 40, max: 80 }}
-  life={{ min: 4000, max: 6000 }}
-/>`}
->
-  <div className="relative h-64 bg-gradient-to-b from-blue-900 to-blue-800 rounded-lg overflow-hidden">
-    <ParticleEffect
-      type="snow"
-      autoTrigger
-      triggerInterval={800}
-      count={8}
-      colors={["#FFFFFF", "#E8E4DB", "#A8A4A0"]}
-      size={{ min: 2, max: 3 }}
-      speed={{ min: 40, max: 80 }}
-      life={{ min: 4000, max: 6000 }}
-      respectMotionPreference={false}
-    />
-    <div className="absolute inset-0 flex items-center justify-center text-white text-lg">
-      飘落的雪花
-    </div>
-  </div>
-</DemoBox>
-
 ## 霓虹光晕
 
 模拟霓虹灯管的发光效果，提供 5 种颜色预设和 3 种强度级别。
 
-<DemoBox
-  title="霓虹文字"
-  description="不同颜色的霓虹光晕效果"
-  code={`<h2 className="neon-glow-cyan text-4xl font-bold">霓虹青</h2>
-<h2 className="neon-glow-pink text-4xl font-bold">樱花粉</h2>
-<h2 className="neon-glow-purple text-4xl font-bold">蒸汽紫</h2>
-<h2 className="neon-glow-gold text-4xl font-bold">神圣金</h2>
-<h2 className="neon-glow-green text-4xl font-bold">抹茶绿</h2>`}
->
-  <div className="bg-gray-900 p-8 rounded-lg space-y-4">
-    <h2 className="neon-glow-cyan text-4xl font-bold text-center">霓虹青</h2>
-    <h2 className="neon-glow-pink text-4xl font-bold text-center">樱花粉</h2>
-    <h2 className="neon-glow-purple text-4xl font-bold text-center">蒸汽紫</h2>
-    <h2 className="neon-glow-gold text-4xl font-bold text-center">神圣金</h2>
-    <h2 className="neon-glow-green text-4xl font-bold text-center">抹茶绿</h2>
-  </div>
-</DemoBox>
-
-### 霓虹动画
-
-<DocTabs>
-  <DocTabPanel id="pulse" label="脉冲动画">
-    <DemoBox
-      code={`<h2 className="neon-glow-cyan neon-pulse text-4xl font-bold">
-  脉冲光晕
-</h2>`}
-    >
-      <div className="bg-gray-900 p-8 rounded-lg">
-        <h2 className="neon-glow-cyan neon-pulse text-4xl font-bold text-center">
-          脉冲光晕
-        </h2>
-      </div>
-    </DemoBox>
-  </DocTabPanel>
-
-<DocTabPanel id="flicker" label="闪烁动画">
-  <DemoBox
-    code={`<h2 className="neon-glow-pink neon-flicker text-4xl font-bold">
-  闪烁光晕
-</h2>`}
-  >
-    <div className="bg-gray-900 p-8 rounded-lg">
-      <h2 className="neon-glow-pink neon-flicker text-4xl font-bold text-center">
-        闪烁光晕
-      </h2>
-    </div>
-  </DemoBox>
-</DocTabPanel>
-
-  <DocTabPanel id="breathe" label="呼吸动画">
-    <DemoBox
-      code={`<h2 className="neon-glow-purple neon-breathe text-4xl font-bold">
-  呼吸光晕
-</h2>`}
-    >
-      <div className="bg-gray-900 p-8 rounded-lg">
-        <h2 className="neon-glow-purple neon-breathe text-4xl font-bold text-center">
-          呼吸光晕
-        </h2>
-      </div>
-    </DemoBox>
-  </DocTabPanel>
-</DocTabs>
+<NeonEffectsDemo />
 
 ## 玻璃拟态
 
 创建毛玻璃背景和边缘高光，适合现代、优雅的界面设计。
 
-<DemoBox
-  title="玻璃卡片"
-  description="不同强度的玻璃拟态效果"
-  code={`<div className="glass-morphism-subtle p-6 rounded-lg">
-  <h3 className="text-white font-bold mb-2">轻微玻璃效果</h3>
-  <p className="text-gray-300">适合背景元素</p>
-</div>
-
-<div className="glass-morphism p-6 rounded-lg">
-  <h3 className="text-white font-bold mb-2">标准玻璃效果</h3>
-  <p className="text-gray-300">适合卡片和面板</p>
-</div>
-
-<div className="glass-morphism-strong p-6 rounded-lg">
-  <h3 className="text-white font-bold mb-2">强烈玻璃效果</h3>
-  <p className="text-gray-300">适合重要内容</p>
-</div>`}
->
-  <div
-    className="p-8 rounded-lg space-y-4"
-    style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    }}
-  >
-    <div className="glass-morphism-subtle p-6 rounded-lg">
-      <h3 className="text-white font-bold mb-2">轻微玻璃效果</h3>
-      <p className="text-gray-300">适合背景元素</p>
-    </div>
-
-    <div className="glass-morphism p-6 rounded-lg">
-      <h3 className="text-white font-bold mb-2">标准玻璃效果</h3>
-      <p className="text-gray-300">适合卡片和面板</p>
-    </div>
-
-    <div className="glass-morphism-strong p-6 rounded-lg">
-      <h3 className="text-white font-bold mb-2">强烈玻璃效果</h3>
-      <p className="text-gray-300">适合重要内容</p>
-    </div>
-
-  </div>
-</DemoBox>
-
-### 彩色玻璃
-
-<DemoBox
-  title="彩色玻璃变体"
-  code={`<div className="glass-morphism-cyan p-6 rounded-lg">青色玻璃</div>
-<div className="glass-morphism-pink p-6 rounded-lg">粉色玻璃</div>
-<div className="glass-morphism-purple p-6 rounded-lg">紫色玻璃</div>`}
->
-  <div
-    className="p-8 rounded-lg space-y-4"
-    style={{
-      background: "linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%)",
-    }}
-  >
-    <div className="glass-morphism-cyan p-6 rounded-lg">
-      <h3 className="text-white font-bold">青色玻璃</h3>
-    </div>
-    <div className="glass-morphism-pink p-6 rounded-lg">
-      <h3 className="text-white font-bold">粉色玻璃</h3>
-    </div>
-    <div className="glass-morphism-purple p-6 rounded-lg">
-      <h3 className="text-white font-bold">紫色玻璃</h3>
-    </div>
-  </div>
-</DemoBox>
+<GlassEffectsDemo />
 
 ## CRT 屏幕效果
 
@@ -431,103 +176,11 @@ return (
 
 使用像素矩阵模拟渐变效果，是经典像素艺术的核心技术。
 
-<DemoBox
-  title="Dithering 渐变"
-  description="4x4 像素矩阵创建的渐变效果"
-  code={`<div className="relative h-32 rounded-lg overflow-hidden">
-  <div className="dithering-4x4-25 absolute inset-0 text-cyan-400"></div>
-  <div className="dithering-4x4-50 absolute inset-0 text-pink-400"></div>
-  <div className="dithering-4x4-75 absolute inset-0 text-purple-400"></div>
-</div>`}
->
-  <div className="relative h-32 rounded-lg overflow-hidden bg-gray-900">
-    <div className="dithering-4x4-25 absolute inset-0 text-cyan-400"></div>
-    <div className="dithering-4x4-50 absolute inset-0 text-pink-400"></div>
-    <div className="dithering-4x4-75 absolute inset-0 text-purple-400"></div>
-  </div>
-</DemoBox>
+<DitheringEffectsDemo />
 
 ## 效果组合
 
-<DemoBox
-  title="多重特效叠加"
-  description="组合使用多种特效创建独特风格"
-  code={`<div className="relative h-64 rounded-lg overflow-hidden">
-  {/* 背景漂浮粒子 */}
-  <ParticleEffect
-    type="float"
-    autoTrigger
-    triggerInterval={1500}
-    count={3}
-    colors={['#4ECDC4', '#7FD99F']}
-  />
-
-{/* 点击爆炸效果 */}
-
-<ParticleEffect
-  type="explosion"
-  onClickEmit
-  count={40}
-  colors={["#FF6B9D", "#FFB86C"]}
-/>
-
-{/* 玻璃拟态卡片 */}
-
-  <div className="glass-morphism-cyan neon-glow-cyan-box p-8">
-    <h2 className="neon-glow-cyan neon-pulse text-3xl font-bold">
-      赛博朋克卡片
-    </h2>
-    <p className="text-white mt-4">
-      组合多种特效创建独特风格
-    </p>
-  </div>
-</div>`}
->
-  <div
-    className="relative h-64 rounded-lg overflow-hidden"
-    style={{
-      background: "linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%)",
-    }}
-  >
-    {/* 背景漂浮粒子 */}
-    <ParticleEffect
-      type="float"
-      autoTrigger
-      triggerInterval={1500}
-      count={3}
-      colors={["#4ECDC4", "#7FD99F"]}
-      style={{ zIndex: 1 }}
-      respectMotionPreference={false}
-    />
-
-    {/* 点击爆炸效果 */}
-    <ParticleEffect
-      type="explosion"
-      onClickEmit
-      count={40}
-      colors={["#FF6B9D", "#FFB86C", "#FFFFFF"]}
-      size={{ min: 2, max: 5 }}
-      speed={{ min: 80, max: 180 }}
-      life={{ min: 600, max: 1200 }}
-      style={{ zIndex: 2 }}
-      respectMotionPreference={false}
-    />
-
-    {/* 玻璃拟态卡片 */}
-    <div
-      className="absolute inset-0 flex items-center justify-center"
-      style={{ zIndex: 10 }}
-    >
-      <div className="glass-morphism-cyan neon-glow-cyan-box p-8 rounded-lg">
-        <h2 className="neon-glow-cyan neon-pulse text-3xl font-bold mb-4">
-          赛博朋克卡片
-        </h2>
-        <p className="text-white">组合多种特效创建独特风格</p>
-      </div>
-    </div>
-
-  </div>
-</DemoBox>
+<CombinedEffectsDemo />
 
 ## API 文档
 

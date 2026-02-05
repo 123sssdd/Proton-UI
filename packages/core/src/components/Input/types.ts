@@ -36,4 +36,19 @@ export interface InputProps extends Omit<
    * 是否全宽
    */
   fullWidth?: boolean;
+
+  /**
+   * 像素艺术主题
+   */
+  pixelTheme?:
+    | "retro-futurism"
+    | "neo-tokyo"
+    | "cyber-shrine"
+    | "dreamy-lofi"
+    | "vaporwave";
+
+  /**
+   * 装饰效果
+   */
+  decoration?: "scanline" | "glitch" | "rivets" | "none";
 }

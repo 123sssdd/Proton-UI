@@ -1,257 +1,93 @@
-# Message 消息
+# Message 消息组件
 
-用于显示对话消息，支持不同角色（用户、AI、系统）的样式区分，支持 Markdown 格式渲染和代码高亮。
+用于显示对话消息，支持 Markdown 渲染、流式打字机效果和多种像素风格主题。
 
 ## 基础用法
 
-最简单的消息显示。
+<div className="p-4 border rounded-lg bg-white dark:bg-gray-900">
+  <Message
+    role="assistant"
+    content="你好！我是 Proton UI 的 AI 助手。"
+    avatar="https://api.dicebear.com/7.x/bottts/svg?seed=proton"
+    timestamp={new Date()}
+  />
+  <Message
+    role="user"
+    content="请介绍一下像素风格组件。"
+    avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=user"
+    timestamp={new Date()}
+  />
+</div>
 
 ```tsx
-import { Message } from "@proton-ui/core";
+import { Message } from '@proton-ui/core';
 
-export default () => (
-  <div className="space-y-4">
-    <Message role="user" content="你好，AI！" timestamp={new Date()} />
-    <Message
-      role="assistant"
-      content="你好！有什么可以帮助你的吗？"
-      timestamp={new Date()}
-    />
-  </div>
-);
+<Message
+  role="assistant"
+  content="你好！我是 Proton UI 的 AI 助手。"
+  avatar="url/to/avatar"
+  timestamp={new Date()}
+/>
+<Message
+  role="user"
+  content="请介绍一下像素风格组件。"
+  timestamp={new Date()}
+/>
 ```
 
-## 不同角色
+## 像素风格主题
 
-支持三种角色：`user`（用户）、`assistant`（AI 助手）、`system`（系统）。
+Message 组件支持多种精美的像素艺术主题，只需设置 `pixelTheme` 属性。
+
+### Retro Futurism (复古未来)
+
+<div className="p-4 border rounded-lg bg-[#161B33]">
+  <Message
+    pixelTheme="retro-futurism"
+    role="assistant"
+    content="系统已启动。等待指令..."
+    decoration="scanline"
+  />
+  <Message pixelTheme="retro-futurism" role="user" content="启动核心引擎。" />
+</div>
 
 ```tsx
-import { Message } from "@proton-ui/core";
-
-export default () => (
-  <div className="space-y-4">
-    <Message
-      role="user"
-      content="用户消息，右对齐显示"
-      timestamp={new Date()}
-    />
-    <Message
-      role="assistant"
-      content="AI 助手消息，左对齐显示"
-      timestamp={new Date()}
-    />
-    <Message role="system" content="系统消息，居中显示" />
-  </div>
-);
+<Message
+  pixelTheme="retro-futurism"
+  role="assistant"
+  content="..."
+  decoration="scanline"
+/>
 ```
 
-## Markdown 支持
+### Neo Tokyo (新东京)
 
-自动渲染 Markdown 格式的内容，支持代码高亮。
+<div className="p-4 border rounded-lg bg-[#0a0a1a]">
+  <Message
+    pixelTheme="neo-tokyo"
+    role="assistant"
+    content="欢迎来到新东京网络层。"
+    decoration="glitch"
+  />
+</div>
 
-```tsx
-import { Message } from "@proton-ui/core";
+### Cyber Shrine (赛博神社)
 
-const markdownContent = `
-这是一段 **粗体** 和 *斜体* 文本。
-
-支持代码块：
-
-\`\`\`javascript
-function hello() {
-  console.log('Hello, World!');
-}
-\`\`\`
-
-也支持行内代码：\`const x = 10;\`
-
-还支持列表：
-- 项目 1
-- 项目 2
-- 项目 3
-`;
-
-export default () => (
-  <Message role="assistant" content={markdownContent} timestamp={new Date()} />
-);
-```
-
-## 自定义头像
-
-通过 `avatar` 属性自定义头像。
-
-```tsx
-import { Message } from "@proton-ui/core";
-
-export default () => (
-  <div className="space-y-4">
-    <Message
-      role="user"
-      content="带自定义头像的用户消息"
-      avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=user1"
-      timestamp={new Date()}
-    />
-    <Message
-      role="assistant"
-      content="带自定义头像的 AI 消息"
-      avatar="https://api.dicebear.com/7.x/bottts/svg?seed=ai1"
-      timestamp={new Date()}
-    />
-  </div>
-);
-```
-
-## 流式渲染
-
-配合 `StreamingText` 组件实现流式渲染效果。
-
-```tsx
-import { Message } from "@proton-ui/core";
-import { StreamingText } from "@proton-ui/streaming";
-import { useState, useEffect } from "react";
-
-export default () => {
-  const [content, setContent] = useState("");
-  const fullText = "这是一段流式渲染的文本，会逐字显示出来。";
-
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setContent(fullText.slice(0, index + 1));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 50);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <Message
-      role="assistant"
-      content={content}
-      streaming
-      renderContent={(text) => <StreamingText content={text} />}
-      timestamp={new Date()}
-    />
-  );
-};
-```
-
-## 长文本消息
-
-消息气泡会自动换行，最大宽度为容器的 70%。
-
-```tsx
-import { Message } from "@proton-ui/core";
-
-const longText = `
-这是一段很长的文本消息，用于演示消息气泡的自动换行功能。
-当文本内容超过气泡的最大宽度时，会自动换行显示，确保内容的可读性。
-
-消息气泡的最大宽度设置为容器宽度的 70%，这样可以在保证内容完整显示的同时，
-也能让对话界面看起来更加美观和易读。
-`;
-
-export default () => (
-  <div className="space-y-4">
-    <Message role="user" content={longText} timestamp={new Date()} />
-    <Message role="assistant" content={longText} timestamp={new Date()} />
-  </div>
-);
-```
-
-## 使用场景
-
-### AI 对话
-
-```tsx
-import { Message } from "@proton-ui/core";
-
-const conversation = [
-  {
-    id: "1",
-    role: "user" as const,
-    content: "请帮我写一个 React 组件",
-    timestamp: new Date(Date.now() - 60000),
-  },
-  {
-    id: "2",
-    role: "assistant" as const,
-    content: `好的，我来帮你写一个简单的 React 组件：
-
-\`\`\`jsx
-function Welcome({ name }) {
-  return <h1>Hello, {name}!</h1>;
-}
-
-export default Welcome;
-\`\`\`
-
-这是一个接收 \`name\` 属性的函数组件，会显示一个欢迎消息。`,
-    timestamp: new Date(Date.now() - 30000),
-  },
-  {
-    id: "3",
-    role: "user" as const,
-    content: "谢谢！",
-    timestamp: new Date(),
-  },
-];
-
-export default () => (
-  <div className="space-y-4">
-    {conversation.map((msg) => (
-      <Message
-        key={msg.id}
-        role={msg.role}
-        content={msg.content}
-        timestamp={msg.timestamp}
-      />
-    ))}
-  </div>
-);
-```
+<div className="p-4 border rounded-lg bg-[#1B4D5C]">
+  <Message
+    pixelTheme="cyber-shrine"
+    role="assistant"
+    content="祈福已接收。吉。"
+    decoration="rivets"
+  />
+</div>
 
 ## API
 
-### Message Props
-
-| 属性             | 说明                      | 类型                                | 默认值  |
-| ---------------- | ------------------------- | ----------------------------------- | ------- |
-| role             | 消息角色                  | `'user' \| 'assistant' \| 'system'` | -       |
-| content          | 消息内容（支持 Markdown） | `string`                            | -       |
-| timestamp        | 时间戳                    | `Date`                              | -       |
-| avatar           | 头像 URL                  | `string`                            | -       |
-| streaming        | 是否为流式渲染模式        | `boolean`                           | `false` |
-| renderContent    | 自定义内容渲染函数        | `(content: string) => ReactNode`    | -       |
-| onStreamComplete | 流式渲染完成回调          | `() => void`                        | -       |
-| className        | 自定义类名                | `string`                            | -       |
-
-## Markdown 支持
-
-Message 组件使用 `react-markdown` 和 `rehype-highlight` 实现 Markdown 渲染和代码高亮，支持：
-
-- **文本格式**：粗体、斜体、删除线
-- **标题**：H1-H6
-- **列表**：有序列表、无序列表
-- **代码**：行内代码、代码块（带语法高亮）
-- **链接**：超链接
-- **引用**：块引用
-- **表格**：GFM 表格（通过 remark-gfm）
-
-## 无障碍性
-
-- 消息容器使用 `role="article"` 标记
-- 提供 `aria-label` 描述消息角色
-- 时间戳包含 `aria-label` 描述发送时间
-- 流式渲染使用 `aria-live="polite"` 实时通知屏幕阅读器
-
-## 设计原则
-
-1. **清晰的角色区分**：通过颜色和对齐方式区分不同角色的消息
-2. **优秀的可读性**：合适的字体大小、行高和气泡宽度
-3. **丰富的内容支持**：完整的 Markdown 支持，满足各种内容展示需求
-4. **流畅的交互体验**：支持流式渲染，提供实时反馈
+| 属性       | 说明         | 类型                                     | 默认值  |
+| ---------- | ------------ | ---------------------------------------- | ------- |
+| role       | 消息角色     | `'user' \| 'assistant' \| 'system'`      | -       |
+| content    | 消息内容     | `string`                                 | -       |
+| pixelTheme | 像素主题     | `'retro-futurism' \| 'neo-tokyo' \| ...` | -       |
+| decoration | 装饰效果     | `'scanline' \| 'rivets' \| 'glitch'`     | -       |
+| streaming  | 是否流式渲染 | `boolean`                                | `false` |

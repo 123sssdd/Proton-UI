@@ -1,0 +1,379 @@
+# 图片滤镜工坊
+
+图片滤镜工坊是一个完整的像素化图片处理工具，提供直观的界面让你轻松将任何图片转换为像素风格。
+
+## 在线体验
+
+<ImageFilterWorkshop />
+
+## 功能特性
+
+### 📁 图片上传
+
+- 支持多种图片格式（JPEG, PNG, WebP, GIF）
+- 自动文件类型和大小验证
+- 超大图片自动缩放（最大 2000x2000）
+- 最大文件大小 10MB
+
+### 🖼️ 示例图库
+
+提供 4 种类型的示例图片：
+
+- **人像照片**：适合测试人物像素化效果
+- **山景风光**：适合测试自然景观效果
+- **UI 界面**：适合测试界面元素效果
+- **抽象艺术**：适合测试色彩和形状效果
+
+### 🎨 预设风格
+
+5 种精心调校的预设配置：
+
+<DocTabs>
+  <DocTabPanel id="retro8bit" label="Retro 8-bit">
+    **经典 8-bit 游戏美学**
+
+    - 像素大小：8px
+    - 色彩级别：16 色
+    - 适合：复古游戏风格、怀旧设计
+
+    ```tsx
+    <PixelatedImage
+      src="/photo.jpg"
+      pixelSize={8}
+      colorLevels={16}
+    />
+    ```
+
+  </DocTabPanel>
+
+  <DocTabPanel id="modern16bit" label="Modern 16-bit">
+    **增强的 16-bit 风格**
+
+    - 像素大小：4px
+    - 色彩级别：64 色
+    - 适合：现代像素艺术、精细设计
+
+    ```tsx
+    <PixelatedImage
+      src="/photo.jpg"
+      pixelSize={4}
+      colorLevels={64}
+    />
+    ```
+
+  </DocTabPanel>
+
+  <DocTabPanel id="modernPixel" label="Modern Pixel">
+    **现代像素艺术**
+
+    - 像素大小：6px
+    - 色彩级别：128 色
+    - 适合：平衡像素感和细节
+
+    ```tsx
+    <PixelatedImage
+      src="/photo.jpg"
+      pixelSize={6}
+      colorLevels={128}
+    />
+    ```
+
+  </DocTabPanel>
+
+  <DocTabPanel id="coarse" label="Coarse">
+    **大块像素效果**
+
+    - 像素大小：16px
+    - 色彩级别：32 色
+    - 适合：强烈的像素风格、艺术效果
+
+    ```tsx
+    <PixelatedImage
+      src="/photo.jpg"
+      pixelSize={16}
+      colorLevels={32}
+    />
+    ```
+
+  </DocTabPanel>
+
+  <DocTabPanel id="fine" label="Fine">
+    **精细像素化**
+
+    - 像素大小：2px
+    - 色彩级别：256 色
+    - 适合：保留细节的轻度像素化
+
+    ```tsx
+    <PixelatedImage
+      src="/photo.jpg"
+      pixelSize={2}
+      colorLevels={256}
+    />
+    ```
+
+  </DocTabPanel>
+</DocTabs>
+
+### ⚙️ 参数调节
+
+实时调整像素化参数：
+
+- **像素大小**：2-32px，控制像素块的大小
+- **色彩级别**：8-256 色，控制色彩的丰富程度
+
+调整参数后会自动切换到"自定义"模式。
+
+### 🔍 对比视图
+
+支持两种查看模式：
+
+- **单图视图**：专注查看像素化效果
+- **对比视图**：并排对比原图和效果图
+
+## 使用示例
+
+### 基础用法
+
+```tsx
+import { PixelatedImage } from "@proton-ui/core";
+
+function Avatar() {
+  return (
+    <PixelatedImage
+      src="/avatar.jpg"
+      alt="用户头像"
+      pixelSize={8}
+      colorLevels={16}
+      className="rounded-lg"
+    />
+  );
+}
+```
+
+### 使用 Hook
+
+```tsx
+import { usePixelateImage } from "@proton-ui/core";
+
+function ImageProcessor() {
+  const { pixelatedImage, pixelate, isProcessing } = usePixelateImage();
+
+  const handleFile = async (file: File) => {
+    await pixelate(file, {
+      pixelSize: 8,
+      colorLevels: 16,
+    });
+  };
+
+  return (
+    <div>
+      <input type="file" onChange={(e) => handleFile(e.target.files[0])} />
+      {isProcessing && <p>处理中...</p>}
+      {pixelatedImage && <img src={pixelatedImage} alt="像素化结果" />}
+    </div>
+  );
+}
+```
+
+### 预设配置
+
+```tsx
+import { PixelatedImage, PIXELATE_PRESETS } from "@proton-ui/core";
+
+function Gallery() {
+  return (
+    <div>
+      {/* 使用预设 */}
+      <PixelatedImage src="/photo1.jpg" {...PIXELATE_PRESETS.retro8bit} />
+
+      {/* 自定义参数 */}
+      <PixelatedImage src="/photo2.jpg" pixelSize={12} colorLevels={32} />
+    </div>
+  );
+}
+```
+
+## API 文档
+
+### PixelatedImage Props
+
+<PropsTable
+  data={[
+    {
+      name: "src",
+      type: "string | File | HTMLImageElement",
+      required: true,
+      defaultValue: "-",
+      description: "图片源，支持 URL、File 对象或 Image 元素",
+    },
+    {
+      name: "alt",
+      type: "string",
+      required: false,
+      defaultValue: '""',
+      description: "图片替代文本",
+    },
+    {
+      name: "pixelSize",
+      type: "number",
+      required: false,
+      defaultValue: "8",
+      description: "像素块大小（2-32）",
+    },
+    {
+      name: "colorLevels",
+      type: "number",
+      required: false,
+      defaultValue: "256",
+      description: "色彩量化级别（1-256）",
+    },
+    {
+      name: "preserveColor",
+      type: "boolean",
+      required: false,
+      defaultValue: "true",
+      description: "是否保持原始色彩",
+    },
+    {
+      name: "quality",
+      type: "number",
+      required: false,
+      defaultValue: "0.92",
+      description: "输出图片质量（0-1）",
+    },
+    {
+      name: "className",
+      type: "string",
+      required: false,
+      defaultValue: "-",
+      description: "自定义 CSS 类名",
+    },
+    {
+      name: "onLoad",
+      type: "(pixelatedSrc: string) => void",
+      required: false,
+      defaultValue: "-",
+      description: "处理完成回调",
+    },
+    {
+      name: "onError",
+      type: "(error: Error) => void",
+      required: false,
+      defaultValue: "-",
+      description: "处理失败回调",
+    },
+  ]}
+/>
+
+### usePixelateImage Hook
+
+```tsx
+const {
+  pixelatedImage, // 像素化后的图片 Data URL
+  pixelate, // 处理函数
+  isProcessing, // 是否正在处理
+  error, // 错误信息
+} = usePixelateImage();
+```
+
+**pixelate 函数签名：**
+
+```tsx
+pixelate(
+  source: string | File | HTMLImageElement,
+  options?: {
+    pixelSize?: number;
+    colorLevels?: number;
+    preserveColor?: boolean;
+    quality?: number;
+  }
+): Promise<string>
+```
+
+## 技术实现
+
+### Canvas 处理流程
+
+1. **加载图片**：将图片加载到 Canvas
+2. **像素化处理**：
+   - 缩小 Canvas 到目标像素大小
+   - 使用 `imageSmoothingEnabled = false` 保持锐利边缘
+   - 放大回原始尺寸
+3. **色彩量化**：
+   - 读取像素数据
+   - 对每个颜色通道进行量化
+   - 写回 Canvas
+4. **输出结果**：转换为 Data URL
+
+### 性能优化
+
+- **批量处理**：使用 `getImageData` 和 `putImageData` 批量处理像素
+- **Web Worker**：大图片可以在 Worker 中处理（未来功能）
+- **缓存结果**：相同参数的处理结果会被缓存
+- **防抖处理**：参数调整时使用防抖避免频繁重新处理
+
+## 使用建议
+
+### 像素大小选择
+
+- **2-4px**：精细像素化，保留大部分细节
+- **6-8px**：经典像素风格，平衡像素感和可读性
+- **12-16px**：强烈像素效果，适合艺术创作
+- **20-32px**：极简像素，适合图标和小图
+
+### 色彩级别选择
+
+- **4-8 色**：极简调色板，Game Boy 风格
+- **16-32 色**：经典 8-bit 风格
+- **64-128 色**：现代像素艺术
+- **256 色**：保留丰富色彩
+
+### 应用场景
+
+- **用户头像**：8px + 16 色
+- **产品图片**：4px + 64 色
+- **背景图**：16px + 32 色
+- **图标**：6px + 32 色
+- **艺术创作**：自定义参数
+
+## 浏览器兼容性
+
+- **Canvas API**：所有现代浏览器支持
+- **File API**：所有现代浏览器支持
+- **Data URL**：所有现代浏览器支持
+
+最低要求：Chrome 76+, Firefox 68+, Safari 12+, Edge 79+
+
+## 相关资源
+
+- [像素特效画廊](/components/effects/pixel-effects)
+- [PixelatedImage 组件文档](/components/effects/pixel-effects#像素化图片)
+- [主题系统](/components/theme/theme-gallery)
+- [设计指南](/guide/design-tokens)
+
+## 常见问题
+
+<Callout type="info" title="为什么处理大图片会比较慢？">
+  像素化处理需要读取和修改每个像素的颜色值，图片越大处理时间越长。建议：限制图片尺寸在
+  2000x2000 以内、使用较大的像素大小可以加快处理速度、考虑在服务端预处理图片。
+</Callout>
+
+<Callout type="warning" title="色彩量化可能导致色带">
+  当色彩级别设置过低时（如 4-8
+  色），可能会出现明显的色带效果。这是正常现象，是像素艺术的一部分。如果不希望出现色带，可以增加色彩级别到
+  64 色以上，或使用 `preserveColor={"{true}"}` 保持原始色彩。
+</Callout>
+
+<Callout type="tip" title="如何保存处理后的图片？">
+
+```tsx
+const handleSave = () => {
+  const link = document.createElement("a");
+  link.download = "pixelated-image.png";
+  link.href = pixelatedImage; // 从 usePixelateImage 获取
+  link.click();
+};
+```
+
+</Callout>

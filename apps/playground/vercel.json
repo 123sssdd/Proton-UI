@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd ../.. && pnpm install && pnpm build --filter=@proton-ui/playground",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install"
+}

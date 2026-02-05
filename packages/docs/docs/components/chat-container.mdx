@@ -1,310 +1,60 @@
 # ChatContainer 对话容器
 
-用于显示对话消息列表，支持加载状态显示和自动滚动功能。
+用于展示完整的对话流，内置自动滚动、加载状态和像素风格支持。
 
 ## 基础用法
 
-最简单的对话容器用法。
+<div className="h-[400px] border rounded-lg overflow-hidden relative">
+  <ChatContainer
+    messages={[
+      { id: "1", role: "assistant", content: "你好！我是 Proton UI AI。" },
+      { id: "2", role: "user", content: "能帮我生成一个按钮吗？" },
+    ]}
+  />
+</div>
 
 ```tsx
 import { ChatContainer } from "@proton-ui/core";
 
 const messages = [
-  {
-    id: "1",
-    role: "user" as const,
-    content: "你好！",
-    timestamp: new Date(Date.now() - 120000),
-  },
-  {
-    id: "2",
-    role: "assistant" as const,
-    content: "你好！有什么可以帮助你的吗？",
-    timestamp: new Date(Date.now() - 60000),
-  },
-  {
-    id: "3",
-    role: "user" as const,
-    content: "请介绍一下你自己",
-    timestamp: new Date(),
-  },
+  { id: "1", role: "assistant", content: "你好！" },
+  { id: "2", role: "user", content: "Hello!" },
 ];
 
-export default () => (
-  <div className="h-96 border rounded-lg">
-    <ChatContainer messages={messages} />
-  </div>
-);
+<ChatContainer messages={messages} />;
 ```
 
-## 加载状态
+## 像素风格容器
 
-通过 `loading` 属性显示加载状态。
+为整个聊天窗口应用统一的像素主题。
 
-```tsx
-import { ChatContainer } from "@proton-ui/core";
-import { useState } from "react";
+### Retro Futurism
 
-const initialMessages = [
-  {
-    id: "1",
-    role: "user" as const,
-    content: "你好！",
-    timestamp: new Date(),
-  },
-];
-
-export default () => {
-  const [messages, setMessages] = useState(initialMessages);
-  const [loading, setLoading] = useState(false);
-
-  const handleSend = () => {
-    const newMessage = {
-      id: Date.now().toString(),
-      role: "user" as const,
-      content: "这是一条新消息",
-      timestamp: new Date(),
-    };
-    setMessages([...messages, newMessage]);
-
-    setLoading(true);
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: "assistant" as const,
-          content: "收到你的消息了！",
-          timestamp: new Date(),
-        },
-      ]);
-      setLoading(false);
-    }, 2000);
-  };
-
-  return (
-    <div className="space-y-4">
-      <div className="h-96 border rounded-lg">
-        <ChatContainer messages={messages} loading={loading} />
-      </div>
-      <button
-        onClick={handleSend}
-        className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-      >
-        发送消息
-      </button>
-    </div>
-  );
-};
-```
-
-## 自定义加载文本
-
-通过 `loadingText` 属性自定义加载提示文本。
+<div className="h-[400px] overflow-hidden relative">
+  <ChatContainer
+    pixelTheme="retro-futurism"
+    decoration="scanline"
+    messages={[
+      { id: "1", role: "system", content: "SYSTEM INITIALIZED" },
+      { id: "2", role: "assistant", content: "Ready for input." },
+      { id: "3", role: "user", content: "Execute protocol 7." },
+    ]}
+  />
+</div>
 
 ```tsx
-import { ChatContainer } from "@proton-ui/core";
-
-const messages = [
-  {
-    id: "1",
-    role: "user" as const,
-    content: "你好！",
-    timestamp: new Date(),
-  },
-];
-
-export default () => (
-  <div className="h-96 border rounded-lg">
-    <ChatContainer messages={messages} loading loadingText="AI 正在思考中..." />
-  </div>
-);
-```
-
-## 自动滚动
-
-ChatContainer 会自动滚动到最新消息，当用户手动滚动查看历史消息时，自动滚动会暂停。
-
-```tsx
-import { ChatContainer } from "@proton-ui/core";
-import { useState, useEffect } from "react";
-
-export default () => {
-  const [messages, setMessages] = useState([
-    {
-      id: "1",
-      role: "assistant" as const,
-      content: "欢迎！我会每秒发送一条新消息。",
-      timestamp: new Date(),
-    },
-  ]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          role: "assistant" as const,
-          content: `消息 ${prev.length + 1}`,
-          timestamp: new Date(),
-        },
-      ]);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="space-y-2">
-      <p className="text-sm text-gray-600">
-        提示：向上滚动查看历史消息时，自动滚动会暂停
-      </p>
-      <div className="h-96 border rounded-lg">
-        <ChatContainer messages={messages} />
-      </div>
-    </div>
-  );
-};
-```
-
-## 完整对话示例
-
-结合 MessageInput 组件实现完整的对话功能。
-
-```tsx
-import { ChatContainer, MessageInput } from "@proton-ui/core";
-import { useState } from "react";
-
-export default () => {
-  const [messages, setMessages] = useState([
-    {
-      id: "1",
-      role: "assistant" as const,
-      content: "你好！我是 AI 助手，有什么可以帮助你的吗？",
-      timestamp: new Date(),
-    },
-  ]);
-  const [loading, setLoading] = useState(false);
-
-  const handleSend = (content: string) => {
-    // 添加用户消息
-    const userMessage = {
-      id: Date.now().toString(),
-      role: "user" as const,
-      content,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMessage]);
-
-    // 模拟 AI 响应
-    setLoading(true);
-    setTimeout(() => {
-      const aiMessage = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant" as const,
-        content: `你说：${content}`,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-      setLoading(false);
-    }, 1000);
-  };
-
-  return (
-    <div className="flex flex-col h-[500px] border rounded-lg">
-      <div className="flex-1 overflow-hidden">
-        <ChatContainer messages={messages} loading={loading} />
-      </div>
-      <div className="border-t">
-        <MessageInput onSend={handleSend} disabled={loading} />
-      </div>
-    </div>
-  );
-};
-```
-
-## 虚拟滚动
-
-对于大量消息的场景，可以使用 `VirtualizedChatContainer` 组件实现虚拟滚动优化。
-
-```tsx
-import { VirtualizedChatContainer } from "@proton-ui/core";
-
-// 生成大量消息
-const messages = Array.from({ length: 1000 }, (_, i) => ({
-  id: i.toString(),
-  role: (i % 2 === 0 ? "user" : "assistant") as const,
-  content: `这是第 ${i + 1} 条消息`,
-  timestamp: new Date(Date.now() - (1000 - i) * 1000),
-}));
-
-export default () => (
-  <div className="h-96 border rounded-lg">
-    <VirtualizedChatContainer messages={messages} />
-  </div>
-);
+<ChatContainer
+  pixelTheme="retro-futurism"
+  decoration="scanline"
+  messages={messages}
+/>
 ```
 
 ## API
 
-### ChatContainer Props
-
-| 属性             | 说明             | 类型            | 默认值          |
-| ---------------- | ---------------- | --------------- | --------------- |
-| messages         | 消息列表         | `MessageData[]` | -               |
-| loading          | 是否显示加载状态 | `boolean`       | `false`         |
-| loadingText      | 加载提示文本     | `string`        | `'正在输入...'` |
-| className        | 容器自定义类名   | `string`        | -               |
-| messageClassName | 消息自定义类名   | `string`        | -               |
-
-### MessageData 类型
-
-```typescript
-interface MessageData {
-  id: string;
-  role: "user" | "assistant" | "system";
-  content: string;
-  timestamp?: Date;
-  avatar?: string;
-  streaming?: boolean;
-  renderContent?: (content: string) => ReactNode;
-  onStreamComplete?: () => void;
-}
-```
-
-## 自动滚动行为
-
-ChatContainer 实现了智能的自动滚动逻辑：
-
-1. **新消息自动滚动**：当有新消息添加时，自动滚动到底部
-2. **用户滚动检测**：检测用户是否手动向上滚动查看历史消息
-3. **暂停自动滚动**：用户向上滚动时，暂停自动滚动
-4. **恢复自动滚动**：用户滚动回底部时，恢复自动滚动
-
-这种设计确保了用户在查看历史消息时不会被新消息打断，同时在正常对话时能够自动跟随最新消息。
-
-## 无障碍性
-
-- 容器使用 `role="log"` 标记为日志区域
-- 提供 `aria-label` 描述容器用途
-- 使用 `aria-live="polite"` 实时通知新消息
-- 加载状态包含 `role="status"` 和 `aria-label`
-
-## 性能优化
-
-对于大量消息的场景，建议使用 `VirtualizedChatContainer`：
-
-- 只渲染可见区域的消息
-- 大幅减少 DOM 节点数量
-- 提升滚动性能
-- 降低内存占用
-
-详见 [虚拟滚动文档](/components/chat-container#虚拟滚动)。
-
-## 设计原则
-
-1. **智能的自动滚动**：在保证用户体验的前提下自动跟随最新消息
-2. **清晰的加载反馈**：通过动画和文本提供清晰的加载状态反馈
-3. **灵活的定制**：支持自定义样式和消息渲染
-4. **性能优先**：提供虚拟滚动方案应对大数据量场景
+| 属性       | 说明       | 类型            | 默认值  |
+| ---------- | ---------- | --------------- | ------- |
+| messages   | 消息列表   | `ChatMessage[]` | `[]`    |
+| loading    | 是否加载中 | `boolean`       | `false` |
+| pixelTheme | 像素主题   | `PixelTheme`    | -       |
+| decoration | 装饰效果   | `Decoration`    | -       |

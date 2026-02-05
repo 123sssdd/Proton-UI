@@ -1,0 +1,52 @@
+---
+title: 组件测试
+---
+
+export const TestBox = ({ children }) => (
+  <div
+    style={{
+      padding: "20px",
+      border: "2px solid #4CAF50",
+      borderRadius: "8px",
+      margin: "10px 0",
+      background: "#f0f9f0",
+    }}
+  >
+    {children}
+  </div>
+);
+
+# 组件测试
+
+这是一个测试页面，用于验证 MDX 环境是否正常。
+
+## 测试 1：内联组件定义
+
+<TestBox>
+  ✅ 如果你能看到这个绿色边框的盒子，说明 MDX 可以正常解析和渲染内联定义的组件！
+</TestBox>
+
+## 测试 2：简单的 HTML
+
+<div
+  style={{
+    padding: "20px",
+    border: "2px solid #2196F3",
+    borderRadius: "8px",
+    background: "#e3f2fd",
+  }}
+>
+  ✅ 如果你能看到这个蓝色边框的盒子，说明 MDX 可以正常渲染 HTML 元素！
+</div>
+
+## 测试 3：Markdown 语法
+
+这是一段普通的 Markdown 文本。
+
+- 列表项 1
+- 列表项 2
+- 列表项 3
+
+**粗体文本** 和 _斜体文本_
+
+如果以上内容都能正常显示，说明 MDX 环境是正常的。

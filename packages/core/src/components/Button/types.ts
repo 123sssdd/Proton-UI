@@ -34,4 +34,25 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * @default false
    */
   fullWidth?: boolean;
+
+  /**
+   * 像素风格主题
+   */
+  pixelTheme?:
+    | "retro-futurism"
+    | "neo-tokyo"
+    | "cyber-shrine"
+    | "dreamy-lofi"
+    | "vaporwave";
+
+  /**
+   * 是否启用辉光效果 (CRT/Neon)
+   * @default false
+   */
+  glow?: boolean;
+
+  /**
+   * 装饰效果
+   */
+  decoration?: "rivets" | "scanline" | "glitch" | "none";
 }

@@ -46,3 +46,6 @@ export const PropsTable: React.FC<PropsTableProps> = ({ data }) => {
     </div>
   );
 };
+
+// 添加 default export 以支持 Rspress globalComponents
+export default PropsTable;

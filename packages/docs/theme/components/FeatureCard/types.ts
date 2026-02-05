@@ -8,4 +8,8 @@ export interface FeatureCardProps {
   }[];
   highlights?: string[];
   className?: string;
+  badge?: {
+    text: string;
+    color?: string;
+  };
 }

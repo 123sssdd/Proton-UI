@@ -89,3 +89,6 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     </div>
   );
 };
+
+// 添加 default export 以支持 Rspress globalComponents
+export default CodeBlock;

@@ -1,0 +1,625 @@
+# MessageInput 消息输入框
+
+用于输入和发送消息，支持快捷键（Enter 发送，Shift+Enter 换行）、字符计数和加载状态。
+
+## 基础用法
+
+最简单的消息输入框。
+
+<DemoBox
+  title="基础消息输入框"
+  description="支持 Enter 发送，Shift+Enter 换行"
+  code={`import { MessageInput } from "@proton-ui/core";
+
+export default () => {
+  const handleSend = (message) => {
+    console.log("发送消息:", message);
+  };
+
+return (
+<div className="border rounded-lg overflow-hidden">
+<MessageInput
+        placeholder="输入消息..."
+        onSend={handleSend}
+      />
+</div>
+);
+};`}
+
+>
+
+  <div className="border rounded-lg overflow-hidden bg-white">
+    <MessageInput
+      placeholder="输入消息..."
+      onSend={(msg) => console.log("发送:", msg)}
+    />
+  </div>
+</DemoBox>
+
+<Callout type="tip" title="快捷键">
+  - **Enter**: 发送消息 - **Shift + Enter**: 换行
+</Callout>
+
+## 字符计数
+
+通过 `maxLength` 属性限制输入长度并显示字符计数。
+
+<DemoBox
+  title="字符计数"
+  description="限制最多 100 个字符"
+  code={`import { MessageInput } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="border rounded-lg overflow-hidden">
+      <MessageInput
+        placeholder="输入消息（最多 100 字）..."
+        maxLength={100}
+        onSend={(msg) => console.log("发送:", msg)}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="border rounded-lg overflow-hidden bg-white">
+    <MessageInput
+      placeholder="输入消息（最多 100 字）..."
+      maxLength={100}
+      onSend={(msg) => console.log("发送:", msg)}
+    />
+  </div>
+</DemoBox>
+
+## 加载状态
+
+发送消息时显示加载状态，防止重复发送。
+
+<DemoBox
+  title="加载状态"
+  description="发送按钮显示加载动画"
+  code={`import { MessageInput } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [loading, setLoading] = useState(false);
+
+const handleSend = (message) => {
+setLoading(true);
+// 模拟发送
+setTimeout(() => {
+console.log("发送:", message);
+setLoading(false);
+}, 2000);
+};
+
+return (
+<div className="border rounded-lg overflow-hidden">
+<MessageInput
+        placeholder="输入消息..."
+        loading={loading}
+        onSend={handleSend}
+      />
+</div>
+);
+};`}
+
+>
+
+  <div className="border rounded-lg overflow-hidden bg-white">
+    <MessageInput
+      placeholder="试试发送消息..."
+      loading={false}
+      onSend={(msg) => {
+        console.log("发送:", msg);
+        alert(`发送消息: ${msg}`);
+      }}
+    />
+  </div>
+</DemoBox>
+
+## 禁用状态
+
+禁用输入框和发送按钮。
+
+<DemoBox
+  title="禁用状态"
+  code={`import { MessageInput } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="border rounded-lg overflow-hidden">
+      <MessageInput
+        placeholder="输入框已禁用"
+        disabled
+        onSend={(msg) => console.log("发送:", msg)}
+      />
+    </div>
+  );
+};`}
+>
+  <div className="border rounded-lg overflow-hidden bg-white">
+    <MessageInput
+      placeholder="输入框已禁用"
+      disabled
+      onSend={(msg) => console.log("发送:", msg)}
+    />
+  </div>
+</DemoBox>
+
+## 完整示例
+
+结合所有功能的完整对话示例。
+
+<DemoBox
+  title="完整对话示例"
+  description="包含消息列表、输入框、加载状态"
+  code={`import { MessageInput } from "@proton-ui/core";
+import { useState } from "react";
+
+export default () => {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+const handleSend = (message) => {
+setMessages((prev) => [...prev, \`你: \${message}\`]);
+
+    // 模拟 AI 回复
+    setLoading(true);
+    setTimeout(() => {
+      setMessages((prev) => [...prev, \`AI: 收到你的消息"\${message}"\`]);
+      setLoading(false);
+    }, 1000);
+
+};
+
+return (
+<div className="border rounded-lg overflow-hidden bg-white">
+{/* 消息列表 */}
+<div className="h-48 overflow-y-auto p-4 space-y-2 bg-gray-50">
+{messages.length === 0 ? (
+<p className="text-sm text-gray-400 text-center py-8">
+还没有消息，试试发送一条吧！
+</p>
+) : (
+messages.map((msg, index) => (
+<div
+key={index}
+className={\`text-sm p-2 rounded \${
+msg.startsWith("你:")
+? "bg-blue-100 text-blue-900 ml-auto max-w-xs"
+: "bg-white text-gray-900 mr-auto max-w-xs"
+}\`} >
+{msg}
+</div>
+))
+)}
+</div>
+{/* 输入框 */}
+<MessageInput
+        placeholder="输入消息..."
+        loading={loading}
+        onSend={handleSend}
+      />
+</div>
+);
+};`}
+
+>
+
+  <MessageInputDemo />
+</DemoBox>
+
+## 自定义按钮文本
+
+可以自定义发送按钮的文本。
+
+<DemoBox
+  title="自定义按钮文本"
+  code={`import { MessageInput } from "@proton-ui/core";
+
+export default () => {
+  return (
+    <div className="space-y-4">
+      <div className="border rounded-lg overflow-hidden">
+        <MessageInput
+          placeholder="输入消息..."
+          sendButtonText="发送"
+          onSend={(msg) => console.log(msg)}
+        />
+      </div>
+      <div className="border rounded-lg overflow-hidden">
+        <MessageInput
+          placeholder="输入消息..."
+          sendButtonText="提交"
+          onSend={(msg) => console.log(msg)}
+        />
+      </div>
+      <div className="border rounded-lg overflow-hidden">
+        <MessageInput
+          placeholder="输入消息..."
+          sendButtonText="→"
+          onSend={(msg) => console.log(msg)}
+        />
+      </div>
+    </div>
+  );
+};`}
+>
+  <div className="space-y-4">
+    <div className="border rounded-lg overflow-hidden bg-white">
+      <MessageInput
+        placeholder="输入消息..."
+        sendButtonText="发送"
+        onSend={(msg) => console.log(msg)}
+      />
+    </div>
+    <div className="border rounded-lg overflow-hidden bg-white">
+      <MessageInput
+        placeholder="输入消息..."
+        sendButtonText="提交"
+        onSend={(msg) => console.log(msg)}
+      />
+    </div>
+    <div className="border rounded-lg overflow-hidden bg-white">
+      <MessageInput
+        placeholder="输入消息..."
+        sendButtonText="→"
+        onSend={(msg) => console.log(msg)}
+      />
+    </div>
+  </div>
+</DemoBox>
+
+## API
+
+### MessageInput Props
+
+<PropsTable
+  data={[
+    {
+      name: "placeholder",
+      type: "string",
+      required: false,
+      defaultValue: '"输入消息..."',
+      description: "输入框占位符文本",
+    },
+    {
+      name: "sendButtonText",
+      type: "string",
+      required: false,
+      defaultValue: '"发送"',
+      description: "发送按钮文本",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否禁用输入框和按钮",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否显示加载状态",
+    },
+    {
+      name: "maxLength",
+      type: "number",
+      required: false,
+      description: "最大字符数，设置后会显示字符计数",
+    },
+    {
+      name: "onSend",
+      type: "(message: string) => void",
+      required: false,
+      description: "发送消息回调函数",
+    },
+    {
+      name: "onChange",
+      type: "(value: string) => void",
+      required: false,
+      description: "输入内容变化回调函数",
+    },
+    {
+      name: "className",
+      type: "string",
+      required: false,
+      description: "自定义容器类名",
+    },
+  ]}
+/>
+
+## 使用场景
+
+### 1. AI 对话界面
+
+```tsx
+import { MessageInput, ChatContainer } from "@proton-ui/core";
+import { useState } from "react";
+
+export default function ChatApp() {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSend = async (message) => {
+    // 添加用户消息
+    setMessages((prev) => [
+      ...prev,
+      { id: Date.now(), role: "user", content: message },
+    ]);
+
+    // 调用 AI API
+    setLoading(true);
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      body: JSON.stringify({ message }),
+    });
+    const data = await response.json();
+
+    // 添加 AI 回复
+    setMessages((prev) => [
+      ...prev,
+      { id: Date.now() + 1, role: "assistant", content: data.reply },
+    ]);
+    setLoading(false);
+  };
+
+  return (
+    <div className="h-screen flex flex-col">
+      <div className="flex-1 overflow-hidden">
+        <ChatContainer messages={messages} loading={loading} />
+      </div>
+      <MessageInput onSend={handleSend} loading={loading} />
+    </div>
+  );
+}
+```
+
+### 2. 表单提交
+
+```tsx
+import { MessageInput } from "@proton-ui/core";
+import { useState } from "react";
+
+export default function FeedbackForm() {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (feedback) => {
+    setSubmitting(true);
+    await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify({ feedback }),
+    });
+    setSubmitting(false);
+    alert("反馈已提交！");
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <h2 className="text-xl font-bold mb-4">提交反馈</h2>
+      <MessageInput
+        placeholder="请输入您的反馈..."
+        sendButtonText="提交"
+        maxLength={500}
+        loading={submitting}
+        onSend={handleSubmit}
+      />
+    </div>
+  );
+}
+```
+
+### 3. 评论系统
+
+```tsx
+import { MessageInput } from "@proton-ui/core";
+import { useState } from "react";
+
+export default function CommentSection() {
+  const [comments, setComments] = useState([]);
+
+  const handleComment = (content) => {
+    const newComment = {
+      id: Date.now(),
+      author: "当前用户",
+      content,
+      timestamp: new Date(),
+    };
+    setComments((prev) => [...prev, newComment]);
+  };
+
+  return (
+    <div>
+      <h3 className="text-lg font-bold mb-4">评论</h3>
+      <div className="space-y-4 mb-4">
+        {comments.map((comment) => (
+          <div key={comment.id} className="border-l-4 border-blue-500 pl-4">
+            <p className="font-medium">{comment.author}</p>
+            <p className="text-gray-700">{comment.content}</p>
+            <p className="text-xs text-gray-500">
+              {comment.timestamp.toLocaleString()}
+            </p>
+          </div>
+        ))}
+      </div>
+      <MessageInput
+        placeholder="写下你的评论..."
+        sendButtonText="发表评论"
+        onSend={handleComment}
+      />
+    </div>
+  );
+}
+```
+
+## 无障碍访问
+
+MessageInput 组件遵循无障碍访问最佳实践：
+
+### ARIA 属性
+
+- 输入框使用 `aria-label` 描述用途
+- 字符计数使用 `aria-live="polite"` 实时播报
+- 发送按钮使用 `aria-label` 描述操作
+
+### 键盘导航
+
+- **Tab**: 在输入框和按钮之间切换焦点
+- **Enter**: 发送消息
+- **Shift + Enter**: 在输入框中换行
+- **Space**: 激活发送按钮（当按钮获得焦点时）
+
+### 状态反馈
+
+- 禁用状态使用 `disabled` 属性和视觉样式
+- 加载状态在按钮上显示加载动画
+- 字符计数实时更新并播报
+
+<Callout type="info" title="屏幕阅读器">
+  MessageInput 对屏幕阅读器友好，会正确播报输入框状态、字符计数和按钮状态。
+</Callout>
+
+## 最佳实践
+
+### 1. 防止空消息
+
+组件内置了空消息检测，只有非空消息才能发送：
+
+```tsx
+<MessageInput
+  onSend={(message) => {
+    // message 已经过 trim() 处理，不会是空字符串
+    console.log("发送:", message);
+  }}
+/>
+```
+
+### 2. 加载状态管理
+
+发送消息时设置加载状态，防止重复发送：
+
+```tsx
+const [loading, setLoading] = useState(false);
+
+const handleSend = async (message) => {
+  setLoading(true);
+  try {
+    await sendMessageToAPI(message);
+  } finally {
+    setLoading(false);
+  }
+};
+
+<MessageInput loading={loading} onSend={handleSend} />;
+```
+
+### 3. 字符限制
+
+对于有长度限制的场景，使用 `maxLength`：
+
+```tsx
+<MessageInput maxLength={500} onSend={handleSend} />
+```
+
+### 4. 输入监听
+
+使用 `onChange` 监听输入变化，实现实时功能：
+
+```tsx
+const [isTyping, setIsTyping] = useState(false);
+
+<MessageInput
+  onChange={(value) => {
+    setIsTyping(value.length > 0);
+    // 发送"正在输入"状态到服务器
+    socket.emit("typing", { isTyping: value.length > 0 });
+  }}
+  onSend={handleSend}
+/>;
+```
+
+## 设计令牌
+
+MessageInput 使用以下 CSS 变量：
+
+- 边框颜色：`border-gray-200` / `dark:border-gray-700`
+- 背景色：`bg-white` / `dark:bg-gray-900`
+- 输入框背景：`bg-white` / `dark:bg-gray-800`
+- 文本颜色：`text-gray-900` / `dark:text-gray-100`
+- 占位符颜色：`text-gray-400` / `dark:text-gray-500`
+- 焦点环：`ring-blue-500`
+
+## 相关组件
+
+- [ChatContainer](/components/chat/chat-container) - 对话容器
+- [Message](/components/chat/message) - 消息组件
+- [Button](/components/button) - 按钮组件
+
+## 常见问题
+
+### 如何实现自动聚焦？
+
+使用 ref 控制输入框焦点：
+
+```tsx
+import { useRef, useEffect } from "react";
+
+const inputRef = useRef(null);
+
+useEffect(() => {
+  inputRef.current?.focus();
+}, []);
+
+// 注意：MessageInput 目前不支持 ref，需要自己实现或提交 PR
+```
+
+### 如何实现多行输入？
+
+MessageInput 的 textarea 会自动根据内容调整高度。使用 Shift+Enter 可以换行。
+
+### 如何实现输入建议？
+
+可以在 MessageInput 上方添加建议列表：
+
+```tsx
+<div className="relative">
+  {suggestions.length > 0 && (
+    <div className="absolute bottom-full mb-2 w-full bg-white border rounded-lg shadow-lg">
+      {suggestions.map((suggestion) => (
+        <button
+          key={suggestion}
+          onClick={() => handleSelectSuggestion(suggestion)}
+          className="w-full text-left px-4 py-2 hover:bg-gray-100"
+        >
+          {suggestion}
+        </button>
+      ))}
+    </div>
+  )}
+  <MessageInput onSend={handleSend} />
+</div>
+```
+
+### 如何实现文件上传？
+
+可以在 MessageInput 旁边添加文件上传按钮：
+
+```tsx
+<div className="flex gap-2 p-4 border-t">
+  <input
+    type="file"
+    ref={fileInputRef}
+    className="hidden"
+    onChange={handleFileSelect}
+  />
+  <button
+    onClick={() => fileInputRef.current?.click()}
+    className="px-3 py-2 border rounded-lg hover:bg-gray-50"
+  >
+    📎
+  </button>
+  <MessageInput onSend={handleSend} className="flex-1" />
+</div>
+```

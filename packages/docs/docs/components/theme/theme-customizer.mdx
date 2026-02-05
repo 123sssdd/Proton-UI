@@ -1,0 +1,295 @@
+# 主题定制器
+
+使用交互式主题定制器，你可以轻松创建自己的主题配色方案，实时预览效果，并导出配置代码。
+
+## 交互式定制器
+
+<ThemeCustomizer />
+
+## 使用说明
+
+### 1. 选择预设模板
+
+从 6 个精心设计的预设主题中选择一个作为起点：
+
+- **💎 默认**: 经典蓝色主题，适合大多数场景
+- **🌟 Retro Futurism**: 霓虹青 + 紫色，赛博朋克风格
+- **🌸 Neo Tokyo Night**: 樱粉 + 霓虹青，日系夜景风格
+- **⛩️ Cyber Shrine**: 金色 + 神社红，神圣庄重风格
+- **☁️ Dreamy Lo-fi**: 抹茶绿 + 淡樱粉，温暖舒适风格
+- **🌊 Vaporwave**: 霓虹粉 + 赛博青，蒸汽波美学
+
+### 2. 自定义颜色
+
+点击颜色选择器或直接输入十六进制颜色值来调整每个颜色：
+
+- **主要颜色**: 用于主要按钮、链接等核心元素
+- **次要颜色**: 用于次要按钮、辅助元素
+- **强调色**: 用于高亮、特殊状态
+- **背景色**: 页面主要背景色
+- **文本颜色**: 主要文本颜色
+- **边框颜色**: 边框和分隔线颜色
+- **成功状态**: 成功提示的颜色
+- **警告状态**: 警告提示的颜色
+- **错误状态**: 错误提示的颜色
+- **信息状态**: 信息提示的颜色
+
+### 3. 实时预览
+
+在预览区域查看你的主题应用到各种组件上的效果：
+
+- 按钮组件（Primary、Secondary、Accent）
+- 输入框组件
+- 卡片组件
+- 状态标签（Success、Warning、Error、Info）
+
+### 4. 导出配置
+
+满意后，点击导出按钮将配置复制到剪贴板：
+
+#### 导出 TypeScript 配置
+
+```typescript
+import type { ThemeConfig } from "@proton-ui/core";
+
+const customTheme: Partial<ThemeConfig> = {
+  colors: {
+    primary: "#4ECDC4",
+    secondary: "#667EEA",
+    accent: "#FFB86C",
+    background: "#1A1D2E",
+    text: "#FFFFFF",
+    border: "#2C3E50",
+    success: "#7FD99F",
+    warning: "#FFB86C",
+    error: "#FF6B9D",
+    info: "#4ECDC4",
+  },
+};
+
+export default customTheme;
+```
+
+#### 导出 CSS 变量
+
+```css
+:root {
+  --color-primary: #4ecdc4;
+  --color-secondary: #667eea;
+  --color-accent: #ffb86c;
+  --color-background: #1a1d2e;
+  --color-text: #ffffff;
+  --color-border: #2c3e50;
+  --color-success: #7fd99f;
+  --color-warning: #ffb86c;
+  --color-error: #ff6b9d;
+  --color-info: #4ecdc4;
+}
+```
+
+## 应用自定义主题
+
+### 方法 1: 使用 ThemeProvider
+
+```tsx
+import { ThemeProvider } from "@proton-ui/core";
+import customTheme from "./customTheme";
+
+function App() {
+  return (
+    <ThemeProvider theme={customTheme}>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+### 方法 2: 使用 CSS 变量
+
+将导出的 CSS 变量添加到你的全局样式文件中：
+
+```css
+/* styles/theme.css */
+:root {
+  --color-primary: #4ecdc4;
+  --color-secondary: #667eea;
+  /* ... 其他变量 */
+}
+```
+
+然后在你的应用入口导入：
+
+```tsx
+import "./styles/theme.css";
+```
+
+### 方法 3: 动态切换主题
+
+```tsx
+import { usePixelTheme } from "@proton-ui/core";
+
+function ThemeToggle() {
+  const { setTheme } = usePixelTheme();
+
+  const applyCustomTheme = () => {
+    setTheme({
+      colors: {
+        primary: "#4ECDC4",
+        secondary: "#667EEA",
+        // ... 其他颜色
+      },
+    });
+  };
+
+  return <button onClick={applyCustomTheme}>应用自定义主题</button>;
+}
+```
+
+## 主题设计建议
+
+### 颜色对比度
+
+确保文本和背景之间有足够的对比度，以满足可访问性标准（WCAG AA）：
+
+- **正常文本**: 对比度 ≥ 4.5:1
+- **大文本**: 对比度 ≥ 3:1
+- **交互元素**: 对比度 ≥ 3:1
+
+<Callout type="tip" title="使用对比度检查工具">
+  推荐使用 Chrome DevTools 的对比度检查器或在线工具如 [WebAIM Contrast
+  Checker](https://webaim.org/resources/contrastchecker/) 来验证你的配色方案。
+</Callout>
+
+### 颜色数量
+
+遵循"限制色盘"原则，保持主题简洁：
+
+- **主色**: 1-2 个（primary, secondary）
+- **强调色**: 1 个（accent）
+- **状态色**: 4 个（success, warning, error, info）
+- **中性色**: 2-3 个（background, text, border）
+
+<Callout type="warning" title="避免过多颜色">
+  过多的颜色会让界面显得杂乱无章。坚持使用 6-12 种颜色，保持视觉一致性。
+</Callout>
+
+### 主题一致性
+
+确保你的主题在不同组件上保持一致：
+
+1. **按钮**: 使用 primary 作为主要操作，secondary 作为次要操作
+2. **输入框**: 使用 border 作为默认边框，primary 作为焦点状态
+3. **状态提示**: 始终使用对应的状态色（success, warning, error, info）
+4. **文本层级**: 使用 text 的不同透明度表示层级（100%, 80%, 60%）
+
+### 暗色主题建议
+
+创建暗色主题时，注意以下几点：
+
+- **背景色**: 使用深色但不是纯黑（#1A1D2E 比 #000000 更好）
+- **文本色**: 使用浅色但不是纯白（#F5F5F5 比 #FFFFFF 更好）
+- **对比度**: 暗色主题需要更高的对比度
+- **饱和度**: 降低颜色饱和度，避免过于刺眼
+
+### 亮色主题建议
+
+创建亮色主题时，注意以下几点：
+
+- **背景色**: 使用浅色但不是纯白（#F5F1E8 比 #FFFFFF 更温暖）
+- **文本色**: 使用深色但不是纯黑（#2C2C2C 比 #000000 更柔和）
+- **阴影**: 使用柔和的阴影增加层次感
+- **留白**: 充分利用留白，营造舒适的视觉体验
+
+## 主题示例
+
+### 示例 1: 科技蓝主题
+
+```typescript
+const techBlueTheme = {
+  colors: {
+    primary: "#0066FF",
+    secondary: "#00CCFF",
+    accent: "#FF6600",
+    background: "#0A0E27",
+    text: "#FFFFFF",
+    border: "#1A2332",
+    success: "#00FF88",
+    warning: "#FFAA00",
+    error: "#FF3366",
+    info: "#00CCFF",
+  },
+};
+```
+
+### 示例 2: 自然绿主题
+
+```typescript
+const natureGreenTheme = {
+  colors: {
+    primary: "#2D6A4F",
+    secondary: "#52B788",
+    accent: "#95D5B2",
+    background: "#F8F9FA",
+    text: "#1B4332",
+    border: "#D8F3DC",
+    success: "#40916C",
+    warning: "#F4A261",
+    error: "#E63946",
+    info: "#2D6A4F",
+  },
+};
+```
+
+### 示例 3: 优雅紫主题
+
+```typescript
+const elegantPurpleTheme = {
+  colors: {
+    primary: "#7C3AED",
+    secondary: "#A78BFA",
+    accent: "#EC4899",
+    background: "#FAFAFA",
+    text: "#1F2937",
+    border: "#E5E7EB",
+    success: "#10B981",
+    warning: "#F59E0B",
+    error: "#EF4444",
+    info: "#7C3AED",
+  },
+};
+```
+
+## 常见问题
+
+<Callout type="info" title="如何保存我的主题？">
+  将导出的配置保存为单独的文件（如
+  `customTheme.ts`），然后在项目中导入使用。建议将主题文件放在 `src/themes/`
+  目录下统一管理。
+</Callout>
+
+<Callout type="warning" title="主题切换后样式不生效？">
+  确保： 1. 已正确导入 Proton UI 的样式文件 2. ThemeProvider 包装了整个应用 3.
+  组件使用了主题令牌而不是硬编码颜色
+</Callout>
+
+<Callout type="tip" title="如何支持多主题切换？">
+创建多个主题配置文件，使用 `usePixelTheme` Hook 的 `setTheme` 方法动态切换：
+
+```typescript
+const themes = {
+  light: lightTheme,
+  dark: darkTheme,
+  custom: customTheme,
+};
+
+const { setTheme } = usePixelTheme();
+setTheme(themes.dark);
+```
+
+</Callout>
+
+## 相关资源
+
+- [主题画廊](/components/theme/theme-gallery) - 查看预设主题
+- [设计令牌](/guide/design-tokens) - 了解设计令牌系统
+- [组件库概览](/guide/getting-started) - 快速开始使用 Proton UI

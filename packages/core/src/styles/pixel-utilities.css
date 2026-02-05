@@ -1,0 +1,347 @@
+/* Pixel Art Utility Classes */
+/* Migrated from apps/playground/src/index.css */
+
+@tailwind components;
+
+@layer components {
+  /* Pixel Card */
+  .pixel-card {
+    background-color: var(--pixel-bg-secondary);
+    border: 2px solid var(--pixel-border);
+    box-shadow: var(--pixel-shadow);
+    transition: transform 0.1s var(--pixel-ease);
+  }
+
+  .pixel-card:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.5);
+    border-color: var(--pixel-accent-cyan);
+  }
+
+  /* Pixel Button (Base Class - prefer using Button component) */
+  .pixel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-family: var(--font-pixel);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: var(--pixel-bg-tertiary);
+    border: 2px solid var(--pixel-text-primary);
+    box-shadow: var(--pixel-shadow-sm);
+    color: var(--pixel-text-primary);
+    position: relative;
+    transition: all 0.1s;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .pixel-btn:hover {
+    background-color: var(--pixel-accent-cyan);
+    color: var(--pixel-bg-primary);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .pixel-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+
+  /* Pixel Input (Base Class) */
+  .pixel-input {
+    appearance: none;
+    background-color: var(--pixel-bg-primary);
+    border: 2px solid var(--pixel-border);
+    color: var(--pixel-text-primary);
+    font-family: monospace;
+    padding: 8px 12px;
+    width: 100%;
+    box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
+  }
+
+  .pixel-input:focus {
+    outline: none;
+    border-color: var(--pixel-accent-cyan);
+    box-shadow: 0 0 0 2px rgba(15, 240, 252, 0.2);
+    background-color: #1a1f35;
+  }
+
+  /* Scrollbar Utilities */
+  .pixel-scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  .pixel-scrollbar::-webkit-scrollbar-track {
+    background: var(--pixel-bg-primary);
+    border-left: 2px solid var(--pixel-border);
+  }
+  .pixel-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--pixel-bg-tertiary);
+    border: 2px solid var(--pixel-bg-primary);
+    box-shadow:
+      inset -2px -2px 0px 0px rgba(0, 0, 0, 0.3),
+      inset 2px 2px 0px 0px rgba(255, 255, 255, 0.1);
+  }
+  .pixel-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--pixel-accent-cyan);
+  }
+
+  /* --- Pixel Effects (Ported) --- */
+
+  /* Text Glows */
+  .neon-glow-cyan {
+    text-shadow:
+      0 0 5px rgba(15, 240, 252, 0.5),
+      0 0 10px rgba(15, 240, 252, 0.3);
+  }
+  .neon-glow-pink {
+    text-shadow:
+      0 0 5px rgba(255, 158, 205, 0.5),
+      0 0 10px rgba(255, 158, 205, 0.3);
+  }
+  .neon-glow-purple {
+    text-shadow:
+      0 0 5px rgba(157, 78, 221, 0.5),
+      0 0 10px rgba(157, 78, 221, 0.3);
+  }
+  .neon-glow-gold {
+    text-shadow:
+      0 0 5px rgba(255, 215, 0, 0.5),
+      0 0 10px rgba(255, 215, 0, 0.3);
+  }
+  .neon-glow-green {
+    text-shadow:
+      0 0 5px rgba(123, 160, 91, 0.5),
+      0 0 10px rgba(123, 160, 91, 0.3);
+  }
+
+  /* Box Glows */
+  .neon-glow-cyan-box {
+    box-shadow:
+      0 0 5px rgba(15, 240, 252, 0.3),
+      0 0 10px rgba(15, 240, 252, 0.1),
+      inset 0 0 2px rgba(15, 240, 252, 0.5);
+    border: 1px solid rgba(15, 240, 252, 0.5);
+  }
+  .neon-glow-pink-box {
+    box-shadow:
+      0 0 5px rgba(255, 158, 205, 0.3),
+      0 0 10px rgba(255, 158, 205, 0.1),
+      inset 0 0 2px rgba(255, 158, 205, 0.5);
+    border: 1px solid rgba(255, 158, 205, 0.5);
+  }
+  .neon-glow-purple-box {
+    box-shadow:
+      0 0 5px rgba(157, 78, 221, 0.3),
+      0 0 10px rgba(157, 78, 221, 0.1),
+      inset 0 0 2px rgba(157, 78, 221, 0.5);
+    border: 1px solid rgba(157, 78, 221, 0.5);
+  }
+  .neon-glow-gold-box {
+    box-shadow:
+      0 0 5px rgba(255, 215, 0, 0.3),
+      0 0 10px rgba(255, 215, 0, 0.1),
+      inset 0 0 2px rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+  }
+  .neon-glow-green-box {
+    box-shadow:
+      0 0 5px rgba(123, 160, 91, 0.3),
+      0 0 10px rgba(123, 160, 91, 0.1),
+      inset 0 0 2px rgba(123, 160, 91, 0.5);
+    border: 1px solid rgba(123, 160, 91, 0.5);
+  }
+
+  /* Intensity Boxes */
+  .neon-glow-subtle-box {
+    box-shadow: 0 0 2px rgba(15, 240, 252, 0.3);
+  }
+  .neon-glow-medium-box {
+    box-shadow: 0 0 8px rgba(15, 240, 252, 0.5);
+  }
+  .neon-glow-strong-box {
+    box-shadow:
+      0 0 15px rgba(15, 240, 252, 0.8),
+      0 0 30px rgba(15, 240, 252, 0.4);
+  }
+
+  .neon-glow-subtle {
+    text-shadow: 0 0 2px currentColor;
+  }
+  .neon-glow-medium {
+    text-shadow: 0 0 8px currentColor;
+  }
+  .neon-glow-strong {
+    text-shadow:
+      0 0 15px currentColor,
+      0 0 30px currentColor;
+  }
+
+  /* Glass Morphism */
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .glass-morphism-subtle {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .glass-morphism-strong {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  /* Colored Glass */
+  .glass-morphism-cyan {
+    background: rgba(15, 240, 252, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(15, 240, 252, 0.2);
+  }
+  .glass-morphism-pink {
+    background: rgba(255, 158, 205, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 158, 205, 0.2);
+  }
+  .glass-morphism-purple {
+    background: rgba(157, 78, 221, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(157, 78, 221, 0.2);
+  }
+
+  /* Animations */
+  @keyframes neon-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.8;
+      filter: brightness(1.2);
+    }
+  }
+  .neon-pulse {
+    animation: neon-pulse 2s infinite;
+  }
+
+  @keyframes neon-flicker {
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    24%,
+    55% {
+      opacity: 0.5;
+    }
+  }
+  .neon-flicker {
+    animation: neon-flicker 3s infinite;
+  }
+
+  @keyframes neon-breathe {
+    0%,
+    100% {
+      box-shadow: 0 0 5px rgba(157, 78, 221, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(157, 78, 221, 0.6);
+    }
+  }
+  .neon-breathe {
+    animation: neon-breathe 4s infinite;
+  }
+
+  /* Dithering Patterns (CSS Patterns) */
+  .dithering-2x2-25 {
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px
+    );
+    background-size: 4px 4px;
+  }
+  .dithering-2x2-50 {
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px
+    );
+    background-size: 2px 2px;
+  }
+  .dithering-2x2-75 {
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    );
+    background-size: 2px 2px;
+  }
+  .dithering-2x2-100 {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Generic Dithering for 4x4 simulation */
+  .dithering-4x4-12 {
+    opacity: 0.125;
+    background: currentColor;
+  }
+  .dithering-4x4-25 {
+    opacity: 0.25;
+    background: currentColor;
+  }
+  .dithering-4x4-37 {
+    opacity: 0.375;
+    background: currentColor;
+  }
+  .dithering-4x4-50 {
+    opacity: 0.5;
+    background: currentColor;
+  }
+  .dithering-4x4-62 {
+    opacity: 0.625;
+    background: currentColor;
+  }
+  .dithering-4x4-75 {
+    opacity: 0.75;
+    background: currentColor;
+  }
+  .dithering-4x4-87 {
+    opacity: 0.875;
+    background: currentColor;
+  }
+  .dithering-4x4-100 {
+    opacity: 1;
+    background: currentColor;
+  }
+
+  /* Dithering Masks/Gradients */
+  .dithering-bg-gradient {
+    background: linear-gradient(45deg, #1a1f35, #2d3453);
+    position: relative;
+    overflow: hidden;
+  }
+  .dithering-bg-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
+    background-size: 4px 4px;
+    opacity: 0.5;
+  }
+}

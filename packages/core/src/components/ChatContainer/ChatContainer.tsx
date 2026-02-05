@@ -33,6 +33,8 @@ export function ChatContainer({
   messageMaxWidth = 70,
   className,
   messageClassName,
+  pixelTheme,
+  decoration,
 }: ChatContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
@@ -94,141 +96,99 @@ export function ChatContainer({
     if (renderLoadingIndicator) {
       return renderLoadingIndicator();
     }
+    return (
+      <div className="flex gap-1">
+        <span
+          className="w-1.5 h-1.5 bg-current animate-bounce"
+          style={{ animationDelay: "0ms" }}
+        />
+        <span
+          className="w-1.5 h-1.5 bg-current animate-bounce"
+          style={{ animationDelay: "150ms" }}
+        />
+        <span
+          className="w-1.5 h-1.5 bg-current animate-bounce"
+          style={{ animationDelay: "300ms" }}
+        />
+      </div>
+    );
+  };
 
-    switch (loadingIndicator) {
-      case "dots":
-        return (
-          <div className="flex gap-1">
-            <span
-              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-              style={{ animationDelay: "0ms" }}
-            />
-            <span
-              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-              style={{ animationDelay: "150ms" }}
-            />
-            <span
-              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-              style={{ animationDelay: "300ms" }}
-            />
-          </div>
-        );
-
-      case "pulse":
-        return (
-          <div className="flex gap-1">
-            <span className="w-3 h-3 bg-gray-400 rounded-full animate-pulse" />
-          </div>
-        );
-
-      case "spinner":
-        return (
-          <svg
-            className="w-5 h-5 animate-spin text-gray-400"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-        );
-
-      case "bars":
-        return (
-          <div className="flex gap-1 items-end h-5">
-            <span
-              className="w-1 bg-gray-400 rounded-full animate-pulse"
-              style={{
-                height: "60%",
-                animationDelay: "0ms",
-                animationDuration: "0.6s",
-              }}
-            />
-            <span
-              className="w-1 bg-gray-400 rounded-full animate-pulse"
-              style={{
-                height: "100%",
-                animationDelay: "150ms",
-                animationDuration: "0.6s",
-              }}
-            />
-            <span
-              className="w-1 bg-gray-400 rounded-full animate-pulse"
-              style={{
-                height: "80%",
-                animationDelay: "300ms",
-                animationDuration: "0.6s",
-              }}
-            />
-          </div>
-        );
-
-      case "wave":
-        return (
-          <div className="flex gap-0.5 items-center h-5">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <span
-                key={i}
-                className="w-0.5 h-3 bg-gray-400 rounded-full"
-                style={{
-                  animation: "wave 1.2s ease-in-out infinite",
-                  animationDelay: `${i * 0.1}s`,
-                }}
-              />
-            ))}
-          </div>
-        );
-
+  // Theme container styles
+  const getContainerStyles = () => {
+    if (!pixelTheme) return {};
+    switch (pixelTheme) {
+      case "retro-futurism":
+        return {
+          backgroundColor: "#161B33", // Secondary BG
+          borderColor: "#333355",
+        };
+      case "neo-tokyo":
+        return {
+          background: "rgba(22, 27, 51, 0.4)",
+          backdropFilter: "blur(10px)",
+          borderColor: "#FF6B9D",
+          boxShadow: "0 0 20px rgba(255, 107, 157, 0.2)",
+        };
       default:
-        return null;
+        return {};
     }
   };
+
+  const themeContainerStyle = getContainerStyles();
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "flex flex-col gap-2 p-4 overflow-y-auto",
-        "bg-white dark:bg-gray-900",
+        "flex flex-col gap-4 p-4 overflow-y-auto border-2 relative",
+        "font-pixel scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent",
+        !pixelTheme &&
+          "bg-[var(--pixel-bg-primary)] border-[var(--pixel-border)] scrollbar-thumb-[var(--pixel-bg-tertiary)]",
         className
       )}
+      style={themeContainerStyle}
       role="log"
       aria-label="对话消息列表"
       aria-live="polite"
       onScroll={handleScroll}
     >
-      {/* 消息列表 */}
-      {messages.map((message) => (
-        <Message
-          key={message.id}
-          role={message.role}
-          content={message.content}
-          timestamp={message.timestamp}
-          avatar={message.avatar}
-          streaming={message.streaming}
-          renderContent={message.renderContent}
-          onStreamComplete={message.onStreamComplete}
-          maxWidth={messageMaxWidth}
-          className={messageClassName}
+      {/* Container Decorations */}
+      {(decoration === "scanline" || pixelTheme === "retro-futurism") && (
+        <div
+          className="absolute inset-0 pointer-events-none opacity-5 sticky top-0 h-full w-full"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(78, 205, 196, 0.3) 2px, rgba(78, 205, 196, 0.3) 4px)",
+            zIndex: 0,
+          }}
         />
-      ))}
+      )}
+
+      {/* 消息列表 */}
+      <div className="relative z-10 flex flex-col">
+        {messages.map((message) => (
+          <Message
+            key={message.id}
+            role={message.role}
+            content={message.content}
+            timestamp={message.timestamp}
+            avatar={message.avatar}
+            streaming={message.streaming}
+            renderContent={message.renderContent}
+            onStreamComplete={message.onStreamComplete}
+            maxWidth={messageMaxWidth}
+            className={messageClassName}
+            pixelTheme={pixelTheme} // Pass theme down
+            decoration={decoration} // Pass decoration down
+          />
+        ))}
+      </div>
 
       {/* 加载状态 */}
       {loading && (
         <div
-          className="flex items-center gap-2 text-gray-500 text-sm px-4 py-2"
+          className="relative z-10 flex items-center gap-2 text-[var(--pixel-text-muted)] text-xs px-4 py-2 uppercase tracking-widest animate-pulse"
           role="status"
           aria-label={loadingText}
         >
@@ -236,18 +196,6 @@ export function ChatContainer({
           <span>{loadingText}</span>
         </div>
       )}
-
-      {/* 添加 wave 动画的 CSS */}
-      <style>{`
-        @keyframes wave {
-          0%, 100% {
-            transform: scaleY(0.5);
-          }
-          50% {
-            transform: scaleY(1);
-          }
-        }
-      `}</style>
     </div>
   );
 }

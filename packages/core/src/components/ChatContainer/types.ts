@@ -33,4 +33,13 @@ export interface ChatContainerProps {
   className?: string;
   /** 消息项自定义类名 */
   messageClassName?: string;
+  /** 像素风格主题 */
+  pixelTheme?:
+    | "retro-futurism"
+    | "neo-tokyo"
+    | "cyber-shrine"
+    | "dreamy-lofi"
+    | "vaporwave";
+  /** 装饰效果 */
+  decoration?: "scanline" | "rivets" | "glitch";
 }

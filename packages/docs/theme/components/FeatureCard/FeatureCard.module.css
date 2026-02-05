@@ -112,6 +112,41 @@
   }
 
   .metrics {
-    grid-template-columns: 1fr;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #a0aec0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  font-family: "Ark Pixel", monospace;
+}
+
+.badgeRed {
+  background: rgba(220, 38, 38, 0.2);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.2);
+  animation: pulseRed 2s infinite;
+}
+
+@keyframes pulseRed {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+    border-color: rgba(239, 68, 68, 0.8);
   }
 }

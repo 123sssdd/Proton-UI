@@ -142,3 +142,6 @@ export const Tabs: React.FC<TabsProps> = ({
 export const TabPanel: React.FC<TabPanelProps> = ({ children }) => {
   return <>{children}</>;
 };
+
+// 添加 default export 以支持 Rspress globalComponents
+export default Tabs;
