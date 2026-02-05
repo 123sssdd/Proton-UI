@@ -81,21 +81,41 @@ const Layout = () => {
   useEffect(() => {
     const addScrollButton = () => {
       // Only add on homepage
-      if (
-        window.location.pathname !== "/" &&
-        window.location.pathname !== "/index.html"
-      ) {
+      const currentPath = window.location.pathname;
+      console.log("📍 Current path:", currentPath);
+
+      if (currentPath !== "/" && currentPath !== "/index.html") {
+        console.log("⏭️ Skipping - not on homepage");
         return;
       }
 
+      // Debug: Check what elements exist
+      console.log("🔍 Checking for hero sections...");
+      const selector1 = document.querySelector(".rspress-home-hero");
+      const selector2 = document.querySelector(
+        "[data-component-name='HomeHero']"
+      );
+      const selector3 = document.querySelector(".hero");
+      const selector4 = document.querySelector("section.max-w-6xl");
+      const selector5 = document.querySelector("[class*='hero']");
+
+      console.log("Found elements:", {
+        ".rspress-home-hero": selector1,
+        "[data-component-name='HomeHero']": selector2,
+        ".hero": selector3,
+        "section.max-w-6xl": selector4,
+        "[class*='hero']": selector5,
+      });
+
       // Try multiple selectors for hero section
       const heroSection =
-        document.querySelector(".rspress-home-hero") ||
-        document.querySelector("[data-component-name='HomeHero']") ||
-        document.querySelector(".hero");
+        selector1 || selector2 || selector3 || selector4 || selector5;
 
       if (heroSection && !document.querySelector(".scroll-down-container")) {
-        console.log("🎯 Adding scroll button to hero section");
+        console.log(
+          "🎯 Adding scroll button to hero section:",
+          heroSection.className
+        );
         const container = document.createElement("div");
         container.className = "scroll-down-container";
         heroSection.appendChild(container);
@@ -108,6 +128,7 @@ const Layout = () => {
       } else {
         console.log("❌ Hero section not found or button already exists", {
           heroSection: !!heroSection,
+          heroClass: heroSection?.className,
           containerExists: !!document.querySelector(".scroll-down-container"),
         });
       }

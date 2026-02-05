@@ -55,6 +55,9 @@ export default defineConfig({
       path.join(__dirname, "theme/components/demos/ParticleEffectDemo.tsx"),
       path.join(__dirname, "theme/components/demos/PixelatedImageDemo.tsx"),
       path.join(__dirname, "theme/components/demos/ImageFilterWorkshop.tsx"),
+      path.join(__dirname, "theme/components/demos/NeonEffectsDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/GlassEffectsDemo.tsx"),
+      path.join(__dirname, "theme/components/demos/DitheringEffectsDemo.tsx"),
       // @proton-ui/core 组件 - 每个组件单独包装
       path.join(__dirname, "theme/components/wrappers/Button.tsx"),
       path.join(__dirname, "theme/components/wrappers/Input.tsx"),

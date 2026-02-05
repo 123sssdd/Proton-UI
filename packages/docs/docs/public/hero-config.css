@@ -55,6 +55,10 @@
   margin-top: 32px !important;
 }
 
+.rspress-home-hero .rspress-home-hero-actions a {
+  margin: 0 6px !important;
+}
+
 /* ========================================
    小猫样式 - Hero 区域右侧（放大）
    ======================================== */
