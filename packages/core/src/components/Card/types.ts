@@ -3,29 +3,26 @@ import * as React from "react";
 /**
  * Card 主组件的 Props 接口
  */
-export interface CardProps {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 子元素
    */
   children: React.ReactNode;
 
   /**
-   * 自定义类名
-   */
-  className?: string;
-
-  /**
-   * 内边距大小
+   * Internal padding
+   * @default 'md'
    */
   padding?: "none" | "sm" | "md" | "lg";
 
   /**
-   * 阴影大
+   * Shadow depth
+   * @default 'md'
    */
   shadow?: "none" | "sm" | "md" | "lg";
 
   /**
-   * 像素艺术主题
+   * Pixel art theme
    */
   pixelTheme?:
     | "retro-futurism"
@@ -35,7 +32,7 @@ export interface CardProps {
     | "vaporwave";
 
   /**
-   * 装饰效果
+   * Additional decorations
    */
   decoration?: "scanline" | "rivets" | "none";
 }

@@ -28,7 +28,7 @@ export function ChatContainer({
   messages,
   loading = false,
   loadingText = "正在输入...",
-  loadingIndicator = "dots",
+  // loadingIndicator = "dots", // unused
   renderLoadingIndicator,
   messageMaxWidth = 70,
   className,
