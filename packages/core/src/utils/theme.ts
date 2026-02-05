@@ -29,7 +29,7 @@ export function getCurrentTheme(): Theme {
   }
 
   const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-  return stored || "system";
+  return stored || "dark";
 }
 
 /**

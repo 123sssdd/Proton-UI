@@ -203,6 +203,18 @@ export default defineConfig({
     html: {
       tags: [
         {
+          tag: "script",
+          children: `
+            (function() {
+              const saved = localStorage.getItem('rspress-theme-appearance');
+              if (!saved) {
+                localStorage.setItem('rspress-theme-appearance', 'dark');
+                document.documentElement.classList.add('dark');
+              }
+            })();
+          `,
+        },
+        {
           tag: "link",
           attrs: {
             rel: "stylesheet",
