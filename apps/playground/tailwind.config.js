@@ -3,6 +3,7 @@ import baseConfig from "../../configs/tailwind-config/index.js";
 /** @type {import('tailwindcss').Config} */
 export default {
   ...baseConfig,
+  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",

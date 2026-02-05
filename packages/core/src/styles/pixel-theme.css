@@ -4,19 +4,58 @@
 :root {
   /* Pixel Art Palette - Japanese Aesthetic */
 
+  /* Light Mode (Default) */
+  --pixel-bg-primary: #ffffff;
+  --pixel-bg-secondary: #f4f5f7;
+  --pixel-bg-tertiary: #e8eaf0;
+
+  /* Accents (Same for both, or adjusted opacity) */
+  --pixel-accent-cyan: #00b4d8; /* Darker cyan for light mode */
+  --pixel-accent-pink: #ff6b9d;
+  --pixel-accent-gold: #e6c200;
+  --pixel-accent-purple: #7b2cbf;
+  --pixel-accent-green: #588157;
+
+  /* Text */
+  --pixel-text-primary: #1a1a2e; /* Dark text */
+  --pixel-text-secondary: #4a4e69;
+  --pixel-text-muted: #9ca3af;
+
+  /* Borders */
+  --pixel-border: #cbd5e1;
+
+  /* Effects */
+  --pixel-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+  --pixel-shadow-sm: 2px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  --pixel-shadow-md: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+  --pixel-shadow-lg: 6px 6px 0px 0px rgba(0, 0, 0, 0.2);
+  --pixel-shadow-hover: 6px 6px 0px 0px rgba(0, 0, 0, 0.3);
+
+  /* Fonts */
+  --font-pixel: "Press Start 2P", monospace;
+
+  /* Animations */
+  --pixel-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"],
+.dark {
   /* Backgrounds */
-  --pixel-bg-primary: #0a0a1a; /* Midnight Navy */
-  --pixel-bg-secondary: #161b33; /* Deep Teal/Navy */
-  --pixel-bg-tertiary: #222845; /* Lighter Navy */
+  --pixel-bg-primary: #0a0a1a;
+  --pixel-bg-secondary: #161b33;
+  --pixel-bg-tertiary: #222845;
 
   /* Accents */
-  --pixel-accent-cyan: #0ff0fc; /* Neon Cyan */
-  --pixel-accent-pink: #ff9ecd; /* Sakura Pink */
-  --pixel-accent-gold: #ffd700; /* Gold */
-  --pixel-accent-purple: #9d4edd; /* Vaporwave Purple */
-  --pixel-accent-green: #7ba05b; /* Matcha Green */
-  --pixel-text-primary: #e0e0e0; /* Off-white */
-  --pixel-text-secondary: #a0a0c0; /* Muted Blue-Grey */
+  --pixel-accent-cyan: #0ff0fc;
+  --pixel-accent-pink: #ff9ecd;
+  --pixel-accent-gold: #ffd700;
+  --pixel-accent-purple: #9d4edd;
+  --pixel-accent-green: #7ba05b;
+
+  /* Text */
+  --pixel-text-primary: #e0e0e0;
+  --pixel-text-secondary: #a0a0c0;
   --pixel-text-muted: #606080;
 
   /* Borders */
@@ -28,12 +67,6 @@
   --pixel-shadow-md: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
   --pixel-shadow-lg: 6px 6px 0px 0px rgba(0, 0, 0, 0.5);
   --pixel-shadow-hover: 6px 6px 0px 0px rgba(0, 0, 0, 0.6);
-
-  /* Fonts */
-  --font-pixel: "Press Start 2P", monospace;
-
-  /* Animations */
-  --pixel-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Base resets for pixel art */

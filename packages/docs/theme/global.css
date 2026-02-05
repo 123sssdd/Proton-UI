@@ -125,3 +125,13 @@ html:not(.dark) [data-component-name="HomeHero"].max-w-6xl > * {
     height: 80px;
   }
 }
+
+/* Hide Rspress theme toggle button */
+.rspress-nav-appearance {
+  display: none !important;
+}
+
+/* Force dark color scheme at root */
+:root {
+  color-scheme: dark;
+}

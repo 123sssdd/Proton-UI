@@ -76,8 +76,10 @@ export function applyTheme(theme: Theme): void {
   // 应用新主题
   if (resolved === "dark") {
     root.setAttribute("data-theme", "dark");
+    root.classList.add("dark");
   } else {
     root.setAttribute("data-theme", "light");
+    root.classList.remove("dark");
   }
 
   // 触发自定义事件

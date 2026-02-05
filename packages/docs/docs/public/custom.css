@@ -1,292 +1,127 @@
-/* 🎮 像素风格自定义样式 - 优化版 */
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-@import url("/fonts.css");
-@import url("/hero-config.css");
-
-/* Tailwind CSS */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ========================================
-   颜色变量 - 像素风设计系统 (Playground 移植)
-   ======================================== */
-
-:root {
-  /* Pixel Art Palette - 基础变量 */
-  --pixel-bg-primary: #0a0a1a; /* Midnight Navy */
-  --pixel-bg-secondary: #161b33; /* Deep Teal/Navy */
-  --pixel-bg-tertiary: #222845; /* Lighter Navy */
-
-  --pixel-accent-cyan: #0ff0fc; /* Neon Cyan */
-  --pixel-accent-pink: #ff9ecd; /* Sakura Pink */
-  --pixel-accent-gold: #ffd700; /* Gold */
-
-  --pixel-text-primary: #e0e0e0; /* Off-white */
-  --pixel-text-secondary: #a0a0c0; /* Muted Blue-Grey */
-
-  --pixel-border: #333355;
-
-  --pixel-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
-  --pixel-shadow-sm: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
-  --pixel-shadow-hover: 6px 6px 0px 0px rgba(0, 0, 0, 0.6);
-
-  /* Rspress 覆盖 - 强制深色风格 (文档默认跟随系统，但我们要像素风) */
-  --rp-c-brand: var(--pixel-accent-cyan);
-  --rp-c-brand-dark: #00b8c4;
-  --rp-c-brand-light: #79f7ff;
-
-  --rp-c-bg: var(--pixel-bg-primary);
-  --rp-c-bg-soft: var(--pixel-bg-secondary);
-  --rp-c-bg-mute: var(--pixel-bg-tertiary);
-
-  --rp-c-text-1: var(--pixel-text-primary);
-  --rp-c-text-2: var(--pixel-text-secondary);
-  --rp-c-text-3: #606080;
-
-  --rp-c-divider: var(--pixel-border);
-  --rp-c-border: var(--pixel-border);
+[data-component-name="HomeHero"].max-w-6xl {
+  margin-top: 0.5rem !important;
 }
-
-/* Dark Mode 相同 (保持一致性) */
-.dark {
-  --rp-c-bg: var(--pixel-bg-primary);
+@media (min-width: 640px) {
+  [data-component-name="HomeHero"].max-w-6xl {
+    margin-top: -40px !important;
+  }
 }
-
-/* ========================================
-   基础样式 - 全局字体与背景
-   ======================================== */
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Press Start 2P", "Ark Pixel", monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  font-weight: normal;
-  image-rendering: pixelated;
-  background-color: var(--pixel-bg-primary);
-  color: var(--pixel-text-primary);
-}
-
-body {
-  overflow-y: auto !important;
-}
-
-/* ========================================
-   Playground Utility Classes (移植)
-   ======================================== */
-
-.pixel-card {
-  background-color: var(--pixel-bg-secondary);
-  border: 2px solid var(--pixel-border);
-  box-shadow: var(--pixel-shadow);
-  transition: transform 0.1s;
-}
-
-.pixel-card:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.5);
-  border-color: var(--pixel-accent-cyan);
-}
-
-.pixel-btn {
-  padding: 8px 16px;
-  font-family: "Press Start 2P", monospace;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: var(--pixel-bg-tertiary);
-  border: 2px solid var(--pixel-text-primary);
-  box-shadow: var(--pixel-shadow-sm);
-  color: var(--pixel-text-primary);
+.rspress-home-feature-card {
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
   position: relative;
-  transition: all 0.1s;
-  cursor: pointer;
+  z-index: 0;
+}
+.rspress-home-feature-card .rspress-home-feature-title {
+  font-size: clamp(1.25rem, 1.1vw + 1rem, 1.75rem);
+}
+.rspress-home-feature-card .rspress-home-feature-detail {
+  font-size: clamp(0.975rem, 0.5vw + 0.85rem, 1.125rem);
+  line-height: 1.6;
+}
+/* prevent decorative mask from intercepting events */
+[data-component-name="HomeHero"] [class^="mask_"] {
+  pointer-events: none !important;
+}
+html:has(.rspress-home-hero),
+body:has(.rspress-home-hero),
+html:has([data-component-name="HomeHero"]),
+body:has([data-component-name="HomeHero"]) {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html:has(.rspress-home-hero)::-webkit-scrollbar,
+body:has(.rspress-home-hero)::-webkit-scrollbar,
+html:has([data-component-name="HomeHero"])::-webkit-scrollbar,
+body:has([data-component-name="HomeHero"])::-webkit-scrollbar {
+  display: none;
+}
+html:not(.dark) .rspress-home-hero,
+html:not(.dark) [data-component-name="HomeHero"].max-w-6xl {
+  position: relative;
+}
+html:not(.dark) .rspress-home-hero::before,
+html:not(.dark) [data-component-name="HomeHero"].max-w-6xl::before {
+  content: "";
+  position: absolute;
+  inset: -12% -8% -16% -8%;
+  background:
+    radial-gradient(
+      60% 55% at 65% 40%,
+      rgba(0, 220, 255, 0.22),
+      rgba(255, 0, 200, 0.18) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 45% at 35% 65%,
+      rgba(255, 170, 0, 0.12),
+      transparent 65%
+    );
+  filter: blur(36px) saturate(120%);
+  pointer-events: none;
+  z-index: 0;
+}
+html:not(.dark) .rspress-home-hero > *,
+html:not(.dark) [data-component-name="HomeHero"].max-w-6xl > * {
+  position: relative;
+  z-index: 1;
 }
 
-.pixel-btn:hover {
-  background-color: var(--pixel-accent-cyan);
-  color: var(--pixel-bg-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--pixel-shadow);
+/* Hero section positioning for scroll button */
+.rspress-home-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.pixel-btn:active {
-  transform: translateY(2px);
-  box-shadow: none;
+/* Scroll down button container */
+.scroll-down-container {
+  position: absolute;
+  bottom: -150px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }
 
-/* ========================================
-   Rspress UI 强力覆盖 (Make it look like Playground)
-   ======================================== */
-
-/* 导航栏 */
-.rspress-nav {
-  border-bottom: 4px solid var(--pixel-border) !important;
-  background-color: var(--pixel-bg-secondary) !important;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+.scroll-down-container > * {
+  pointer-events: auto;
 }
 
-.rspress-nav .nav-content {
-  max-width: 1400px;
+/* Pixel cat hero positioning */
+.pixel-cat-hero {
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+  z-index: 5;
 }
 
-/* 侧边栏 Sidebar */
-.rspress-sidebar {
-  border-right: 4px solid var(--pixel-border) !important;
-  background-color: var(--pixel-bg-primary) !important;
+.pixel-cat-hero img {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
 }
 
-/* 侧边栏链接 */
-.rspress-sidebar-group-title {
-  font-family: "Press Start 2P", monospace !important;
-  color: var(--pixel-accent-cyan) !important;
-  font-size: 12px !important;
-  letter-spacing: 1px;
-  margin-bottom: 12px !important;
-  text-transform: uppercase;
-}
+@media (max-width: 768px) {
+  .rspress-home-hero {
+    min-height: 70vh;
+  }
 
-.rspress-sidebar-item {
-  font-family: monospace !important; /* 保持菜单可读性 */
-  font-size: 13px !important;
-  margin: 4px 0 !important;
-}
+  .pixel-cat-hero {
+    bottom: 60px;
+    right: 20px;
+  }
 
-.rspress-sidebar-item.active {
-  background: var(--pixel-bg-tertiary) !important;
-  border-left: 4px solid var(--pixel-accent-pink) !important;
-  color: var(--pixel-accent-pink) !important;
-}
-
-/* 右侧目录 (On this page) */
-.rspress-aside {
-  border-left: 4px solid var(--pixel-border) !important;
-  background-color: var(--pixel-bg-primary) !important;
-}
-
-.rspress-aside-content {
-  font-family: monospace !important;
-}
-
-/* 主要内容区域 */
-.rspress-doc {
-  background-color: var(--pixel-bg-primary) !important;
-}
-
-/* 标题样式 */
-.rspress-doc h1 {
-  font-size: 2rem;
-  color: var(--pixel-accent-cyan);
-  text-shadow: 3px 3px 0 var(--pixel-bg-tertiary);
-  border-bottom: 4px solid var(--pixel-border);
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
-.rspress-doc h2 {
-  font-size: 1.5rem;
-  color: var(--pixel-accent-pink);
-  margin-top: 3rem;
-  border-left: 6px solid var(--pixel-accent-pink);
-  padding-left: 1rem;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 158, 205, 0.1) 0%,
-    transparent 100%
-  );
-}
-
-.rspress-doc h3 {
-  font-size: 1.2rem;
-  color: var(--pixel-accent-gold);
-  margin-top: 2rem;
-}
-
-/* ========================================
-   Code Blocks (Fixing Dark Mode)
-   ======================================== */
-
-.rspress-doc pre,
-div[class*="language-"] {
-  border: 2px solid var(--pixel-border) !important;
-  border-radius: 0 !important;
-  box-shadow: var(--pixel-shadow) !important;
-  background-color: #0d1117 !important; /* GitHub Dimmed */
-}
-
-code {
-  font-family: "JetBrains Mono", monospace !important;
-}
-
-/* 行内代码 */
-.rspress-doc code:not(pre code) {
-  background-color: var(--pixel-bg-tertiary) !important;
-  color: var(--pixel-accent-cyan) !important;
-  border: 1px solid var(--pixel-border);
-  border-radius: 0;
-  padding: 2px 6px;
-}
-
-/* ========================================
-   组件样式 - DemoBox & Components
-   ======================================== */
-
-/* Features 卡片 (首页) */
-.rspress-home-feature {
-  border: 3px solid var(--pixel-border) !important;
-  border-radius: 0 !important;
-  box-shadow: var(--pixel-shadow) !important;
-  background-color: var(--pixel-bg-secondary) !important;
-}
-
-.rspress-home-feature:hover {
-  transform: translate(-4px, -4px) !important;
-  box-shadow: var(--pixel-shadow-hover) !important;
-  border-color: var(--pixel-accent-cyan) !important;
-}
-
-/* 按钮 (首页 & 通用) */
-.rspress-button {
-  border-radius: 0 !important;
-  background: var(--pixel-bg-tertiary) !important;
-  border: 2px solid var(--pixel-accent-cyan) !important;
-  color: var(--pixel-accent-cyan) !important;
-  font-family: "Press Start 2P", monospace !important;
-  box-shadow: var(--pixel-shadow-sm) !important;
-}
-
-.rspress-button:hover {
-  transform: translate(-2px, -2px) !important;
-  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5) !important;
-  background: var(--pixel-accent-cyan) !important;
-  color: var(--pixel-bg-primary) !important;
-}
-
-.rspress-button.brand {
-  background: var(--pixel-accent-cyan) !important;
-  color: var(--pixel-bg-primary) !important;
-  border-color: #fff !important;
-}
-
-/* 滚动条 */
-::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
-}
-::-webkit-scrollbar-track {
-  background: var(--pixel-bg-primary);
-  border-left: 2px solid var(--pixel-border);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--pixel-bg-tertiary);
-  border: 2px solid var(--pixel-bg-primary);
-  box-shadow:
-    inset -2px -2px 0px 0px rgba(0, 0, 0, 0.3),
-    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.1);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--pixel-accent-cyan);
+  .pixel-cat-hero img {
+    width: 80px;
+    height: 80px;
+  }
 }

@@ -12,6 +12,13 @@ import "@proton-ui/core/styles/pixel-utilities.css";
 import "./global.css";
 
 const Layout = () => {
+  useEffect(() => {
+    // 强制深色模式
+    document.documentElement.classList.add("dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("rspress-theme", "dark");
+  }, []);
+
   const isNavbarHidden = useNavbarHide(100);
 
   useEffect(() => {
