@@ -68,3 +68,52 @@ html:not(.dark) [data-component-name="HomeHero"].max-w-6xl > * {
   position: relative;
   z-index: 1;
 }
+
+/* Hero section positioning for scroll button */
+.rspress-home-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Scroll down button container */
+.scroll-down-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  z-index: 20;
+}
+
+/* Pixel cat hero positioning */
+.pixel-cat-hero {
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+  z-index: 5;
+}
+
+.pixel-cat-hero img {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 768px) {
+  .rspress-home-hero {
+    min-height: 70vh;
+  }
+
+  .pixel-cat-hero {
+    bottom: 60px;
+    right: 20px;
+  }
+
+  .pixel-cat-hero img {
+    width: 80px;
+    height: 80px;
+  }
+}

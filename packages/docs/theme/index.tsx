@@ -80,8 +80,22 @@ const Layout = () => {
 
   useEffect(() => {
     const addScrollButton = () => {
-      const heroSection = document.querySelector(".rspress-home-hero");
-      if (heroSection && !heroSection.querySelector(".scroll-down-container")) {
+      // Only add on homepage
+      if (
+        window.location.pathname !== "/" &&
+        window.location.pathname !== "/index.html"
+      ) {
+        return;
+      }
+
+      // Try multiple selectors for hero section
+      const heroSection =
+        document.querySelector(".rspress-home-hero") ||
+        document.querySelector("[data-component-name='HomeHero']") ||
+        document.querySelector(".hero");
+
+      if (heroSection && !document.querySelector(".scroll-down-container")) {
+        console.log("🎯 Adding scroll button to hero section");
         const container = document.createElement("div");
         container.className = "scroll-down-container";
         heroSection.appendChild(container);
@@ -89,13 +103,32 @@ const Layout = () => {
         import("react-dom/client").then(({ createRoot }) => {
           const root = createRoot(container);
           root.render(<ScrollDownButton />);
+          console.log("✅ Scroll button rendered");
+        });
+      } else {
+        console.log("❌ Hero section not found or button already exists", {
+          heroSection: !!heroSection,
+          containerExists: !!document.querySelector(".scroll-down-container"),
         });
       }
     };
 
-    setTimeout(addScrollButton, 100);
+    // Try multiple times with increasing delays
     setTimeout(addScrollButton, 500);
     setTimeout(addScrollButton, 1000);
+    setTimeout(addScrollButton, 2000);
+
+    // Also try on route changes
+    const observer = new MutationObserver(() => {
+      addScrollButton();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
