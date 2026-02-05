@@ -155,7 +155,7 @@ export default defineConfig({
           text: "✨ 特效组件",
           items: [
             {
-              text: "像素特效画廊",
+              text: "特效画廊",
               link: "/components/effects/pixel-effects",
             },
             {
