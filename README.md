@@ -7,8 +7,10 @@
 目前项目**只有我一个人在维护**（是的，One Man Army 🫡），发出来是想看看有没有志同道合的佬感兴趣，求个 Star ⭐️ 或者一起以此为基础搞点事情！
 
 🔗 **GitHub**: [https://github.com/123sssdd/Proton-UI](https://github.com/123sssdd/Proton-UI)  
-🕹️ **Playground**: [https://proton-ui-playground.vercel.app](https://proton-ui-playground.vercel.app) (施工中)  
+🕹️ **Playground**: [https://proton-ui-playground.vercel.app](https://proton-ui-playground.vercel.app) (施工中)  （vercel 部署的，需要开代理访问）
 📚 **文档**: [https://proton-ui.vercel.app](https://proton-ui.vercel.app) (施工中)
+
+国内访问：正在部署中🚧
 
 ## 缘起：一个人的"叛逆"重构
 
