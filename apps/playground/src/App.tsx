@@ -76,8 +76,16 @@ export default function App() {
   const [view, setView] = useState<ViewState>("normal");
   const [reduceMotion, setReduceMotion] = useState(false);
 
-  // Check system preference on mount
+  // Check system preference and force dark mode if no previous choice exists
   useEffect(() => {
+    const stored = localStorage.getItem("proton-ui-theme");
+    if (!stored) {
+      // If no stored theme, force dark mode by default as per user requested
+      import("@proton-ui/utils").then(({ setTheme }) => {
+        setTheme("dark");
+      });
+    }
+
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduceMotion(mediaQuery.matches);
 

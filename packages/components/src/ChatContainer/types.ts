@@ -28,6 +28,10 @@ export interface ChatContainerProps {
   className?: string;
   /** 消息项自定义类名 */
   messageClassName?: string;
+  /** 用户消息气泡自定义类名 */
+  userBubbleClassName?: string;
+  /** AI 消息气泡自定义类名 */
+  aiBubbleClassName?: string;
   /** 像素风格主题 */
   pixelTheme?:
     | "retro-futurism"

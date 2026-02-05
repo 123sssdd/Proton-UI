@@ -1,6 +1,3 @@
-/* Pixel Art Utility Classes */
-/* Migrated from apps/playground/src/index.css */
-
 @tailwind components;
 
 @layer components {
@@ -65,8 +62,7 @@
 
   .pixel-input:focus {
     outline: none;
-    border-color: var(--pixel-accent-cyan);
-    box-shadow: 0 0 0 2px rgba(15, 240, 252, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
     background-color: #1a1f35;
   }
 

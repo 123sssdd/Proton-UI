@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "@proton-ui/core";
+import { Input } from "@proton-ui/components";
 
 /**
  * Input 完整展示页面 (Refactored to use Core Themes)
@@ -126,7 +126,7 @@ export function InputShowcase() {
               艺术主题 (Enhanced Pixel Style)
             </h2>
             <p className="text-sm text-[var(--pixel-text-secondary)]">
-              Powered by @proton-ui/core "pixelTheme" prop
+              Powered by @proton-ui/components "pixelTheme" prop
             </p>
           </div>
 

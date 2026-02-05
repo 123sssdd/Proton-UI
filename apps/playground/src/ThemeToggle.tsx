@@ -1,4 +1,4 @@
-import { usePixelTheme } from "@proton-ui/core";
+import { usePixelTheme } from "@proton-ui/hooks";
 
 export function ThemeToggle() {
   const { resolvedTheme, toggleTheme } = usePixelTheme();

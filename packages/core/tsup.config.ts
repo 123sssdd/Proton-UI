@@ -27,6 +27,9 @@ export default defineConfig({
   // 输出格式：ESM 和 CJS
   format: ["esm", "cjs"],
 
+  // 确保 ESM 格式由于给浏览器使用，排除 Node.js 内置模块
+  platform: "browser",
+
   // 生成类型声明文件
   dts: {
     compilerOptions: {
@@ -46,6 +49,9 @@ export default defineConfig({
 
   // 外部依赖（不打包进 bundle）
   external: ["react", "react-dom"],
+
+  // 强制打包内部工作区依赖，解决文档链接导出问题
+  noExternal: ["@proton-ui/utils", "@proton-ui/hooks", "@proton-ui/components"],
 
   // Tree-shaking（移除未使用的代码）
   treeshake: true,

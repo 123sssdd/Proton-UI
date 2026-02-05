@@ -1,6 +1,7 @@
 /* 导入核心样式库 */
-@import "@proton-ui/core/styles/pixel-theme.css";
-@import "@proton-ui/core/styles/pixel-utilities.css";
+@import "@proton-ui/components/styles/pixel-theme.css";
+@import "@proton-ui/components/styles/pixel-effects.css";
+@import "@proton-ui/components/styles/pixel-utilities.css";
 
 @tailwind base;
 @tailwind components;

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { PixelThemeProvider } from "@proton-ui/core";
+import { PixelThemeProvider } from "@proton-ui/components";
 import App from "./App";
 import "./index.css";
 

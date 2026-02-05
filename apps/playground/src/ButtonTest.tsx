@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@proton-ui/core";
+import { Button } from "@proton-ui/components";
 
 /**
  * Button 组件测试页面

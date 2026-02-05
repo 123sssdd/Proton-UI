@@ -2044,42 +2044,28 @@
 /* ========== 装饰元素库 ========== */
 
 /**
- * 边框装饰 - 简约线条
- */
-.border-deco-minimal {
-  position: relative;
-  border: 2px solid currentColor;
-}
-
-.border-deco-minimal::before,
-.border-deco-minimal::after {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border: 2px solid currentColor;
-}
-
-.border-deco-minimal::before {
-  top: -2px;
-  left: -2px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.border-deco-minimal::after {
-  bottom: -2px;
-  right: -2px;
-  border-left: none;
-  border-top: none;
-}
-
-/**
  * 边框装饰 - 复古花纹
  */
+/* ========== 玻璃拟态强度控制 ========== */
+.glass-intensity-low {
+  --glass-opacity: 0.05;
+  --glass-blur: 4px;
+}
+
+.glass-intensity-medium {
+  --glass-opacity: 0.1;
+  --glass-blur: 10px;
+}
+
+.glass-intensity-high {
+  --glass-opacity: 0.2;
+  --glass-blur: 20px;
+}
+
+/* ========== 装饰性边框修正 ========== */
 .border-deco-retro {
   position: relative;
-  border: 2px solid currentColor;
+  border: 2px solid var(--pixel-border, currentColor);
 }
 
 .border-deco-retro::before,
@@ -2088,13 +2074,18 @@
   position: absolute;
   width: 12px;
   height: 12px;
-  background: currentColor;
+  background: var(--pixel-border, currentColor);
 }
 
 .border-deco-retro::before {
   top: -2px;
   left: -2px;
   clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 100%, 0 100%);
+}
+
+[data-theme="dark"] .border-deco-retro {
+  --pixel-border: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .border-deco-retro::after {
@@ -2104,11 +2095,54 @@
 }
 
 /**
+ * 边框装饰 - 几何切角
+ */
+.border-deco-geometric {
+  position: relative;
+  border: 2px solid var(--pixel-border, currentColor);
+  clip-path: polygon(
+    0 8px,
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%
+  );
+}
+
+[data-theme="dark"] .border-deco-geometric {
+  --pixel-border: #f0e6ff;
+  box-shadow: 0 0 12px rgba(240, 230, 255, 0.3);
+}
+
+/**
+ * 边框装饰 - 极简像素
+ */
+.border-deco-minimal {
+  position: relative;
+  border: 1px solid var(--pixel-border, currentColor);
+}
+
+/**
+ * 边框装饰 - 混合架构 (Hybrid)
+ */
+.border-deco-hybrid {
+  position: relative;
+  border: 2px solid var(--pixel-border, currentColor);
+  box-shadow: 0 0 15px rgba(var(--neon-glow-rgb, 0, 255, 255), 0.3);
+}
+
+/**
  * 边框装饰 - 科技电路
  */
 .border-deco-tech {
   position: relative;
-  border: 2px solid currentColor;
+  border: 2px solid var(--pixel-border, currentColor);
+}
+
+[data-theme="dark"] .border-deco-tech {
+  --pixel-border: #bffdfd;
+  box-shadow: 0 0 15px rgba(237 242 242 / 0.4);
 }
 
 .border-deco-tech::before {
@@ -2119,7 +2153,7 @@
   transform: translateX(-50%);
   width: 20px;
   height: 4px;
-  background: currentColor;
+  background: var(--pixel-border, currentColor);
 }
 
 .border-deco-tech::after {
@@ -2130,7 +2164,7 @@
   transform: translateX(-50%);
   width: 20px;
   height: 4px;
-  background: currentColor;
+  background: var(--pixel-border, currentColor);
 }
 
 /**
@@ -2138,43 +2172,20 @@
  */
 .border-deco-japanese {
   position: relative;
-  border: 2px solid currentColor;
+  border: 2px solid var(--pixel-border, currentColor);
   border-image: repeating-linear-gradient(
       45deg,
-      currentColor,
-      currentColor 4px,
+      var(--pixel-border, currentColor),
+      var(--pixel-border, currentColor) 4px,
       transparent 4px,
       transparent 8px
     )
     2;
 }
 
-/**
- * 边框装饰 - 几何图案
- */
-.border-deco-geometric {
-  position: relative;
-  border: 2px solid currentColor;
-}
-
-.border-deco-geometric::before,
-.border-deco-geometric::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: currentColor;
-  transform: rotate(45deg);
-}
-
-.border-deco-geometric::before {
-  top: -6px;
-  left: -6px;
-}
-
-.border-deco-geometric::after {
-  bottom: -6px;
-  right: -6px;
+[data-theme="dark"] .border-deco-japanese {
+  --pixel-border: #fff0f5;
+  box-shadow: 0 0 10px rgba(255, 240, 245, 0.3);
 }
 
 /**
@@ -2185,51 +2196,51 @@
 }
 
 .corner-deco-rivet::before,
-.corner-deco-rivet::after {
+.corner-deco-rivet::after,
+.corner-deco-rivet .rivet-bl,
+.corner-deco-rivet .rivet-br {
   content: "";
   position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  width: 4px;
+  height: 4px;
+  background: var(--pixel-border, currentColor);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .corner-deco-rivet::before {
   top: 4px;
   left: 4px;
 }
-
 .corner-deco-rivet::after {
-  bottom: 4px;
+  top: 4px;
   right: 4px;
 }
 
 /**
- * 角落装饰 - 宝石
+ * 角落装饰 - 能量宝石
  */
-.corner-deco-gem {
-  position: relative;
+.corner-deco-gem::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--pixel-border, currentColor);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px var(--pixel-border, currentColor);
 }
 
-.corner-deco-gem::before,
 .corner-deco-gem::after {
   content: "";
   position: absolute;
-  width: 8px;
-  height: 8px;
-  background: currentColor;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
-.corner-deco-gem::before {
-  top: 4px;
-  left: 4px;
-}
-
-.corner-deco-gem::after {
-  bottom: 4px;
-  right: 4px;
+  bottom: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--pixel-border, currentColor);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px var(--pixel-border, currentColor);
 }
 
 /**
@@ -2481,4 +2492,32 @@
   .neon-glow-strong-box {
     box-shadow: none !important;
   }
+}
+
+/* ========== 玻璃拟态基础样式更新 ========== */
+.glass-morphism,
+.glass-morphism-subtle,
+.glass-morphism-strong,
+.glass-morphism-cyan,
+.glass-morphism-pink,
+.glass-morphism-purple {
+  background: rgba(255, 255, 255, var(--glass-opacity, 0.1));
+  backdrop-filter: blur(var(--glass-blur, 10px));
+}
+
+.glass-morphism-subtle {
+  --glass-opacity: 0.05;
+}
+.glass-morphism-strong {
+  --glass-opacity: 0.15;
+}
+
+.glass-morphism-cyan {
+  background: rgba(0, 255, 255, var(--glass-opacity, 0.1));
+}
+.glass-morphism-pink {
+  background: rgba(255, 0, 255, var(--glass-opacity, 0.1));
+}
+.glass-morphism-purple {
+  background: rgba(128, 0, 128, var(--glass-opacity, 0.1));
 }

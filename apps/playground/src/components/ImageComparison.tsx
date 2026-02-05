@@ -1,5 +1,5 @@
 import React from "react";
-import { PixelatedImage } from "@proton-ui/core";
+import { PixelatedImage } from "@proton-ui/components";
 
 /**
  * ImageComparison 组件属性

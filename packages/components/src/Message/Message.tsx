@@ -46,6 +46,7 @@ export function Message({
   onStreamComplete: _onStreamComplete,
   maxWidth = 70,
   className,
+  bubbleClassName,
   pixelTheme,
   decoration,
 }: MessageProps) {
@@ -112,7 +113,8 @@ export function Message({
       "bg-[var(--pixel-bg-tertiary)] text-[var(--pixel-text-muted)] border-dashed border-[var(--pixel-text-muted)] text-sm text-center",
     // 如果显示加载点，使用固定的最小尺寸
     showLoadingDot &&
-      "min-w-[60px] min-h-[40px] flex items-center justify-center"
+      "min-w-[60px] min-h-[40px] flex items-center justify-center",
+    bubbleClassName
   );
 
   // 动态设置最大宽度

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "@proton-ui/core";
+import { Card } from "@proton-ui/components";
 
 /**
  * Card 完整展示页面 (Refactored to use Core Themes)
@@ -24,7 +24,7 @@ export function CardShowcase() {
             Card 组件完整展示
           </h1>
           <p className="text-sm text-[var(--pixel-text-secondary)]">
-            Powered by @proton-ui/core
+            Powered by @proton-ui/components
           </p>
         </div>
 

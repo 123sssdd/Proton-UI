@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "@proton-ui/core";
+import { Input } from "@proton-ui/components";
 
 /**
  * Input 组件测试页面

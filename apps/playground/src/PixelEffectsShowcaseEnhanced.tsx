@@ -9,6 +9,7 @@ import {
   DEFAULT_EXAMPLES,
 } from "./components";
 import type { PresetName } from "./components";
+import { Glass } from "@proton-ui/components";
 
 /**
  * 防抖函数
@@ -116,7 +117,7 @@ export const PixelEffectsShowcaseEnhanced: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-4 sm:p-8">
+    <div className="min-h-screen bg-gray-950 p-4 sm:p-8">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* 标题 */}
         <div className="text-center space-y-4">
@@ -130,42 +131,45 @@ export const PixelEffectsShowcaseEnhanced: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="glass-morphism-pink p-4 rounded-lg border-2 border-pink-400">
+          <Glass
+            variant="pink"
+            className="p-4 rounded-lg border-2 border-pink-400"
+          >
             <div className="flex items-center gap-3">
               <span className="text-2xl">⚠️</span>
               <p className="text-pink-400 font-bold">{error}</p>
             </div>
-          </div>
+          </Glass>
         )}
 
         {/* 图片上传 */}
-        <div className="glass-morphism p-6 sm:p-8 rounded-lg">
+        <Glass className="p-6 sm:p-8 rounded-lg">
           <ImageUploader
             onImageLoad={handleImageUpload}
             onError={handleError}
           />
-        </div>
+        </Glass>
 
         {/* 示例图库 */}
-        <div className="glass-morphism p-6 sm:p-8 rounded-lg">
+        <Glass className="p-6 sm:p-8 rounded-lg">
           <ExampleGallery
             examples={DEFAULT_EXAMPLES}
             onExampleSelect={handleExampleSelect}
             selectedImage={currentImage}
           />
-        </div>
+        </Glass>
 
         {/* 预设选择器 */}
-        <div className="glass-morphism p-6 sm:p-8 rounded-lg">
+        <Glass className="p-6 sm:p-8 rounded-lg">
           <PresetSelector
             activePreset={activePreset}
             onPresetSelect={handlePresetSelect}
             presets={DEFAULT_PRESETS}
           />
-        </div>
+        </Glass>
 
         {/* 参数控制 */}
-        <div className="glass-morphism p-6 sm:p-8 rounded-lg">
+        <Glass className="p-6 sm:p-8 rounded-lg">
           <ParameterControls
             pixelSize={pixelSize}
             colorLevels={colorLevels}
@@ -173,27 +177,27 @@ export const PixelEffectsShowcaseEnhanced: React.FC = () => {
             onColorLevelsChange={handleColorLevelsChange}
             disabled={isProcessing}
           />
-        </div>
+        </Glass>
 
         {/* 图片对比 */}
-        <div className="glass-morphism p-6 sm:p-8 rounded-lg">
+        <Glass className="p-6 sm:p-8 rounded-lg">
           <ImageComparison
             originalImage={currentImage}
             pixelSize={pixelSize}
             colorLevels={colorLevels}
             isProcessing={isProcessing}
           />
-        </div>
+        </Glass>
 
         {/* API 使用示例 */}
-        <div className="glass-morphism p-6 sm:p-8 rounded-lg">
+        <Glass className="p-6 sm:p-8 rounded-lg">
           <h3 className="text-xl font-bold text-white mb-4">API 使用示例</h3>
           <div className="space-y-4">
             {/* 组件用法 */}
             <div>
               <h4 className="text-cyan-400 font-bold mb-2">组件用法</h4>
               <pre className="bg-gray-900 p-4 rounded border border-gray-700 overflow-x-auto text-sm">
-                <code className="text-gray-300">{`import { PixelatedImage } from '@proton-ui/core';
+                <code className="text-gray-300">{`import { PixelatedImage } from '@proton-ui/components';
 
 <PixelatedImage
   src="/avatar.jpg"
@@ -209,7 +213,8 @@ export const PixelEffectsShowcaseEnhanced: React.FC = () => {
             <div>
               <h4 className="text-pink-400 font-bold mb-2">Hook 用法</h4>
               <pre className="bg-gray-900 p-4 rounded border border-gray-700 overflow-x-auto text-sm">
-                <code className="text-gray-300">{`import { usePixelateImage } from '@proton-ui/core';
+                <code className="text-gray-300">{`import { PixelatedImage } from '@proton-ui/components';
+import { usePixelateImage } from '@proton-ui/hooks';
 
 const { pixelatedImage, pixelate } = usePixelateImage();
 
@@ -222,10 +227,10 @@ const handleFile = async (file: File) => {
               </pre>
             </div>
           </div>
-        </div>
+        </Glass>
 
         {/* 特性说明 */}
-        <div className="glass-morphism p-6 rounded-lg">
+        <Glass className="p-6 rounded-lg">
           <h3 className="text-xl font-bold text-white mb-4">特性说明</h3>
           <ul className="text-gray-300 space-y-2">
             <li>✓ 支持可调像素大小（2-32px）</li>
@@ -236,7 +241,7 @@ const handleFile = async (file: File) => {
             <li>✓ Canvas 处理，高性能</li>
             <li>✓ 响应式设计，适配所有设备</li>
           </ul>
-        </div>
+        </Glass>
 
         {/* 底部说明 */}
         <div className="text-center text-gray-400 text-sm">

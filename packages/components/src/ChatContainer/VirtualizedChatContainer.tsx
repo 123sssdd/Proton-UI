@@ -28,6 +28,8 @@ export function VirtualizedChatContainer({
   loadingText = "正在输入...",
   className,
   messageClassName,
+  userBubbleClassName,
+  aiBubbleClassName,
 }: ChatContainerProps) {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const [autoScroll, setAutoScroll] = useState(true);
@@ -80,6 +82,11 @@ export function VirtualizedChatContainer({
               renderContent={message.renderContent}
               onStreamComplete={message.onStreamComplete}
               className={messageClassName}
+              bubbleClassName={
+                message.role === "user"
+                  ? userBubbleClassName
+                  : aiBubbleClassName
+              }
             />
           </div>
         )}

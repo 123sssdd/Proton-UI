@@ -195,10 +195,8 @@ const config: UserConfig = defineConfig({
   // ],
   builderConfig: {
     resolve: {
-      alias: {
-        "@proton-ui/core": path.resolve(__dirname, "../core/dist"),
-        "@proton-ui/streaming": path.resolve(__dirname, "../streaming/dist"),
-      },
+      "@proton-ui/core": path.resolve(__dirname, "../core"),
+      "@proton-ui/streaming": path.resolve(__dirname, "../streaming"),
     },
     html: {
       tags: [

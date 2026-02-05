@@ -4,7 +4,7 @@ import { Button } from "@proton-ui/components";
 /**
  * Button 完整展示页面
  * 包含基础风格和艺术风格
- * Refactored to use @proton-ui/core "Smart" Button component
+ * Refactored to use @proton-ui/components "Smart" Button component
  */
 export function ButtonShowcase() {
   const [activeTheme, setActiveTheme] =

@@ -19,6 +19,8 @@ export interface MessageProps {
   maxWidth?: number;
   /** 自定义类名 */
   className?: string;
+  /** 气泡自定义类名 */
+  bubbleClassName?: string;
   /** 像素风格主题 */
   pixelTheme?:
     | "retro-futurism"

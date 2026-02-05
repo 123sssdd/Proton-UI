@@ -3,7 +3,7 @@ import {
   VirtualizedChatContainer,
   MessageInput,
   type ChatMessage,
-} from "@proton-ui/core";
+} from "@proton-ui/components";
 
 /**
  * 虚拟滚动演示页面
@@ -58,15 +58,19 @@ export default function VirtualizedDemo() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-950">
       {/* 头部 */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
-        <h1 className="text-2xl font-bold text-gray-900">
-          虚拟滚动演示 - {messages.length} 条消息
-        </h1>
-        <p className="text-sm text-gray-600 mt-1">
-          使用 react-virtuoso 实现虚拟滚动，只渲染可见区域的消息
-        </p>
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 shadow-sm">
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              虚拟滚动演示 - {messages.length} 条消息
+            </h1>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              使用 react-virtuoso 实现虚拟滚动，只渲染可见区域的消息
+            </p>
+          </div>
+        </div>
       </header>
 
       {/* 对话容器 */}
@@ -75,17 +79,21 @@ export default function VirtualizedDemo() {
           messages={messages}
           loading={loading}
           className="h-full"
+          userBubbleClassName="bg-blue-600 text-white dark:bg-blue-700"
+          aiBubbleClassName="bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100"
         />
       </div>
 
       {/* 输入框 */}
-      <MessageInput
-        onSend={handleSend}
-        disabled={loading}
-        loading={loading}
-        placeholder="输入消息... (Enter 发送)"
-        maxLength={500}
-      />
+      <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4">
+        <MessageInput
+          onSend={handleSend}
+          disabled={loading}
+          loading={loading}
+          placeholder="输入消息... (Enter 发送)"
+          maxLength={500}
+        />
+      </div>
     </div>
   );
 }

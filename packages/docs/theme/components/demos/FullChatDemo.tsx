@@ -1,9 +1,5 @@
 import { useState, useRef } from "react";
-import {
-  ChatContainer,
-  MessageInput,
-  type ChatMessage,
-} from "@proton-ui/components";
+import { ChatContainer, MessageInput, type ChatMessage } from "@proton-ui/core";
 import { StreamingText } from "@proton-ui/streaming";
 
 /**
