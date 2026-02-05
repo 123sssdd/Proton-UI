@@ -8,7 +8,7 @@
 
 🔗 **GitHub**: [https://github.com/123sssdd/Proton-UI](https://github.com/123sssdd/Proton-UI)
 
-🕹️ **Playground**: [https://proton-ui-playground.vercel.app](https://proton-ui-playground.vercel.app) (施工中) （正在向 赛博朋克风 + 部分像素化调整）（同时尝试增加更多基础组件）（vercel 部署的，需要开代理访问）
+🕹️ **Playground**: [https://proton-ui-playground.vercel.app](https://proton-ui-playground.vercel.app) （vercel 部署的，需要开clash代理访问）（正在向 赛博朋克风 + 部分像素化调整）（同时尝试增加更多基础组件）
 
 📚 **文档**: [https://proton-ui.vercel.app](https://proton-ui.vercel.app) (组件效果预览 修复中，可以先看看架构和组件介绍)
 
