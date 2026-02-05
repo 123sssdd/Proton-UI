@@ -25,7 +25,7 @@ export const DemoBox: React.FC<DemoBoxProps> = ({
   const [isCodeVisible, setIsCodeVisible] = useState(false);
 
   // 属性值状态
-  const [propValues, setPropValues] = useState(() =>
+  const [propValues, setPropValues] = useState<Record<string, unknown>>(() =>
     propsConfig.reduce(
       (acc, prop) => ({
         ...acc,
@@ -132,7 +132,7 @@ function renderPropControl(
         <input
           id={inputId}
           type="checkbox"
-          checked={value}
+          checked={value as boolean}
           onChange={(e) => onChange(e.target.checked)}
           className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
         />
@@ -143,7 +143,7 @@ function renderPropControl(
         <input
           id={inputId}
           type="text"
-          value={value}
+          value={(value as string) || ""}
           onChange={(e) => onChange(e.target.value)}
           className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
@@ -158,11 +158,13 @@ function renderPropControl(
             min={prop.min}
             max={prop.max}
             step={prop.step || 1}
-            value={value}
+            value={(value as number) || 0}
             onChange={(e) => onChange(Number(e.target.value))}
             className="flex-1"
           />
-          <span className="text-sm font-mono w-12 text-right">{value}</span>
+          <span className="text-sm font-mono w-12 text-right">
+            {value as number}
+          </span>
         </div>
       );
 
@@ -170,7 +172,7 @@ function renderPropControl(
       return (
         <select
           id={inputId}
-          value={value}
+          value={(value as string) || ""}
           onChange={(e) => onChange(e.target.value)}
           className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
@@ -188,11 +190,11 @@ function renderPropControl(
           <input
             id={inputId}
             type="color"
-            value={value}
+            value={(value as string) || "#000000"}
             onChange={(e) => onChange(e.target.value)}
             className="w-10 h-10 rounded cursor-pointer"
           />
-          <span className="text-sm font-mono">{value}</span>
+          <span className="text-sm font-mono">{value as string}</span>
         </div>
       );
 

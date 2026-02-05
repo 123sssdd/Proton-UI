@@ -4,7 +4,7 @@ import {
   MessageInput,
   type ChatMessage,
   ParticleEffect,
-} from "@proton-ui/core";
+} from "@proton-ui/components";
 import { StreamingText } from "@proton-ui/streaming";
 import VirtualizedDemo from "./VirtualizedDemo";
 import { ThemeToggle } from "./ThemeToggle";
@@ -114,7 +114,7 @@ export default function App() {
       content: "", // 空内容会显示加载点
       timestamp: new Date(),
       streaming: true,
-      renderContent: (content) => (
+      renderContent: (content: string) => (
         <StreamingText
           content={content}
           className=""

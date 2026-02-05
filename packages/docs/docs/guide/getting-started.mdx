@@ -8,22 +8,24 @@
 
 ## 安装
 
-### 使用 pnpm (推荐)
+### 方式 1: 完整安装 (推荐)
+
+最简单的方式，直接安装 `core` 包，包含所有功能：
 
 ```bash
 pnpm add @proton-ui/core @proton-ui/streaming
 ```
 
-### 使用 npm
+### 方式 2: 按需安装 (Headless / Modular)
+
+如果你只需要特定的组件或逻辑，可以使用细粒度的包：
 
 ```bash
-npm install @proton-ui/core @proton-ui/streaming
-```
+# 仅安装组件库
+pnpm add @proton-ui/components @proton-ui/streaming
 
-### 使用 yarn
-
-```bash
-yarn add @proton-ui/core @proton-ui/streaming
+# 仅安装 Hooks (纯逻辑)
+pnpm add @proton-ui/hooks
 ```
 
 ## 配置 Tailwind CSS

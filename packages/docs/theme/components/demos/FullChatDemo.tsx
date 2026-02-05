@@ -1,5 +1,9 @@
-import { useState, useEffect, useRef } from "react";
-import { ChatContainer, MessageInput } from "@proton-ui/core";
+import { useState, useRef } from "react";
+import {
+  ChatContainer,
+  MessageInput,
+  type ChatMessage,
+} from "@proton-ui/components";
 import { StreamingText } from "@proton-ui/streaming";
 
 /**
@@ -19,7 +23,7 @@ import { StreamingText } from "@proton-ui/streaming";
  * - 加载状态
  */
 export function FullChatDemo() {
-  const [messages, setMessages] = useState<any[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
       role: "assistant",
@@ -63,7 +67,7 @@ export function FullChatDemo() {
 
     // 随机选择一个回复
     const response =
-      aiResponses[Math.floor(Math.random() * aiResponses.length)];
+      aiResponses[Math.floor(Math.random() * aiResponses.length)]!;
 
     // 模拟流式输出
     let index = 0;

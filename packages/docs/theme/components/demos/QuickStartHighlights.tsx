@@ -1,6 +1,5 @@
 import React from "react";
 import { ParticleEffect, PixelatedImage } from "@proton-ui/core";
-import { StreamingText } from "@proton-ui/streaming";
 
 /**
  * QuickStartHighlights - 快速开始页面的核心亮点展示组件
@@ -81,7 +80,7 @@ export const QuickStartHighlights: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* 像素特效卡片 */}
         <a
-          href={highlights[0].link}
+          href={highlights[0]!.link}
           className="block p-6 rounded-lg border-2 transition-all hover:scale-105 hover:shadow-xl"
           style={{
             borderColor: "var(--color-accent, #4ECDC4)",
@@ -92,15 +91,15 @@ export const QuickStartHighlights: React.FC = () => {
           onMouseLeave={() => setShowParticles(false)}
         >
           <div className="text-center">
-            <div className="text-5xl mb-4">{highlights[0].icon}</div>
+            <div className="text-5xl mb-4">{highlights[0]!.icon}</div>
             <h3
               className="text-xl font-bold mb-2"
               style={{ color: "var(--color-accent, #4ECDC4)" }}
             >
-              {highlights[0].title}
+              {highlights[0]!.title}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {highlights[0].description}
+              {highlights[0]!.description}
             </p>
 
             {/* 演示区域 */}
@@ -120,7 +119,7 @@ export const QuickStartHighlights: React.FC = () => {
 
         {/* 主题系统卡片 */}
         <a
-          href={highlights[1].link}
+          href={highlights[1]!.link}
           className="block p-6 rounded-lg border-2 transition-all hover:scale-105 hover:shadow-xl"
           style={{
             borderColor: "var(--color-accent, #FF6B9D)",
@@ -129,15 +128,15 @@ export const QuickStartHighlights: React.FC = () => {
           }}
         >
           <div className="text-center">
-            <div className="text-5xl mb-4">{highlights[1].icon}</div>
+            <div className="text-5xl mb-4">{highlights[1]!.icon}</div>
             <h3
               className="text-xl font-bold mb-2"
               style={{ color: "var(--color-accent, #FF6B9D)" }}
             >
-              {highlights[1].title}
+              {highlights[1]!.title}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {highlights[1].description}
+              {highlights[1]!.description}
             </p>
 
             {/* 演示区域 - 主题色块 */}
@@ -173,7 +172,7 @@ export const QuickStartHighlights: React.FC = () => {
 
         {/* 流式渲染卡片 */}
         <a
-          href={highlights[2].link}
+          href={highlights[2]!.link}
           className="block p-6 rounded-lg border-2 transition-all hover:scale-105 hover:shadow-xl"
           style={{
             borderColor: "var(--color-accent, #667EEA)",
@@ -182,15 +181,15 @@ export const QuickStartHighlights: React.FC = () => {
           }}
         >
           <div className="text-center">
-            <div className="text-5xl mb-4">{highlights[2].icon}</div>
+            <div className="text-5xl mb-4">{highlights[2]!.icon}</div>
             <h3
               className="text-xl font-bold mb-2"
               style={{ color: "var(--color-accent, #667EEA)" }}
             >
-              {highlights[2].title}
+              {highlights[2]!.title}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {highlights[2].description}
+              {highlights[2]!.description}
             </p>
 
             {/* 演示区域 - 流式文本 */}

@@ -1,0 +1,55 @@
+/**
+ * 间距令牌 - 像素风UI设计系统
+ * 基于 8px 像素网格系统，融合日系"间"的概念
+ */
+
+:root {
+  /* ========== 基准间距刻度 ========== */
+  --spacing-0: 0px;
+  --spacing-1: 4px; /* 0.25rem - 最小单位 */
+  --spacing-2: 8px; /* 0.5rem - 基准单位 */
+  --spacing-3: 12px; /* 0.75rem */
+  --spacing-4: 16px; /* 1rem */
+  --spacing-6: 24px; /* 1.5rem */
+  --spacing-8: 32px; /* 2rem */
+  --spacing-12: 48px; /* 3rem */
+  --spacing-16: 64px; /* 4rem */
+  --spacing-20: 80px; /* 5rem */
+  --spacing-24: 96px; /* 6rem */
+
+  /* ========== 组件内间距（Padding）========== */
+  --padding-compact: var(--spacing-2); /* 8px - 紧凑 */
+  --padding-standard: var(--spacing-3); /* 12px - 标准 */
+  --padding-comfortable: var(--spacing-4); /* 16px - 舒适 */
+  --padding-spacious: var(--spacing-6); /* 24px - 宽松 */
+
+  /* ========== 组件间间距（Margin）========== */
+  --margin-same: var(--spacing-2); /* 8px - 同类元素 */
+  --margin-related: var(--spacing-4); /* 16px - 相关元素 */
+  --margin-group: var(--spacing-6); /* 24px - 不同组 */
+  --margin-section: var(--spacing-8); /* 32px - 区块分隔 */
+  --margin-page: var(--spacing-12); /* 48px - 页面分隔 */
+
+  /* ========== 组件尺寸约束 ========== */
+  --min-touch-target: 44px; /* 移动端最小触摸目标 */
+  --min-click-target: 32px; /* 桌面端最小点击目标 */
+  --min-text-container: 32px; /* 最小文本容器高度 */
+
+  /* ========== 按钮高度 ========== */
+  --button-height-sm: 32px;
+  --button-height-md: 40px;
+  --button-height-lg: 48px;
+}
+
+/* ========== 内容密度级别 ========== */
+[data-density="compact"] {
+  --padding-standard: 9px; /* 标准 padding 减少 25% */
+  --padding-comfortable: 12px;
+  --padding-spacious: 18px;
+}
+
+[data-density="spacious"] {
+  --padding-standard: 18px; /* 标准 padding 增加 50% */
+  --padding-comfortable: 24px;
+  --padding-spacious: 36px;
+}

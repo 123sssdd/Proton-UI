@@ -1,11 +1,11 @@
-import { defineConfig } from "rspress/config";
+import { defineConfig, UserConfig } from "rspress/config";
 // import { pluginPlayground } from "@rspress/plugin-playground";
 import path from "path";
 import { fileURLToPath } from "url";
 // --- ESM 路径兼容处理 ---
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
+const config: UserConfig = defineConfig({
   root: path.join(__dirname, "docs"),
   title: "Proton UI",
   description: "面向 AI 对话场景的现代化 React 组件库 🎮",
@@ -225,3 +225,5 @@ export default defineConfig({
     },
   },
 });
+
+export default config;

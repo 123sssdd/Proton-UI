@@ -1,0 +1,60 @@
+# 多阶段构建 Dockerfile - Playground
+# 阶段 1: 构建阶段
+FROM node:18-alpine AS builder
+
+# 设置工作目录
+WORKDIR /app
+
+# 安装 pnpm
+RUN npm install -g pnpm@8.15.3
+
+# 复制 package.json 和 lock 文件
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/core/package.json ./packages/core/
+COPY packages/streaming/package.json ./packages/streaming/
+COPY apps/playground/package.json ./apps/playground/
+COPY configs/typescript-config/package.json ./configs/typescript-config/
+
+# 安装依赖
+RUN pnpm install --frozen-lockfile
+
+# 复制所有源代码
+COPY . .
+
+# 构建项目
+RUN pnpm build --filter=@proton-ui/playground
+
+# 阶段 2: Playground 生产镜像
+FROM nginx:alpine AS playground
+
+# 复制构建产物
+COPY --from=builder /app/apps/playground/dist /usr/share/nginx/html
+
+# 创建 Nginx 配置
+RUN echo 'server { \
+    listen 80; \
+    server_name localhost; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    \
+    gzip on; \
+    gzip_vary on; \
+    gzip_min_length 1024; \
+    gzip_comp_level 6; \
+    gzip_types text/plain text/css text/javascript application/json application/javascript; \
+    \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+    \
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ { \
+        expires 1y; \
+        add_header Cache-Control "public, immutable"; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
+# 暴露端口
+EXPOSE 80
+
+# 启动 Nginx
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,32 @@
+/**
+ * 暗色主题 - 像素风UI设计系统
+ * 深色夜景 + 霓虹青强调色
+ */
+
+[data-theme="dark"] {
+  /* 主色调 */
+  --color-bg-primary: #1a1d2e;
+  --color-bg-secondary: #252836;
+  --color-text-primary: #e8e4db;
+  --color-text-secondary: #a8a4a0;
+  --color-accent: #4ecdc4;
+  --color-highlight: #ff6b9d;
+
+  /* 语义色（暗色变体） */
+  --color-success: #7fd99f;
+  --color-warning: #ffb86c;
+  --color-error: #ff6b6b;
+  --color-info: #6bbaff;
+
+  /* 边框颜色 */
+  --border-color-default: rgba(168, 164, 160, 0.4);
+  --border-color-light: rgba(168, 164, 160, 0.2);
+  --border-color-dark: rgba(168, 164, 160, 0.6);
+
+  /* 阴影 */
+  --shadow-pixel-sm: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  --shadow-pixel-md: 4px 4px 0px rgba(0, 0, 0, 0.4);
+  --shadow-pixel-lg: 6px 6px 0px rgba(0, 0, 0, 0.5);
+  --shadow-pixel-xl: 8px 8px 0px rgba(0, 0, 0, 0.6);
+  --shadow-focus: 0 0 0 4px rgba(78, 205, 196, 0.2);
+}

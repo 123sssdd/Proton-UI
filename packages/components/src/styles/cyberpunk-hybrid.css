@@ -1,0 +1,124 @@
+/* Cyberpunk Hybrid Style System */
+/* Fusion of Cyberpunk aesthetics (Neon, Glitch, Glassmorphism) with Partial Pixelation */
+
+@layer components {
+  /* --- Hybrid Container --- */
+  .hybrid-glass {
+    background: rgba(16, 20, 30, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.2),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  /* --- Hybrid Border Decoration --- */
+  /* Partial pixelation: corners only */
+  .border-deco-hybrid {
+    position: relative;
+    border: 1px solid rgba(0, 243, 255, 0.3); /* Cyan tint */
+    clip-path: polygon(
+      0% 10px,
+      /* Top-left cut */ 10px 0%,
+      /* Top-left cut */ 100% 0%,
+      100% calc(100% - 10px),
+      /* Bottom-right cut */ calc(100% - 10px) 100%,
+      /* Bottom-right cut */ 0% 100%
+    );
+  }
+
+  /* Pixelated corner accents using pseudo-elements */
+  .border-deco-hybrid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--pixel-accent-cyan, #0ff);
+    border-left: 2px solid var(--pixel-accent-cyan, #0ff);
+    clip-path: polygon(0 0, 100% 0, 100% 2px, 2px 2px, 2px 100%, 0 100%);
+  }
+
+  .border-deco-hybrid::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--pixel-accent-pink, #f0f);
+    border-right: 2px solid var(--pixel-accent-pink, #f0f);
+    clip-path: polygon(
+      calc(100% - 2px) 0,
+      100% 0,
+      100% 100%,
+      0 100%,
+      0 calc(100% - 2px),
+      calc(100% - 2px) calc(100% - 2px)
+    );
+  }
+
+  /* --- Neon Glitch Text --- */
+  .text-hybrid-glitch {
+    position: relative;
+    color: var(--pixel-text-primary, #fff);
+  }
+
+  .text-hybrid-glitch:hover {
+    text-shadow:
+      2px 0 var(--pixel-accent-pink, #f0f),
+      -2px 0 var(--pixel-accent-cyan, #0ff);
+    animation: hybrid-glitch-anim 0.3s infinite;
+  }
+
+  /* --- Hybrid Button --- */
+  .btn-hybrid {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-hybrid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 243, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+    transform: skewX(-20deg);
+  }
+
+  .btn-hybrid:hover::before {
+    left: 100%;
+  }
+}
+
+@keyframes hybrid-glitch-anim {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}

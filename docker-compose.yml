@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # Docs 文档站点
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: docs
+    container_name: proton-ui-docs
+    ports:
+      - "3001:80" # 映射到宿主机 3001 端口
+    restart: unless-stopped
+    networks:
+      - proton-ui-network
+
+  # Playground 演示站点
+  playground:
+    build:
+      context: .
+      dockerfile: Dockerfile.playground
+      target: playground
+    container_name: proton-ui-playground
+    ports:
+      - "3002:80" # 映射到宿主机 3002 端口
+    restart: unless-stopped
+    networks:
+      - proton-ui-network
+
+networks:
+  proton-ui-network:
+    driver: bridge

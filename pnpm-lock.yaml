@@ -47,12 +47,21 @@ importers:
 
   apps/playground:
     dependencies:
+      '@proton-ui/components':
+        specifier: workspace:*
+        version: link:../../packages/components
       '@proton-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@proton-ui/hooks':
+        specifier: workspace:*
+        version: link:../../packages/hooks
       '@proton-ui/streaming':
         specifier: workspace:*
         version: link:../../packages/streaming
+      '@proton-ui/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -126,11 +135,23 @@ importers:
 
   configs/typescript-config: {}
 
-  packages/core:
+  packages/components:
     dependencies:
+      '@proton-ui/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@proton-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.0.0
+        version: 18.3.1(react@18.3.1)
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@18.3.27)(react@18.3.1)
@@ -146,6 +167,40 @@ importers:
       tailwind-merge:
         specifier: ^2.2.0
         version: 2.6.1
+    devDependencies:
+      '@proton-ui/typescript-config':
+        specifier: workspace:*
+        version: link:../../configs/typescript-config
+      '@tailwindcss/typography':
+        specifier: ^0.5.19
+        version: 0.5.19(tailwindcss@3.4.19)
+      '@types/react':
+        specifier: ^18.2.48
+        version: 18.3.27
+      '@types/react-dom':
+        specifier: ^18.2.18
+        version: 18.3.7(@types/react@18.3.27)
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.19(tsx@4.21.0)
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/core:
+    dependencies:
+      '@proton-ui/components':
+        specifier: workspace:*
+        version: link:../components
+      '@proton-ui/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@proton-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
       '@proton-ui/eslint-config':
         specifier: workspace:*
@@ -186,12 +241,21 @@ importers:
 
   packages/docs:
     dependencies:
+      '@proton-ui/components':
+        specifier: workspace:*
+        version: link:../components
       '@proton-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@proton-ui/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@proton-ui/streaming':
         specifier: workspace:*
         version: link:../streaming
+      '@proton-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -199,6 +263,9 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@proton-ui/typescript-config':
+        specifier: workspace:^
+        version: link:../../configs/typescript-config
       '@rspress/core':
         specifier: ^1.47.1
         version: 1.47.1(tslib@2.8.1)(webpack@5.104.1)
@@ -223,6 +290,31 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.19(tsx@4.21.0)
+
+  packages/hooks:
+    dependencies:
+      '@proton-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.0.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@proton-ui/typescript-config':
+        specifier: workspace:*
+        version: link:../../configs/typescript-config
+      '@types/react':
+        specifier: ^18.2.48
+        version: 18.3.27
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
 
   packages/streaming:
     dependencies:
@@ -256,6 +348,18 @@ importers:
         version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/utils:
+    devDependencies:
+      '@proton-ui/typescript-config':
+        specifier: workspace:*
+        version: link:../../configs/typescript-config
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
         version: 5.9.3
 
 packages:

@@ -5,7 +5,7 @@ import { BackToTop } from "./components/BackToTop";
 import { LogoCat } from "./components/LogoCat";
 import { CoreFeatures } from "./components/CoreFeatures";
 import { ScrollDownButton } from "./components/ScrollDownButton";
-import { TechStackTags } from "./components/TechStackTags";
+
 import { useNavbarHide } from "./hooks";
 import "@proton-ui/core/styles/pixel-theme.css";
 import "@proton-ui/core/styles/pixel-utilities.css";
@@ -72,7 +72,7 @@ const Layout = () => {
         ];
         setInterval(() => {
           frame = (frame + 1) % frames.length;
-          catImg.src = frames[frame];
+          catImg.src = frames[frame] ?? "";
         }, 500);
 
         catContainer.appendChild(catImg);

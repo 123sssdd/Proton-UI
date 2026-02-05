@@ -2,11 +2,25 @@
   "extends": "@proton-ui/typescript-config/react.json",
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": "../../",
     "baseUrl": ".",
+    "noEmit": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@proton-ui/core": ["../../packages/core/src/index.ts"],
+      "@proton-ui/components": ["../../packages/components/src/index.ts"],
+      "@proton-ui/hooks": ["../../packages/hooks/src/index.ts"],
+      "@proton-ui/utils": ["../../packages/utils/src/index.ts"],
+      "@proton-ui/streaming": ["../../packages/streaming/src/index.ts"]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "../../packages/core/src",
+    "../../packages/components/src",
+    "../../packages/hooks/src",
+    "../../packages/utils/src",
+    "../../packages/streaming/src"
+  ],
   "exclude": ["node_modules", "dist"]
 }

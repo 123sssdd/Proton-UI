@@ -1,0 +1,103 @@
+/**
+ * 字体令牌 - 像素风UI设计系统
+ * 高可读性像素字体系统
+ */
+
+:root {
+  /* ========== 字体家族 ========== */
+  --font-pixel: "Press Start 2P", "Courier New", monospace;
+  --font-mono: "Courier New", "Consolas", monospace;
+
+  /* ========== 字号层级 ========== */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+
+  /* ========== 行高 ========== */
+  --line-height-xs: 16px; /* 1.33 */
+  --line-height-sm: 20px; /* 1.43 */
+  --line-height-base: 24px; /* 1.5 */
+  --line-height-lg: 28px; /* 1.4 */
+  --line-height-xl: 32px; /* 1.33 */
+  --line-height-2xl: 40px; /* 1.25 */
+
+  /* ========== 字重 ========== */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* ========== 字符间距 ========== */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+}
+
+/* ========== 字体渲染规则（像素完美）========== */
+body {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-regular);
+
+  /* 禁用字体平滑以保持像素边界 */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+
+  /* 优化渲染速度 */
+  text-rendering: optimizeSpeed;
+}
+
+/* ========== 字体工具类 ========== */
+.font-pixel {
+  font-family: var(--font-pixel);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-xs {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.text-base {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+}
+
+.text-2xl {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+}
+
+.font-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}

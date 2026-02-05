@@ -7,7 +7,10 @@ Proton UI 采用 Monorepo 架构，基于 pnpm + Turborepo 构建，提供高效
 ```
 Proton-ui/
 ├── packages/              # 核心包
-│   ├── core/             # 核心组件库
+│   ├── core/             # 元包 (Meta-package)
+│   ├── components/       # UI 组件库 (Headless + Styled)
+│   ├── hooks/            # React Hooks (Headless Logic)
+│   ├── utils/            # 工具函数与类型
 │   ├── streaming/        # 流式渲染引擎
 │   └── docs/             # 文档站点
 ├── apps/                 # 应用
@@ -34,54 +37,64 @@ graph TB
 
     subgraph "组件层"
         C[@proton-ui/core]
-        D[@proton-ui/streaming]
+        D[@proton-ui/components]
+        E[@proton-ui/hooks]
+        F[@proton-ui/utils]
+        G[@proton-ui/streaming]
     end
 
     subgraph "配置层"
-        E[eslint-config]
-        F[typescript-config]
-        G[tailwind-config]
+        H[eslint-config]
+        I[typescript-config]
+        J[tailwind-config]
     end
 
     A --> C
-    A --> D
+    A --> G
     B --> C
-    B --> D
+    B --> G
+
     C --> D
     C --> E
     C --> F
-    C --> G
+
     D --> E
     D --> F
+
+    E --> F
+
+    G --> F
 ```
 
 ## 核心包
 
 ### @proton-ui/core
 
-核心组件库，包含所有基础组件和对话组件。
+元包 (Meta-package)，重新导出所有其它包的内容，确保向后兼容性。仅仅作为一个统一入口使用。
+
+### @proton-ui/components
+
+包含所有的 UI 组件（Headless 逻辑 + 默认样式）。
 
 **主要功能：**
 
-- 基础组件（Button、Input、Card）
-- 对话组件（Message、ChatContainer、MessageInput）
-- 主题系统（ThemeProvider、defaultTheme）
-- 工具函数（cn）
+- 基础组件（Button, Input, Card）
+- 对话组件（Message, ChatContainer）
+- 视觉组件（ParticleEffect, PixelatedImage）
 
-**技术栈：**
+### @proton-ui/hooks
 
-- React 18
-- TypeScript
-- Tailwind CSS
-- react-markdown
-- rehype-highlight
+纯逻辑层，包含所有自定义 React Hooks，实现 Headless UI 理念。
 
-**构建配置：**
+**主要 Hooks：**
 
-- 使用 tsup 构建
-- 输出 ESM 和 CJS 格式
-- 生成类型声明文件
-- 支持 tree-shaking
+- `useParticles`: 粒子系统逻辑
+- `usePixelTheme`: 主题系统逻辑
+- `usePixelate`: 图片像素化逻辑
+
+### @proton-ui/utils
+
+底层工具库，包含共享的帮助函数和类型定义。
 
 ### @proton-ui/streaming
 

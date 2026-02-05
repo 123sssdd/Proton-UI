@@ -75,11 +75,10 @@ export function PixelatedImageDemo() {
   ];
 
   // 状态
-  const [currentImage, setCurrentImage] = useState(exampleImages[0].url);
+  const [currentImage, setCurrentImage] = useState(exampleImages[0]!.url);
   const [activePreset, setActivePreset] = useState<PresetName>("retro8bit");
   const [pixelSize, setPixelSize] = useState(presets.retro8bit.pixelSize);
   const [colorLevels, setColorLevels] = useState(presets.retro8bit.colorLevels);
-  const [showComparison, setShowComparison] = useState(false);
 
   // 处理预设选择
   const handlePresetSelect = (preset: PresetName) => {

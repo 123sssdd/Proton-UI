@@ -129,7 +129,7 @@ export const ThemeCustomizer: React.FC = () => {
 
   const handlePresetChange = (presetName: string) => {
     setSelectedPreset(presetName);
-    setColors(presetThemes[presetName]);
+    setColors(presetThemes[presetName]!);
   };
 
   const exportTheme = () => {
@@ -194,10 +194,10 @@ export default customTheme;`;
               }`}
             >
               <div className="text-2xl mb-1">
-                {presetLabels[presetName].icon}
+                {presetLabels[presetName]!.icon}
               </div>
               <div className="text-xs font-medium">
-                {presetLabels[presetName].name}
+                {presetLabels[presetName]!.name}
               </div>
             </button>
           ))}

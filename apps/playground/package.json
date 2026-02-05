@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@proton-ui/core": "workspace:*",
+    "@proton-ui/components": "workspace:*",
+    "@proton-ui/hooks": "workspace:*",
+    "@proton-ui/utils": "workspace:*",
     "@proton-ui/streaming": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

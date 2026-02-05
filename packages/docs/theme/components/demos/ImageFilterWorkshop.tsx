@@ -38,8 +38,12 @@ function debounce<T extends (...args: unknown[]) => unknown>(
 export function ImageFilterWorkshop() {
   // 状态管理
   const [currentImage, setCurrentImage] = useState<string>(
-    DEFAULT_EXAMPLES[0].url
+    DEFAULT_EXAMPLES[0]!.url
   );
+
+  // ... (keeping other lines same if possible, but replace needs context)
+  // Actually I will do separate replaces for precision.
+
   const [pixelSize, setPixelSize] = useState<number>(8);
   const [colorLevels, setColorLevels] = useState<number>(16);
   const [activePreset, setActivePreset] = useState<PresetName | "custom">(
@@ -66,8 +70,8 @@ export function ImageFilterWorkshop() {
    */
   const handlePixelSizeChange = useMemo(
     () =>
-      debounce((value: number) => {
-        setPixelSize(value);
+      debounce((value: unknown) => {
+        setPixelSize(value as number);
         setActivePreset("custom");
         setIsProcessing(true);
         // 模拟处理延迟
@@ -81,8 +85,8 @@ export function ImageFilterWorkshop() {
    */
   const handleColorLevelsChange = useMemo(
     () =>
-      debounce((value: number) => {
-        setColorLevels(value);
+      debounce((value: unknown) => {
+        setColorLevels(value as number);
         setActivePreset("custom");
         setIsProcessing(true);
         // 模拟处理延迟

@@ -184,7 +184,6 @@ function hello() {
               content={content3}
               batchSize={batchSize}
               maxFPS={maxFPS}
-              enablePerformanceMonitoring={showPerf}
             />
           </div>
         </div>

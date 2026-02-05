@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ParticleEffect } from "@proton-ui/core";
+import { ParticleEffect } from "@proton-ui/components";
 import "./index.css";
 
 /**

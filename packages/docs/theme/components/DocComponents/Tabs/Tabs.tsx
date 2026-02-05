@@ -14,7 +14,8 @@ export const Tabs: React.FC<TabsProps> = ({
   syncWithUrl = false,
 }) => {
   const childrenArray = Children.toArray(children).filter(isValidElement);
-  const firstTabId = childrenArray[0]?.props?.id;
+  const firstTabId = (childrenArray[0] as React.ReactElement<TabPanelProps>)
+    ?.props?.id;
 
   // 从 URL 哈希获取初始标签页
   const getInitialTab = () => {

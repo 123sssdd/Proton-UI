@@ -1,0 +1,112 @@
+/**
+ * 边框与圆角令牌 - 像素风UI设计系统
+ * 符合像素风格的边框和圆角规范
+ */
+
+:root {
+  /* ========== 圆角半径 ========== */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ========== 边框宽度 ========== */
+  --border-thin: 1px;
+  --border-base: 2px;
+  --border-thick: 3px;
+  --border-heavy: 4px;
+
+  /* ========== 边框颜色 ========== */
+  --border-color-default: rgba(90, 90, 90, 0.4); /* text-secondary + 40% */
+  --border-color-light: rgba(90, 90, 90, 0.2); /* text-secondary + 20% */
+  --border-color-dark: rgba(90, 90, 90, 0.6); /* text-secondary + 60% */
+  --border-color-accent: var(--color-accent);
+  --border-color-error: var(--color-error);
+}
+
+[data-theme="dark"] {
+  --border-color-default: rgba(168, 164, 160, 0.4);
+  --border-color-light: rgba(168, 164, 160, 0.2);
+  --border-color-dark: rgba(168, 164, 160, 0.6);
+}
+
+/* ========== 边框工具类 ========== */
+.border-thin {
+  border-width: var(--border-thin);
+}
+
+.border-base {
+  border-width: var(--border-base);
+}
+
+.border-thick {
+  border-width: var(--border-thick);
+}
+
+.border-heavy {
+  border-width: var(--border-heavy);
+}
+
+.border-default {
+  border-color: var(--border-color-default);
+}
+
+.border-light {
+  border-color: var(--border-color-light);
+}
+
+.border-dark {
+  border-color: var(--border-color-dark);
+}
+
+.border-accent {
+  border-color: var(--border-color-accent);
+}
+
+.border-error {
+  border-color: var(--border-color-error);
+}
+
+/* ========== 圆角工具类 ========== */
+.rounded-none {
+  border-radius: var(--radius-none);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* ========== 边框样式 ========== */
+.border-solid {
+  border-style: solid;
+}
+
+.border-dashed {
+  border-style: dashed;
+}
+
+.border-dotted {
+  border-style: dotted;
+}
+
+.border-double {
+  border-style: double;
+}

@@ -13,7 +13,7 @@ export const LogoCat: React.FC = () => {
   const [currentFrame, setCurrentFrame] = useState(0);
 
   useEffect(() => {
-    const animation = logoAnimations[0];
+    const animation = logoAnimations[0]!;
     const frameInterval = animation.duration / animation.frames.length;
 
     const interval = setInterval(() => {
@@ -29,7 +29,7 @@ export const LogoCat: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const currentFrameSrc = logoAnimations[0].frames[currentFrame];
+  const currentFrameSrc = logoAnimations[0]?.frames[currentFrame] ?? "";
 
   return (
     <div

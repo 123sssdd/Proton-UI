@@ -8,10 +8,19 @@ import { useState, useEffect } from "react";
  * 模拟真实的 AI 对话流式渲染效果
  */
 export function StreamingChatDemo() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<
+    Array<{
+      id: string;
+      role: "user" | "assistant";
+      content: string;
+      timestamp: Date;
+      streaming?: boolean;
+      renderContent?: (text: string) => React.ReactNode;
+    }>
+  >([
     {
       id: "1",
-      role: "user" as const,
+      role: "user",
       content: "请介绍一下流式渲染",
       timestamp: new Date(),
     },
@@ -47,7 +56,7 @@ export function StreamingChatDemo() {
   useEffect(() => {
     if (streamingContent) {
       setMessages([
-        messages[0],
+        messages[0]!,
         {
           id: "2",
           role: "assistant" as const,
