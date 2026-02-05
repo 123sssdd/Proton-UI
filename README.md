@@ -2,7 +2,7 @@
 
 直奔主题：我开源了 **[Proton UI](https://github.com/123sssdd/Proton-UI)**，这是一个**AI 原生**的**赛博朋克风（或许） React 组件库**。
 
-💡Tip：因为是 headless 架构，佬们也可以只导入 hooks 包（基础组件逻辑&流式输出&虚拟补全&RAF节流），自己写UI定制组件，playground 只是一个范例
+💡Tip：因为是 headless 架构，佬们也可以只导入 hooks 和 streaming 包（基础组件逻辑&流式输出&虚拟补全&RAF节流），自己写UI定制组件，playground 的赛博朋克风 只是一个范例
 
 # **⚠️⚠️⚠️风格倾向： 赛博朋克风 + 部分像素化处理，佬们可以提提建议！！！（技术力有限，正在尝试）**
 
