@@ -2,6 +2,76 @@
 
 卡片组件用于展示内容和操作，提供像素风格的视觉效果和灵活的组合模式。
 
+## 像素风主题 (Pixel Themes)
+
+Card 组件的主题不仅改变颜色，还改变边框风格和独特装饰。
+
+<DemoBox
+  title="主题卡片"
+  description="展示不同风格的像素卡片容器"
+  showCode={true}
+  code={`import { Card, Button } from "@proton-ui/core";
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <Card pixelTheme="retro-futurism" decoration="scanline">
+    <Card.Header title="Retro Dashboard" subtitle="System Online" />
+    <Card.Body>
+       <p className="text-sm opacity-80">Connected to mainframe via secure shell.</p>
+    </Card.Body>
+     <Card.Footer>
+        <Button pixelTheme="retro-futurism" size="sm" glow>ACCESS</Button>
+     </Card.Footer>
+  </Card>
+
+   <Card pixelTheme="neo-tokyo">
+    <Card.Header title="Neo Tokyo" subtitle="Glass Effect" />
+    <Card.Body>
+       <p className="text-sm opacity-80">Futuristic glassmorphism with blur.</p>
+    </Card.Body>
+  </Card>
+</div>`}
+  language="tsx"
+>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <Card pixelTheme="retro-futurism" decoration="scanline">
+      <Card.Header title="Retro Dashboard" subtitle="System Online" />
+      <Card.Body>
+         <p className="text-sm opacity-80">Connected to mainframe via secure shell.</p>
+      </Card.Body>
+       <Card.Footer>
+          <Button pixelTheme="retro-futurism" size="sm" glow>ACCESS</Button>
+       </Card.Footer>
+    </Card>
+
+     <Card pixelTheme="neo-tokyo">
+      <Card.Header title="Neo Tokyo" subtitle="Glass Effect" />
+      <Card.Body>
+         <p className="text-sm opacity-80">Futuristic glassmorphism with blur.</p>
+      </Card.Body>
+    </Card>
+
+  </div>
+</DemoBox>
+
+<PropsTable
+  data={[
+    {
+      name: "pixelTheme",
+      type: '"retro-futurism" | "neo-tokyo" | "cyber-shrine" | "dreamy-lofi" | "vaporwave"',
+      required: false,
+      defaultValue: "-",
+      description: "应用预设的像素艺术主题样式",
+    },
+    {
+      name: "decoration",
+      type: '"scanline" | "rivets" | "none"',
+      required: false,
+      defaultValue: "none",
+      description: "应用额外的装饰效果（如扫描线、铆钉）",
+    },
+  ]}
+/>
+
 ## 基础用法
 
 Card 组件提供简洁的容器样式，可以通过 `padding` 和 `shadow` 属性调整外观。
@@ -409,76 +479,6 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   - **平板端 (640px - 1024px)**: 2 列
   - **桌面端 (≥ 1024px)**: 3 列
 </Callout>
-
-## 像素风主题 (Pixel Themes)
-
-Card 组件的主题不仅改变颜色，还改变边框风格和独特装饰。
-
-<DemoBox
-  title="主题卡片"
-  description="展示不同风格的像素卡片容器"
-  showCode={true}
-  code={`import { Card, Button } from "@proton-ui/core";
-
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <Card pixelTheme="retro-futurism" decoration="scanline">
-    <Card.Header title="Retro Dashboard" subtitle="System Online" />
-    <Card.Body>
-       <p className="text-sm opacity-80">Connected to mainframe via secure shell.</p>
-    </Card.Body>
-     <Card.Footer>
-        <Button pixelTheme="retro-futurism" size="sm" glow>ACCESS</Button>
-     </Card.Footer>
-  </Card>
-
-   <Card pixelTheme="neo-tokyo">
-    <Card.Header title="Neo Tokyo" subtitle="Glass Effect" />
-    <Card.Body>
-       <p className="text-sm opacity-80">Futuristic glassmorphism with blur.</p>
-    </Card.Body>
-  </Card>
-</div>`}
-  language="tsx"
->
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <Card pixelTheme="retro-futurism" decoration="scanline">
-      <Card.Header title="Retro Dashboard" subtitle="System Online" />
-      <Card.Body>
-         <p className="text-sm opacity-80">Connected to mainframe via secure shell.</p>
-      </Card.Body>
-       <Card.Footer>
-          <Button pixelTheme="retro-futurism" size="sm" glow>ACCESS</Button>
-       </Card.Footer>
-    </Card>
-
-     <Card pixelTheme="neo-tokyo">
-      <Card.Header title="Neo Tokyo" subtitle="Glass Effect" />
-      <Card.Body>
-         <p className="text-sm opacity-80">Futuristic glassmorphism with blur.</p>
-      </Card.Body>
-    </Card>
-
-  </div>
-</DemoBox>
-
-<PropsTable
-  data={[
-    {
-      name: "pixelTheme",
-      type: '"retro-futurism" | "neo-tokyo" | "cyber-shrine" | "dreamy-lofi" | "vaporwave"',
-      required: false,
-      defaultValue: "-",
-      description: "应用预设的像素艺术主题样式",
-    },
-    {
-      name: "decoration",
-      type: '"scanline" | "rivets" | "none"',
-      required: false,
-      defaultValue: "none",
-      description: "应用额外的装饰效果（如扫描线、铆钉）",
-    },
-  ]}
-/>
 
 ## API
 

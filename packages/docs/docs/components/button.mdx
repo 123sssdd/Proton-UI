@@ -2,6 +2,71 @@
 
 按钮组件用于触发操作和事件，提供像素风格的视觉效果和完整的交互反馈。
 
+## 像素风主题 (Pixel Themes)
+
+Button 组件内置了多种像素艺术主题，配合 `decoration` 属性可以创建独特的视觉效果。
+
+<DemoBox
+  title="主题展示"
+  description="支持 Retro Futurism, Neo Tokyo, Cyber Shrine 等主题"
+  showCode={true}
+  code={`import { Button } from "@proton-ui/core";
+
+<div className="flex flex-wrap gap-4 items-center">
+  <Button pixelTheme="retro-futurism" glow>Retro Neon</Button>
+  <Button pixelTheme="retro-futurism" decoration="rivets">Metal Rivets</Button>
+
+<Button pixelTheme="neo-tokyo">Neo Tokyo</Button>
+<Button pixelTheme="neo-tokyo" decoration="glitch">
+  Glitch Effect
+</Button>
+
+  <Button pixelTheme="cyber-shrine">Cyber Shrine</Button>
+  <Button pixelTheme="dreamy-lofi">Dreamy Lofi</Button>
+  <Button pixelTheme="vaporwave">Vaporwave</Button>
+</div>`}
+  language="tsx"
+>
+  <div className="flex flex-wrap gap-4 items-center">
+    <Button pixelTheme="retro-futurism" glow>Retro Neon</Button>
+    <Button pixelTheme="retro-futurism" decoration="rivets">Metal Rivets</Button>
+
+    <Button pixelTheme="neo-tokyo">Neo Tokyo</Button>
+    <Button pixelTheme="neo-tokyo" decoration="glitch">Glitch Effect</Button>
+
+    <Button pixelTheme="cyber-shrine">Cyber Shrine</Button>
+    <Button pixelTheme="dreamy-lofi">Dreamy Lofi</Button>
+    <Button pixelTheme="vaporwave">Vaporwave</Button>
+
+  </div>
+</DemoBox>
+
+<PropsTable
+  data={[
+    {
+      name: "pixelTheme",
+      type: '"retro-futurism" | "neo-tokyo" | "cyber-shrine" | "dreamy-lofi" | "vaporwave"',
+      required: false,
+      defaultValue: "-",
+      description: "应用预设的像素艺术主题样式",
+    },
+    {
+      name: "decoration",
+      type: '"glitch" | "rivets" | "none"',
+      required: false,
+      defaultValue: "none",
+      description: "应用额外的装饰效果",
+    },
+    {
+      name: "glow",
+      type: "boolean",
+      required: false,
+      defaultValue: "false",
+      description: "是否启用发光效果（主要用于 retro-futurism）",
+    },
+  ]}
+/>
+
 ## 基础用法
 
 使用 `variant`、`size` 等属性来定义按钮的样式。
@@ -277,71 +342,6 @@ const PlusIcon = () => (
     </Button>
   </div>
 </DemoBox>
-
-## 像素风主题 (Pixel Themes)
-
-Button 组件内置了多种像素艺术主题，配合 `decoration` 属性可以创建独特的视觉效果。
-
-<DemoBox
-  title="主题展示"
-  description="支持 Retro Futurism, Neo Tokyo, Cyber Shrine 等主题"
-  showCode={true}
-  code={`import { Button } from "@proton-ui/core";
-
-<div className="flex flex-wrap gap-4 items-center">
-  <Button pixelTheme="retro-futurism" glow>Retro Neon</Button>
-  <Button pixelTheme="retro-futurism" decoration="rivets">Metal Rivets</Button>
-
-<Button pixelTheme="neo-tokyo">Neo Tokyo</Button>
-<Button pixelTheme="neo-tokyo" decoration="glitch">
-  Glitch Effect
-</Button>
-
-  <Button pixelTheme="cyber-shrine">Cyber Shrine</Button>
-  <Button pixelTheme="dreamy-lofi">Dreamy Lofi</Button>
-  <Button pixelTheme="vaporwave">Vaporwave</Button>
-</div>`}
-  language="tsx"
->
-  <div className="flex flex-wrap gap-4 items-center">
-    <Button pixelTheme="retro-futurism" glow>Retro Neon</Button>
-    <Button pixelTheme="retro-futurism" decoration="rivets">Metal Rivets</Button>
-
-    <Button pixelTheme="neo-tokyo">Neo Tokyo</Button>
-    <Button pixelTheme="neo-tokyo" decoration="glitch">Glitch Effect</Button>
-
-    <Button pixelTheme="cyber-shrine">Cyber Shrine</Button>
-    <Button pixelTheme="dreamy-lofi">Dreamy Lofi</Button>
-    <Button pixelTheme="vaporwave">Vaporwave</Button>
-
-  </div>
-</DemoBox>
-
-<PropsTable
-  data={[
-    {
-      name: "pixelTheme",
-      type: '"retro-futurism" | "neo-tokyo" | "cyber-shrine" | "dreamy-lofi" | "vaporwave"',
-      required: false,
-      defaultValue: "-",
-      description: "应用预设的像素艺术主题样式",
-    },
-    {
-      name: "decoration",
-      type: '"glitch" | "rivets" | "none"',
-      required: false,
-      defaultValue: "none",
-      description: "应用额外的装饰效果",
-    },
-    {
-      name: "glow",
-      type: "boolean",
-      required: false,
-      defaultValue: "false",
-      description: "是否启用发光效果（主要用于 retro-futurism）",
-    },
-  ]}
-/>
 
 ## API
 
