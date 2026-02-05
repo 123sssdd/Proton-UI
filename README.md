@@ -1,14 +1,18 @@
 > 🚧 **维护中警告**：本组件库目前由我单人高强度迭代维护中，API 可能会有 Breaking Changes，暂未发布至 NPM，仅供尝鲜和学习使用！
 
-直奔主题：我开源了 **[Proton UI](https://github.com/123sssdd/Proton-UI)**，这是一个**AI 原生**的**现代风 React 组件库**。
+直奔主题：我开源了 **[Proton UI](https://github.com/123sssdd/Proton-UI)**，这是一个**AI 原生**的**赛博朋克风（或许） React 组件库**。
 
 # **⚠️⚠️⚠️风格倾向： 赛博朋克风 + 部分像素化处理，佬们可以提提建议！！！（技术力有限，正在尝试）**
 
 目前项目**只有我一个人在维护**（是的，One Man Army 🫡），发出来是想看看有没有志同道合的佬感兴趣，求个 Star ⭐️ 或者一起以此为基础搞点事情！
 
+🕹️ **Playground（网页端预览组件效果，移动端暂时不适配）**: [https://proton-ui-playground.vercel.app](https://proton-ui-playground.vercel.app) 
+（请开clash代理访问，因为是用vercel 部署的）
+（正在向 赛博朋克风 + 部分像素化调整）（同时尝试增加更多基础组件）
+
 🔗 **GitHub**: [https://github.com/123sssdd/Proton-UI](https://github.com/123sssdd/Proton-UI)
 
-🕹️ **Playground**: [https://proton-ui-playground.vercel.app](https://proton-ui-playground.vercel.app) （vercel 部署的，需要开clash代理访问）（正在向 赛博朋克风 + 部分像素化调整）（同时尝试增加更多基础组件）
+
 
 📚 **文档**: [https://proton-ui.vercel.app](https://proton-ui.vercel.app) (组件效果预览 修复中，可以先看看架构和组件介绍)
 
