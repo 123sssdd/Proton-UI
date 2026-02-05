@@ -136,7 +136,7 @@
 ### 基础用法
 
 ```tsx
-import { PixelatedImage } from "@proton-ui/core";
+import { PixelatedImage } from "@proton-ui/components";
 
 function Avatar() {
   return (
@@ -154,7 +154,7 @@ function Avatar() {
 ### 使用 Hook
 
 ```tsx
-import { usePixelateImage } from "@proton-ui/core";
+import { usePixelateImage } from "@proton-ui/hooks";
 
 function ImageProcessor() {
   const { pixelatedImage, pixelate, isProcessing } = usePixelateImage();
@@ -179,7 +179,8 @@ function ImageProcessor() {
 ### 预设配置
 
 ```tsx
-import { PixelatedImage, PIXELATE_PRESETS } from "@proton-ui/core";
+import { PixelatedImage } from "@proton-ui/components";
+import { PIXELATE_PRESETS } from "@proton-ui/utils";
 
 function Gallery() {
   return (

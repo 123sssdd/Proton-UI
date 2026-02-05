@@ -9,7 +9,7 @@
 <DemoBox
   title="基础消息"
   description="展示用户和 AI 的基础消息样式"
-  code={`import { Message } from "@proton-ui/core";
+  code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (
@@ -49,7 +49,7 @@ Message 组件支持三种角色：用户（user）、AI 助手（assistant）�
 <DocTabs defaultTab="user">
   <DocTabPanel id="user" label="用户消息">
     <DemoBox
-      code={`import { Message } from "@proton-ui/core";
+      code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (
@@ -75,7 +75,7 @@ export default () => {
 
   <DocTabPanel id="assistant" label="AI 消息">
     <DemoBox
-      code={`import { Message } from "@proton-ui/core";
+      code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (
@@ -101,7 +101,7 @@ export default () => {
 
   <DocTabPanel id="system" label="系统消息">
     <DemoBox
-      code={`import { Message } from "@proton-ui/core";
+      code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (
@@ -131,7 +131,7 @@ Message 组件内置支持 Markdown 格式，包括代码高亮、列表、链�
 <DemoBox
   title="Markdown 消息"
   description="支持丰富的 Markdown 格式"
-  code={`import { Message } from "@proton-ui/core";
+  code={`import { Message } from "@proton-ui/components";
 
 const markdownContent = \`这是一段包含 **Markdown** 格式的消息：
 
@@ -188,7 +188,7 @@ timestamp={new Date()}
 <DemoBox
   title="流式消息"
   description="模拟 AI 逐字生成回复的效果"
-  code={`import { Message } from "@proton-ui/core";
+  code={`import { Message } from "@proton-ui/components";
 import { StreamingText } from "@proton-ui/streaming";
 import { useState, useEffect } from "react";
 
@@ -212,6 +212,7 @@ clearInterval(timer);
 }, []);
 
 return (
+
 <div className="bg-white p-4 rounded-lg">
 <Message
 role="assistant"
@@ -242,7 +243,7 @@ timestamp={new Date()}
 
 <DemoBox
   title="自定义头像"
-  code={`import { Message } from "@proton-ui/core";
+  code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (
@@ -285,7 +286,7 @@ export default () => {
 
 <DemoBox
   title="自定义宽度"
-  code={`import { Message } from "@proton-ui/core";
+  code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (
@@ -338,7 +339,7 @@ export default () => {
 
 <DemoBox
   title="加载状态"
-  code={`import { Message } from "@proton-ui/core";
+  code={`import { Message } from "@proton-ui/components";
 
 export default () => {
   return (

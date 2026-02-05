@@ -10,7 +10,7 @@ Input 组件同样支持多种艺术主题，让表单也充满个性。
   title="主题输入框"
   description="不同主题下的输入框样式"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <div className="grid grid-cols-1 gap-6 max-w-md">
   <Input
@@ -108,7 +108,7 @@ Input 组件同样支持多种艺术主题，让表单也充满个性。
       description: "是否占满容器宽度"
     }
   ]}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <Input placeholder="请输入内容..." />`}
   language="tsx"
@@ -124,7 +124,7 @@ Input 组件同样支持多种艺术主题，让表单也充满个性。
   title="带标签的输入框"
   description="标签帮助用户理解输入框的用途"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <div className="space-y-4">
   <Input
@@ -160,7 +160,7 @@ Input 组件同样支持多种艺术主题，让表单也充满个性。
   title="图标输入框"
   description="图标可以帮助用户快速识别输入框的用途"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 // 搜索图标
 const SearchIcon = () => (
@@ -265,7 +265,7 @@ Input 组件支持多种状态，提供完整的视觉反馈。
   title="状态演示"
   description="展示输入框的不同状态：正常、聚焦、错误、禁用"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <div className="space-y-4">
   <Input
@@ -326,7 +326,7 @@ Input 组件支持多种状态，提供完整的视觉反馈。
   title="表单验证演示"
   description="实时验证用户输入，提供即时反馈"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 import { useState } from "react";
 
 function ValidationDemo() {
@@ -400,7 +400,7 @@ Input 组件支持所有原生 HTML input 类型。
     <DemoBox
       description="标准文本输入框"
       showCode={true}
-      code={`import { Input } from "@proton-ui/core";
+      code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="姓名"
@@ -421,7 +421,7 @@ Input 组件支持所有原生 HTML input 类型。
     <DemoBox
       description="邮箱输入框，移动端会显示邮箱键盘"
       showCode={true}
-      code={`import { Input } from "@proton-ui/core";
+      code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="邮箱"
@@ -442,7 +442,7 @@ Input 组件支持所有原生 HTML input 类型。
     <DemoBox
       description="密码输入框，输入内容会被隐藏"
       showCode={true}
-      code={`import { Input } from "@proton-ui/core";
+      code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="密码"
@@ -463,7 +463,7 @@ Input 组件支持所有原生 HTML input 类型。
     <DemoBox
       description="数字输入框，移动端会显示数字键盘"
       showCode={true}
-      code={`import { Input } from "@proton-ui/core";
+      code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="年龄"
@@ -488,7 +488,7 @@ Input 组件支持所有原生 HTML input 类型。
     <DemoBox
       description="电话输入框，移动端会显示电话键盘"
       showCode={true}
-      code={`import { Input } from "@proton-ui/core";
+      code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="电话"
@@ -509,7 +509,7 @@ Input 组件支持所有原生 HTML input 类型。
     <DemoBox
       description="URL 输入框，移动端会显示 URL 键盘"
       showCode={true}
-      code={`import { Input } from "@proton-ui/core";
+      code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="网站"
@@ -535,7 +535,7 @@ Input 组件支持所有原生 HTML input 类型。
   title="全宽输入框"
   description="适用于表单布局或需要占满容器宽度的场景"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <div className="space-y-4">
   <Input
@@ -703,7 +703,7 @@ Input 组件会自动为输入框和标签生成唯一的 ID，并通过 `htmlFo
   title="标签关联演示"
   description="点击标签文本，输入框会获得焦点"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <Input
   label="点击这个标签试试"
@@ -759,7 +759,7 @@ Input 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
   title="标签和占位符示例"
   description="正确使用标签和占位符"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <div className="space-y-4">
   {/* 推荐：标签 + 占位符 */}
@@ -806,7 +806,7 @@ Input 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
   title="辅助文本示例"
   description="使用辅助文本提供输入指导"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
 
 <div className="space-y-4">
   <Input
@@ -846,8 +846,8 @@ Input 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
   title="表单布局示例"
   description="使用全宽输入框创建整洁的表单"
   showCode={true}
-  code={`import { Input } from "@proton-ui/core";
-import { Button } from "@proton-ui/core";
+  code={`import { Input } from "@proton-ui/components";
+import { Button } from "@proton-ui/components";
 
 <form className="space-y-4 max-w-md">
   <Input

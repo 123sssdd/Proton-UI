@@ -13,7 +13,7 @@ Proton UI 提供了灵活的主题系统，支持亮色/暗色模式切换和自
 <DemoBox
   title="亮色/暗色模式切换"
   description="点击按钮切换主题模式"
-  code={`import { usePixelTheme } from '@proton-ui/core';
+  code={`import { usePixelTheme } from '@proton-ui/hooks';
 
 function ThemeToggle() {
 const { resolvedTheme, toggleTheme } = usePixelTheme();
@@ -152,7 +152,7 @@ return (
 
 <DemoBox
   title="自定义主题配置"
-  code={`import { ThemeProvider } from '@proton-ui/core';
+  code={`import { PixelThemeProvider } from '@proton-ui/components';
 
 const customTheme = {
 colors: {
@@ -167,9 +167,9 @@ text: '#FFFFFF',
 function App() {
 return (
 
-<ThemeProvider theme={customTheme}>
+<PixelThemeProvider theme={customTheme}>
 <YourApp />
-</ThemeProvider>
+</PixelThemeProvider>
 );
 }`}
 
@@ -435,7 +435,7 @@ return (
 ### 步骤 1: 定义主题配置
 
 ```typescript
-import type { ThemeConfig } from "@proton-ui/core";
+import type { ThemeConfig } from "@proton-ui/utils";
 
 const myTheme: Partial<ThemeConfig> = {
   colors: {
@@ -465,16 +465,16 @@ const myTheme: Partial<ThemeConfig> = {
 ### 步骤 2: 应用主题
 
 ```tsx
-import { ThemeProvider } from "@proton-ui/core";
+import { PixelThemeProvider } from "@proton-ui/components";
 import { myTheme } from "./theme";
 
 function App() {
   return (
-    <ThemeProvider theme={myTheme}>
+    <PixelThemeProvider theme={myTheme}>
       <div className="min-h-screen bg-[var(--color-bg-primary)]">
         <YourApp />
       </div>
-    </ThemeProvider>
+    </PixelThemeProvider>
   );
 }
 ```
@@ -518,10 +518,11 @@ function MyComponent() {
 
 ```typescript
 // 旧版本
-import { Theme } from "@proton-ui/core";
+import { Theme } from "@proton-ui/utils";
 
 // 新版本
-import { ThemeProvider, usePixelTheme } from "@proton-ui/core";
+import { PixelThemeProvider } from "@proton-ui/components";
+import { usePixelTheme } from "@proton-ui/hooks";
 ```
 
 #### 2. 更新主题配置
@@ -566,7 +567,7 @@ const theme = {
 检查是否正确导入了 Proton UI 的样式文件：
 
 ```typescript
-import "@proton-ui/core/dist/index.css";
+import "@proton-ui/components/dist/styles/index.css";
 ```
 
 </Callout>

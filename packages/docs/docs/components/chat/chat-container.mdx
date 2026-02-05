@@ -9,7 +9,7 @@
 <DemoBox
   title="基础对话容器"
   description="展示基本的消息列表"
-  code={`import { ChatContainer } from "@proton-ui/core";
+  code={`import { ChatContainer } from "@proton-ui/components";
 
 const messages = [
 {
@@ -56,7 +56,7 @@ ChatContainer 支持多种加载指示器样式。
 <DocTabs defaultTab="dots">
   <DocTabPanel id="dots" label="跳动的点">
     <DemoBox
-      code={`import { ChatContainer } from "@proton-ui/core";
+      code={`import { ChatContainer } from "@proton-ui/components";
 
 export default () => {
   const messages = [
@@ -91,7 +91,7 @@ loadingText="AI 正在思考..."
 
   <DocTabPanel id="pulse" label="脉冲">
     <DemoBox
-      code={`import { ChatContainer } from "@proton-ui/core";
+      code={`import { ChatContainer } from "@proton-ui/components";
 
 export default () => {
   const messages = [
@@ -126,7 +126,7 @@ loadingText="正在输入..."
 
   <DocTabPanel id="spinner" label="旋转">
     <DemoBox
-      code={`import { ChatContainer } from "@proton-ui/core";
+      code={`import { ChatContainer } from "@proton-ui/components";
 
 export default () => {
   const messages = [
@@ -161,7 +161,7 @@ loadingText="加载中..."
 
   <DocTabPanel id="bars" label="跳动的条">
     <DemoBox
-      code={`import { ChatContainer } from "@proton-ui/core";
+      code={`import { ChatContainer } from "@proton-ui/components";
 
 export default () => {
   const messages = [
@@ -196,7 +196,7 @@ loadingText="处理中..."
 
   <DocTabPanel id="wave" label="波浪">
     <DemoBox
-      code={`import { ChatContainer } from "@proton-ui/core";
+      code={`import { ChatContainer } from "@proton-ui/components";
 
 export default () => {
   const messages = [
@@ -237,7 +237,7 @@ loadingText="生成中..."
 <DemoBox
   title="流式消息演示"
   description="模拟真实的 AI 对话流式渲染"
-  code={`import { ChatContainer } from "@proton-ui/core";
+  code={`import { ChatContainer } from "@proton-ui/components";
 import { StreamingText } from "@proton-ui/streaming";
 import { useState, useEffect } from "react";
 
@@ -321,7 +321,7 @@ ChatContainer 内置自动滚动功能，可以处理大量消息。
 <DemoBox
   title="大量消息演示"
   description="展示 50 条消息的滚动效果"
-  code={`import { ChatContainer } from "@proton-ui/core";
+  code={`import { ChatContainer } from "@proton-ui/components";
 
 // 生成大量测试消息
 const generateMessages = (count) => {
@@ -389,7 +389,7 @@ export default () => {
 
 <DemoBox
   title="自定义消息宽度"
-  code={`import { ChatContainer } from "@proton-ui/core";
+  code={`import { ChatContainer } from "@proton-ui/components";
 
 const messages = [
 { id: "1", role: "user", content: "这是较窄的消息", timestamp: new Date() },
@@ -555,7 +555,7 @@ export default () => {
 使用 Server-Sent Events (SSE) 实现真实的流式对话。
 
 ```tsx
-import { ChatContainer } from "@proton-ui/core";
+import { ChatContainer } from "@proton-ui/components";
 import { StreamingText } from "@proton-ui/streaming";
 import { useState } from "react";
 
@@ -642,7 +642,7 @@ export default function ChatApp() {
 使用 WebSocket 实现双向实时通信。
 
 ```tsx
-import { ChatContainer } from "@proton-ui/core";
+import { ChatContainer } from "@proton-ui/components";
 import { StreamingText } from "@proton-ui/streaming";
 import { useState, useEffect, useRef } from "react";
 

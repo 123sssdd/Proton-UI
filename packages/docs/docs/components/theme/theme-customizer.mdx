@@ -50,7 +50,7 @@
 #### 导出 TypeScript 配置
 
 ```typescript
-import type { ThemeConfig } from "@proton-ui/core";
+import type { ThemeConfig } from "@proton-ui/utils";
 
 const customTheme: Partial<ThemeConfig> = {
   colors: {
@@ -92,14 +92,14 @@ export default customTheme;
 ### 方法 1: 使用 ThemeProvider
 
 ```tsx
-import { ThemeProvider } from "@proton-ui/core";
+import { PixelThemeProvider } from "@proton-ui/components";
 import customTheme from "./customTheme";
 
 function App() {
   return (
-    <ThemeProvider theme={customTheme}>
+    <PixelThemeProvider theme={customTheme}>
       <YourApp />
-    </ThemeProvider>
+    </PixelThemeProvider>
   );
 }
 ```
@@ -126,7 +126,7 @@ import "./styles/theme.css";
 ### 方法 3: 动态切换主题
 
 ```tsx
-import { usePixelTheme } from "@proton-ui/core";
+import { usePixelTheme } from "@proton-ui/hooks";
 
 function ThemeToggle() {
   const { setTheme } = usePixelTheme();

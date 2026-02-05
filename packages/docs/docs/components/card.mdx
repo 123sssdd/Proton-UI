@@ -29,7 +29,7 @@ Card 组件提供简洁的容器样式，可以通过 `padding` 和 `shadow` 属
       description: "卡片的阴影大小"
     }
   ]}
-  code={`import { Card } from "@proton-ui/core";
+  code={`import { Card } from "@proton-ui/components";
 
 <Card padding="md" shadow="md">
   <p>这是一个基础卡片，可以包含任何内容。</p>
@@ -49,7 +49,7 @@ Card 组件提供简洁的容器样式，可以通过 `padding` 和 `shadow` 属
   title="完整结构卡片"
   description="展示卡片的头部、主体和底部组合"
   showCode={true}
-  code={`import { Card, Button } from "@proton-ui/core";
+  code={`import { Card, Button } from "@proton-ui/components";
 
 <Card>
   <Card.Header
@@ -92,7 +92,7 @@ Card 组件提供简洁的容器样式，可以通过 `padding` 和 `shadow` 属
     <DemoBox
       description="中等阴影，适用于大多数场景"
       showCode={true}
-      code={`import { Card } from "@proton-ui/core";
+      code={`import { Card } from "@proton-ui/components";
 
 <Card shadow="md">
   <Card.Header title="默认卡片" />
@@ -115,7 +115,7 @@ Card 组件提供简洁的容器样式，可以通过 `padding` 和 `shadow` 属
     <DemoBox
       description="无阴影，适用于简洁的界面"
       showCode={true}
-      code={`import { Card } from "@proton-ui/core";
+      code={`import { Card } from "@proton-ui/components";
 
 <Card shadow="none">
   <Card.Header title="扁平卡片" />
@@ -138,7 +138,7 @@ Card 组件提供简洁的容器样式，可以通过 `padding` 和 `shadow` 属
     <DemoBox
       description="大阴影，适用于需要强调的内容"
       showCode={true}
-      code={`import { Card } from "@proton-ui/core";
+      code={`import { Card } from "@proton-ui/components";
 
 <Card shadow="lg">
   <Card.Header title="悬浮卡片" />
@@ -172,7 +172,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="用户信息卡片"
   description="展示用户信息的卡片示例"
   showCode={true}
-  code={`import { Card, Button } from "@proton-ui/core";
+  code={`import { Card, Button } from "@proton-ui/components";
 
 <Card>
   <Card.Header
@@ -240,7 +240,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="统计卡片"
   description="展示数据统计的卡片示例"
   showCode={true}
-  code={`import { Card } from "@proton-ui/core";
+  code={`import { Card } from "@proton-ui/components";
 
 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
   <Card>
@@ -311,7 +311,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="响应式卡片网格"
   description="在不同屏幕尺寸下自动调整列数"
   showCode={true}
-  code={`import { Card } from "@proton-ui/core";
+  code={`import { Card } from "@proton-ui/components";
 
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   <Card>
@@ -539,7 +539,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="内容组织示例"
   description="合理使用头部、主体和底部组件"
   showCode={true}
-  code={`import { Card, Button } from "@proton-ui/core";
+  code={`import { Card, Button } from "@proton-ui/components";
 
 <Card>
   {/* 头部：标题和操作 */}
@@ -597,7 +597,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="内边距对比"
   description="不同内边距的视觉效果"
   showCode={true}
-  code={`import { Card } from "@proton-ui/core";
+  code={`import { Card } from "@proton-ui/components";
 
 <div className="space-y-4">
   <Card padding="sm">
@@ -638,7 +638,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="嵌套卡片示例"
   description="外层使用大阴影，内层使用无阴影"
   showCode={true}
-  code={`import { Card } from "@proton-ui/core";
+  code={`import { Card } from "@proton-ui/components";
 
 <Card shadow="lg">
   <Card.Header title="外层卡片" />
@@ -685,7 +685,7 @@ Card 组件支持灵活的组合，可以创建各种复杂的布局。
   title="可点击卡片"
   description="添加悬停效果提升交互体验"
   showCode={true}
-  code={`import { Card } from "@proton-ui/core";
+  code={`import { Card } from "@proton-ui/components";
 
 <Card
   className="cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02]"
@@ -731,7 +731,7 @@ Card 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
   title="产品展示卡片"
   description="电商产品卡片示例"
   showCode={true}
-  code={`import { Card, Button } from "@proton-ui/core";
+  code={`import { Card, Button } from "@proton-ui/components";
 
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   <Card>
@@ -773,7 +773,7 @@ Card 组件使用以下 CSS 变量，可以通过主题系统进行自定义：
   title="通知消息卡片"
   description="系统通知卡片示例"
   showCode={true}
-  code={`import { Card, Button } from "@proton-ui/core";
+  code={`import { Card, Button } from "@proton-ui/components";
 
 <div className="space-y-4 max-w-md">
   <Card padding="sm">

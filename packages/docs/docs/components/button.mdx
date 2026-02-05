@@ -10,7 +10,7 @@ Button 组件内置了多种风格的艺术主题，配合 `decoration` 属性�
   title="主题展示"
   description="支持 Retro Futurism, Neo Tokyo, Cyber Shrine 等主题"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <div className="flex flex-wrap gap-4 items-center">
   <Button pixelTheme="retro-futurism" glow>Retro Neon</Button>
@@ -108,7 +108,7 @@ Button 组件内置了多种风格的艺术主题，配合 `decoration` 属性�
       description: "是否显示加载状态"
     }
   ]}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <Button variant="primary" size="md">
   点击我
@@ -127,7 +127,7 @@ Button 组件提供四种视觉变体，适用于不同的使用场景。
     <DemoBox
       description="主要按钮，用于页面中最重要的操作"
       showCode={true}
-      code={`import { Button } from "@proton-ui/core";
+      code={`import { Button } from "@proton-ui/components";
 
 <Button variant="primary">
   Primary Button
@@ -142,7 +142,7 @@ Button 组件提供四种视觉变体，适用于不同的使用场景。
     <DemoBox
       description="次要按钮，用于次要操作或与主要按钮配合使用"
       showCode={true}
-      code={`import { Button } from "@proton-ui/core";
+      code={`import { Button } from "@proton-ui/components";
 
 <Button variant="secondary">
   Secondary Button
@@ -157,7 +157,7 @@ Button 组件提供四种视觉变体，适用于不同的使用场景。
     <DemoBox
       description="危险按钮，用于删除、取消等需要警示的操作"
       showCode={true}
-      code={`import { Button } from "@proton-ui/core";
+      code={`import { Button } from "@proton-ui/components";
 
 <Button variant="danger">
   Danger Button
@@ -172,7 +172,7 @@ Button 组件提供四种视觉变体，适用于不同的使用场景。
     <DemoBox
       description="幽灵按钮，用于不需要强调的操作或文本链接"
       showCode={true}
-      code={`import { Button } from "@proton-ui/core";
+      code={`import { Button } from "@proton-ui/components";
 
 <Button variant="ghost">
   Ghost Button
@@ -192,7 +192,7 @@ Button 组件提供四种视觉变体，适用于不同的使用场景。
   title="尺寸对比"
   description="从左到右依次为：小号（sm）、中号（md）、大号（lg）"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <div className="flex items-center gap-4">
   <Button size="sm">Small</Button>
@@ -222,7 +222,7 @@ Button 组件支持多种状态，提供完整的交互反馈。
   title="状态演示"
   description="展示按钮的不同状态：正常、禁用、加载中"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <div className="flex flex-col gap-4">
   <div className="flex items-center gap-4">
@@ -279,7 +279,7 @@ Button 组件支持多种状态，提供完整的交互反馈。
   title="全宽按钮"
   description="适用于移动端或需要占满容器宽度的场景"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <div className="space-y-4">
   <Button fullWidth>Full Width Button</Button>
@@ -305,7 +305,7 @@ Button 组件支持多种状态，提供完整的交互反馈。
   title="图标按钮"
   description="图标会自动与文本保持适当的间距"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 // 使用任何 React 图标库，例如 lucide-react
 const PlusIcon = () => (
@@ -437,7 +437,7 @@ Button 组件会自动添加适当的 ARIA 属性：
   title="焦点指示器演示"
   description="使用 Tab 键导航，观察焦点指示器效果"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <div className="flex items-center gap-4">
   <Button>Button 1</Button>
@@ -498,7 +498,7 @@ Button 组件使用以下 CSS 变量，可以通过主题系统进行自定义�
   title="按钮层级示例"
   description="主要操作使用 primary，次要操作使用 secondary 或 ghost"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 
 <div className="flex items-center gap-4">
   <Button variant="primary">保存</Button>
@@ -522,7 +522,7 @@ Button 组件使用以下 CSS 变量，可以通过主题系统进行自定义�
   title="异步操作示例"
   description="点击按钮后显示加载状态"
   showCode={true}
-  code={`import { Button } from "@proton-ui/core";
+  code={`import { Button } from "@proton-ui/components";
 import { useState } from "react";
 
 function AsyncButton() {

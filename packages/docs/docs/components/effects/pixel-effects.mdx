@@ -38,7 +38,7 @@ Proton UI 提供了丰富的赛博朋克风格视觉特效系统，包括霓虹�
 <DemoBox
   title="基础像素化"
   description="调整像素大小和色彩级别，实时预览效果"
-  code={`import { PixelatedImage } from '@proton-ui/core';
+  code={`import { PixelatedImage } from '@proton-ui/components';
 
 function Avatar() {
 return (
@@ -69,7 +69,8 @@ return (
 <DocTabs>
   <DocTabPanel id="retro8bit" label="8-bit 风格">
     <DemoBox
-      code={`import { PixelatedImage, PIXELATE_PRESETS } from '@proton-ui/core';
+      code={`import { PixelatedImage } from '@proton-ui/components';
+import { PIXELATE_PRESETS } from '@proton-ui/utils';
 
 <PixelatedImage
   src="/photo.jpg"
