@@ -81,7 +81,7 @@ html:not(.dark) [data-component-name="HomeHero"].max-w-6xl > * {
 /* Scroll down button container */
 .scroll-down-container {
   position: absolute;
-  bottom: 20px;
+  bottom: -150px;
   left: 0;
   right: 0;
   height: 60px;
