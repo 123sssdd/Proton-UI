@@ -17,7 +17,7 @@ export interface PixelThemeProviderProps {
  *
  * @example
  * ```tsx
- * import { PixelThemeProvider } from '@aether-ui/core';
+ * import { PixelThemeProvider } from '@Proton-ui/core';
  *
  * function App() {
  *   return (

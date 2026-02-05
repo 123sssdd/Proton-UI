@@ -5,7 +5,7 @@
 
 export type Theme = "light" | "dark" | "system";
 
-const THEME_STORAGE_KEY = "aether-ui-theme";
+const THEME_STORAGE_KEY = "proton-ui-theme";
 
 /**
  * 获取系统主题偏好

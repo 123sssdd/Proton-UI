@@ -5,8 +5,8 @@
 ### 1. 在应用根部添加 PixelThemeProvider
 
 ```tsx
-import { PixelThemeProvider } from '@aether-ui/core';
-import '@aether-ui/core/styles'; // 导入样式
+import { PixelThemeProvider } from '@Proton-ui/core';
+import '@Proton-ui/core/styles'; // 导入样式
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
 ### 2. 使用 useTheme Hook
 
 ```tsx
-import { useTheme } from '@aether-ui/core';
+import { useTheme } from '@Proton-ui/core';
 
 function ThemeToggle() {
   const { theme, resolvedTheme, toggleTheme, setTheme } = useTheme();
@@ -40,7 +40,7 @@ function ThemeToggle() {
 ### 3. 直接使用工具函数
 
 ```tsx
-import { setTheme, toggleTheme, getCurrentTheme } from '@aether-ui/core';
+import { setTheme, toggleTheme, getCurrentTheme } from '@Proton-ui/core';
 
 // 设置主题
 setTheme('dark');
