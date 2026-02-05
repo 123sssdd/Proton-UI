@@ -3,7 +3,7 @@ import { ParticleEffect } from "@proton-ui/core";
 import "./index.css";
 
 /**
- * 像素特效展示页面
+ * 特效系统展示页面
  * 展示霓虹光晕、玻璃拟态和装饰元素
  */
 export const PixelEffectsShowcase: React.FC = () => {
@@ -15,10 +15,10 @@ export const PixelEffectsShowcase: React.FC = () => {
         {/* 标题 */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-white mb-4 neon-glow-cyan">
-            像素特效展示
+            赛博朋克特效展示
           </h1>
           <p className="text-gray-300 text-lg">
-            霓虹光晕 · 玻璃拟态 · 装饰元素
+            霓虹光晕 · 玻璃拟态 · 粒子系统
           </p>
         </div>
 
@@ -44,26 +44,7 @@ export const PixelEffectsShowcase: React.FC = () => {
           >
             玻璃拟态
           </button>
-          <button
-            onClick={() => setSelectedEffect("decoration")}
-            className={`px-6 py-3 rounded border-2 transition-all ${
-              selectedEffect === "decoration"
-                ? "neon-glow-purple-box text-purple-400"
-                : "border-gray-600 text-gray-400 hover:border-purple-400"
-            }`}
-          >
-            装饰元素
-          </button>
-          <button
-            onClick={() => setSelectedEffect("dithering")}
-            className={`px-6 py-3 rounded border-2 transition-all ${
-              selectedEffect === "dithering"
-                ? "neon-glow-green-box text-green-400"
-                : "border-gray-600 text-gray-400 hover:border-green-400"
-            }`}
-          >
-            Dithering
-          </button>
+
           <button
             onClick={() => setSelectedEffect("particles")}
             className={`px-6 py-3 rounded border-2 transition-all ${
@@ -74,8 +55,111 @@ export const PixelEffectsShowcase: React.FC = () => {
           >
             粒子效果
           </button>
+          <button
+            onClick={() => setSelectedEffect("hybrid")}
+            className={`px-6 py-3 rounded border-2 transition-all ${
+              selectedEffect === "hybrid"
+                ? "neon-glow-cyan-box text-cyan-400"
+                : "border-gray-600 text-gray-400 hover:border-cyan-400"
+            }`}
+          >
+            混合风格 (Hybrid)
+          </button>
         </div>
 
+        {/* 混合风格展示 */}
+        {selectedEffect === "hybrid" && (
+          <div className="space-y-12">
+            <div className="text-center">
+              <h2 className="text-4xl font-bold text-white mb-4 text-hybrid-glitch">
+                Cyberpunk Hybrid Style
+              </h2>
+              <p className="text-cyan-300 max-w-2xl mx-auto">
+                高保真 UI 与局部像素化的完美融合。
+                <br />
+                <span className="text-sm opacity-70">
+                  Partial Pixelation · Neon Glitch · High-Fi Glass
+                </span>
+              </p>
+            </div>
+
+            {/* Showcase Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Card 1: Data Construct */}
+              <div className="hybrid-glass border-deco-hybrid p-8 h-64 flex flex-col justify-between group cursor-pointer relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-2 opacity-50 font-pixel text-xs text-cyan-400">
+                  SYS.VER.2.0
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    Data Construct
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Accessing neural network interface...
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="px-2 py-1 bg-cyan-900/30 border border-cyan-500/30 text-cyan-400 text-xs rounded font-pixel">
+                    SECURE
+                  </span>
+                  <span className="px-2 py-1 bg-purple-900/30 border border-purple-500/30 text-purple-400 text-xs rounded font-pixel">
+                    ENCRYPTED
+                  </span>
+                </div>
+                {/* Glitch Overlay on Hover */}
+                <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mix-blend-overlay" />
+              </div>
+
+              {/* Card 2: System Status */}
+              <div className="hybrid-glass border-deco-hybrid p-8 h-64 flex flex-col justify-between relative">
+                <div className="absolute -left-1 top-10 w-1 h-12 bg-pink-500/50" />
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-4 text-hybrid-glitch">
+                    System Status
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400">CPU Load</span>
+                      <div className="w-32 h-2 bg-gray-700 overflow-hidden">
+                        <div className="h-full bg-pink-500 w-[75%] neon-glow-pink"></div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400">Memory</span>
+                      <div className="w-32 h-2 bg-gray-700 overflow-hidden">
+                        <div className="h-full bg-cyan-500 w-[45%] neon-glow-cyan"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button className="btn-hybrid mt-4 py-2 px-6 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-cyan-400 hover:text-cyan-400 transition-all uppercase tracking-widest text-sm">
+                  Initialize
+                </button>
+              </div>
+            </div>
+
+            {/* Typography & Elements */}
+            <div className="glass-morphism p-8 rounded-lg mt-8">
+              <h3 className="text-xl font-bold text-white mb-6">
+                Hybrid Elements
+              </h3>
+              <div className="flex flex-wrap gap-8 items-center">
+                <div className="text-center">
+                  <p className="text-gray-500 text-sm mb-2">Glitch Text</p>
+                  <p className="text-2xl font-bold text-white text-hybrid-glitch cursor-default">
+                    PROTOCOL_V3
+                  </p>
+                </div>
+                <div className="text-center">
+                  <p className="text-gray-500 text-sm mb-2">Neon Badge</p>
+                  <span className="inline-block px-4 py-1 border border-pink-500/50 bg-pink-500/10 text-pink-400 neon-glow-pink-box rounded-sm font-pixel text-xs">
+                    WARNING
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         {/* 霓虹光晕效果 */}
         {selectedEffect === "neon" && (
           <div className="space-y-8">
@@ -259,261 +343,6 @@ export const PixelEffectsShowcase: React.FC = () => {
                 </div>
                 <div className="glass-blur-xl glass-opacity-20 p-4 rounded-lg border border-white/20">
                   <p className="text-white text-sm font-bold">X-Large</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* 装饰元素 */}
-        {selectedEffect === "decoration" && (
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-white mb-6">装饰元素库</h2>
-
-            {/* 边框装饰 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                边框装饰（5 种样式）
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="border-deco-minimal p-6 rounded-lg bg-gray-800/50 text-white">
-                  <p className="font-bold mb-2">简约线条</p>
-                  <p className="text-sm text-gray-300">Minimal</p>
-                </div>
-                <div className="border-deco-retro p-6 rounded-lg bg-gray-800/50 text-white">
-                  <p className="font-bold mb-2">复古花纹</p>
-                  <p className="text-sm text-gray-300">Retro</p>
-                </div>
-                <div className="border-deco-tech p-6 rounded-lg bg-gray-800/50 text-white">
-                  <p className="font-bold mb-2">科技电路</p>
-                  <p className="text-sm text-gray-300">Tech</p>
-                </div>
-                <div className="border-deco-japanese p-6 rounded-lg bg-gray-800/50 text-white">
-                  <p className="font-bold mb-2">和风纹样</p>
-                  <p className="text-sm text-gray-300">Japanese</p>
-                </div>
-                <div className="border-deco-geometric p-6 rounded-lg bg-gray-800/50 text-white">
-                  <p className="font-bold mb-2">几何图案</p>
-                  <p className="text-sm text-gray-300">Geometric</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 角落装饰 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                角落装饰元素
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="corner-deco-rivet p-6 rounded-lg bg-gray-800/50 border-2 border-gray-600 text-white">
-                  <p className="font-bold mb-2">铆钉装饰</p>
-                  <p className="text-sm text-gray-300">Rivet</p>
-                </div>
-                <div className="corner-deco-gem p-6 rounded-lg bg-gray-800/50 border-2 border-gray-600 text-white">
-                  <p className="font-bold mb-2">宝石装饰</p>
-                  <p className="text-sm text-gray-300">Gem</p>
-                </div>
-                <div className="corner-deco-glow p-6 rounded-lg bg-gray-800/50 border-2 border-gray-600 text-white">
-                  <p className="font-bold mb-2">发光点装饰</p>
-                  <p className="text-sm text-gray-300">Glow</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 分割线样式 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">分割线样式</h3>
-              <div className="space-y-6">
-                <div>
-                  <p className="text-white text-sm mb-2">实线 (Solid)</p>
-                  <hr className="divider-solid text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-white text-sm mb-2">虚线 (Dashed)</p>
-                  <hr className="divider-dashed text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-white text-sm mb-2">点线 (Dotted)</p>
-                  <hr className="divider-dotted text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-white text-sm mb-2">装饰线 (Decorated)</p>
-                  <hr className="divider-decorated text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-white text-sm mb-2">渐变线 (Gradient)</p>
-                  <hr className="divider-gradient text-gray-400" />
-                </div>
-              </div>
-            </div>
-
-            {/* 背景纹理 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">背景纹理库</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="texture-noise p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">噪点纹理</p>
-                  <p className="text-sm text-gray-300">Noise</p>
-                </div>
-                <div className="texture-grid p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">网格纹理</p>
-                  <p className="text-sm text-gray-300">Grid</p>
-                </div>
-                <div className="texture-scanline p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">扫描线纹理</p>
-                  <p className="text-sm text-gray-300">Scanline</p>
-                </div>
-                <div className="texture-dots p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">点阵纹理</p>
-                  <p className="text-sm text-gray-300">Dots</p>
-                </div>
-                <div className="texture-wave p-6 rounded-lg bg-gray-800/50 border border-gray-600">
-                  <p className="text-white font-bold mb-2">波纹纹理</p>
-                  <p className="text-sm text-gray-300">Wave</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Dithering 效果 */}
-        {selectedEffect === "dithering" && (
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              动态 Dithering（抖动渐变）
-            </h2>
-
-            {/* 2x2 像素矩阵 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                2x2 像素矩阵渐变（4 种密度）
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-2x2-25 absolute inset-0 rounded-lg text-white"></div>
-                  <p className="text-white font-bold relative z-10">25%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-2x2-50 absolute inset-0 rounded-lg text-white"></div>
-                  <p className="text-white font-bold relative z-10">50%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-2x2-75 absolute inset-0 rounded-lg text-white"></div>
-                  <p className="text-white font-bold relative z-10">75%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-2x2-100 absolute inset-0 rounded-lg text-white"></div>
-                  <p className="text-white font-bold relative z-10">100%</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 4x4 像素矩阵 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                4x4 像素矩阵渐变（8 种密度）
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-12 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">12.5%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-25 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">25%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-37 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">37.5%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-50 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">50%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-62 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">62.5%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-75 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">75%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-87 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">87.5%</p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-100 absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10">100%</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Dithering 应用 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                Dithering 应用场景
-              </h3>
-              <div className="space-y-6">
-                <div>
-                  <p className="text-white font-bold mb-2">背景渐变</p>
-                  <div className="dithering-bg-gradient p-6 rounded-lg">
-                    <p className="text-white">
-                      使用 Dithering 实现像素风格的背景渐变效果
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-white font-bold mb-2">阴影过渡</p>
-                  <div className="dithering-shadow p-6 rounded-lg bg-gray-800/50">
-                    <p className="text-white">
-                      使用 Dithering 实现像素化的阴影效果
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-white font-bold mb-2">渐变叠加层</p>
-                  <div className="dithering-overlay-gradient p-6 rounded-lg bg-gray-800/50">
-                    <p className="text-white">
-                      使用 Dithering 叠加层实现复古渐变效果
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Dithering 动画 */}
-            <div className="glass-morphism p-8 rounded-lg">
-              <h3 className="text-xl font-bold text-white mb-4">
-                Dithering 动画效果
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-50 dithering-animated absolute inset-0 rounded-lg text-cyan-400"></div>
-                  <p className="text-white font-bold relative z-10 mb-2">
-                    渐变动画
-                  </p>
-                  <p className="text-sm text-gray-300 relative z-10">
-                    像素点移动
-                  </p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative">
-                  <div className="dithering-4x4-50 dithering-sparkle absolute inset-0 rounded-lg text-pink-400"></div>
-                  <p className="text-white font-bold relative z-10 mb-2">
-                    闪烁效果
-                  </p>
-                  <p className="text-sm text-gray-300 relative z-10">
-                    像素点闪烁
-                  </p>
-                </div>
-                <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-600 relative overflow-hidden">
-                  <div className="dithering-4x4-50 dithering-wave absolute inset-0 rounded-lg text-purple-400"></div>
-                  <p className="text-white font-bold relative z-10 mb-2">
-                    波浪扩散
-                  </p>
-                  <p className="text-sm text-gray-300 relative z-10">
-                    从中心扩散
-                  </p>
                 </div>
               </div>
             </div>

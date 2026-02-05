@@ -81,7 +81,7 @@ export function ThemeGallery() {
         {/* 标题 */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">🎨 主题画廊</h1>
-          <p className="text-xl text-gray-600 mb-2">探索 5 个精美像素风主题</p>
+          <p className="text-xl text-gray-600 mb-2">探索 5 个艺术主题</p>
           <p className="text-sm text-gray-500">
             每个主题都有独特的视觉风格和情感表达
           </p>

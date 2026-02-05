@@ -129,19 +129,19 @@ const coreFeatures = [
     ],
   },
   {
-    icon: "🎮",
-    title: "现代化像素设计系统",
+    icon: "🌃",
+    title: "赛博朋克与混合像素风格",
     description:
-      "不仅仅是复古！融合赛博朋克与现代交互体验的新一代像素设计语言。通过 CSS 像素化渲染、像素字体与高帧率动画，打造既有怀旧情怀又具未来感的视觉冲击。",
+      "超越单纯的复古！将赛博朋克美学（霓虹、故障、玻璃拟态）与局部像素化处理完美融合。在现代高清 UI 中点缀像素颗粒，营造高保真与低保真碰撞的独特科幻氛围。",
     metrics: [
-      { label: "视觉识别度", value: "极高" },
-      { label: "交互体验", value: "AI Native" },
+      { label: "视觉风格", value: "Cyberpunk" },
+      { label: "渲染技术", value: "Hybrid" },
     ],
     highlights: [
-      "CSS image-rendering: pixelated",
-      "Modern + Retro 融合设计",
-      "高帧率像素动画",
-      "复古未来主义 (Retro Futurism)",
+      "局部像素化 (Partial Pixelation)",
+      "霓虹光影系统 (Neon Lighting)",
+      "CRT & Glitch 故障艺术",
+      "High-Fi + Lo-Fi 混合美学",
     ],
   },
 ];

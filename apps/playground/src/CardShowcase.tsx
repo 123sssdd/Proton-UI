@@ -45,11 +45,11 @@ export function CardShowcase() {
           </div>
         </section>
 
-        {/* 精美风格 */}
+        {/* 艺术主题 */}
         <section className="space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-2xl font-pixel text-[var(--pixel-text-primary)]">
-              精美像素风格 (Enhanced Pixel Style)
+              艺术主题 (Enhanced Pixel Style)
             </h2>
           </div>
 

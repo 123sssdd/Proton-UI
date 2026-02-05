@@ -7,3 +7,4 @@ export * from "./ChatContainer";
 export * from "./MessageInput";
 export * from "./ParticleEffect";
 export * from "./PixelatedImage";
+export * from "./PixelCard";

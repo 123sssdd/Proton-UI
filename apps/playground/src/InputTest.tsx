@@ -23,7 +23,7 @@ export function InputTest() {
             Input 组件测试
           </h1>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            像素风格输入框 - 所有状态和变体
+            艺术主题输入框 - 所有状态和变体
           </p>
         </div>
 

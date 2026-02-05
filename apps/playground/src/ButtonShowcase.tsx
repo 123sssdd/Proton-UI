@@ -3,7 +3,7 @@ import { Button } from "@proton-ui/core";
 
 /**
  * Button 完整展示页面
- * 包含基础风格和精美像素风格
+ * 包含基础风格和艺术风格
  * Refactored to use @proton-ui/core "Smart" Button component
  */
 export function ButtonShowcase() {
@@ -58,7 +58,7 @@ export function ButtonShowcase() {
             Button 组件完整展示
           </h1>
           <p className="text-sm text-[var(--pixel-text-secondary)]">
-            从基础到精美 - 像素风格按钮的完整演示
+            从基础到精美 - 艺术风格按钮的完整演示
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export function ButtonShowcase() {
             href="#enhanced"
             className="px-4 py-2 text-sm font-pixel text-[var(--pixel-accent-cyan)] hover:underline"
           >
-            精美像素风格
+            艺术风格
           </a>
         </nav>
 
@@ -86,7 +86,7 @@ export function ButtonShowcase() {
               基础风格 (Basic Style)
             </h2>
             <p className="text-sm text-[var(--pixel-text-secondary)]">
-              简洁实用的像素风格按钮 - 适合快速开发
+              简洁实用的基础风格按钮 - 适合快速开发
             </p>
           </div>
 
@@ -177,16 +177,16 @@ export function ButtonShowcase() {
           </div>
           <div className="relative flex justify-center">
             <span className="px-4 bg-[var(--pixel-bg-primary)] text-sm font-pixel text-[var(--pixel-text-secondary)]">
-              ✨ 精美像素风格 ✨
+              ✨ 艺术风格 ✨
             </span>
           </div>
         </div>
 
-        {/* ==================== 精美像素风格部分 ==================== */}
+        {/* ==================== 艺术风格部分 ==================== */}
         <section id="enhanced" className="space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-2xl font-pixel text-[var(--pixel-text-primary)]">
-              精美像素风格 (Enhanced Pixel Style)
+              艺术风格 (Enhanced Pixel Style)
             </h2>
             <p className="text-sm text-[var(--pixel-text-secondary)]">
               Clean Pixel + High Readability + Japanese Aesthetic

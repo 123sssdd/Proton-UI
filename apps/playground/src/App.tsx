@@ -342,7 +342,7 @@ export default function App() {
                 />
                 <PixelButton
                   target="pixeleffectsshowcase"
-                  label="像素特效"
+                  label="特效系统"
                   icon="✨"
                   active={view === "pixeleffectsshowcase"}
                 />

@@ -13,7 +13,7 @@ type Message = {
  *
  * 包含：
  * 1. 基础风格部分（使用现有 ChatContainer 组件）
- * 2. 精美像素风格部分（5 个主题）
+ * 2. 艺术风格部分（5 个主题）
  */
 export function ChatContainerShowcase() {
   const [selectedTheme, setSelectedTheme] = useState<
@@ -65,7 +65,7 @@ export function ChatContainerShowcase() {
             💬 ChatContainer 组件展示
           </h1>
           <p className="text-lg text-gray-600">
-            基础风格 + 精美像素风格（5 个主题）
+            基础风格 + 艺术主题（5 个主题）
           </p>
         </div>
 
@@ -123,7 +123,7 @@ export function ChatContainerShowcase() {
         <div className="flex items-center justify-center my-16">
           <div className="flex-1 border-t-2 border-gray-300"></div>
           <div className="px-6 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500">
-            ✨ 精美像素风格 ✨
+            ✨ 艺术主题 ✨
           </div>
           <div className="flex-1 border-t-2 border-gray-300"></div>
         </div>
@@ -182,7 +182,7 @@ export function ChatContainerShowcase() {
           </button>
         </div>
 
-        {/* 精美像素风格展示 */}
+        {/* 艺术主题展示 */}
         <section>
           {selectedTheme === "retro" && (
             <RetroFuturismTheme messages={sampleMessages} />

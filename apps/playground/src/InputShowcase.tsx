@@ -57,7 +57,7 @@ export function InputShowcase() {
             Input 组件完整展示
           </h1>
           <p className="text-sm text-[var(--pixel-text-secondary)]">
-            从基础到精美 - 像素风格输入框的完整演示 (Core Component Powered)
+            从基础到精美 - 艺术主题输入框的完整演示 (Core Component Powered)
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export function InputShowcase() {
             href="#enhanced"
             className="px-4 py-2 text-sm font-pixel text-[var(--pixel-accent-cyan)] hover:underline"
           >
-            精美像素风格
+            艺术主题
           </a>
         </nav>
 
@@ -85,7 +85,7 @@ export function InputShowcase() {
               基础风格 (Basic Style)
             </h2>
             <p className="text-sm text-[var(--pixel-text-secondary)]">
-              简洁实用的像素风格输入框 - 适合快速开发
+              简洁实用的输入框 - 适合快速开发
             </p>
           </div>
 
@@ -119,11 +119,11 @@ export function InputShowcase() {
           </div>
         </section>
 
-        {/* ==================== 精美像素风格部分 ==================== */}
+        {/* ==================== 艺术主题部分 ==================== */}
         <section id="enhanced" className="space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-2xl font-pixel text-[var(--pixel-text-primary)]">
-              精美像素风格 (Enhanced Pixel Style)
+              艺术主题 (Enhanced Pixel Style)
             </h2>
             <p className="text-sm text-[var(--pixel-text-secondary)]">
               Powered by @proton-ui/core "pixelTheme" prop

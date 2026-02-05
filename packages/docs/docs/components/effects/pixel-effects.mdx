@@ -1,6 +1,6 @@
-# 像素特效
+# 视觉特效 (Visual Effects)
 
-Proton UI 提供了丰富的像素风格视觉特效系统，包括霓虹光晕、玻璃拟态、粒子效果、像素化图片等。所有特效都遵循"像素但不糙"的设计理念，在保持像素美学的同时确保高可读性。
+Proton UI 提供了丰富的赛博朋克风格视觉特效系统，包括霓虹光晕、玻璃拟态、粒子效果、像素化图片处理等。所有特效旨在打造沉浸式的现代科幻体验。
 
 <Callout type="warning" title="关于动画偏好设置">
 粒子效果默认会尊重用户的 `prefers-reduced-motion` 系统设置。如果用户在系统中启用了"减少动效"选项，粒子效果将不会触发。
@@ -172,12 +172,6 @@ return (
   </div>
 </DemoBox>
 
-## Dithering 效果
-
-使用像素矩阵模拟渐变效果，是经典像素艺术的核心技术。
-
-<DitheringEffectsDemo />
-
 ## 效果组合
 
 <CombinedEffectsDemo />
@@ -343,7 +337,6 @@ return (
 - **粒子效果**：默认不会触发（可通过 `respectMotionPreference={false}` 覆盖）
 - **霓虹动画**：自动禁用脉冲、闪烁、呼吸等动画
 - **CRT 效果**：保持静态效果，禁用闪烁和开关机动画
-- **Dithering 动画**：停止像素点移动和闪烁
 
 这是一个重要的无障碍特性，可以帮助有前庭障碍或对动画敏感的用户更舒适地使用应用。
 
@@ -406,13 +399,13 @@ return (
 </div>
 
 // ❌ 避免过度叠加
-<div className="glass-morphism neon-glow-cyan-box crt-full-effect dithering-animated">
+<div className="glass-morphism neon-glow-cyan-box crt-full-effect">
   内容
 </div>
 ```
 
 ## 相关资源
 
-- [像素特效使用指南](/guide/pixel-effects)
+- [视觉特效使用指南](/guide/pixel-effects)
 - [主题系统](/components/theme/theme-gallery)
 - [设计令牌](/guide/design-tokens)

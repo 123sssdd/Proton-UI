@@ -22,7 +22,7 @@ interface Highlight {
 const highlights: Highlight[] = [
   {
     id: "pixel-effects",
-    title: "像素特效系统",
+    title: "特效系统",
     description: "粒子效果 + 图片像素化，打造独特的视觉体验",
     icon: "✨",
     link: "/components/effects/pixel-effects",
