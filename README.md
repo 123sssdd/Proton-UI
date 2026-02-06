@@ -11,9 +11,9 @@
 
 目前 部分效果：
 
-![1770367947796_960x621 (1)](https://github.com/user-attachments/assets/04f7735a-1f66-4e63-b330-1c5b1bc1d191)
+![1770370015814_960x621](https://github.com/user-attachments/assets/6bb69cf3-e663-44dc-bafa-57ce59394cbb)
 
-![1770368050021_960x621](https://github.com/user-attachments/assets/bd6728e1-0673-4cec-bd9c-e31f4a4381b1)
+![1770370205884_738x477](https://github.com/user-attachments/assets/93be6517-1cb7-4c31-9493-1c8c6b9d7279)
 
 <img width="632" height="408" alt="image" src="https://github.com/user-attachments/assets/88b26486-4ea1-487e-97ff-334cfdcea8b6" />
 
