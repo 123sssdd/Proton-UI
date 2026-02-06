@@ -4,5 +4,5 @@
   "buildCommand": "pnpm build",
   "installCommand": "pnpm install",
   "framework": null,
-  "outputDirectory": null
+  "outputDirectory": "packages/docs/doc_build"
 }
