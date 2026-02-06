@@ -11,11 +11,13 @@
 
 目前 部分效果：
 
+![1770367947796_960x621 (1)](https://github.com/user-attachments/assets/04f7735a-1f66-4e63-b330-1c5b1bc1d191)
+
+![1770368050021_960x621](https://github.com/user-attachments/assets/bd6728e1-0673-4cec-bd9c-e31f4a4381b1)
+
 <img width="632" height="408" alt="image" src="https://github.com/user-attachments/assets/88b26486-4ea1-487e-97ff-334cfdcea8b6" />
 
-<img width="743" height="480" alt="image" src="https://github.com/user-attachments/assets/a5fc1e2c-36d2-4617-a70f-1a4e1bdec43c" />
-
-<img width="743" height="480" alt="image" src="https://github.com/user-attachments/assets/d02e6736-f7a7-44f7-82d7-7ca8fe4d5550" />
+![1770368146214_960x621](https://github.com/user-attachments/assets/50095290-1959-4a77-ac88-8ca776e5d5e8)
 
 
 # **⚠️⚠️⚠️风格倾向： 赛博朋克风 + 部分像素化处理，佬们可以提提建议！！！（技术力有限，正在尝试）**
